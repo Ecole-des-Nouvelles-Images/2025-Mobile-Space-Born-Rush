@@ -22,8 +22,10 @@ public static class EventBus
     // public static Action<PowerUpType> OnPowerUpCollected;
     // public static Action<List<Item>> OnPlayerLevelUp;
     // public static Action<Item> OnPlayerChooseAnItem;
-    public static Action<float, float> OnPlayerHealthChange;
-    public static Action<float, float> OnPlayerExpChange;
+    public static Action<float> OnPlayerCurrentHealthChange;
+    public static Action<float> OnPlayerMaxHealthChange;
+    public static Action<float> OnPlayerCurrentXPChange;
+    public static Action<float> OnPlayerXPToLevelUpChange;
     public static Action<int> OnLaneChanged;
 
     // Combat
