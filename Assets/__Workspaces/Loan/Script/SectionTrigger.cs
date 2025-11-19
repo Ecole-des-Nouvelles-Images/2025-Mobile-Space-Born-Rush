@@ -10,7 +10,7 @@ public class SectionTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameObject modul = Instantiate(_modulPrefabs, new Vector3(0,0,40), Quaternion.identity);
+            GameObject modul = Instantiate(_modulPrefabs, new Vector3(0,0,60), Quaternion.identity);
         }
     }
 }
