@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
@@ -57,11 +58,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnPlayerMaxHealthChange(float val)
     {
-        throw new NotImplementedException();
+        //Depends on how the value is sent but this is the basic logic
+        _maxHealth = val;
     }
 
     private void OnSpeedChanged(float val)
     {
+        //Will need to speed up all the players animations with this
         throw new NotImplementedException();
     }
 
@@ -77,7 +80,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnObstacleHit(float val)
     {
-        throw new NotImplementedException();
+        //The value should be how the speed is effected and for how long Unless we do a flat speed reduction
+        //TODO ask Loan if its flat or a percentage of the current speed, will need to change the event based on his ans.
     }
 
     private void OnPlayerCurrentXPChange(float val)
@@ -92,12 +96,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnPlayerCurrentHealthChange(float val)
     {
-        throw new NotImplementedException();
+        _currentHealth += val;
+        
+        Mathf.Clamp(_currentHealth, 0, _maxHealth);
     }
 
     private void OnPlayerRevive()
     {
-        throw new NotImplementedException();
+        _currentHealth = _maxHealth;
     }
 
     private void OnPlayerSpawn()
@@ -105,9 +111,16 @@ public class PlayerController : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    private void OnPlayerTakeDamage(float val, bool arg2)
+    private void OnPlayerTakeDamage(float val)
     {
-        throw new NotImplementedException();
+        _currentHealth -= val;
+        
+        Mathf.Clamp(_currentHealth, 0, _maxHealth);
+
+        if (_currentHealth <= 0)
+        {
+            Invoke("OnPlayerDead", 0.1f);
+        }
     }
 
     private void OnGameResume()

@@ -18,7 +18,7 @@ public static class EventBus
     public static Action OnPlayerSpawn;
     public static Action OnPlayerDead;
     public static Action OnPlayerRevive;
-    public static Action<float, bool> OnPlayerTakeDamage;
+    public static Action<float> OnPlayerTakeDamage;
     // public static Action<PowerUpType> OnPowerUpCollected;
     // public static Action<List<Item>> OnPlayerLevelUp;
     // public static Action<Item> OnPlayerChooseAnItem;
