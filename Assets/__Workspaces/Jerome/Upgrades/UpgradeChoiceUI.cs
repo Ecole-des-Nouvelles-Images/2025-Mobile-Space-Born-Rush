@@ -1,29 +1,55 @@
-using System;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class UpgradeChoiceUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private TMPro.TextMeshProUGUI nameText;
-    [SerializeField] private TMPro.TextMeshProUGUI descriptionText;
-    [SerializeField] private UnityEngine.UI.Image iconImage;
-    [SerializeField] private UnityEngine.UI.Button selectButton;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private Image iconImage;
+    [SerializeField] private Button selectButton;
 
     private int choiceIndex;
-    private Action<int> onSelectedCallback;
+    private System.Action<int> onSelectedCallback;
+    private bool _isiconImageNotNull;
+
+    private void Start()
+    {
+        _isiconImageNotNull = iconImage != null;
+    }
 
     public void DisplayUpgrade(UpgradeData upgrade, int index)
     {
+        if (!upgrade)
+        {
+            Debug.LogError("Cannot display null upgrade!");
+            gameObject.SetActive(false);
+            return;
+        }
+
         choiceIndex = index;
         
         // Update UI elements
-        nameText.text = upgrade.Name;
-        descriptionText.text = upgrade.Description;
-        iconImage.sprite = upgrade.Icon;
+        if (nameText)
+            nameText.text = upgrade.Name ?? "Missing Name";
         
-        // Remove previous listeners and add new one
-        selectButton.onClick.RemoveAllListeners();
-        selectButton.onClick.AddListener(OnSelectButtonClicked);
+        if (descriptionText)
+            descriptionText.text = upgrade.Description ?? "Missing Description";
+
+        if (_isiconImageNotNull)
+        {
+            iconImage.sprite = upgrade.Icon;
+            iconImage.color = upgrade.Icon ? Color.white : new Color(0.8f, 0.8f, 0.8f);
+        }
+        
+        if (selectButton)
+        {
+            selectButton.onClick.RemoveAllListeners();
+            selectButton.onClick.AddListener(OnSelectButtonClicked);
+        }
+
+        gameObject.SetActive(true);
     }
 
     private void OnSelectButtonClicked()
@@ -31,14 +57,16 @@ public class UpgradeChoiceUI : MonoBehaviour
         onSelectedCallback?.Invoke(choiceIndex);
     }
 
-    // Called by parent UpgradeUIManager
-    public void SetSelectionCallback(Action<int> callback)
+    public void SetSelectionCallback(System.Action<int> callback)
     {
         onSelectedCallback = callback;
     }
 
-    public void Hide()
+    // Called when this instance is destroyed
+    private void OnDestroy()
     {
-        gameObject.SetActive(false);
+        // Clean up listeners to prevent memory leaks
+        if (selectButton != null)
+            selectButton.onClick.RemoveAllListeners();
     }
 }

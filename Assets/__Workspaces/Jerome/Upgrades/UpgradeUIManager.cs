@@ -5,10 +5,12 @@ public class UpgradeUIManager : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject upgradePanel;
-    [SerializeField] private UpgradeChoiceUI[] choiceSlots; // Your UI button slots
-    [SerializeField] private Animator panelAnimator; // Optional for animations
+    [SerializeField] private UpgradeChoiceUI upgradeChoicePrefab; // The prefab reference
+    [SerializeField] private Transform choicesParent; // Parent to instantiate under
+    [SerializeField] private Animator panelAnimator;
 
     private List<UpgradeData> currentChoices;
+    private List<UpgradeChoiceUI> activeChoiceInstances; // Track spawned instances
     private UpgradeManager upgradeManager;
 
     private void Start()
@@ -20,65 +22,80 @@ public class UpgradeUIManager : MonoBehaviour
         }
         
         upgradePanel.SetActive(false);
-        
-        // Hide all slots initially
-        foreach (var slot in choiceSlots)
-        {
-            slot.gameObject.SetActive(false);
-        }
+        activeChoiceInstances = new List<UpgradeChoiceUI>();
     }
 
     private void OnEnable()
     {
-        // Listen for when upgrade choices are ready (from your EventBus)
-        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
-        
-        // Listen for when upgrades are applied to potentially close UI
+        EventBus.OnPlayerLevelUp += ShowUpgradeChoices;
         EventBus.OnUpgradeApplied += OnUpgradeApplied;
     }
 
     private void OnDisable()
     {
-        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
+        EventBus.OnPlayerLevelUp -= ShowUpgradeChoices;
         EventBus.OnUpgradeApplied -= OnUpgradeApplied;
     }
-    
-    private void OnPlayerLevelUp(List<UpgradeData> upgradeChoices)
+
+    private void ShowUpgradeChoices(List<UpgradeData> upgradeChoices)
     {
         if (upgradeChoices == null || upgradeChoices.Count == 0)
         {
             Debug.LogError("No upgrade choices provided!");
-            CloseUpgradePanel();
             return;
         }
 
-        // Debug log to see how many choices we're getting
-        Debug.Log($"Displaying {upgradeChoices.Count} upgrade choices (Player has {choiceSlots.Length} available slots)");
+        if (!upgradeChoicePrefab)
+        {
+            Debug.LogError("UpgradeChoicePrefab is not assigned!");
+            return;
+        }
 
         currentChoices = upgradeChoices;
+        Debug.Log($"Displaying {upgradeChoices.Count} upgrade choices");
 
-        // Display each choice in available UI slots
-        for (int i = 0; i < choiceSlots.Length; i++)
+        // Clear previous choices
+        ClearExistingChoices();
+
+        // Create new choice instances
+        for (int i = 0; i < upgradeChoices.Count; i++)
         {
-            if (i < upgradeChoices.Count)
-            {
-                choiceSlots[i].gameObject.SetActive(true);
-                choiceSlots[i].DisplayUpgrade(upgradeChoices[i], i);
-                choiceSlots[i].SetSelectionCallback(OnUpgradeSelected);
-            }
-            else
-            {
-                choiceSlots[i].gameObject.SetActive(false);
-            }
+            UpgradeChoiceUI choiceInstance = CreateChoiceInstance(upgradeChoices[i], i);
+            activeChoiceInstances.Add(choiceInstance);
         }
 
         // Show the upgrade panel
         upgradePanel.SetActive(true);
         
-        if (panelAnimator != null)
+        if (panelAnimator)
             panelAnimator.SetTrigger("Show");
         
         PauseGame();
+    }
+
+    private UpgradeChoiceUI CreateChoiceInstance(UpgradeData upgrade, int index)
+    {
+        // Instantiate the prefab
+        UpgradeChoiceUI choiceInstance = Instantiate(upgradeChoicePrefab, choicesParent);
+        
+        // Set up the choice
+        choiceInstance.DisplayUpgrade(upgrade, index);
+        choiceInstance.SetSelectionCallback(OnUpgradeSelected);
+        
+        return choiceInstance;
+    }
+
+    private void ClearExistingChoices()
+    {
+        // Destroy all active choice instances
+        foreach (UpgradeChoiceUI choice in activeChoiceInstances)
+        {
+            if (choice)
+            {
+                Destroy(choice.gameObject);
+            }
+        }
+        activeChoiceInstances.Clear();
     }
 
     // Called by UI buttons when player selects an upgrade
@@ -103,14 +120,10 @@ public class UpgradeUIManager : MonoBehaviour
 
         // Apply the upgrade through the UpgradeManager
         upgradeManager.ApplyUpgrade(selectedUpgrade);
-        
-        // Note: The UI will close when OnUpgradeApplied is fired (see method below)
     }
 
-    // Called when any upgrade is applied (could be from this UI or other sources)
     private void OnUpgradeApplied(UpgradeData upgradedData)
     {
-        // FIXED: Only close if this was one of our current choices
         if (currentChoices != null && currentChoices.Contains(upgradedData))
         {
             CloseUpgradePanel();
@@ -119,12 +132,10 @@ public class UpgradeUIManager : MonoBehaviour
 
     private void CloseUpgradePanel()
     {
-        // Optional: Trigger hide animation
         if (panelAnimator)
         {
             panelAnimator.SetTrigger("Hide");
-            // You might want to use an animation event to actually disable the panel
-            Invoke(nameof(DisablePanel), 0.3f); // Match animation duration
+            Invoke(nameof(DisablePanel), 0.3f);
         }
         else
         {
@@ -135,16 +146,9 @@ public class UpgradeUIManager : MonoBehaviour
     private void DisablePanel()
     {
         upgradePanel.SetActive(false);
+        ClearExistingChoices(); // Clean up instances
         ResumeGame();
-        
-        // Clear current choices
         currentChoices = null;
-        
-        // Hide all slots
-        foreach (var slot in choiceSlots)
-        {
-            slot.gameObject.SetActive(false);
-        }
     }
 
     private void PauseGame()
