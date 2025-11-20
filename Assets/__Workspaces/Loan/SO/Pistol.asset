@@ -16,6 +16,7 @@ MonoBehaviour:
   AmmoPrefab: {fileID: 0}
   Name: VX-9
   Damage: 0
-  Cooldown: 0
-  FireRate: 0
-  MagSize: 0
+  Cooldown: 5
+  FireRate: 1
+  FireDistance: 20
+  MagSize: 6

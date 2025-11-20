@@ -17,7 +17,7 @@ public class ModulMove : MonoBehaviour
         
         
         _rb.linearVelocity = _speedMovement;
-         SpawnObstacles();
+         // SpawnObstacles();
     }
 
     private void SpawnObstacles()

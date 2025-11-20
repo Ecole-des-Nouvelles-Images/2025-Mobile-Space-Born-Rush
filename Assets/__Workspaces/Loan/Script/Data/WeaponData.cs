@@ -9,5 +9,6 @@ public class WeaponData : ScriptableObject
     public float Damage;
     public float Cooldown;
     public float FireRate;
+    public float FireDistance;
     public int MagSize;
 }
