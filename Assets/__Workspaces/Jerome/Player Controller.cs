@@ -6,12 +6,22 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
+    //Data variables
     private Rigidbody _rb;
     private CapsuleCollider _col;
     private PlayerData _playerData;
-    private bool _isMoving = false;
     
+    //Variables for swipe detection
+    private Vector2 _pos1;
+    private bool _fingerDown;
+    
+    public int PixelDistToDetect = 200;
+    
+    //Player Variables
     private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
+    
+    //Variables for methods
+    private bool _isMoving = false;
     
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
@@ -226,14 +236,28 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!_fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            Jump();
+            _pos1 = Input.touches[0].position;
+            _fingerDown = true;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (_fingerDown)
         {
-            Slide();
+            if (Input.touches[0].position.y >= _pos1.y + PixelDistToDetect)
+            {
+                Jump();
+                Debug.Log("Swipe Up");
+                _fingerDown = false;
+            }
+
+            if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
+            {
+                Slide();
+                Debug.Log("Swipe Down");
+                _fingerDown = false;
+            }
+            
         }
 
         if (Input.GetButtonDown("Fire2"))
@@ -242,4 +266,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        throw new NotImplementedException();
+    }
 }
