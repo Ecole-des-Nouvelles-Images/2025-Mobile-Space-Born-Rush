@@ -56,11 +56,10 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log("Fire");
+            GameObject currentAmmo = Instantiate(_currentWeapon.AmmoPrefab,_firePoint.position,Quaternion.identity);
             _currentFireRate = _currentWeapon.FireRate;
             _ammoNumber--;
         }
-        // Instantiate(_currentWeapon.AmmoPrefab,_firePoint.position,Quaternion.identity);
     }
     
 }
