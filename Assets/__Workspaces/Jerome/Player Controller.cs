@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour
     //Data variables
     private Rigidbody _rb;
     private CapsuleCollider _col;
-    private PlayerData _playerData;
+    [SerializeField] private PlayerData _playerData;
     
     //Variables for swipe detection
     private Vector2 _pos1;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public int PixelDistToDetect = 200;
     
     //Player Variables
-    private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
+    [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
     
     //Variables for methods
     private bool _isMoving = false;
@@ -44,8 +45,8 @@ public class PlayerController : MonoBehaviour
         EventBus.OnPlayerMaxHealthChange += OnPlayerMaxHealthChange;
         EventBus.OnPlayerCurrentXPChange += OnPlayerCurrentXPChange;
         EventBus.OnPlayerXPToLevelUpChange += OnPlayerXPToLevelUpChange;
-        // EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
-        // EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
+        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
+        EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
         
         // Power-up & Items
         // EventBus.OnPowerUpCollected += OnPowerUpCollected;
@@ -61,10 +62,16 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void OnPlayerXPToLevelUpChange(float val)
+    private void OnPlayerChooseAnItem(UpgradeType obj)
     {
-        _xpToLevelUp = val;
+        throw new NotImplementedException();
     }
+
+    private void OnPlayerLevelUp(List<UpgradeData> obj)
+    {
+        throw new NotImplementedException();
+    }
+
 
     private void OnPlayerMaxHealthChange(float val)
     {
@@ -100,15 +107,26 @@ public class PlayerController : MonoBehaviour
 
         if (_currentXP >= _xpToLevelUp)
         {
-            //EventBus.OnPlayerLevelUp Invoke this
+            // Get upgrades and trigger level up UI
+            var upgradeGenerator = FindObjectOfType<UpgradeGenerator>();
+            var choices = upgradeGenerator.GenerateUpgradeChoices();
+            EventBus.OnPlayerLevelUp?.Invoke(choices);
+            
+            // Reset XP for next level
+            _currentXP = 0;
+            EventBus.OnPlayerXPToLevelUpChange?.Invoke(_xpToLevelUp * 1.2f);
         }
+    }
+    private void OnPlayerXPToLevelUpChange(float val)
+    {
+        _xpToLevelUp = val;
     }
 
     private void OnPlayerCurrentHealthChange(float val)
     {
         _currentHealth += val;
         
-        Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
     }
 
     private void OnPlayerRevive()
@@ -125,7 +143,7 @@ public class PlayerController : MonoBehaviour
     {
         _currentHealth -= val;
         
-        Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
         if (_currentHealth <= 0)
         {
@@ -263,6 +281,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             StopSlide();
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            
         }
     }
 
