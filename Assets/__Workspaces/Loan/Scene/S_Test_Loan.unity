@@ -1412,6 +1412,7 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 8
+  _isRaycastDraw: 0
 --- !u!65 &1703253612
 BoxCollider:
   m_ObjectHideFlags: 0

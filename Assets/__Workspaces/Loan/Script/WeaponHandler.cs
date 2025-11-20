@@ -13,6 +13,8 @@ public class WeaponHandler : MonoBehaviour
     [FormerlySerializedAs("_currentMagSize")] [SerializeField] private int _ammoNumber;
     [SerializeField] private LayerMask _enemyMask;
     
+    [SerializeField] private bool _isRaycastDraw;
+    
 
     private void Start()
     {
@@ -44,6 +46,11 @@ public class WeaponHandler : MonoBehaviour
         {
             _currentCooldown -= Time.deltaTime;
         }
+
+        if (_isRaycastDraw)
+        {
+            Debug.DrawRay(_weaponRaycast.origin, _weaponRaycast.direction * _currentWeapon.FireDistance, Color.red);
+        }
     }
     
     public void Fire()
@@ -57,6 +64,7 @@ public class WeaponHandler : MonoBehaviour
         else
         {
             GameObject currentAmmo = Instantiate(_currentWeapon.AmmoPrefab,_firePoint.position,Quaternion.identity);
+            currentAmmo.GetComponent<BulletHandler>().Damage = _currentWeapon.Damage;
             _currentFireRate = _currentWeapon.FireRate;
             _ammoNumber--;
         }
