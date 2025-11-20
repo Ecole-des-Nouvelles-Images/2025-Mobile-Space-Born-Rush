@@ -31,7 +31,7 @@ public class UpgradeUIManager : MonoBehaviour
     private void OnEnable()
     {
         // Listen for when upgrade choices are ready (from your EventBus)
-        EventBus.OnPlayerLevelUp += ShowUpgradeChoices;
+        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         
         // Listen for when upgrades are applied to potentially close UI
         EventBus.OnUpgradeApplied += OnUpgradeApplied;
@@ -39,27 +39,23 @@ public class UpgradeUIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventBus.OnPlayerLevelUp -= ShowUpgradeChoices;
+        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         EventBus.OnUpgradeApplied -= OnUpgradeApplied;
     }
-
-    // This is called when EventBus.OnPlayerLevelUp fires with upgrade choices
-    private void ShowUpgradeChoices(List<UpgradeData> upgradeChoices)
+    
+    private void OnPlayerLevelUp(List<UpgradeData> upgradeChoices)
     {
         if (upgradeChoices == null || upgradeChoices.Count == 0)
         {
             Debug.LogError("No upgrade choices provided!");
-            CloseUpgradePanel(); // Ensure UI doesn't get stuck open
+            CloseUpgradePanel();
             return;
         }
 
-        if (upgradeChoices.Count > choiceSlots.Length)
-        {
-            Debug.LogWarning($"More choices ({upgradeChoices.Count}) than available slots ({choiceSlots.Length})");
-        }
+        // Debug log to see how many choices we're getting
+        Debug.Log($"Displaying {upgradeChoices.Count} upgrade choices (Player has {choiceSlots.Length} available slots)");
 
         currentChoices = upgradeChoices;
-        Debug.Log($"Displaying {upgradeChoices.Count} upgrade choices");
 
         // Display each choice in available UI slots
         for (int i = 0; i < choiceSlots.Length; i++)
@@ -68,7 +64,7 @@ public class UpgradeUIManager : MonoBehaviour
             {
                 choiceSlots[i].gameObject.SetActive(true);
                 choiceSlots[i].DisplayUpgrade(upgradeChoices[i], i);
-                choiceSlots[i].SetSelectionCallback(OnUpgradeSelected); // FIXED: Connect callback
+                choiceSlots[i].SetSelectionCallback(OnUpgradeSelected);
             }
             else
             {
@@ -79,18 +75,16 @@ public class UpgradeUIManager : MonoBehaviour
         // Show the upgrade panel
         upgradePanel.SetActive(true);
         
-        // Optional: Trigger animation
         if (panelAnimator != null)
             panelAnimator.SetTrigger("Show");
         
-        // Pause the game while player chooses
         PauseGame();
     }
 
     // Called by UI buttons when player selects an upgrade
     public void OnUpgradeSelected(int choiceIndex)
     {
-        if (upgradeManager == null)
+        if (!upgradeManager)
         {
             Debug.LogError("UpgradeManager not found!");
             CloseUpgradePanel();
@@ -126,7 +120,7 @@ public class UpgradeUIManager : MonoBehaviour
     private void CloseUpgradePanel()
     {
         // Optional: Trigger hide animation
-        if (panelAnimator != null)
+        if (panelAnimator)
         {
             panelAnimator.SetTrigger("Hide");
             // You might want to use an animation event to actually disable the panel

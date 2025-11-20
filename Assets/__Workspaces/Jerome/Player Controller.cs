@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnPlayerLevelUp(List<UpgradeData> obj)
     {
-        throw new NotImplementedException();
+        Debug.Log("PlayerLevelUp");
     }
 
 
@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            
+            EventBus.OnPlayerCurrentXPChange?.Invoke(100);
         }
     }
 

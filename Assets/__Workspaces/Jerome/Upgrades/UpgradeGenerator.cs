@@ -4,7 +4,8 @@ using UnityEngine;
 public class UpgradeGenerator : MonoBehaviour
 {
     [SerializeField] private List<UpgradeData> allPossibleUpgrades;
-    [SerializeField] private int choicesPerLevel = 3;
+    [Header("Dynamic Choices")]
+    [SerializeField] private int baseChoicesPerLevel = 2; // Start with 2 choices
     
     // Weighted probabilities for different upgrade categories
     [SerializeField] private float weaponWeight = 0.4f;
@@ -12,11 +13,26 @@ public class UpgradeGenerator : MonoBehaviour
     [SerializeField] private float gameSystemWeight = 0.2f;
 
     private List<UpgradeData> availableUpgrades;
+    private int currentChoicesPerLevel = 2; // Default starting value
 
     private void Start()
     {
         // Start with all upgrades available
         availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);
+        currentChoicesPerLevel = baseChoicesPerLevel;
+        
+        // Listen for CardChoiceCount upgrades
+        EventBus.OnGameSystemUpgrade += OnGameSystemUpgrade;
+    }
+
+    private void OnGameSystemUpgrade(UpgradeType type, float value)
+    {
+        if (type == UpgradeType.CardChoiceCount)
+        {
+            // Increase the number of choices player gets
+            currentChoicesPerLevel += Mathf.RoundToInt(value);
+            Debug.Log($"Card choices increased to: {currentChoicesPerLevel}");
+        }
     }
 
     // Called when player levels up
@@ -31,7 +47,8 @@ public class UpgradeGenerator : MonoBehaviour
         List<UpgradeData> choices = new List<UpgradeData>();
         List<UpgradeData> tempPool = new List<UpgradeData>(availableUpgrades);
 
-        for (int i = 0; i < choicesPerLevel; i++)
+        // Use dynamic choice count instead of fixed
+        for (int i = 0; i < currentChoicesPerLevel; i++)
         {
             if (tempPool.Count == 0) break;
 
@@ -83,7 +100,7 @@ public class UpgradeGenerator : MonoBehaviour
         availableUpgrades.Remove(selectedUpgrade);
         
         // Optional: Regenerate pool if running low
-        if (availableUpgrades.Count < choicesPerLevel)
+        if (availableUpgrades.Count < baseChoicesPerLevel)
         {
             RegenerateUpgradePool();
         }
