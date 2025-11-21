@@ -4,9 +4,10 @@ using UnityEngine;
 public abstract class BulletData : ScriptableObject
 {
     public GameObject BulletPrefab;
-    public float BulletSpeed;
+    public Vector3 BulletSpeed;
     public float BulletLifeTime;
     public float BulletDamage;
+    public bool IsDestroyedObstacle = false;
 
-    public abstract void OnHitEnemy(IDamageable damageable, GameObject ennemy);
+    public abstract void OnHitEnemy(GameObject bullet,IDamageable damageable, GameObject ennemy);
 }

@@ -4,9 +4,8 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public GameObject Prefab;
-    public GameObject AmmoPrefab; 
+    public BulletData BulletData; 
     public string Name;
-    public float Damage;
     public float Cooldown;
     public float FireRate;
     public float FireDistance;

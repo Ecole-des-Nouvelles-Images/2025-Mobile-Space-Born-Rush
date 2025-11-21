@@ -59,12 +59,11 @@ public class WeaponHandler : MonoBehaviour
         {
             _ammoNumber = _currentWeapon.MagSize;
             _currentCooldown = _currentWeapon.Cooldown;
-            Debug.Log("Reload");
         }
         else
         {
-            GameObject currentAmmo = Instantiate(_currentWeapon.AmmoPrefab,_firePoint.position,Quaternion.identity);
-            currentAmmo.GetComponent<BulletHandler>().Damage = _currentWeapon.Damage;
+            GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
+            currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData);
             _currentFireRate = _currentWeapon.FireRate;
             _ammoNumber--;
         }
