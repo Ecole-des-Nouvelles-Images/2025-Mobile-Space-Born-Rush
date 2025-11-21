@@ -1,19 +1,16 @@
+using System;
 using UnityEngine;
 
 public class EnemyTest : MonoBehaviour, IDamageable
 {
-    
+    public Vector3 Speed;
     private float _health = 10;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private Rigidbody _rb;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _rb = GetComponent<Rigidbody>();
+        _rb.linearVelocity = Speed;
     }
 
     public void TakeDamage(float damage)

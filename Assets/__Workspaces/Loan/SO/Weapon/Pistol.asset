@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18481ae9e9f410441aa5c0379c4549ae, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 4600168536979642986, guid: 7420d26986428de4b91f7ca708b0aea6, type: 3}
   BulletData: {fileID: 11400000, guid: cd6d815224a67ff4e940e90e8b893a76, type: 2}
   Name: VX-9
   Cooldown: 5

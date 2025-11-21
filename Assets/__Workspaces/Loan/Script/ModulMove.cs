@@ -9,15 +9,20 @@ public class ModulMove : MonoBehaviour
     private Rigidbody _rb;
     private float _width = 22f;
     
-    [SerializeField] private List<GameObject> _obstaclesPrefabs = new List<GameObject>();
+    [SerializeField] private List<ObstacleData> _obstaclesPrefabs = new List<ObstacleData>();
     [SerializeField] private List<Transform> _obstaclesPos = new List<Transform>();
+    
+    [SerializeField] private bool _isObstacle;
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         
         
         _rb.linearVelocity = _speedMovement;
-         // SpawnObstacles();
+        if (_isObstacle)
+        {
+            SpawnObstacles();
+        }
     }
 
     private void SpawnObstacles()
@@ -29,7 +34,9 @@ public class ModulMove : MonoBehaviour
             if (chance > 0.75) 
             {
                 int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
-                Instantiate(_obstaclesPrefabs[randomObstacle],pos.position,Quaternion.identity,transform);
+                ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
+                GameObject obstacle = Instantiate(currentObstacle.Prefab,pos.position,Quaternion.identity,transform);
+                obstacle.GetComponent<ObstacleTest>().ObstacleData =  currentObstacle;
             }
         }
         _obstaclesPos.Clear();
