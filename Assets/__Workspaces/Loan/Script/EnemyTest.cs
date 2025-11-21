@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class EnemyTest : MonoBehaviour
+public class EnemyTest : MonoBehaviour, IDamageable
 {
+    
+    private float _health = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,5 +14,18 @@ public class EnemyTest : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (_health > 0)
+        {
+            _health -= damage;
+            Debug.Log(_health);
+        }
+        else
+        {
+            Debug.Log("Die !");
+        }
     }
 }
