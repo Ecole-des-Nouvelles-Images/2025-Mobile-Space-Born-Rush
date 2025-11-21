@@ -11,7 +11,6 @@ public class BulletHandler : MonoBehaviour
     [SerializeField] private LayerMask _enemyMask;
 
     public float Damage;
-    [SerializeField]private bool _isRaycastDraw;
 
     private void Start()
     {
@@ -23,9 +22,10 @@ public class BulletHandler : MonoBehaviour
 
     private void Update()
     {
-        float currentRaycastDistance =  _lastPosition.z - transform.position.z;
+        Vector3 direction = transform.position - _lastPosition;
+        float distance = direction.magnitude;
 
-        if (Physics.Raycast(_bulletRaycast,out RaycastHit hit, currentRaycastDistance,_enemyMask))
+        if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
         {
             if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
             {
@@ -34,12 +34,8 @@ public class BulletHandler : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
         _lastPosition = transform.position;
-        
-        if (_isRaycastDraw)
-        {
-            Debug.DrawRay(_bulletRaycast.origin, _bulletRaycast.direction * currentRaycastDistance, Color.red);
-        }
     }
     
 }
