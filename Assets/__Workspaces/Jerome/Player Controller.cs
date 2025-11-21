@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private CapsuleCollider _col;
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private LaneProfile _laneProfile;
     
     //Variables for swipe detection
     private Vector2 _pos1;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     
     //Player Variables
     [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
+    [SerializeField] private int _currentLaneIndex;
     
     //Variables for methods
     private bool _isMoving = false;
@@ -225,6 +227,8 @@ public class PlayerController : MonoBehaviour
         _currentXP = 0;
         _xpToLevelUp = _playerData.BaseXPToLevelUp;
         _xpMultiplier = _playerData.BaseXPMultiplier;
+
+        _currentLaneIndex = 1;
     }
     
     //This method is called at the start and end of any animation to stop the player from being able to double jump or slide
@@ -275,6 +279,26 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Swipe Down");
                 _fingerDown = false;
             }
+
+            if (Input.touches[0].position.x >= _pos1.x + PixelDistToDetect)
+            {
+                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
+                Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
+                transform.position = targetPos;
+                Debug.Log("Swipe Right");   
+                _fingerDown = false;
+            }
+
+            if (Input.touches[0].position.x <= _pos1.x - PixelDistToDetect)
+            {
+                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
+                Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
+                transform.position = targetPos;
+                Debug.Log("Swipe Left");
+                _fingerDown = false;
+            }
+            
+            
             
         }
 
