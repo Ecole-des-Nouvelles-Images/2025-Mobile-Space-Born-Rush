@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18481ae9e9f410441aa5c0379c4549ae, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  Prefab: {fileID: 0}
-  AmmoPrefab: {fileID: 7005073462024459232, guid: 4e0adca639edd4f4ca1e1ce18b77f7e4, type: 3}
+  Prefab: {fileID: 4600168536979642986, guid: 7420d26986428de4b91f7ca708b0aea6, type: 3}
+  BulletData: {fileID: 11400000, guid: cd6d815224a67ff4e940e90e8b893a76, type: 2}
   Name: VX-9
-  Damage: 0
   Cooldown: 5
   FireRate: 0.25
   FireDistance: 20

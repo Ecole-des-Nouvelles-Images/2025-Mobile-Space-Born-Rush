@@ -1,0 +1,11 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "BulletData", menuName = "Scriptable Objects/BulletData/ARBulletData")]
+public class ARBulletData : BulletData
+{
+    public override void OnHitEnemy(GameObject bullet, IDamageable damageable, GameObject ennemy)
+    {
+        damageable.TakeDamage(BulletDamage);
+        Destroy(bullet);
+    }
+}
