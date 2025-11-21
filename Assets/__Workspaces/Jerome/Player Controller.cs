@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
     //Data variables
     private Rigidbody _rb;
-    private CapsuleCollider _col;
+    private BoxCollider _col;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private LaneProfile _laneProfile;
     
@@ -216,7 +213,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _col = GetComponent<CapsuleCollider>();
+        _col = GetComponent<BoxCollider>();
 
         // Animator animator = GetComponent<Animator>();
         // animator.speed = 2;
@@ -246,13 +243,13 @@ public class PlayerController : MonoBehaviour
     //And when the end of the animation plays it should call for the collider to resize
     private void Slide()
     {
-        _col.radius /= SlideAmount;
+        _col.size /= SlideAmount;
         _col.center /= SlideAmount;
     }
 
     public void StopSlide()
     {
-        _col.radius *= SlideAmount;
+        _col.size *= SlideAmount;
         _col.center *= SlideAmount;
     }
 
@@ -313,8 +310,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        throw new NotImplementedException();
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     throw new NotImplementedException();
+    // }
 }

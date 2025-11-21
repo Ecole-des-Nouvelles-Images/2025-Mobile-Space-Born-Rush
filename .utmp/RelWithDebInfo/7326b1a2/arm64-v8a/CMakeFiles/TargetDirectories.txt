@@ -1,0 +1,5 @@
+D:/LocalDir/2025-Mobile-Space-Born/.utmp/RelWithDebInfo/7326b1a2/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/LocalDir/2025-Mobile-Space-Born/.utmp/RelWithDebInfo/7326b1a2/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/LocalDir/2025-Mobile-Space-Born/.utmp/RelWithDebInfo/7326b1a2/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/LocalDir/2025-Mobile-Space-Born/.utmp/RelWithDebInfo/7326b1a2/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/LocalDir/2025-Mobile-Space-Born/.utmp/RelWithDebInfo/7326b1a2/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

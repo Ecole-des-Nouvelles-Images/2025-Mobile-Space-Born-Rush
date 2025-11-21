@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LaneData
   m_EditorClassIdentifier: Assembly-CSharp::LaneProfile
   LanePositions:
-  - {x: -5, y: 0, z: 0}
+  - {x: -1.5, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 5, y: 0, z: 0}
+  - {x: 1.5, y: 0, z: 0}
