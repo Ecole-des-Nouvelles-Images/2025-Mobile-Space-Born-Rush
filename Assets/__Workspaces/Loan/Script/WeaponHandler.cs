@@ -21,13 +21,14 @@ public class WeaponHandler : MonoBehaviour
         _currentWeapon = _weaponData;
         _ammoNumber = _currentWeapon.MagSize;
         _firePoint.GetComponent<Transform>();
-        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+        
     }
 
     private void Update()
     {
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
+            _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
             if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_enemyMask))
             {
                 if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))

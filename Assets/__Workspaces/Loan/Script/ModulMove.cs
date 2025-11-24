@@ -5,8 +5,8 @@ using Random = UnityEngine.Random;
 
 public class ModulMove : MonoBehaviour
 {
+    [SerializeField] private GameObject _modulPrefabs;
     [SerializeField]private Vector3 _speedMovement = new Vector3(0f, 0f, -5f);
-    private Rigidbody _rb;
     private float _width = 22f;
     
     [SerializeField] private List<ObstacleData> _obstaclesPrefabs = new List<ObstacleData>();
@@ -15,10 +15,6 @@ public class ModulMove : MonoBehaviour
     [SerializeField] private bool _isObstacle;
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        
-        
-        _rb.linearVelocity = _speedMovement;
         if (_isObstacle)
         {
             SpawnObstacles();
@@ -44,8 +40,11 @@ public class ModulMove : MonoBehaviour
 
     void Update()
     {
+        transform.position += _speedMovement * Time.deltaTime;
+        
         if (transform.position.z < -_width)
         {
+            Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);
             Destroy(gameObject);
         }
     }

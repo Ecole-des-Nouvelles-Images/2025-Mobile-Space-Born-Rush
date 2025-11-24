@@ -18,13 +18,13 @@ MonoBehaviour:
   BulletDamage: 20
   IsDestroyedObstacle: 0
   _knockbackMidDirections:
-  - {x: 0, y: 0, z: 1.5}
-  - {x: -1.5, y: 0, z: 1.5}
-  - {x: 1.5, y: 0, z: 1.5}
+  - {x: 0, y: 0, z: 3}
+  - {x: -1.5, y: 0, z: 3}
+  - {x: 1.5, y: 0, z: 3}
   _knockbackRightDirections:
-  - {x: -1.5, y: 0, z: 1.5}
-  - {x: 0, y: 0, z: 1.5}
+  - {x: -1.5, y: 0, z: 3}
+  - {x: 0, y: 0, z: 3}
   _knockbackLeftDirections:
-  - {x: 1.5, y: 0, z: 1.5}
-  - {x: 0, y: 0, z: 1.5}
-  _knockbackForce: 6
+  - {x: 1.5, y: 0, z: 3}
+  - {x: 0, y: 0, z: 3}
+  _knockbackForce: 5
