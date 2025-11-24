@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
     //This method is called at the start and end of any animation to stop the player from being able to double jump or slide
     public bool MovementStateChange(bool state)
     {
-        return state = !state;
+        return !state;
     }
     private void Jump()
     {
@@ -244,14 +244,14 @@ public class PlayerController : MonoBehaviour
     //And when the end of the animation plays it should call for the collider to resize
     private void Slide()
     {
-        MovementStateChange(_isSliding);
+        _isSliding = MovementStateChange(_isSliding);
         _col.size /= SlideAmount;
         _col.center /= SlideAmount;
     }
 
     public void StopSlide()
     {
-        MovementStateChange(_isSliding);
+        _isSliding = MovementStateChange(_isSliding);
         _col.size *= SlideAmount;
         _col.center *= SlideAmount;
     }
@@ -274,8 +274,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Swipe Up");
                     _fingerDown = false;
                 }
-            }
-            else if(!_isSliding)
+            }else if(!_isSliding)
             {
                 if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
                 {
@@ -283,10 +282,6 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Swipe Down");
                     _fingerDown = false;
                 }
-            }
-            else
-            {
-                _fingerDown = false;
             }
 
             if (Input.touches[0].position.x >= _pos1.x + PixelDistToDetect)
@@ -299,7 +294,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Swipe Right");   
                 _fingerDown = false;
             }
-
             if (Input.touches[0].position.x <= _pos1.x - PixelDistToDetect)
             {
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
@@ -332,7 +326,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.collider.tag == "Platform")
         {
-            MovementStateChange(_isJumping);
+            _isJumping = MovementStateChange(_isJumping);
         }
     }
 
@@ -340,7 +334,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.collider.tag == "Platform")
         {
-            MovementStateChange(_isJumping);
+            _isJumping =MovementStateChange(_isJumping);
         }
     }
 
