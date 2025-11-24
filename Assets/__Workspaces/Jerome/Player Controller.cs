@@ -264,7 +264,7 @@ public class PlayerController : MonoBehaviour
             _fingerDown = true;
         }
 
-        if (_fingerDown)
+        if (_fingerDown && Input.touchCount > 0)
         {
             if (!_isJumping) 
             {
