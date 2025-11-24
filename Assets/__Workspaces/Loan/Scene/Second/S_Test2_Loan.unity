@@ -1288,6 +1288,10 @@ PrefabInstance:
       propertyPath: _weaponData
       value: 
       objectReference: {fileID: 11400000, guid: 1f39fa5fc976e4a449fa10e01a7b3ac1, type: 2}
+    - target: {fileID: 4235329850120448227, guid: 7420d26986428de4b91f7ca708b0aea6, type: 3}
+      propertyPath: _isRaycastDraw
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4514384476242662964, guid: 7420d26986428de4b91f7ca708b0aea6, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.09999998
@@ -1622,7 +1626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715264883030605259, guid: 008428c34e35f334492029ff4a091b10, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3715264883030605259, guid: 008428c34e35f334492029ff4a091b10, type: 3}
       propertyPath: m_LocalRotation.w

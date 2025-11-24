@@ -12,19 +12,19 @@ public class ShotGunBulletData : BulletData
     public override void OnHitEnemy(GameObject bullet, IDamageable damageable, EnemyTest enemy)
     {
         damageable.TakeDamage(BulletDamage);
-        if (enemy.EnemyTransform.position.x == 0)
+        if (enemy.Transform.position.x == 0)
         {
             Vector3 dir = _knockbackMidDirections[Random.Range(0, _knockbackMidDirections.Count)];
             enemy.ApplyKnockback(dir * _knockbackForce);
         }
         else
         {
-            if (enemy.EnemyTransform.position.x > 1 )
+            if (enemy.Transform.position.x > 1 )
             {
                 Vector3 dir = _knockbackRightDirections[Random.Range(0, _knockbackMidDirections.Count)];
                 enemy.ApplyKnockback(dir * _knockbackForce);
             }
-            else if (enemy.EnemyTransform.position.x < -1 )
+            else if (enemy.Transform.position.x < -1 )
             {
                 Vector3 dir = _knockbackLeftDirections[Random.Range(0, _knockbackMidDirections.Count)];
                 enemy.ApplyKnockback(dir * _knockbackForce);
