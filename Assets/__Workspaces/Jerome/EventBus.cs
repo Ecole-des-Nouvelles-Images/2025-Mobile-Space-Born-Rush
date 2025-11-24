@@ -19,6 +19,7 @@ public static class EventBus
     public static Action OnPlayerDead;
     public static Action OnPlayerRevive;
     public static Action<float> OnPlayerTakeDamage;
+    public static Action<float> OnPlayerTakeStun;
     // public static Action<PowerUpType> OnPowerUpCollected;
     public static Action<float> OnPlayerCurrentHealthChange;
     public static Action<float> OnPlayerMaxHealthChange;

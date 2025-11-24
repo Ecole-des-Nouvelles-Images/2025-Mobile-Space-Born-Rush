@@ -50,7 +50,7 @@ public class BulletHandler : MonoBehaviour
             {
                 if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
                 {
-                    if (hitObstacle.collider.TryGetComponent<ObstacleTest>(out var enemy))
+                    if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
                     {
                         Destroy(gameObject);
                     }

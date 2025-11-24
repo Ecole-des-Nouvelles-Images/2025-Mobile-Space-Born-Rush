@@ -36,7 +36,7 @@ public class ModulMove : MonoBehaviour
                 int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
                 ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
                 GameObject obstacle = Instantiate(currentObstacle.Prefab,pos.position,Quaternion.identity,transform);
-                obstacle.GetComponent<ObstacleTest>().ObstacleData =  currentObstacle;
+                obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
             }
         }
         _obstaclesPos.Clear();
