@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _currentLaneIndex;
     
     //Variables for methods
-    private bool _isMoving = false;
+    private bool _isJumping = true;
+    private bool _isSliding = true;
     
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
@@ -229,9 +230,9 @@ public class PlayerController : MonoBehaviour
     }
     
     //This method is called at the start and end of any animation to stop the player from being able to double jump or slide
-    public void MovementStateChange()
+    public bool MovementStateChange(bool state)
     {
-        _isMoving = !_isMoving;
+        return state = !state;
     }
     private void Jump()
     {
@@ -243,12 +244,14 @@ public class PlayerController : MonoBehaviour
     //And when the end of the animation plays it should call for the collider to resize
     private void Slide()
     {
+        MovementStateChange(_isSliding);
         _col.size /= SlideAmount;
         _col.center /= SlideAmount;
     }
 
     public void StopSlide()
     {
+        MovementStateChange(_isSliding);
         _col.size *= SlideAmount;
         _col.center *= SlideAmount;
     }
@@ -263,17 +266,26 @@ public class PlayerController : MonoBehaviour
 
         if (_fingerDown)
         {
-            if (Input.touches[0].position.y >= _pos1.y + PixelDistToDetect)
+            if (!_isJumping) 
             {
-                Jump();
-                Debug.Log("Swipe Up");
-                _fingerDown = false;
+                if (Input.touches[0].position.y >= _pos1.y + PixelDistToDetect)
+                {
+                    Jump();
+                    Debug.Log("Swipe Up");
+                    _fingerDown = false;
+                }
             }
-
-            if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
+            else if(!_isSliding)
             {
-                Slide();
-                Debug.Log("Swipe Down");
+                if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
+                {
+                    Slide();
+                    Debug.Log("Swipe Down");
+                    _fingerDown = false;
+                }
+            }
+            else
+            {
                 _fingerDown = false;
             }
 
@@ -281,7 +293,9 @@ public class PlayerController : MonoBehaviour
             {
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
                 Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
-                transform.position = targetPos;
+                var vector3 = transform.position;
+                vector3.x = targetPos.x;
+                transform.position = vector3;
                 Debug.Log("Swipe Right");   
                 _fingerDown = false;
             }
@@ -290,15 +304,17 @@ public class PlayerController : MonoBehaviour
             {
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
                 Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
-                transform.position = targetPos;
+                var vector3 = transform.position;
+                vector3.x = targetPos.x;
+                transform.position = vector3;
                 Debug.Log("Swipe Left");
                 _fingerDown = false;
             }
             
             
-            
         }
 
+        //TODO Delete
         if (Input.GetButtonDown("Fire2"))
         {
             StopSlide();
@@ -307,6 +323,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             EventBus.OnPlayerCurrentXPChange?.Invoke(100);
+        }
+    }
+
+    
+    //The logic to stop the player from double jumping or sliding while jumping
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.collider.tag == "Platform")
+        {
+            MovementStateChange(_isJumping);
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if(other.collider.tag == "Platform")
+        {
+            MovementStateChange(_isJumping);
         }
     }
 
