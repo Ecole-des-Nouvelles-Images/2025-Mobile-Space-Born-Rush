@@ -31,7 +31,7 @@ public class WeaponHandler : MonoBehaviour
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
             if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_enemyMask))
             {
-                if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
+                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                 {
                     Fire();
                 }

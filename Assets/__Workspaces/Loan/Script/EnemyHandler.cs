@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class EnemyTest : MonoBehaviour, IDamageable
+public class EnemyHandler : MonoBehaviour, IDamageable
 {
     public Vector3 Speed;
-    [FormerlySerializedAs("EnemyTransform")] public Transform Transform;
+    public Transform Transform;
     private Vector3 _knockbackVelocity;
     private float _knockbackTimer = 3f;
     private float _health = 10;
@@ -74,6 +74,5 @@ public class EnemyTest : MonoBehaviour, IDamageable
             }
         }
         transform.position = new Vector3(closeLane, transform.position.y, transform.position.z);
-        Debug.Log("Offset Lanes ! ");
     }
 }

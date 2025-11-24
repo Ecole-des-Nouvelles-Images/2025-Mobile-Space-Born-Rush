@@ -9,7 +9,7 @@ public class ShotGunBulletData : BulletData
     [SerializeField] private List<Vector3> _knockbackRightDirections = new List<Vector3>();
     [SerializeField] private List<Vector3> _knockbackLeftDirections = new List<Vector3>();
     [SerializeField] private float _knockbackForce;
-    public override void OnHitEnemy(GameObject bullet, IDamageable damageable, EnemyTest enemy)
+    public override void OnHitEnemy(GameObject bullet, IDamageable damageable, EnemyHandler enemy)
     {
         damageable.TakeDamage(BulletDamage);
         if (enemy.Transform.position.x == 0)

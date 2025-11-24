@@ -40,7 +40,7 @@ public class BulletHandler : MonoBehaviour
             {
                 if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                 {
-                    if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                     {
                         _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
@@ -57,7 +57,7 @@ public class BulletHandler : MonoBehaviour
                 }
                 else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                 {
-                    if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                     {
                         _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }

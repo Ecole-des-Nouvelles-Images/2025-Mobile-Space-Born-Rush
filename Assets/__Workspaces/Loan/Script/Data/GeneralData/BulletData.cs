@@ -9,5 +9,5 @@ public abstract class BulletData : ScriptableObject
     public float BulletDamage;
     public bool IsDestroyedObstacle = false;
 
-    public abstract void OnHitEnemy(GameObject bullet,IDamageable damageable, EnemyTest enemy);
+    public abstract void OnHitEnemy(GameObject bullet,IDamageable damageable, EnemyHandler enemy);
 }
