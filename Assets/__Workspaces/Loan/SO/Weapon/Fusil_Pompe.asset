@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Fusil_Pompe
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   Prefab: {fileID: 0}
-  AmmoPrefab: {fileID: 0}
+  BulletData: {fileID: 11400000, guid: ad45df66ecdb327409dc7322a939cd7e, type: 2}
   Name: KX-90
-  Damage: 0
-  Cooldown: 0
-  FireRate: 0
-  MagSize: 0
+  Cooldown: 6
+  FireRate: 0.5
+  FireDistance: 25
+  MagSize: 5

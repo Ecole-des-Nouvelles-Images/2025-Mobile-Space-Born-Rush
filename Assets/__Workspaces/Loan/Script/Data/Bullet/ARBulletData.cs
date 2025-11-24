@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BulletData", menuName = "Scriptable Objects/BulletData/ARBulletData")]
 public class ARBulletData : BulletData
 {
-    public override void OnHitEnemy(GameObject bullet, IDamageable damageable, GameObject ennemy)
+    public override void OnHitEnemy(GameObject bullet, IDamageable damageable, EnemyTest enemy)
     {
         damageable.TakeDamage(BulletDamage);
         Destroy(bullet);

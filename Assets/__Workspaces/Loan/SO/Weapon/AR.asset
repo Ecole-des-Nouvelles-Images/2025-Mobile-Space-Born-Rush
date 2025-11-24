@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   Prefab: {fileID: 0}
-  AmmoPrefab: {fileID: 0}
+  BulletData: {fileID: 11400000, guid: ce94d54a8dd69f944ace1bc36cd1a2dd, type: 2}
   Name: RX-77
-  Damage: 0
   Cooldown: 0
   FireRate: 0
+  FireDistance: 0
   MagSize: 0

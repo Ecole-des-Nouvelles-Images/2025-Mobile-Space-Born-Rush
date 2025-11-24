@@ -42,7 +42,7 @@ public class BulletHandler : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
                     {
-                        _bulletData.OnHitEnemy(gameObject,enemy, enemy.gameObject);
+                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
                 }
             }
@@ -59,7 +59,7 @@ public class BulletHandler : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
                     {
-                        _bulletData.OnHitEnemy(gameObject,enemy, enemy.gameObject);
+                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
                 }
             }
