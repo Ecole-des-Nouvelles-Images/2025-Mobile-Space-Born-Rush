@@ -5,12 +5,13 @@ using UnityEngine.Serialization;
 public class WeaponHandler : MonoBehaviour
 {
     [SerializeField]private WeaponData _weaponData;
+    [SerializeField]private WeaponUpgradeController _weaponUpgrades;
     [SerializeField]private Transform _firePoint ;
     private WeaponData _currentWeapon ;
     private Ray _weaponRaycast;
     [SerializeField]private float _currentFireRate;
     [SerializeField]private float _currentCooldown;
-    [FormerlySerializedAs("_currentMagSize")] [SerializeField] private int _ammoNumber;
+    [SerializeField] private int _ammoNumber;
     [SerializeField] private LayerMask _enemyMask;
     
     [SerializeField] private bool _isRaycastDraw;
@@ -57,14 +58,14 @@ public class WeaponHandler : MonoBehaviour
     {
         if (_ammoNumber <= 0)
         {
-            _ammoNumber = _currentWeapon.MagSize;
-            _currentCooldown = _currentWeapon.Cooldown;
+            _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
+            _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
         }
         else
         {
             GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
             currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData);
-            _currentFireRate = _currentWeapon.FireRate;
+            _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
             _ammoNumber--;
         }
     }

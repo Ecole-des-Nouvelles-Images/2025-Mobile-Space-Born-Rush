@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     //Data variables
     private Rigidbody _rb;
     private BoxCollider _col;
-    [SerializeField] private PlayerData _playerData;
     [SerializeField] private LaneProfile _laneProfile;
     
     //Variables for swipe detection
@@ -17,12 +16,11 @@ public class PlayerController : MonoBehaviour
     public int PixelDistToDetect = 200;
     
     //Player Variables
-    [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
     [SerializeField] private int _currentLaneIndex;
     
     //Variables for methods
     private bool _isJumping = true;
-    private bool _isSliding = true;
+    private bool _isSliding;
     
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
@@ -40,26 +38,18 @@ public class PlayerController : MonoBehaviour
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerRevive += OnPlayerRevive;
-        EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
-        EventBus.OnPlayerCurrentHealthChange += OnPlayerCurrentHealthChange;
-        EventBus.OnPlayerMaxHealthChange += OnPlayerMaxHealthChange;
-        EventBus.OnPlayerCurrentXPChange += OnPlayerCurrentXPChange;
-        EventBus.OnPlayerXPToLevelUpChange += OnPlayerXPToLevelUpChange;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
-        
-        // Power-up & Items
-        // EventBus.OnPowerUpCollected += OnPowerUpCollected;
-        
-        // Combat Events
-        // EventBus.OnWeaponChanged += OnWeaponChanged;
-        EventBus.OnObstacleHit += OnObstacleHit;
-        EventBus.OnObstacleDodged += OnObstacleDodged;
         
         // Movement & Environment
         EventBus.OnLaneChanged += OnLaneChanged;
         EventBus.OnSpeedChanged += OnSpeedChanged;
         
+    }
+
+    private void OnPlayerRevive()
+    {
+        throw new NotImplementedException();
     }
 
     private void OnPlayerChooseAnItem(UpgradeType obj)
@@ -70,13 +60,6 @@ public class PlayerController : MonoBehaviour
     private void OnPlayerLevelUp(List<UpgradeData> obj)
     {
         Debug.Log("PlayerLevelUp");
-    }
-
-
-    private void OnPlayerMaxHealthChange(float val)
-    {
-        //Depends on how the value is sent but this is the basic logic
-        _maxHealth = val;
     }
 
     private void OnSpeedChanged(float val)
@@ -101,54 +84,9 @@ public class PlayerController : MonoBehaviour
         //TODO ask Loan if its flat or a percentage of the current speed, will need to change the event based on his ans.
     }
 
-    private void OnPlayerCurrentXPChange(float val)
-    {
-        _currentXP += val;
-
-        if (_currentXP >= _xpToLevelUp)
-        {
-            // Get upgrades and trigger level up UI
-            var upgradeGenerator = FindObjectOfType<UpgradeGenerator>();
-            var choices = upgradeGenerator.GenerateUpgradeChoices();
-            EventBus.OnPlayerLevelUp?.Invoke(choices);
-            
-            // Reset XP for next level
-            _currentXP = 0;
-            EventBus.OnPlayerXPToLevelUpChange?.Invoke(_xpToLevelUp * 1.2f);
-        }
-    }
-    private void OnPlayerXPToLevelUpChange(float val)
-    {
-        _xpToLevelUp = val;
-    }
-
-    private void OnPlayerCurrentHealthChange(float val)
-    {
-        _currentHealth += val;
-        
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-    }
-
-    private void OnPlayerRevive()
-    {
-        _currentHealth = _maxHealth;
-    }
-
     private void OnPlayerSpawn()
     {
         throw new NotImplementedException();
-    }
-
-    private void OnPlayerTakeDamage(float val)
-    {
-        _currentHealth -= val;
-        
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-
-        if (_currentHealth <= 0)
-        {
-            Invoke("OnPlayerDead", 0.1f);
-        }
     }
 
     private void OnGameResume()
@@ -188,21 +126,8 @@ public class PlayerController : MonoBehaviour
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
         EventBus.OnPlayerRevive -= OnPlayerRevive;
-        EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
-        EventBus.OnPlayerCurrentHealthChange -= OnPlayerCurrentHealthChange;
-        EventBus.OnPlayerMaxHealthChange -= OnPlayerMaxHealthChange;
-        EventBus.OnPlayerCurrentXPChange -= OnPlayerCurrentXPChange;
-        EventBus.OnPlayerXPToLevelUpChange -= OnPlayerXPToLevelUpChange;
-        // EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
-        // EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
-        
-        // Power-up & Items
-        // EventBus.OnPowerUpCollected -= OnPowerUpCollected;
-        
-        // Combat Events
-        // EventBus.OnWeaponChanged -= OnWeaponChanged;
-        EventBus.OnObstacleHit -= OnObstacleHit;
-        EventBus.OnObstacleDodged -= OnObstacleDodged;
+        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
+        EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
         
         // Movement & Environment
         EventBus.OnLaneChanged -= OnLaneChanged;
@@ -218,13 +143,6 @@ public class PlayerController : MonoBehaviour
 
         // Animator animator = GetComponent<Animator>();
         // animator.speed = 2;
-
-        _maxHealth = _playerData.BaseMaxHealth;
-        _currentHealth = _playerData.BaseMaxHealth;
-        _hpDropMultiplier = _playerData.BaseHPDropMultiplier;
-        _currentXP = 0;
-        _xpToLevelUp = _playerData.BaseXPToLevelUp;
-        _xpMultiplier = _playerData.BaseXPMultiplier;
 
         _currentLaneIndex = 1;
     }
