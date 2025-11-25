@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2865939602988361234}
   - component: {fileID: 6339536256287895648}
+  - component: {fileID: -3757105385989480502}
   m_Layer: 7
   m_Name: Modul
   m_TagString: Untagged
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModulMove
   _modulPrefabs: {fileID: 2748276823874896590}
   _speedMovement: {x: 0, y: 0, z: -5}
+  _gameUpgrades: {fileID: 0}
   _obstaclesPrefabs:
   - {fileID: 11400000, guid: e97e5301080f4ba4580e8874c666cde3, type: 2}
   - {fileID: 11400000, guid: 1bfcafc0b31cd7145802c1430dbe6508, type: 2}
@@ -128,6 +130,33 @@ MonoBehaviour:
   - {fileID: 5372378856162216988}
   - {fileID: 2738302449689939221}
   _isObstacle: 0
+--- !u!54 &-3757105385989480502
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2748276823874896590}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2977185061086244294
 GameObject:
   m_ObjectHideFlags: 0

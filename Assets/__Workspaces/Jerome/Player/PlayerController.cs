@@ -267,6 +267,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     // }
     public void TakeDamage(float damage)
     {
-        _currentHealth -= damage;
+        EventBus.OnPlayerTakeDamage?.Invoke(damage);
     }
 }

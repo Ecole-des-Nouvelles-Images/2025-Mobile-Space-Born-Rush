@@ -8,7 +8,6 @@ public class ModulMove : MonoBehaviour
     [SerializeField] private GameObject _modulPrefabs;
     [SerializeField]private Vector3 _speedMovement = new Vector3(0f, 0f, -5f);
     [SerializeField] private GameUpgradeController _gameUpgrades;
-    [SerializeField] private Vector3 _speedMovement = new Vector3(0f, 0f, -5f);
     private Rigidbody _rb;
     private float _width = 22f;
     
