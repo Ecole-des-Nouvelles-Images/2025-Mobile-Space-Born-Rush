@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private BoxCollider _col;
     [SerializeField] private LaneProfile _laneProfile;
+    private WeaponData _currentweaponData;
     
     //Variables for swipe detection
     private Vector2 _pos1;
@@ -264,4 +265,9 @@ public class PlayerController : MonoBehaviour
     // {
     //     throw new NotImplementedException();
     // }
+
+    private void zebi()
+    {
+        Instantiate(_currentweaponData.Prefab);
+    }
 }

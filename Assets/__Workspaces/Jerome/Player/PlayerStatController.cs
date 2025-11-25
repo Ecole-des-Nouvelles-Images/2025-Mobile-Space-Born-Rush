@@ -17,12 +17,12 @@ public class PlayerStatController : MonoBehaviour
         // Player Specific Events
         EventBus.OnPlayerRevive += OnPlayerRevive;
         EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
+        EventBus.OnPlayerDead += OnPlayerDead;
         EventBus.OnPlayerCurrentHealthChange += OnPlayerCurrentHealthChange;
         EventBus.OnPlayerMaxHealthChange += OnPlayerMaxHealthChange;
         EventBus.OnPlayerCurrentXPChange += OnPlayerCurrentXPChange;
         EventBus.OnPlayerXPToLevelUpChange += OnPlayerXPToLevelUpChange;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
-        EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
         
         // Main event
         EventBus.OnStatUpgrade += OnStatUpgrade;
@@ -44,11 +44,6 @@ public class PlayerStatController : MonoBehaviour
                 break;
         }
         Debug.Log("Stat upgrade: " + upgrade);
-    }
-
-    private void OnPlayerChooseAnItem(UpgradeType obj)
-    {
-        throw new NotImplementedException();
     }
 
     private void OnPlayerLevelUp(List<UpgradeData> obj)
@@ -100,8 +95,22 @@ public class PlayerStatController : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            Invoke("OnPlayerDead", 0.1f);
+            EventBus.OnPlayerDead?.Invoke();
         }
+    }
+    private void OnPlayerDead()
+    {
+        //Play death animations
+        //
+        
+        //Play death screen
+        //
+        
+        //Then die
+        Destroy(this);
+        
+        //Invoke GameOver
+        EventBus.OnGameOver?.Invoke();
     }
     private void OnDestroy()
     {
@@ -113,7 +122,6 @@ public class PlayerStatController : MonoBehaviour
         EventBus.OnPlayerCurrentXPChange -= OnPlayerCurrentXPChange;
         EventBus.OnPlayerXPToLevelUpChange -= OnPlayerXPToLevelUpChange;
         EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
-        EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
         
         // Main event
         EventBus.OnStatUpgrade -= OnStatUpgrade;
@@ -121,12 +129,13 @@ public class PlayerStatController : MonoBehaviour
 
     #endregion
     
-    public float HPDropMultiplier => _hpDropMultiplier;
-    public float XPMultiplier => _xpMultiplier;
-    public float MaxHealth => _maxHealth;
-    public float CurrentHealth => _currentHealth;
-    public float CurrentXp => _currentXP;
-    public float XpToLevelUp => _xpToLevelUp;
+    //If I ever decide to decouple this class into a data class and a damage handler or smth
+    // public float HPDropMultiplier => _hpDropMultiplier;
+    // public float XPMultiplier => _xpMultiplier;
+    // public float MaxHealth => _maxHealth;
+    // public float CurrentHealth => _currentHealth;
+    // public float CurrentXp => _currentXP;
+    // public float XpToLevelUp => _xpToLevelUp;
     
     void Start()
     {
