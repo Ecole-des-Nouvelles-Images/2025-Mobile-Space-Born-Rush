@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,IDamageable
 {
     //Data variables
     private Rigidbody _rb;
@@ -314,4 +314,8 @@ public class PlayerController : MonoBehaviour
     // {
     //     throw new NotImplementedException();
     // }
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+    }
 }

@@ -4,57 +4,87 @@ using UnityEngine.Serialization;
 
 public class EnemyHandler : MonoBehaviour, IDamageable
 {
-    public Vector3 Speed;
+    [Header("=====General Settings=====")] 
+    public float Hp;
+    public float MaxHp;
+    public Vector3 SpeedDirection;
     public Transform Transform;
-    private Vector3 _knockbackVelocity;
+    public Rigidbody Rb;
+
+    [Header("<color=red>=====Attack Settings=====</color>")]
+    // public WeaponData WeaponData;
+    public float Damage;
+    public bool IsRange;
+    public float Range;
+    public Ray Raycast;
+    public float CurrentFireRate; 
+    
+    [Header("<color=cyan>======Animator======</color>")]
+    public Animator Animator;
+    
+    [Header("<color=magenta>=====Other Settings=====</color>")]
+    public Vector3 KnockBackVelocity;
+    public bool IsKnocked;
+    public LayerMask EnemyMask;
+    
+    [Header("<color=yellow>=====Bool State Settings=====</color>")]
+    public bool IsWait;
+    public bool IsAttacking;
+    public bool IsDead;
+    
+    public BaseState CurrentState = new Wait();
+    
     private float _knockbackTimer = 3f;
-    private float _health = 10;
-    private Rigidbody _rb;
     private float _knockbackForceMax = 8f;
     private float[] _lanes = new[] { -1.5f, 0f, 1.5f };
-    private bool _isKnocked = false;
-
+    
+    
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
+        Hp =  MaxHp;
+        IsWait =  true;
     }
-
     private void FixedUpdate()
     {
-        _knockbackVelocity = Vector3.Lerp(_knockbackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
+        KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
         
-        _rb.linearVelocity = Speed + _knockbackVelocity;
+        Rb.linearVelocity = SpeedDirection +  KnockBackVelocity;
         
-        if (!_isKnocked && _knockbackVelocity.magnitude < 0.05f)
+        if (!IsKnocked && KnockBackVelocity.magnitude < 0.05f)
         {
             SnapToLanes();
-            _isKnocked = true;
+            IsKnocked = true;
         }
         
-        if (_knockbackVelocity.magnitude > 0.1f)
+        if (KnockBackVelocity.magnitude > 0.1f)
         {
-            _isKnocked = false;
+            IsKnocked = false;
+        }
+
+        if (Hp <= 0)
+        {
+            IsDead = true;
+            IsWait = false;
+            IsAttacking = false;
         }
     }
     public void TakeDamage(float damage)
     {
-        if (_health > 0)
-        {
-            _health -= damage;
-            // Debug.Log(_health);
-        }
-        else
-        {
-            Debug.Log("Die !");
-        }
+        Hp -= damage;
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
     
     public void ApplyKnockback(Vector3 force)
     {
-        _knockbackVelocity += force;
+        KnockBackVelocity += force;
         
-        _knockbackVelocity = Vector3.ClampMagnitude(_knockbackVelocity, _knockbackForceMax);
+        KnockBackVelocity = Vector3.ClampMagnitude(KnockBackVelocity, _knockbackForceMax);
     }
 
     private void SnapToLanes()

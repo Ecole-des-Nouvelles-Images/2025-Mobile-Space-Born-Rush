@@ -11,7 +11,7 @@ public class BulletHandler : MonoBehaviour
     private BulletData _bulletData;
     private Vector3 _speedMove;
     
-    [SerializeField] private LayerMask _enemyMask;
+    private LayerMask _enemyMask;
     [SerializeField] private LayerMask _obstacleMask;
     
 
@@ -20,9 +20,10 @@ public class BulletHandler : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Setup(BulletData data)
+    public void Setup(BulletData data,LayerMask enemyMask)
     {
         _bulletData = data;
+        _enemyMask = enemyMask;
         _rb.linearVelocity = _bulletData.BulletSpeed;
         _lifeTime =  _bulletData.BulletLifeTime;
         _lastPosition = transform.position;

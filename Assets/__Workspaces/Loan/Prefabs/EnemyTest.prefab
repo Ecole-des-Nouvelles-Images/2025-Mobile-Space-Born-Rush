@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 736239687394586358}
   - component: {fileID: 421597080668098266}
   - component: {fileID: 1198022742704567018}
-  - component: {fileID: 49056335398776875}
   - component: {fileID: 3784929531653068995}
+  - component: {fileID: 7460707452621351658}
   m_Layer: 3
   m_Name: EnemyTest
   m_TagString: Untagged
@@ -115,19 +115,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &49056335398776875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9214185679248329394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5914ac59de42b0a48b26195e1fa83b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyTest
-  Speed: {x: 0, y: 0, z: 0}
 --- !u!54 &3784929531653068995
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,3 +142,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &7460707452621351658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214185679248329394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c115358d6a718f746abcd46289f28893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCAC
+  Hp: 0
+  MaxHp: 5
+  SpeedDirection: {x: 0, y: 0, z: 0}
+  Transform: {fileID: 0}
+  Rb: {fileID: 0}
+  Damage: 0
+  IsRange: 0
+  Range: 0
+  CurrentFireRate: 0
+  Animator: {fileID: 0}
+  KnockBackVelocity: {x: 0, y: 0, z: 0}
+  IsKnocked: 0
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 0
+  IsWait: 0
+  IsAttacking: 0
+  IsDead: 0
