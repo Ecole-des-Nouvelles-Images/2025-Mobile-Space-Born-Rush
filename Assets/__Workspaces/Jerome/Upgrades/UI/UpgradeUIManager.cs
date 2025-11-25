@@ -153,7 +153,7 @@ public class UpgradeUIManager : MonoBehaviour
 
     private void PauseGame()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         EventBus.OnGamePause?.Invoke();
     }
 

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     //Variables for methods
     private bool _isJumping = true;
     private bool _isSliding;
+    private bool _isPaused;
     
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnGameResume()
     {
-        throw new NotImplementedException();
+        _isPaused  = false;
     }
 
     private void OnGameRestart()
@@ -106,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnGamePause()
     {
-        throw new NotImplementedException();
+        _isPaused =  true;
     }
 
     private void OnGameStart()
@@ -176,54 +177,57 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!_fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (!_isPaused)
         {
-            _pos1 = Input.touches[0].position;
-            _fingerDown = true;
-        }
-
-        if (_fingerDown && Input.touchCount > 0)
-        {
-            if (!_isJumping) 
+            if (!_fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                if (Input.touches[0].position.y >= _pos1.y + PixelDistToDetect)
-                {
-                    Jump();
-                    Debug.Log("Swipe Up");
-                    _fingerDown = false;
-                }
-            }else if(!_isSliding)
-            {
-                if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
-                {
-                    Slide();
-                    Debug.Log("Swipe Down");
-                    _fingerDown = false;
-                }
+                _pos1 = Input.touches[0].position;
+                _fingerDown = true;
             }
 
-            if (Input.touches[0].position.x >= _pos1.x + PixelDistToDetect)
+            if (_fingerDown && Input.touchCount > 0)
             {
-                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
-                Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
-                var vector3 = transform.position;
-                vector3.x = targetPos.x;
-                transform.position = vector3;
-                Debug.Log("Swipe Right");   
-                _fingerDown = false;
+                if (!_isJumping) 
+                {
+                    if (Input.touches[0].position.y >= _pos1.y + PixelDistToDetect)
+                    {
+                        Jump();
+                        Debug.Log("Swipe Up");
+                        _fingerDown = false;
+                    }
+                }else if(!_isSliding)
+                {
+                    if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
+                    {
+                        Slide();
+                        Debug.Log("Swipe Down");
+                        _fingerDown = false;
+                    }
+                }
+
+                if (Input.touches[0].position.x >= _pos1.x + PixelDistToDetect)
+                {
+                    _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
+                    Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
+                    var vector3 = transform.position;
+                    vector3.x = targetPos.x;
+                    transform.position = vector3;
+                    Debug.Log("Swipe Right");   
+                    _fingerDown = false;
+                }
+                if (Input.touches[0].position.x <= _pos1.x - PixelDistToDetect)
+                {
+                    _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
+                    Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
+                    var vector3 = transform.position;
+                    vector3.x = targetPos.x;
+                    transform.position = vector3;
+                    Debug.Log("Swipe Left");
+                    _fingerDown = false;
+                }
+                
+                
             }
-            if (Input.touches[0].position.x <= _pos1.x - PixelDistToDetect)
-            {
-                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
-                Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
-                var vector3 = transform.position;
-                vector3.x = targetPos.x;
-                transform.position = vector3;
-                Debug.Log("Swipe Left");
-                _fingerDown = false;
-            }
-            
-            
         }
 
         //TODO Delete

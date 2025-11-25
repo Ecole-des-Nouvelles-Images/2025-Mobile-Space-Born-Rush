@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class UpgradeGenerator : MonoBehaviour
 {
+    private GameUpgradeController _gameUpgrades;
     [SerializeField] private List<UpgradeData> allPossibleUpgrades;
     [Header("Dynamic Choices")]
-    [SerializeField] private int baseChoicesPerLevel = 2; // Start with 2 choices
     
     // Weighted probabilities for different upgrade categories
     [SerializeField] private float weaponWeight = 0.4f;
@@ -13,26 +13,13 @@ public class UpgradeGenerator : MonoBehaviour
     [SerializeField] private float gameSystemWeight = 0.2f;
 
     private List<UpgradeData> availableUpgrades;
-    private int currentChoicesPerLevel = 2; // Default starting value
 
     private void Start()
     {
         // Start with all upgrades available
         availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);
-        currentChoicesPerLevel = baseChoicesPerLevel;
         
-        // Listen for CardChoiceCount upgrades
-        EventBus.OnGameSystemUpgrade += OnGameSystemUpgrade;
-    }
-
-    private void OnGameSystemUpgrade(UpgradeType type, float value)
-    {
-        if (type == UpgradeType.CardChoiceCount)
-        {
-            // Increase the number of choices player gets
-            currentChoicesPerLevel += Mathf.RoundToInt(value);
-            Debug.Log($"Card choices increased to: {currentChoicesPerLevel}");
-        }
+        _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
     }
 
     // Called when player levels up
@@ -48,7 +35,7 @@ public class UpgradeGenerator : MonoBehaviour
         List<UpgradeData> tempPool = new List<UpgradeData>(availableUpgrades);
 
         // Use dynamic choice count instead of fixed
-        for (int i = 0; i < currentChoicesPerLevel; i++)
+        for (int i = 0; i < _gameUpgrades.NumberOfUpgrades; i++)
         {
             if (tempPool.Count == 0) break;
 
@@ -93,18 +80,6 @@ public class UpgradeGenerator : MonoBehaviour
         };
     }
 
-    // Call this when the upgrade should no longer be available
-    // like when there are the max amount of choices or the speed is too high
-    public void RemoveUpgradeFromPool(UpgradeData selectedUpgrade)
-    {
-        availableUpgrades.Remove(selectedUpgrade);
-        
-        // Optional: Regenerate pool if running low
-        if (availableUpgrades.Count < baseChoicesPerLevel)
-        {
-            RegenerateUpgradePool();
-        }
-    }
 
     private void RegenerateUpgradePool()
     {
@@ -112,5 +87,13 @@ public class UpgradeGenerator : MonoBehaviour
         
         // Optional: Increase weights for rare upgrades on regeneration
         gameSystemWeight += 0.1f; // Make system upgrades more common in late game
+    }
+    
+    // Call this when the upgrade should no longer be available
+    // like when there are the max amount of choices or the speed is too high
+    public void RemoveUpgradeFromPool(UpgradeData selectedUpgrade)
+    {
+        availableUpgrades.Remove(selectedUpgrade);
+        
     }
 }

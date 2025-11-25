@@ -9,10 +9,6 @@ public class WeaponUpgradeController : MonoBehaviour
           #region subscriptions
     private void Awake()
     {
-        // Game State Events
-        EventBus.OnGameResume += OnGameResume;
-        EventBus.OnGameRestart += OnGameRestart;
-        
         // Player Specific Events
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
@@ -59,20 +55,8 @@ public class WeaponUpgradeController : MonoBehaviour
     {
         Debug.Log("PlayerLevelUp");
     }
-    private void OnGameResume()
-    {
-        throw new NotImplementedException();
-    }
-    private void OnGameRestart()
-    {
-        throw new NotImplementedException();
-    }
     private void OnDestroy()
     {
-        // Game State Events
-        EventBus.OnGameResume -= OnGameResume;
-        EventBus.OnGameRestart -= OnGameRestart;
-        
         // Player Specific Events
         EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;

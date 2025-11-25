@@ -23,6 +23,8 @@ public class WeaponHandler : MonoBehaviour
         _ammoNumber = _currentWeapon.MagSize;
         _firePoint.GetComponent<Transform>();
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+        
+        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
     }
 
     private void Update()

@@ -14,10 +14,6 @@ public class PlayerStatController : MonoBehaviour
     #region subscriptions
     private void Awake()
     {
-        // Game State Events
-        EventBus.OnGameResume += OnGameResume;
-        EventBus.OnGameRestart += OnGameRestart;
-        
         // Player Specific Events
         EventBus.OnPlayerRevive += OnPlayerRevive;
         EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
@@ -38,7 +34,7 @@ public class PlayerStatController : MonoBehaviour
         switch (upgrade)
         {
             case UpgradeType.MaxHP:
-                EventBus.OnPlayerMaxHealthChange(value);
+                EventBus.OnPlayerMaxHealthChange?.Invoke(value);
                 break;
             case UpgradeType.HPMultiplier:
                 _hpDropMultiplier += value;
@@ -62,7 +58,7 @@ public class PlayerStatController : MonoBehaviour
     private void OnPlayerMaxHealthChange(float val)
     {
         //Depends on how the value is sent but this is the basic logic
-        _maxHealth = val;
+        _maxHealth += val;
         EventBus.OnPlayerCurrentHealthChange(val);
     }
     private void OnPlayerCurrentHealthChange(float val)
@@ -107,20 +103,8 @@ public class PlayerStatController : MonoBehaviour
             Invoke("OnPlayerDead", 0.1f);
         }
     }
-    private void OnGameResume()
-    {
-        throw new NotImplementedException();
-    }
-    private void OnGameRestart()
-    {
-        throw new NotImplementedException();
-    }
     private void OnDestroy()
     {
-        // Game State Events
-        EventBus.OnGameResume -= OnGameResume;
-        EventBus.OnGameRestart -= OnGameRestart;
-        
         // Player Specific Events
         EventBus.OnPlayerRevive -= OnPlayerRevive;
         EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
