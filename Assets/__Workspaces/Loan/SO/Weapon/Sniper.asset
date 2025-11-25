@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   Prefab: {fileID: 0}
-  AmmoPrefab: {fileID: 0}
+  BulletData: {fileID: 11400000, guid: 8e0f573ccff3b284098e82125dbf607e, type: 2}
   Name: LX-99
-  Damage: 0
   Cooldown: 0
   FireRate: 0
+  FireDistance: 0
   MagSize: 0

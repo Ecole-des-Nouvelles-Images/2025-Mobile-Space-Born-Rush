@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class ModulMove : MonoBehaviour
 {
+    [SerializeField] private GameObject _modulPrefabs;
+    [SerializeField]private Vector3 _speedMovement = new Vector3(0f, 0f, -5f);
     [SerializeField] private GameUpgradeController _gameUpgrades;
     [SerializeField] private Vector3 _speedMovement = new Vector3(0f, 0f, -5f);
     private Rigidbody _rb;
@@ -36,7 +38,7 @@ public class ModulMove : MonoBehaviour
                 int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
                 ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
                 GameObject obstacle = Instantiate(currentObstacle.Prefab,pos.position,Quaternion.identity,transform);
-                obstacle.GetComponent<ObstacleTest>().ObstacleData =  currentObstacle;
+                obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
             }
         }
         _obstaclesPos.Clear();
@@ -47,6 +49,7 @@ public class ModulMove : MonoBehaviour
         _rb.linearVelocity = _speedMovement * _gameUpgrades.GameSpeed;
         if (transform.position.z < -_width)
         {
+            Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);
             Destroy(gameObject);
         }
     }

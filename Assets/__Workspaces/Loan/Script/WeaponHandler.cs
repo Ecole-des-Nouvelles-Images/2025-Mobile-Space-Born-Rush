@@ -31,9 +31,10 @@ public class WeaponHandler : MonoBehaviour
     {
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
-            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_enemyMask))
+            _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_currentWeapon.EnemyMask))
             {
-                if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
+                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                 {
                     Fire();
                 }
@@ -66,6 +67,8 @@ public class WeaponHandler : MonoBehaviour
         else
         {
             GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
+            currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData,_currentWeapon.EnemyMask);
+            _currentFireRate = _currentWeapon.FireRate;
             currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData);
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
             _ammoNumber--;

@@ -11,7 +11,7 @@ public class BulletHandler : MonoBehaviour
     private BulletData _bulletData;
     private Vector3 _speedMove;
     
-    [SerializeField] private LayerMask _enemyMask;
+    private LayerMask _enemyMask;
     [SerializeField] private LayerMask _obstacleMask;
     
 
@@ -20,9 +20,10 @@ public class BulletHandler : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Setup(BulletData data)
+    public void Setup(BulletData data,LayerMask enemyMask)
     {
         _bulletData = data;
+        _enemyMask = enemyMask;
         _rb.linearVelocity = _bulletData.BulletSpeed;
         _lifeTime =  _bulletData.BulletLifeTime;
         _lastPosition = transform.position;
@@ -40,9 +41,9 @@ public class BulletHandler : MonoBehaviour
             {
                 if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                 {
-                    if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                     {
-                        _bulletData.OnHitEnemy(gameObject,enemy, enemy.gameObject);
+                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
                 }
             }
@@ -50,16 +51,16 @@ public class BulletHandler : MonoBehaviour
             {
                 if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
                 {
-                    if (hitObstacle.collider.TryGetComponent<ObstacleTest>(out var enemy))
+                    if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
                     {
                         Destroy(gameObject);
                     }
                 }
                 else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                 {
-                    if (hit.collider.TryGetComponent<EnemyTest>(out var enemy))
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                     {
-                        _bulletData.OnHitEnemy(gameObject,enemy, enemy.gameObject);
+                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
                 }
             }
