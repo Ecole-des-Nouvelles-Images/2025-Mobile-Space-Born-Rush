@@ -39,30 +39,65 @@ public class BulletHandler : MonoBehaviour
 
             if (_bulletData.IsDestroyedObstacle)
             {
-                if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                if (_enemyMask == LayerMask.NameToLayer("Enemy"))
                 {
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                     {
-                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                        {
+                            _bulletData.OnHitEnemy(gameObject,enemy, enemy);
+                        }
                     }
                 }
+                else
+                {
+                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                    {
+                        if (hit.collider.TryGetComponent<PlayerController>(out var enemy))
+                        {
+                            _bulletData.OnHitEnemy(gameObject,enemy, null);
+                        }
+                    }
+                }
+                
             }
             else
             {
-                if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
+                if (_enemyMask == LayerMask.NameToLayer("Enemy"))
                 {
-                    if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
+                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
                     {
-                        Destroy(gameObject);
+                        if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
+                        {
+                            Destroy(gameObject);
+                        }
+                    }
+                    else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                    {
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                        {
+                            _bulletData.OnHitEnemy(gameObject,enemy, enemy);
+                        }
                     }
                 }
-                else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                else
                 {
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
                     {
-                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
+                        if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
+                        {
+                            Destroy(gameObject);
+                        }
+                    }
+                    else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                    {
+                        if (hit.collider.TryGetComponent<PlayerController>(out var enemy))
+                        {
+                            _bulletData.OnHitEnemy(gameObject,enemy, null);
+                        }
                     }
                 }
+                
             }
 
             

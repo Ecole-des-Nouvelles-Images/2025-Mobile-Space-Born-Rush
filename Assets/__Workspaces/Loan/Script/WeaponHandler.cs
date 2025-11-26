@@ -12,7 +12,6 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField]private float _currentFireRate;
     [SerializeField]private float _currentCooldown;
     [SerializeField] private int _ammoNumber;
-    [SerializeField] private LayerMask _enemyMask;
     
     [SerializeField] private bool _isRaycastDraw;
     
@@ -32,13 +31,27 @@ public class WeaponHandler : MonoBehaviour
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_currentWeapon.EnemyMask))
+            if (_currentWeapon.EnemyMask == LayerMask.NameToLayer("Enemy"))
             {
-                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_currentWeapon.EnemyMask))
                 {
-                    Fire();
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                    {
+                        Fire();
+                    }
                 }
             }
+            else
+            {
+                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_currentWeapon.EnemyMask))
+                {
+                    if (hit.collider.TryGetComponent<PlayerController>(out var enemy))
+                    {
+                        Fire();
+                    }
+                }
+            }
+            
         }
         
         if (_currentFireRate > 0)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerStatController : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class PlayerStatController : MonoBehaviour
     
     
     //Player Variables
-    [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
+    [FormerlySerializedAs("_maxHealth")]public  float MaxHealth;
+    [SerializeField] private float _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
 
     #region subscriptions
     private void Awake()
@@ -53,14 +55,14 @@ public class PlayerStatController : MonoBehaviour
     private void OnPlayerMaxHealthChange(float val)
     {
         //Depends on how the value is sent but this is the basic logic
-        _maxHealth += val;
+        MaxHealth += val;
         EventBus.OnPlayerCurrentHealthChange(val);
     }
     private void OnPlayerCurrentHealthChange(float val)
     {
         _currentHealth += val;
         
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
     }
 
     private void OnPlayerCurrentXPChange(float val)
@@ -85,13 +87,13 @@ public class PlayerStatController : MonoBehaviour
     }
     private void OnPlayerRevive()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = MaxHealth;
     }
     private void OnPlayerTakeDamage(float val)
     {
         _currentHealth -= val;
         
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
 
         if (_currentHealth <= 0)
         {
@@ -139,7 +141,7 @@ public class PlayerStatController : MonoBehaviour
     
     void Start()
     {
-        _maxHealth = _playerData.BaseMaxHealth;
+        MaxHealth = _playerData.BaseMaxHealth;
         _currentHealth = _playerData.BaseMaxHealth;
         _hpDropMultiplier = _playerData.BaseHPDropMultiplier;
         _currentXP = 0;

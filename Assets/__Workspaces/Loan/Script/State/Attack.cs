@@ -12,11 +12,13 @@ public class Attack : BaseState
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
+                    enemy.SpeedDirection = Vector3.zero;
                     return;
                 }
             }
             else
             {
+                enemy.SpeedDirection = new Vector3(0, 0, -5);
                 enemy.IsAttacking = false;
                 enemy.IsWait =  true;
             }
