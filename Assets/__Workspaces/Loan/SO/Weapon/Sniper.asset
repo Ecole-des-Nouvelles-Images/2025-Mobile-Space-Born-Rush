@@ -19,3 +19,6 @@ MonoBehaviour:
   FireRate: 0
   FireDistance: 0
   MagSize: 0
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 8
