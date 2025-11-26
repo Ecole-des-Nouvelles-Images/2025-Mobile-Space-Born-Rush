@@ -52,7 +52,6 @@ public class UpgradeUIManager : MonoBehaviour
         }
 
         currentChoices = upgradeChoices;
-        Debug.Log($"Displaying {upgradeChoices.Count} upgrade choices");
 
         // Clear previous choices
         ClearExistingChoices();

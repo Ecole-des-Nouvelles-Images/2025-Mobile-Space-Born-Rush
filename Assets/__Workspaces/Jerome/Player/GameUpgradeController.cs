@@ -10,7 +10,6 @@ public class GameUpgradeController : MonoBehaviour
     private void Awake()
     {
         // Player Specific Events
-        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
         
         // Main event
@@ -31,22 +30,15 @@ public class GameUpgradeController : MonoBehaviour
                 break;
                 
         }
-        Debug.Log("Stat upgrade: " + upgrade);
     }
 
     private void OnPlayerChooseAnItem(UpgradeType obj)
     {
         throw new NotImplementedException();
     }
-
-    private void OnPlayerLevelUp(List<UpgradeData> obj)
-    {
-        Debug.Log("PlayerLevelUp");
-    }
     private void OnDestroy()
     {
         // Player Specific Events
-        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
         
         // Main event

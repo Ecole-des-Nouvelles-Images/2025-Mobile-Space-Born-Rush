@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerRevive += OnPlayerRevive;
-        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
         
         // Movement & Environment
@@ -57,11 +56,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnPlayerChooseAnItem(UpgradeType obj)
     {
         throw new NotImplementedException();
-    }
-
-    private void OnPlayerLevelUp(List<UpgradeData> obj)
-    {
-        Debug.Log("PlayerLevelUp");
     }
 
     private void OnSpeedChanged(float val)
@@ -128,7 +122,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
         EventBus.OnPlayerRevive -= OnPlayerRevive;
-        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
         
         // Movement & Environment

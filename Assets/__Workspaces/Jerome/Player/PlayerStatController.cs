@@ -22,7 +22,6 @@ public class PlayerStatController : MonoBehaviour
         EventBus.OnPlayerMaxHealthChange += OnPlayerMaxHealthChange;
         EventBus.OnPlayerCurrentXPChange += OnPlayerCurrentXPChange;
         EventBus.OnPlayerXPToLevelUpChange += OnPlayerXPToLevelUpChange;
-        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         
         // Main event
         EventBus.OnStatUpgrade += OnStatUpgrade;
@@ -43,12 +42,6 @@ public class PlayerStatController : MonoBehaviour
                 _xpMultiplier += value;
                 break;
         }
-        Debug.Log("Stat upgrade: " + upgrade);
-    }
-
-    private void OnPlayerLevelUp(List<UpgradeData> obj)
-    {
-        Debug.Log("PlayerLevelUp");
     }
     private void OnPlayerMaxHealthChange(float val)
     {
@@ -121,7 +114,6 @@ public class PlayerStatController : MonoBehaviour
         EventBus.OnPlayerMaxHealthChange -= OnPlayerMaxHealthChange;
         EventBus.OnPlayerCurrentXPChange -= OnPlayerCurrentXPChange;
         EventBus.OnPlayerXPToLevelUpChange -= OnPlayerXPToLevelUpChange;
-        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         
         // Main event
         EventBus.OnStatUpgrade -= OnStatUpgrade;

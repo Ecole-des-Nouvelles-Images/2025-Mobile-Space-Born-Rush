@@ -23,7 +23,5 @@ public class UpgradeManager : MonoBehaviour
                 EventBus.OnGameSystemUpgrade?.Invoke(upgrade.Type, upgrade.Value);
                 break;
         }
-        
-        Debug.Log($"Applied upgrade: {upgrade.Name}");
     }
 }
