@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GenerateGrid : MonoBehaviour
+public class GridManager : MonoBehaviour
 {
     [SerializeField] private GameObject _floor;
     [SerializeField] private int _cellX;
@@ -64,6 +64,13 @@ public class GenerateGrid : MonoBehaviour
     public Vector3 GetCellWorldPosition(int x, int z)
     {
         return Grid[x, z].Position;
+    }
+
+    public void SetCellEmpty(int x, int z, bool empty)
+    {
+        Cell cell = Grid[x, z];
+        cell.IsEmpty = empty;
+        Grid[x, z] = cell;
     }
     
     private void OnDrawGizmos()

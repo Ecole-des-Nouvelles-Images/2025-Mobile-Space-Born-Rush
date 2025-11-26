@@ -501,6 +501,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7420d26986428de4b91f7ca708b0aea6, type: 3}
+--- !u!1 &481438925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481438926}
+  m_Layer: 0
+  m_Name: EnemyParents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &481438926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481438925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554754190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,13 +2303,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModulMove
   _modulPrefabs: {fileID: 1972041011}
   _gameUpgrades: {fileID: 0}
-  _grid: {fileID: 207144414}
+  _gridManager: {fileID: 207144414}
+  _enemies:
+  - {fileID: 9214185679248329394, guid: 008428c34e35f334492029ff4a091b10, type: 3}
+  _parentsTransform: {fileID: 481438926}
+  EnemyNumber: 3
+  _isEnemy: 1
   _obstaclesPrefabs:
   - {fileID: 11400000, guid: e97e5301080f4ba4580e8874c666cde3, type: 2}
   - {fileID: 11400000, guid: 1bfcafc0b31cd7145802c1430dbe6508, type: 2}
   - {fileID: 11400000, guid: ef8f3edb62bd60a4299f28d0262efdfb, type: 2}
   _isObstacle: 1
-  _obstaclesPos: []
 --- !u!54 &2059005553
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2958,3 +2993,4 @@ SceneRoots:
   - {fileID: 1811974084}
   - {fileID: 1269260177}
   - {fileID: 2059005554}
+  - {fileID: 481438926}
