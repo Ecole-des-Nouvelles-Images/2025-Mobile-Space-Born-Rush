@@ -1,6 +1,5 @@
-using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class WeaponHandler : MonoBehaviour
 {
@@ -16,6 +15,29 @@ public class WeaponHandler : MonoBehaviour
     
     [SerializeField] private bool _isRaycastDraw;
     
+    private Coroutine _stunCoroutine = null;
+    private bool _isStunned;
+
+    private void Awake()
+    {
+        EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
+    }
+
+    private void OnPlayerTakeStun(float time)
+    {
+        if (_stunCoroutine != null)
+        {
+            StopCoroutine(_stunCoroutine);
+        }
+
+        _stunCoroutine = StartCoroutine(AsyncStun(time));
+        Debug.Log("Stun");
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.OnPlayerTakeStun -= OnPlayerTakeStun;
+    }
 
     private void Start()
     {
@@ -29,6 +51,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+        if (_isStunned) return;
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
@@ -40,7 +63,7 @@ public class WeaponHandler : MonoBehaviour
                 }
             }
         }
-        
+            
         if (_currentFireRate > 0)
         {
             _currentFireRate -= Time.deltaTime;
@@ -55,6 +78,15 @@ public class WeaponHandler : MonoBehaviour
         {
             Debug.DrawRay(_weaponRaycast.origin, _weaponRaycast.direction * _currentWeapon.FireDistance, Color.red);
         }
+    }
+    private IEnumerator AsyncStun(float time)
+    {
+        _isStunned = true;
+        
+        yield return new WaitForSeconds(time);
+        _isStunned = false;
+        
+        _stunCoroutine = null;
     }
     
     public void Fire()

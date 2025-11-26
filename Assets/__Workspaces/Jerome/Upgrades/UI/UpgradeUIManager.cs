@@ -115,7 +115,6 @@ public class UpgradeUIManager : MonoBehaviour
         }
 
         UpgradeData selectedUpgrade = currentChoices[choiceIndex];
-        Debug.Log($"Player selected: {selectedUpgrade.Name}");
 
         // Apply the upgrade through the UpgradeManager
         upgradeManager.ApplyUpgrade(selectedUpgrade);

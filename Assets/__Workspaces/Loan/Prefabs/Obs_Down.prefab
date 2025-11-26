@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead02351084e4a44882aca53348507a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleTest
-  ObstacleData: {fileID: 0}
+  ObstacleData: {fileID: 11400000, guid: 75429ed626a29f34eb5836fb63dca22a, type: 2}
 --- !u!65 &1401284134648213200
 BoxCollider:
   m_ObjectHideFlags: 0

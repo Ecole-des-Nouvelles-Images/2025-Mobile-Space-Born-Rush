@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,6 +14,7 @@ public class ModulMove : MonoBehaviour
     [SerializeField] private List<Transform> _obstaclesPos = new List<Transform>();
     
     [SerializeField] private bool _isObstacle;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -25,7 +25,6 @@ public class ModulMove : MonoBehaviour
             SpawnObstacles();
         }
     }
-
     private void SpawnObstacles()
     {
         foreach (var pos in _obstaclesPos)
