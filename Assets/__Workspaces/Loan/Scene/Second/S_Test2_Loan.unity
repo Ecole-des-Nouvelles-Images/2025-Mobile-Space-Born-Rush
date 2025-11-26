@@ -267,15 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fdd825606ecd54096976fc0db7bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _playerData: {fileID: 11400000, guid: b7b9fe7912d4f224993af640ca7f2bcf, type: 2}
   _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
   PixelDistToDetect: 200
-  _maxHealth: 0
-  _currentHealth: 0
-  _hpDropMultiplier: 0
-  _currentXP: 0
-  _xpToLevelUp: 0
-  _xpMultiplier: 0
   _currentLaneIndex: 0
   JumpForce: {x: 0, y: 5, z: 0}
   SlideAmount: 2
@@ -946,15 +939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fdd825606ecd54096976fc0db7bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _playerData: {fileID: 11400000, guid: b7b9fe7912d4f224993af640ca7f2bcf, type: 2}
   _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
   PixelDistToDetect: 200
-  _maxHealth: 0
-  _currentHealth: 0
-  _hpDropMultiplier: 0
-  _currentXP: 0
-  _xpToLevelUp: 0
-  _xpMultiplier: 0
   _currentLaneIndex: 0
   JumpForce: {x: 0, y: 5, z: 0}
   SlideAmount: 2
@@ -1039,7 +1025,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c35729e8fd617a54ebc182268eed881c, type: 2}
   - {fileID: 11400000, guid: 7a3cdfe0a6e916b47bf5a9be2304a44a, type: 2}
   - {fileID: 11400000, guid: 3ff65f925ce154d4b919589ee340b06d, type: 2}
-  baseChoicesPerLevel: 2
   weaponWeight: 0.4
   playerStatWeight: 0.4
   gameSystemWeight: 0.2
@@ -1659,6 +1644,90 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef08f56cb86a74c4d9215ed22c8f5a1b, type: 3}
+--- !u!1 &1811974080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1811974084}
+  - component: {fileID: 1811974083}
+  - component: {fileID: 1811974082}
+  - component: {fileID: 1811974081}
+  m_Layer: 0
+  m_Name: UpgradesControllers
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1811974081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811974080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea329cfbbbfb1cd44b517a3a439dfcfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponUpgradeController
+  _damage: 0
+  _fireRate: 0
+  _cooldown: 0
+  _magSize: 0
+  _weapon: 0
+--- !u!114 &1811974082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811974080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9e7e7c0606fea4a8a5ba7dde69256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatController
+  _playerData: {fileID: 11400000, guid: b7b9fe7912d4f224993af640ca7f2bcf, type: 2}
+  _maxHealth: 0
+  _currentHealth: 0
+  _hpDropMultiplier: 0
+  _currentXP: 0
+  _xpToLevelUp: 0
+  _xpMultiplier: 0
+--- !u!114 &1811974083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811974080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f8ca192cffc0e4eb6451a9db020bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameUpgradeController
+  _gameSpeed: 0
+  _numberOfUpgrades: 0
+--- !u!4 &1811974084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811974080}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894848858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1859,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7460707452621351658, guid: 008428c34e35f334492029ff4a091b10, type: 3}
+      propertyPath: MaxHp
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460707452621351658, guid: 008428c34e35f334492029ff4a091b10, type: 3}
       propertyPath: Range
       value: 5
       objectReference: {fileID: 0}
@@ -1906,3 +1979,4 @@ SceneRoots:
   - {fileID: 244034281}
   - {fileID: 1463928590}
   - {fileID: 729642594}
+  - {fileID: 1811974084}

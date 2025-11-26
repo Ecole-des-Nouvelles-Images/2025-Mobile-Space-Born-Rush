@@ -68,9 +68,11 @@ public class WeaponHandler : MonoBehaviour
         {
             GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
             currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData,_currentWeapon.EnemyMask);
-            _currentFireRate = _currentWeapon.FireRate- _weaponUpgrades.FireRate;
+            _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
             _ammoNumber--;
         }
     }
+
+    
     
 }

@@ -45,7 +45,9 @@ public class ModulMove : MonoBehaviour
 
     void Update()
     {
-        _rb.linearVelocity = _speedMovement * _gameUpgrades.GameSpeed;
+        var vector3 = transform.position;
+        vector3.z = vector3.z - _gameUpgrades.GameSpeed * Time.deltaTime;
+        transform.position = vector3;
         if (transform.position.z < -_width)
         {
             Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);

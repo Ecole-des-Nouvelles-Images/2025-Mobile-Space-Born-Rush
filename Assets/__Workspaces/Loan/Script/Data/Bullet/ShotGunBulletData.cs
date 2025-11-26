@@ -9,9 +9,17 @@ public class ShotGunBulletData : BulletData
     [SerializeField] private List<Vector3> _knockbackRightDirections = new List<Vector3>();
     [SerializeField] private List<Vector3> _knockbackLeftDirections = new List<Vector3>();
     [SerializeField] private float _knockbackForce;
+    
+    private WeaponUpgradeController _weaponUpgrades;
+
+    public void Start()
+    {
+        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
+    }
     public override void OnHitEnemy(GameObject bullet, IDamageable damageable, EnemyHandler enemy)
     {
-        damageable.TakeDamage(BulletDamage);
+        if(!_weaponUpgrades) Start();
+        damageable.TakeDamage(BulletDamage + _weaponUpgrades.Damage);
         if (enemy.Transform.position.x == 0)
         {
             Vector3 dir = _knockbackMidDirections[Random.Range(0, _knockbackMidDirections.Count)];
