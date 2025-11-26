@@ -6,7 +6,9 @@ public class GenerateGrid : MonoBehaviour
     [SerializeField] private GameObject _floor;
     [SerializeField] private int _cellX;
     [SerializeField] private int _cellZ;
-    [SerializeField] private float _cellSize;
+    [SerializeField] private float _cellSize = 1.5f;
+
+    [SerializeField] private MeshRenderer[] _lanesBounds;
     
     
     private Bounds _planeBounds;
@@ -20,9 +22,12 @@ public class GenerateGrid : MonoBehaviour
 
     private void Generate()
     {
-        MeshRenderer mr = _floor.GetComponent<MeshRenderer>();
-        _planeBounds = mr.bounds;
-
+        _planeBounds = _lanesBounds[0].bounds;
+        for (int i = 1; i < _lanesBounds.Length; i++)
+        {
+            _planeBounds.Encapsulate(_lanesBounds[i].bounds);
+        }
+        
         Vector3 size = _planeBounds.size;
         _cellX = Mathf.RoundToInt(size.x / _cellSize);
         _cellZ = Mathf.RoundToInt(size.z / _cellSize);
@@ -54,6 +59,11 @@ public class GenerateGrid : MonoBehaviour
         }
 
         Debug.Log($"Grille générée : {_cellX} x {_cellZ}");
+    }
+    
+    public Vector3 GetCellWorldPosition(int x, int z)
+    {
+        return Grid[x, z].Position;
     }
     
     private void OnDrawGizmos()

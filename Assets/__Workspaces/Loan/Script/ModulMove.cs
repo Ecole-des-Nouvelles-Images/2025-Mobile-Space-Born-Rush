@@ -5,19 +5,22 @@ using Random = UnityEngine.Random;
 
 public class ModulMove : MonoBehaviour
 {
+    [Header("<color=cyan>=====Modul Settings=====</color>")]
     [SerializeField] private GameObject _modulPrefabs;
-    [SerializeField]private Vector3 _speedMovement = new Vector3(0f, 0f, -5f);
     [SerializeField] private GameUpgradeController _gameUpgrades;
-    private Rigidbody _rb;
-    private float _width = 22f;
+
+    [Header("<color=green>=====Grid Settings=====</color>")] 
+    [SerializeField] private GenerateGrid _grid;
     
+    [Header("<color=yellow>=====Obstacle Settings=====</color>")]
     [SerializeField] private List<ObstacleData> _obstaclesPrefabs = new List<ObstacleData>();
+    [SerializeField] private bool _isObstacle;
+    
     [SerializeField] private List<Transform> _obstaclesPos = new List<Transform>();
     
-    [SerializeField] private bool _isObstacle;
+    private float _width = 22f;
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         
         if (_isObstacle)
@@ -28,19 +31,47 @@ public class ModulMove : MonoBehaviour
 
     private void SpawnObstacles()
     {
-        foreach (var pos in _obstaclesPos)
-        {
-            float chance = Random.Range(0f, 1f);
+        //First method
+        // foreach (var pos in _obstaclesPos)
+        // {
+        //     float chance = Random.Range(0f, 1f);
+        //
+        //     if (chance > 0.75) 
+        //     {
+        //         int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
+        //         ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
+        //         GameObject obstacle = Instantiate(currentObstacle.Prefab,pos.position,Quaternion.identity,transform);
+        //         obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
+        //     }
+        // }
+        // _obstaclesPos.Clear();
+        
+        //Grid 
 
-            if (chance > 0.75) 
+        for (int i = 0; i < _grid.Grid.GetLength(0); i++)
+        {
+            int numberObstacle = 0;
+            for (int j = 0; j < _grid.Grid.GetLength(1); j++)
             {
-                int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
-                ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
-                GameObject obstacle = Instantiate(currentObstacle.Prefab,pos.position,Quaternion.identity,transform);
-                obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
+
+                if (numberObstacle == 2)
+                {
+                    break;
+                }
+                float chance = Random.Range(0f, 1f);
+
+                if (chance > 0.75) 
+                {
+                    Vector3 offset = new Vector3(0, 0.5f, 0);
+                    Vector3 pos = _grid.GetCellWorldPosition(i,j);
+                    int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
+                    ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
+                    GameObject obstacle = Instantiate(currentObstacle.Prefab,offset + pos,Quaternion.identity,transform);
+                    obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
+                    numberObstacle++;
+                }
             }
         }
-        _obstaclesPos.Clear();
     }
 
     void Update()
