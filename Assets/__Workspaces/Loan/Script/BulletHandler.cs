@@ -39,62 +39,43 @@ public class BulletHandler : MonoBehaviour
 
             if (_bulletData.IsDestroyedObstacle)
             {
-                if (_enemyMask == LayerMask.NameToLayer("Enemy"))
+                if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                 {
-                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                     {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
-                        {
-                            _bulletData.OnHitEnemy(gameObject,enemy, enemy);
-                        }
+                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
                 }
-                else
+                else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit other, distance, _enemyMask))
                 {
-                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                    if (other.collider.TryGetComponent<PlayerController>(out var enemy))
                     {
-                        if (hit.collider.TryGetComponent<PlayerController>(out var enemy))
-                        {
-                            _bulletData.OnHitEnemy(gameObject,enemy, null);
-                        }
+                        _bulletData.OnHitEnemy(gameObject,enemy, null);
                     }
                 }
-                
             }
             else
             {
-                if (_enemyMask == LayerMask.NameToLayer("Enemy"))
+                if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
                 {
-                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
+                    if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
                     {
-                        if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
-                        {
-                            Destroy(gameObject);
-                        }
-                    }
-                    else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
-                    {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
-                        {
-                            _bulletData.OnHitEnemy(gameObject,enemy, enemy);
-                        }
+                        Destroy(gameObject);
                     }
                 }
-                else
+                
+                if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
                 {
-                    if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitObstacle, distance, _obstacleMask))
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
                     {
-                        if (hitObstacle.collider.TryGetComponent<ObstacleHandler>(out var enemy))
-                        {
-                            Destroy(gameObject);
-                        }
+                        _bulletData.OnHitEnemy(gameObject,enemy, enemy);
                     }
-                    else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hit, distance, _enemyMask))
+                }
+                else if (Physics.Raycast(_lastPosition, direction.normalized, out RaycastHit hitPlayer, distance, _enemyMask))
+                {
+                    if (hitPlayer.collider.TryGetComponent<PlayerController>(out var enemy))
                     {
-                        if (hit.collider.TryGetComponent<PlayerController>(out var enemy))
-                        {
-                            _bulletData.OnHitEnemy(gameObject,enemy, null);
-                        }
+                        _bulletData.OnHitEnemy(gameObject,enemy, null);
                     }
                 }
                 
