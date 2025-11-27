@@ -15,8 +15,12 @@ MonoBehaviour:
   m_TableCollectionName: Table
   m_TableCollectionNameGuidString: 8d934c70e864f1547b6cb915aee6cf8c
   m_Entries:
+  - m_Id: 9674151776256
+    m_Key: B_Exit
+    m_Metadata:
+      m_Items: []
   - m_Id: 30431858688
-    m_Key: New Entry
+    m_Key: B_Start
     m_Metadata:
       m_Items: []
   m_Metadata:
