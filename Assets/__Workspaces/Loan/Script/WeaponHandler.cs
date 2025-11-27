@@ -60,7 +60,6 @@ public class WeaponHandler : MonoBehaviour
             
             if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
             { 
-                Debug.Log("2");
                 if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                 { 
                     Fire();

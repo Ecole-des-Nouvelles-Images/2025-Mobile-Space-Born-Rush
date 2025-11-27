@@ -154,14 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c115358d6a718f746abcd46289f28893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCAC
-  Hp: 0
-  MaxHp: 5
+  EnemyData: {fileID: 11400000, guid: d2ccd8a2e87657c4f90da28d72473ce9, type: 2}
+  CurrentHealth: 0
   SpeedDirection: {x: 0, y: 0, z: -1}
   Transform: {fileID: 0}
   Rb: {fileID: 0}
-  Damage: 5
+  GameUpgrades: {fileID: 0}
+  CurrentDamage: 0
   IsRange: 0
-  Range: 2
+  CurrentRange: 0
   CurrentFireRate: 1
   Animator: {fileID: 0}
   KnockBackVelocity: {x: 0, y: 0, z: 0}
