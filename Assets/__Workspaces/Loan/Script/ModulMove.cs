@@ -20,13 +20,13 @@ public class ModulMove : MonoBehaviour
     [Header("<color=yellow>=====Obstacle Settings=====</color>")]
     [SerializeField] private List<ObstacleData> _obstaclesPrefabs = new List<ObstacleData>();
     [SerializeField] private bool _isObstacle;
-
-    public List<Vector3> EnemyPos = new List<Vector3>();
+    
     
     private float _width = 22f;
     private void Start()
     {
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
+        _parentsTransform = GameObject.FindGameObjectWithTag("Parents").transform;
         
         if (_isObstacle)
         {
@@ -81,8 +81,7 @@ public class ModulMove : MonoBehaviour
                     int random =  Random.Range(0, _enemies.Count);
                     Vector3 offset = new Vector3(0, 0.5f, 0);
                     Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
-                    GameObject enemy = Instantiate(_enemies[random],offset + pos ,Quaternion.identity);
-                    EnemyPos.Add(offset + pos);
+                    GameObject enemy = Instantiate(_enemies[random],offset + pos ,Quaternion.Euler(0f, 180f, 0f),_parentsTransform);
                     EnemyNumber--;
                 }
                 else if (EnemyNumber == 0)
