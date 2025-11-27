@@ -57,8 +57,6 @@ public class GridManager : MonoBehaviour
                 };
             }
         }
-
-        Debug.Log($"Grille générée : {_cellX} x {_cellZ}");
     }
     
     public Vector3 GetCellWorldPosition(int x, int z)

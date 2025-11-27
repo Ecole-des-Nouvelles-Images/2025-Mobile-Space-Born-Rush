@@ -20,6 +20,8 @@ public class ModulMove : MonoBehaviour
     [Header("<color=yellow>=====Obstacle Settings=====</color>")]
     [SerializeField] private List<ObstacleData> _obstaclesPrefabs = new List<ObstacleData>();
     [SerializeField] private bool _isObstacle;
+
+    public List<Vector3> EnemyPos = new List<Vector3>();
     
     private float _width = 22f;
     private void Start()
@@ -73,12 +75,14 @@ public class ModulMove : MonoBehaviour
         {
             for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
             {
-                if (EnemyNumber > 0 && _gridManager.Grid[i,j].IsEmpty)
+                float chance = Random.Range(0f, 1f);
+                if (chance > 0.8f && EnemyNumber > 0 && _gridManager.Grid[i,j].IsEmpty)
                 {
                     int random =  Random.Range(0, _enemies.Count);
                     Vector3 offset = new Vector3(0, 0.5f, 0);
                     Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
-                    Instantiate(_enemies[random],offset + pos ,Quaternion.identity);
+                    GameObject enemy = Instantiate(_enemies[random],offset + pos ,Quaternion.identity);
+                    EnemyPos.Add(offset + pos);
                     EnemyNumber--;
                 }
                 else if (EnemyNumber == 0)
@@ -87,21 +91,6 @@ public class ModulMove : MonoBehaviour
                 }
             }
         }
-        
-        // foreach (var cell in _gridManager.Grid)
-        // {
-        //     if (EnemyNumber > 0 && cell.IsEmpty)
-        //     {
-        //         int random =  Random.Range(0, _enemies.Count);
-        //         Instantiate(_enemies[random], cell.Position,Quaternion.identity,_parentsTransform);
-        //         EnemyNumber--;
-        //     }
-        //     else if (EnemyNumber == 0)
-        //     {
-        //         return;
-        //     }
-        //     
-        // }
     }
 
     void Update()
