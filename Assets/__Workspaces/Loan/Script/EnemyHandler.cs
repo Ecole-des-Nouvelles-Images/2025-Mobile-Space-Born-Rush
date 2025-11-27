@@ -10,6 +10,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public Vector3 SpeedDirection;
     public Transform Transform;
     public Rigidbody Rb;
+    public GameUpgradeController GameUpgrades;
 
     [Header("<color=red>=====Attack Settings=====</color>")]
     // public WeaponData WeaponData;
@@ -43,12 +44,14 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     {
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
+        GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         Hp =  MaxHp;
         IsWait =  true;
     }
     private void FixedUpdate()
     {
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
+        SpeedDirection = new Vector3(0f, 0f, -GameUpgrades.GameSpeed);
         
         Rb.linearVelocity = SpeedDirection +  KnockBackVelocity;
         
