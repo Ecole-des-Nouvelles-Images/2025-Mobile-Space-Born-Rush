@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {
@@ -11,8 +13,11 @@ public class PlayerController : MonoBehaviour,IDamageable
     private WeaponData _currentweaponData;
     
     //Variables for swipe detection
-    private Vector2 _pos1;
+    private TouchControls _inputActions;
+    private Vector2 _touchStartPosition;
     private bool _fingerDown;
+    //Legacy    
+    private Vector2 _pos1;
     
     public int PixelDistToDetect = 200;
     
@@ -30,6 +35,8 @@ public class PlayerController : MonoBehaviour,IDamageable
     #region subscriptions
     private void Awake()
     {
+        _inputActions = new TouchControls();
+        
         // Game State Events
         EventBus.OnGameStart += OnGameStart;
         EventBus.OnGamePause += OnGamePause;
@@ -99,6 +106,9 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnDestroy()
     {
+        DisableGameplayInput();
+        _inputActions?.Dispose();
+        
         // Game State Events
         EventBus.OnGameStart -= OnGameStart;
         EventBus.OnGamePause -= OnGamePause;
@@ -116,11 +126,12 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
 
     #endregion
-
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<BoxCollider>();
+        EnableGameplayInput();
 
         // Animator animator = GetComponent<Animator>();
         // animator.speed = 2;
@@ -154,75 +165,83 @@ public class PlayerController : MonoBehaviour,IDamageable
         _col.size *= SlideAmount;
         _col.center *= SlideAmount;
     }
-
-    private void Update()
+    
+    #region Inputs
+      private void EnableGameplayInput()
     {
-        if (!_isPaused)
-        {
-            if (!_fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-            {
-                _pos1 = Input.touches[0].position;
-                _fingerDown = true;
-            }
-
-            if (_fingerDown && Input.touchCount > 0)
-            {
-                if (!_isJumping) 
-                {
-                    if (Input.touches[0].position.y >= _pos1.y + PixelDistToDetect)
-                    {
-                        Jump();
-                        Debug.Log("Swipe Up");
-                        _fingerDown = false;
-                    }
-                }
-                if(!_isSliding)
-                {
-                    if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
-                    {
-                        Slide();
-                        Debug.Log("Swipe Down");
-                        _fingerDown = false;
-                    }
-                }
-
-                if (Input.touches[0].position.x >= _pos1.x + PixelDistToDetect)
-                {
-                    _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
-                    Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
-                    var vector3 = transform.position;
-                    vector3.x = targetPos.x;
-                    transform.position = vector3;
-                    Debug.Log("Swipe Right");   
-                    _fingerDown = false;
-                }
-                if (Input.touches[0].position.x <= _pos1.x - PixelDistToDetect)
-                {
-                    _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
-                    Vector3 targetPos =_laneProfile.GetLanePosition(_currentLaneIndex);
-                    var vector3 = transform.position;
-                    vector3.x = targetPos.x;
-                    transform.position = vector3;
-                    Debug.Log("Swipe Left");
-                    _fingerDown = false;
-                }
-                
-                
-            }
-        }
-
-        //TODO Delete
-        if (Input.GetButtonDown("Fire2"))
-        {
-            StopSlide();
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            EventBus.OnPlayerCurrentXPChange?.Invoke(100);
-        }
+        _inputActions.Player.Enable();
+        
+        _inputActions.Player.TouchContact.started += OnTouchStarted;
+        _inputActions.Player.TouchContact.canceled += OnTouchEnded;
     }
 
+    private void DisableGameplayInput()
+    {
+        _inputActions.Player.Disable();
+        
+        _inputActions.Player.TouchContact.started -= OnTouchStarted;
+        _inputActions.Player.TouchContact.canceled -= OnTouchEnded;
+    }
+
+    private void OnTouchStarted(InputAction.CallbackContext context)
+    {
+        if (_isPaused) return;
+        
+        _touchStartPosition = _inputActions.Player.TouchPosition.ReadValue<Vector2>();
+        _fingerDown = true;
+    }
+
+    private void OnTouchEnded(InputAction.CallbackContext context)
+    {
+        if (_isPaused || !_fingerDown) return;
+        
+        Vector2 touchEndPosition = _inputActions.Player.TouchPosition.ReadValue<Vector2>();
+        ProcessSwipe(_touchStartPosition, touchEndPosition);
+        
+        _fingerDown = false;
+    }
+
+    private void ProcessSwipe(Vector2 startPos, Vector2 endPos)
+    {
+        Vector2 swipeDelta = endPos - startPos;
+        
+        // Your existing swipe processing logic goes here
+        if (swipeDelta.magnitude < PixelDistToDetect) return;
+        
+        // Rest of your swipe logic from before...
+        bool isHorizontalSwipe = Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y);
+        
+        if (isHorizontalSwipe)
+        {
+            // Your lane switching code
+            if (swipeDelta.x > 0)
+            {
+                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
+            }
+            else
+            {
+                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
+            }
+            
+            Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
+            var position = transform.position;
+            position.x = targetPos.x;
+            transform.position = position;
+        }
+        else
+        {
+            // Your jump/slide code
+            if (swipeDelta.y > 0 && !_isJumping)
+            {
+                Jump();
+            }
+            else if (swipeDelta.y < 0 && !_isSliding)
+            {
+                Slide();
+            }
+        }
+    }
+    #endregion
     
     //The logic to stop the player from double jumping or sliding while jumping
     private void OnCollisionEnter(Collision other)

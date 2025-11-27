@@ -17,6 +17,7 @@ public class EnemyCAC : EnemyHandler
 
         if (IsDead)
         {
+            EventBus.OnEnemyDead?.Invoke(gameObject);
             CurrentState = new Dead();
         }
         

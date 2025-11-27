@@ -16,6 +16,7 @@ public class EnemyRange : EnemyHandler
 
         if (IsDead)
         {
+            EventBus.OnEnemyDead?.Invoke(gameObject);
             CurrentState = new Dead();
         }
         

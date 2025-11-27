@@ -24,6 +24,7 @@ public class LaneProfile : ScriptableObject
         return laneIndex;
     }
     // Public method to safely get a lane's world position.
+    // ReSharper disable Unity.PerformanceAnalysis
     public Vector3 GetLanePosition(int laneIndex)
     {
         if (LanePositions == null || LanePositions.Length == 0)
