@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatController
   _playerData: {fileID: 11400000, guid: b7b9fe7912d4f224993af640ca7f2bcf, type: 2}
-  _maxHealth: 0
+  MaxHealth: 0
   _currentHealth: 0
   _hpDropMultiplier: 0
   _currentXP: 0
@@ -783,7 +783,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2fff17cf7faa83e4995d8dce34e77721, type: 2}
   - {fileID: 11400000, guid: 3ff65f925ce154d4b919589ee340b06d, type: 2}
   weaponWeight: 0.4
-  playerStatWeight: 0.4
+  playerStatWeight: 0.8
   gameSystemWeight: 0.2
 --- !u!4 &1064532052
 Transform:
@@ -1508,15 +1508,15 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2014911605}
   - {fileID: 554754192}
   - {fileID: 1238214848}
   - {fileID: 1064532052}
+  - {fileID: 1021344945}
   - {fileID: 883383920}
   - {fileID: 209586058}
   - {fileID: 2053727501}
   - {fileID: 1894848860}
-  - {fileID: 1021344945}
-  - {fileID: 2014911605}
   - {fileID: 963409676}
   - {fileID: 1585758050}
   - {fileID: 1657533458}
