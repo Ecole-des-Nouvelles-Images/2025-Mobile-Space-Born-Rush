@@ -29,12 +29,12 @@ public class ShotGunBulletData : BulletData
         {
             if (enemy.Transform.position.x > 1 )
             {
-                Vector3 dir = _knockbackRightDirections[Random.Range(0, _knockbackMidDirections.Count)];
+                Vector3 dir = _knockbackRightDirections[Random.Range(0, _knockbackRightDirections.Count)];
                 enemy.ApplyKnockback(dir * _knockbackForce);
             }
             else if (enemy.Transform.position.x < -1 )
             {
-                Vector3 dir = _knockbackLeftDirections[Random.Range(0, _knockbackMidDirections.Count)];
+                Vector3 dir = _knockbackLeftDirections[Random.Range(0, _knockbackLeftDirections.Count)];
                 enemy.ApplyKnockback(dir * _knockbackForce);
             }
         }

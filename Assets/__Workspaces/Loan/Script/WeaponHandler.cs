@@ -16,6 +16,7 @@ public class WeaponHandler : MonoBehaviour
     
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
+    [SerializeField]private LayerMask _layerMask;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class WeaponHandler : MonoBehaviour
     {
         _currentWeapon = _weaponData;
         _ammoNumber = _currentWeapon.MagSize;
+        _layerMask = _currentWeapon.EnemyMask;
         _firePoint.GetComponent<Transform>();
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
         
@@ -54,26 +56,25 @@ public class WeaponHandler : MonoBehaviour
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-            if (_currentWeapon.EnemyMask == LayerMask.NameToLayer("Enemy"))
-            {
-                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_currentWeapon.EnemyMask))
-                {
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
-                    {
-                        Fire();
-                    }
+            
+            
+            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
+            { 
+                Debug.Log("2");
+                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                { 
+                    Fire();
                 }
             }
-            else
+            else if (Physics.Raycast(_weaponRaycast,out RaycastHit other ,_currentWeapon.FireDistance,_layerMask))
             {
-                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_currentWeapon.EnemyMask))
-                {
-                    if (hit.collider.TryGetComponent<PlayerController>(out var enemy))
-                    {
-                        Fire();
-                    }
+                if (other.collider.TryGetComponent<PlayerController>(out var enemy)) 
+                { 
+                    Fire();
                 }
             }
+            
+            
             
         }
             
