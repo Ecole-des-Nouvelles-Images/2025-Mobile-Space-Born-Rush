@@ -12,13 +12,12 @@ public class Attack : BaseState
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
-                    enemy.SpeedDirection = Vector3.zero;
                     return;
                 }
             }
             else
             {
-                enemy.SpeedDirection = new Vector3(0, 0, -5);
+                enemy.SpeedDirection = new Vector3(0, 0, -enemy.GameUpgrades.GameSpeed);
                 enemy.IsAttacking = false;
                 enemy.IsWait =  true;
             }
@@ -30,7 +29,7 @@ public class Attack : BaseState
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
-                    enemy.SpeedDirection = Vector3.zero;
+                    
                     if (enemy.CurrentFireRate <= 0)
                     {
                         player.TakeDamage(enemy.Damage);
@@ -45,7 +44,7 @@ public class Attack : BaseState
             }
             else
             {
-                enemy.SpeedDirection = new Vector3(0, 0, -5);
+                enemy.SpeedDirection = new Vector3(0, 0, -enemy.GameUpgrades.GameSpeed);
                 enemy.IsAttacking = false;
                 enemy.IsWait =  true;
             }
