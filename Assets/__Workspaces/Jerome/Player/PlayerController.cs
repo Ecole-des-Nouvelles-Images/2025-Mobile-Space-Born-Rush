@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     
     //Variables for methods
     private bool _isJumping = true;
-    private bool _isSliding;
+    [SerializeField] private bool _isSliding;
     private bool _isPaused;
     
     public Vector3 JumpForce = Vector3.up;
@@ -175,7 +175,8 @@ public class PlayerController : MonoBehaviour,IDamageable
                         Debug.Log("Swipe Up");
                         _fingerDown = false;
                     }
-                }else if(!_isSliding)
+                }
+                if(!_isSliding)
                 {
                     if (Input.touches[0].position.y <= _pos1.y - PixelDistToDetect)
                     {
