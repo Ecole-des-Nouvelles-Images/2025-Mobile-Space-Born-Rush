@@ -40,8 +40,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerRevive += OnPlayerRevive;
-        EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
-        EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
         
         // Movement & Environment
         EventBus.OnLaneChanged += OnLaneChanged;
@@ -52,16 +50,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnPlayerRevive()
     {
         throw new NotImplementedException();
-    }
-
-    private void OnPlayerChooseAnItem(UpgradeType obj)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void OnPlayerLevelUp(List<UpgradeData> obj)
-    {
-        Debug.Log("PlayerLevelUp");
     }
 
     private void OnSpeedChanged(float val)
@@ -79,13 +67,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     {
         throw new NotImplementedException();
     }
-
-    private void OnObstacleHit(float val)
-    {
-        //The value should be how the speed is effected and for how long Unless we do a flat speed reduction
-        //TODO ask Loan if its flat or a percentage of the current speed, will need to change the event based on his ans.
-    }
-
     private void OnPlayerSpawn()
     {
         throw new NotImplementedException();
@@ -128,8 +109,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
         EventBus.OnPlayerRevive -= OnPlayerRevive;
-        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
-        EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
         
         // Movement & Environment
         EventBus.OnLaneChanged -= OnLaneChanged;
@@ -247,24 +226,22 @@ public class PlayerController : MonoBehaviour,IDamageable
     //The logic to stop the player from double jumping or sliding while jumping
     private void OnCollisionEnter(Collision other)
     {
-        if(other.collider.tag == "Platform")
+        switch (other.gameObject.tag)
         {
-            _isJumping = MovementStateChange(_isJumping);
+            case "Platform":
+                _isJumping = MovementStateChange(_isJumping);
+                break;
         }
     }
-
     private void OnCollisionExit(Collision other)
     {
-        if(other.collider.tag == "Platform")
+        switch (other.gameObject.tag)
         {
-            _isJumping =MovementStateChange(_isJumping);
+            case "Platform":
+                _isJumping = MovementStateChange(_isJumping);
+                break;
         }
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     throw new NotImplementedException();
-    // }
     public void TakeDamage(float damage)
     {
         EventBus.OnPlayerTakeDamage?.Invoke(damage);

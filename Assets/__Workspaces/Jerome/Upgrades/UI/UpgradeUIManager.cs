@@ -52,7 +52,6 @@ public class UpgradeUIManager : MonoBehaviour
         }
 
         currentChoices = upgradeChoices;
-        Debug.Log($"Displaying {upgradeChoices.Count} upgrade choices");
 
         // Clear previous choices
         ClearExistingChoices();
@@ -116,7 +115,6 @@ public class UpgradeUIManager : MonoBehaviour
         }
 
         UpgradeData selectedUpgrade = currentChoices[choiceIndex];
-        Debug.Log($"Player selected: {selectedUpgrade.Name}");
 
         // Apply the upgrade through the UpgradeManager
         upgradeManager.ApplyUpgrade(selectedUpgrade);
