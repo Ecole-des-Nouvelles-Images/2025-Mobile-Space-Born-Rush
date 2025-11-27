@@ -159,16 +159,16 @@ MonoBehaviour:
   SpeedDirection: {x: 0, y: 0, z: -1}
   Transform: {fileID: 0}
   Rb: {fileID: 0}
-  Damage: 0
+  Damage: 5
   IsRange: 0
-  Range: 0
-  CurrentFireRate: 0
+  Range: 2
+  CurrentFireRate: 1
   Animator: {fileID: 0}
   KnockBackVelocity: {x: 0, y: 0, z: 0}
   IsKnocked: 0
   EnemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   IsWait: 0
   IsAttacking: 0
   IsDead: 0
