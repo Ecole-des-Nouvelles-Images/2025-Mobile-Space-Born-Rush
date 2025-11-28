@@ -4,7 +4,6 @@ using UnityEngine;
 public class SectionTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject _modulPrefabs;
-    private float _rotate = -90f;
 
     private void OnTriggerEnter(Collider other)
     {
