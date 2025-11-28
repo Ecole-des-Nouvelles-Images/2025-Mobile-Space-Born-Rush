@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: Retour
     m_Metadata:
       m_Items: []
+  - m_Id: 377179134464000
+    m_Localized: Partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377235145199616
+    m_Localized: Option
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377381010509824
+    m_Localized: Francais
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377437851717632
+    m_Localized: Anglais
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

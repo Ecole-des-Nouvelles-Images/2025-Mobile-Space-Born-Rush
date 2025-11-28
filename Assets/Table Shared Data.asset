@@ -23,6 +23,26 @@ MonoBehaviour:
     m_Key: B_Start
     m_Metadata:
       m_Items: []
+  - m_Id: 377179134464000
+    m_Key: B_Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377235145199616
+    m_Key: B_Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377297720020992
+    m_Key: T_Credit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377381010509824
+    m_Key: B_Francer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377437851717632
+    m_Key: B_English
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

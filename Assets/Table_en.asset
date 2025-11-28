@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: Return
     m_Metadata:
       m_Items: []
+  - m_Id: 377179134464000
+    m_Localized: Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377235145199616
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377381010509824
+    m_Localized: French
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377437851717632
+    m_Localized: 'English '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
