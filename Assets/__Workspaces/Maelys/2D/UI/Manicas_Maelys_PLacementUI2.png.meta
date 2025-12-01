@@ -1,0 +1,399 @@
+fileFormatVersion: 2
+guid: b3ff99f8a43884c44b2d830e852605ed
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1022
+        width: 1316
+        height: 1429
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7920e4f474cffd3499bea5b30d9452a7
+      internalID: 1233612529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_4
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 548
+        width: 414
+        height: 456
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4ae2476044bdce4aa52dfe45f8ccfc9
+      internalID: 2129509404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_5
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 548
+        width: 416
+        height: 456
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 111c8260eafd6cd40adc997ec71cd3c4
+      internalID: -1225363209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_6
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 357
+        width: 336
+        height: 314
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1dcaa340d81996459c64fce131d1fab
+      internalID: 970099956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_8
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 693
+        width: 242
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d77133dabb61e44da3e21e5f79d9214
+      internalID: -1651781478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_13
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 685
+        width: 241
+        height: 325
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9b3f78b52417ee43bccf227d5a32e36
+      internalID: 2075886160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_14
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 348
+        width: 235
+        height: 323
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3702689a0792aa44082c44d7ba75d6ba
+      internalID: -884949612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_17
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 83
+        width: 416
+        height: 456
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdd1a6d269037c34aafe588b56f46606
+      internalID: -2103415651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_18
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 80
+        width: 417
+        height: 459
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 358adbccd4ec23b419c70d5092f695a8
+      internalID: -422129554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_22
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 29
+        width: 252
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1364654803473ae4fa98e631067bbf61
+      internalID: 1690835182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI2_24
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 26
+        width: 245
+        height: 318
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81353954dc7ac82439be9a60e25afcce
+      internalID: -1200811564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e2342677d2fca57429deeda5cdb352ec
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Manicas_Maelys_PLacementUI2_0: -102134101
+      Manicas_Maelys_PLacementUI2_1: 1233612529
+      Manicas_Maelys_PLacementUI2_10: -154896902
+      Manicas_Maelys_PLacementUI2_11: -850409678
+      Manicas_Maelys_PLacementUI2_12: -1269422004
+      Manicas_Maelys_PLacementUI2_13: 2075886160
+      Manicas_Maelys_PLacementUI2_14: -884949612
+      Manicas_Maelys_PLacementUI2_15: 142644851
+      Manicas_Maelys_PLacementUI2_16: 1255620743
+      Manicas_Maelys_PLacementUI2_17: -2103415651
+      Manicas_Maelys_PLacementUI2_18: -422129554
+      Manicas_Maelys_PLacementUI2_19: -1304659752
+      Manicas_Maelys_PLacementUI2_2: 413917635
+      Manicas_Maelys_PLacementUI2_20: -1026794589
+      Manicas_Maelys_PLacementUI2_21: 1743633361
+      Manicas_Maelys_PLacementUI2_22: 1690835182
+      Manicas_Maelys_PLacementUI2_23: 1645088258
+      Manicas_Maelys_PLacementUI2_24: -1200811564
+      Manicas_Maelys_PLacementUI2_3: -1907112322
+      Manicas_Maelys_PLacementUI2_4: 2129509404
+      Manicas_Maelys_PLacementUI2_5: -1225363209
+      Manicas_Maelys_PLacementUI2_6: 970099956
+      Manicas_Maelys_PLacementUI2_7: -1819259645
+      Manicas_Maelys_PLacementUI2_8: -1651781478
+      Manicas_Maelys_PLacementUI2_9: -146736872
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
