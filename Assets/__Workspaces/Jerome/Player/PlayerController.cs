@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {

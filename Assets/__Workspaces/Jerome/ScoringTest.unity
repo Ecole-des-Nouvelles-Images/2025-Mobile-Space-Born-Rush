@@ -174,11 +174,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c, type: 3}
       propertyPath: _isEnemy
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c, type: 3}
       propertyPath: _isObstacle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c, type: 3}
       propertyPath: _modulPrefabs
