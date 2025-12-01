@@ -20,7 +20,6 @@ public class StartUpManager : MonoBehaviour
 
     private void StartGame()
     {
-        Debug.Log("Hello World!");
         int pos = 0;
         if (_playerPrefb != null)
         {
