@@ -103,7 +103,8 @@ public class ScoringManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isGamePaused) return;
+        //TODO: Uncomment when the game UI is implemented
+        //if (_isGamePaused) return;
         
         _score += _gameUpgrades.GameSpeed *  Time.deltaTime;
     }
