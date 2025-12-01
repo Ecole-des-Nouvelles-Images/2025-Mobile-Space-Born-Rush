@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: B_English
     m_Metadata:
       m_Items: []
+  - m_Id: 1395782735450112
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -51,6 +55,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 7700955870973657180
-      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
       data:
         m_CustomEpoch: 1764250499529

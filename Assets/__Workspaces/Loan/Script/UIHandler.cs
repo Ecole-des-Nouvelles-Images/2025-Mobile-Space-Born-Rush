@@ -90,6 +90,7 @@ public class UIHandler : MonoBehaviour
     
     public void ChangeLangue(int langueID)
     {
+        Debug.Log("Change la langue");
         if (_isActive)
             return;
         StartCoroutine(SetLangue(langueID));

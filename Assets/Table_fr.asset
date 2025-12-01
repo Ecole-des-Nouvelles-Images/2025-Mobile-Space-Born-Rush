@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Anglais
     m_Metadata:
       m_Items: []
+  - m_Id: 377297720020992
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
