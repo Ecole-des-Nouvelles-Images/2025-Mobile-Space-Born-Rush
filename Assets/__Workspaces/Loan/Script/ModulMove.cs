@@ -100,6 +100,7 @@ public class ModulMove : MonoBehaviour
         transform.position = vector3;
         if (transform.position.z < -_width)
         {
+            Debug.Log("Instancie nouveau block ="+_modulPrefabs);
             Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);
             Destroy(gameObject);
         }

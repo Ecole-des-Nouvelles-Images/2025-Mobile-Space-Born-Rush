@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameStart()
     {
-        throw new NotImplementedException();
+        Debug.Log("GameStart");
     }
 
     private void OnDestroy()

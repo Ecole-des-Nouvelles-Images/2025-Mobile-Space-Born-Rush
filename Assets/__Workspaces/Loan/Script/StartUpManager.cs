@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class StartUpManager : MonoBehaviour
@@ -23,14 +22,16 @@ public class StartUpManager : MonoBehaviour
     {
         Debug.Log("Hello World!");
         int pos = 0;
-        GameObject player = Instantiate(_playerPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform);
+        if (_playerPrefb != null)
+        {
+            GameObject player = Instantiate(_playerPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform);
+        }
 
         while (pos <= 60)
         {
-            GameObject modul = Instantiate(_modulPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform);
-            var mooveModul = modul.GetComponent<ModulMove>();
-            mooveModul.isObstacle = false;
-            mooveModul.isEnemy = false;
+            GameObject modul = Instantiate(_modulPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform.transform);
+            modul.GetComponent<ModulMove>().isEnemy = false;
+            modul.GetComponent<ModulMove>().isObstacle = false;
             pos += 20;
         }
     }
