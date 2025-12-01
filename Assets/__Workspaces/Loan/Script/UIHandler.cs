@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 public class UIHandler : MonoBehaviour
@@ -40,6 +37,7 @@ public class UIHandler : MonoBehaviour
     private void GameLosse()
     {
        _loosePanel.SetActive(true);
+       Debug.Log("Loose");
        EventBus.OnGamePause?.Invoke();
     }
 
@@ -90,7 +88,6 @@ public class UIHandler : MonoBehaviour
     
     public void ChangeLangue(int langueID)
     {
-        Debug.Log("Change la langue");
         if (_isActive)
             return;
         StartCoroutine(SetLangue(langueID));

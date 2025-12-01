@@ -101,11 +101,13 @@ public class PlayerStatController : MonoBehaviour
         //Play death screen
         //
         
-        //Then die
-        Destroy(this);
         
         //Invoke GameOver
         EventBus.OnGameOver?.Invoke();
+        
+        //Then die
+        Destroy(this);
+        
     }
     private void OnDestroy()
     {
