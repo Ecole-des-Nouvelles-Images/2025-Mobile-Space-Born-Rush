@@ -37,7 +37,7 @@ public static class EventBus
 
     // ===== COMBAT EVENTS =====
     // public static Action<WeaponType> OnWeaponChanged;
-    public static Action<float> OnObstacleHit;
+    public static Action OnObstacleHit;
     /// <summary>
     /// Damage the obstacle inflicts
     /// </summary>
@@ -45,8 +45,9 @@ public static class EventBus
 
     // ===== ENEMY EVENTS =====
     // public static Action<EnemyType> OnEnemySpawn;
-    // public static Action<GameObject, EnemyType> OnEnemyDead;
+    public static Action<GameObject> OnEnemyDead;
     public static Action<float> OnEnemyTakeDamage;
+    public static Action OnEnemyGotPastPlayer;
 
     // ===== ENVIRONMENT EVENTS =====
     public static Action<Terrain> GenerationTerrainFinished;

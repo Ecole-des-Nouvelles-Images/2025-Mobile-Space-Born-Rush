@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ObstacleHandler : MonoBehaviour
@@ -9,14 +8,14 @@ public class ObstacleHandler : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            EventBus.OnPlayerTakeDamage?.Invoke(ObstacleData.Damage);
+            EventBus.OnObstacleHit?.Invoke();
             if (ObstacleData.IsStunning)
             {
-                EventBus.OnPlayerTakeDamage?.Invoke(ObstacleData.Damage);
                 EventBus.OnPlayerTakeStun?.Invoke(ObstacleData.StunTime);
             }
             else
             {
-                EventBus.OnPlayerTakeDamage?.Invoke(ObstacleData.Damage);
                 Destroy(gameObject);
             }
         }
