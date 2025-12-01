@@ -10,52 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Table Shared Data
+  m_Name: LangueTable Shared Data
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
-  m_TableCollectionName: Table
-  m_TableCollectionNameGuidString: 8d934c70e864f1547b6cb915aee6cf8c
+  m_TableCollectionName: LangueTable
+  m_TableCollectionNameGuidString: edbf53024ff336f4eb0d036add812111
   m_Entries:
-  - m_Id: 9674151776256
-    m_Key: B_Exit
+  - m_Id: 189073018880
+    m_Key: B_Retour
     m_Metadata:
       m_Items: []
-  - m_Id: 30431858688
+  - m_Id: 253623357440
     m_Key: B_Start
     m_Metadata:
       m_Items: []
-  - m_Id: 377179134464000
+  - m_Id: 301706858496
     m_Key: B_Game
     m_Metadata:
       m_Items: []
-  - m_Id: 377235145199616
-    m_Key: B_Settings
+  - m_Id: 356400582656
+    m_Key: B_Option
     m_Metadata:
       m_Items: []
-  - m_Id: 377297720020992
-    m_Key: T_Credit
+  - m_Id: 408242180096
+    m_Key: B_Anglais
     m_Metadata:
       m_Items: []
-  - m_Id: 377381010509824
-    m_Key: B_Francer
+  - m_Id: 505583587328
+    m_Key: B_Francais
     m_Metadata:
       m_Items: []
-  - m_Id: 377437851717632
-    m_Key: B_English
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1395782735450112
-    m_Key: New Entry
+  - m_Id: 1042228006912
+    m_Key: B_Credits
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 7700955870973657180
+    rid: 178360609571078539
   references:
     version: 2
     RefIds:
-    - rid: 7700955870973657180
+    - rid: 178360609571078539
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1764250499529
+        m_CustomEpoch: 1764592286596

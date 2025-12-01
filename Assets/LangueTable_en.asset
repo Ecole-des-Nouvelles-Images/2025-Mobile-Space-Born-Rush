@@ -10,39 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Table_fr
+  m_Name: LangueTable_en
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
   m_LocaleId:
-    m_Code: fr
-  m_SharedData: {fileID: 11400000, guid: 8d934c70e864f1547b6cb915aee6cf8c, type: 2}
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: edbf53024ff336f4eb0d036add812111, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 30431858688
-    m_Localized: Commencer
+  - m_Id: 189073018880
+    m_Localized: Return
     m_Metadata:
       m_Items: []
-  - m_Id: 9674151776256
-    m_Localized: Retour
+  - m_Id: 253623357440
+    m_Localized: Start
     m_Metadata:
       m_Items: []
-  - m_Id: 377179134464000
-    m_Localized: Partie
+  - m_Id: 301706858496
+    m_Localized: Game
     m_Metadata:
       m_Items: []
-  - m_Id: 377235145199616
-    m_Localized: Option
+  - m_Id: 356400582656
+    m_Localized: Settings
     m_Metadata:
       m_Items: []
-  - m_Id: 377381010509824
-    m_Localized: Francais
+  - m_Id: 408242180096
+    m_Localized: English
     m_Metadata:
       m_Items: []
-  - m_Id: 377437851717632
-    m_Localized: Anglais
+  - m_Id: 505583587328
+    m_Localized: French
     m_Metadata:
       m_Items: []
-  - m_Id: 377297720020992
+  - m_Id: 1042228006912
     m_Localized: Credits
     m_Metadata:
       m_Items: []

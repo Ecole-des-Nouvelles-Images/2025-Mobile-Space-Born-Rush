@@ -15,19 +15,17 @@ MonoBehaviour:
   m_GroupName: Localization-Locales
   m_GUID: 0e375e45a44490b4581d8ccd7d141642
   m_SerializeEntries:
-  - m_GUID: 477252b12dc16e24aa350c0bf4f915fd
-    m_Address: French (fr) 1
+  - m_GUID: 1935890943807394fb6cfca298dc2903
+    m_Address: French (fr)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-    - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4ba2d7275cd8b0545a67f9da860ee707
-    m_Address: English (en) 1
+  - m_GUID: cb293a21b62c20a449b54dc5961ddfbe
+    m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-    - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: f110bef9128ec8243be18dd949f94c58, type: 2}
