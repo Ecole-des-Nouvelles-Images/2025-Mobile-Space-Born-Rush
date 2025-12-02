@@ -9,6 +9,10 @@ EditorBuildSettings:
     path: Assets/__Workspaces/Test/APKTest.unity
     guid: f88e1a2fcec3f4c48bb036368749cbae
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: d914f9b66f044814b944f97b196c7e50, type: 2}
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.addressableassets: {fileID: 11400000, guid: d914f9b66f044814b944f97b196c7e50,
+      type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b,
+      type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: af2b79d44c68b594e8eff384e9e61939,
+      type: 2}
   m_UseUCBPForAssetBundles: 0

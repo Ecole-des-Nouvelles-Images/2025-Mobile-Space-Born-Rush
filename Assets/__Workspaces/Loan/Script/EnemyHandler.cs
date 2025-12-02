@@ -5,8 +5,8 @@ using UnityEngine.Serialization;
 public class EnemyHandler : MonoBehaviour, IDamageable
 {
     [Header("=====General Settings=====")] 
-    public float Hp;
-    public float MaxHp;
+    public EnemyData EnemyData;
+    public float CurrentHealth;
     public Vector3 SpeedDirection;
     public Transform Transform;
     public Rigidbody Rb;
@@ -14,9 +14,9 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     [Header("<color=red>=====Attack Settings=====</color>")]
     // public WeaponData WeaponData;
-    public float Damage;
+    public float CurrentDamage;
     public bool IsRange;
-    public float Range;
+    public float CurrentRange;
     public Ray Raycast;
     public float CurrentFireRate; 
     
@@ -33,6 +33,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public bool IsAttacking;
     public bool IsDead;
     
+    
     public BaseState CurrentState = new Wait();
     
     private float _knockbackTimer = 3f;
@@ -45,7 +46,9 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
-        Hp =  MaxHp;
+        CurrentHealth = EnemyData.MaxHealth;
+        CurrentFireRate = EnemyData.FireRate;
+        CurrentDamage = EnemyData.Damage;
         IsWait =  true;
     }
     private void FixedUpdate()
@@ -66,7 +69,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             IsKnocked = false;
         }
 
-        if (Hp <= 0)
+        if (CurrentHealth <= 0)
         {
             IsDead = true;
             IsWait = false;
@@ -75,7 +78,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        Hp -= damage;
+        CurrentHealth -= damage;
     }
 
     public void Death()

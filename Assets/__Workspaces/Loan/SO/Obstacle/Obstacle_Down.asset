@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Obstacle_Down
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleData
   Prefab: {fileID: 9095732443537711072, guid: a577c94d62e73254183599ffbc26212b, type: 3}
-  Damage: 0
+  LanesTaken: 0
+  Damage: 10
   IsStunning: 0
   StunTime: 0

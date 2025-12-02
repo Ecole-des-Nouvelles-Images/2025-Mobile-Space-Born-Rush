@@ -4,6 +4,7 @@ using UnityEngine;
 public class ObstacleData : ScriptableObject
 {
     public GameObject Prefab;
+    public int LanesTaken;
     public float Damage;
     public bool IsStunning = false;
     public float StunTime;
