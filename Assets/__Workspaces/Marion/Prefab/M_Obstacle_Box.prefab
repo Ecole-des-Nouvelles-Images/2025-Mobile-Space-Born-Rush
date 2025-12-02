@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ef1805baab801e458233f23fb0dd3bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.203
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ef1805baab801e458233f23fb0dd3bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c605cfcae5d062d43a6ba17992606df4, type: 2}
     - target: {fileID: 919132149155446097, guid: 0ef1805baab801e458233f23fb0dd3bb, type: 3}
       propertyPath: m_Name
-      value: Box_low
+      value: M_Obstacle_Box
       objectReference: {fileID: 0}
     - target: {fileID: 1536311901431431028, guid: 0ef1805baab801e458233f23fb0dd3bb, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
