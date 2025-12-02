@@ -12,6 +12,7 @@ public static class EventBus
     public static Action OnGameRestart;
     public static Action<float> OnDistanceRun;
     public static Action<int> OnScoreChanged;
+    public static Action<int> OnHighScore;
     public static Action<float> OnSpeedChanged;
     
     // ===== PLAYER EVENTS =====

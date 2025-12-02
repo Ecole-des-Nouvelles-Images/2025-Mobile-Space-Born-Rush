@@ -1,82 +1,133 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class ScoreTraker : MonoBehaviour
+public class ScoreTracker : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _scoreText;
+    [Header("References")]
     [SerializeField] private ScoringManager _scoringManager;
+    [SerializeField] private HighScoreData _highScoreData;
     
-    // Optional: Formatting and animation variables
-    [SerializeField] private string _scoreFormat = "SCORE: {0}";
+    [Header("UI References")]
+    [SerializeField] private TextMeshProUGUI _currentScoreText;
+    [SerializeField] private TextMeshProUGUI _highScoreText;
+    
+    [Header("Formatting")]
+    [SerializeField] private string _currentScoreFormat;
+    [SerializeField] private string _highScoreFormat;
+    
+    [Header("Animation")]
     [SerializeField] private float _animationDuration = 0.3f;
     
     private float _currentDisplayScore;
     private float _targetScore;
-    private float _animationTimer;
-
+    private float _currentHighScore;
+    
     private void Start()
     {
-        // If not assigned in inspector, try to find them
-        if (_scoreText == null)
-            _scoreText = GetComponent<TextMeshProUGUI>();
+        // Find references if not assigned
+        if (!_currentScoreText)
+            Debug.LogWarning("Current Score Text not assigned to ScoreTracker!");
         
-        if (_scoringManager == null)
+        if (!_highScoreText)
+            Debug.LogWarning("High Score Text not assigned to ScoreTracker!");
+        
+        if (!_scoringManager)
             _scoringManager = FindObjectOfType<ScoringManager>();
+        
+        if (!_highScoreData)
+            Debug.LogWarning("HighScoreData not assigned to ScoreTracker!");
+        else
+            _highScoreData.LoadHighScore(); // Load saved high score
         
         // Initialize display
         _currentDisplayScore = 0;
-        UpdateScoreText();
+        _currentHighScore = _highScoreData?.HighScore ?? 0;
+        
+        UpdateCurrentScoreText();
+        UpdateHighScoreText();
     }
-
+    
     private void Update()
     {
-        // Handle continuous score updates from ScoringManager's Update method
-        if (_scoringManager)
+        if (!_scoringManager) return;
+        
+        // Update current score with smooth animation
+        _targetScore = _scoringManager.Score;
+        
+        if (Mathf.Abs(_currentDisplayScore - _targetScore) > 0.1f)
         {
-            _targetScore = _scoringManager.Score;
-            
-            // Smooth animation for score changes
-            if (Mathf.Abs(_currentDisplayScore - _targetScore) > 0.1f)
-            {
-                _currentDisplayScore = Mathf.Lerp(_currentDisplayScore, _targetScore, _animationDuration * Time.deltaTime * 10f);
-                UpdateScoreText();
-            }
-            else if (_currentDisplayScore != _targetScore)
-            {
-                _currentDisplayScore = _targetScore;
-                UpdateScoreText();
-            }
+            _currentDisplayScore = Mathf.Lerp(_currentDisplayScore, _targetScore, 
+                _animationDuration * Time.deltaTime * 10f);
+            UpdateCurrentScoreText();
         }
+        else if (_currentDisplayScore != _targetScore)
+        {
+            _currentDisplayScore = _targetScore;
+            UpdateCurrentScoreText();
+        }
+        
+        // Check and update high score if needed
+        if (_highScoreData && _targetScore > _currentHighScore)
+        {
+            _currentHighScore = _targetScore;
+            _highScoreData.HighScore = _currentHighScore; // This will trigger save and event
+            UpdateHighScoreText();
+        }
+        
+        
     }
-
+    
     private void OnScoreChanged(GameObject obj = null)
     {
-        // This forces an immediate update when big score changes happen
+        // Force immediate update for big score changes
         if (_scoringManager)
         {
             _currentDisplayScore = _scoringManager.Score;
-            UpdateScoreText();
+            UpdateCurrentScoreText();
         }
     }
-
-    private void UpdateScoreText()
+    
+    private void OnHighScoreChanged(float newHighScore)
     {
-        if (_scoreText)
+        _currentHighScore = newHighScore;
+        UpdateHighScoreText();
+    }
+    
+    private void UpdateCurrentScoreText()
+    {
+        if (_currentScoreText)
         {
-            // Format the score (0 decimal places, with commas for thousands)
             string formattedScore = _currentDisplayScore.ToString("N0");
-            _scoreText.text = string.Format(_scoreFormat, formattedScore);
+            _currentScoreText.text = string.Format(_currentScoreFormat, formattedScore);
         }
     }
-
-    // Optional: Add visual feedback for score changes
-    public void PulseText()
+    
+    private void UpdateHighScoreText()
     {
-        // You could add a simple scale animation here
-        // or change color temporarily when score increases/decreases
+        if (_highScoreText)
+        {
+            string formattedScore = _currentHighScore.ToString("N0");
+            _highScoreText.text = string.Format(_highScoreFormat, formattedScore);
+        }
+    }
+    
+    // Optional visual effects
+    public void PulseCurrentScore()
+    {
+        // Add scale animation or color change for current score
+        if (_currentScoreText)
+        {
+            // Example: _currentScoreText.transform.localScale = Vector3.one * 1.2f;
+            // Use LeanTween or DOTween for smooth animation
+        }
+    }
+    
+    public void PulseHighScore()
+    {
+        // Add visual effect when high score is broken
+        if (_highScoreText)
+        {
+            // Example: Change color to gold temporarily
+        }
     }
 }
-
-
-    
