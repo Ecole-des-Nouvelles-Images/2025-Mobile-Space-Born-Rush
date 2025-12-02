@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class ModulMove : MonoBehaviour
 {
     [Header("<color=cyan>=====Modul Settings=====</color>")]
-    [SerializeField] private GameObject _modulPrefabs;
+    [SerializeField] private List<GameObject> _modulPrefabs = new List<GameObject>();
     [SerializeField] private GameUpgradeController _gameUpgrades;
     
     [Header("<color=green>=====Grid Settings=====</color>")] 
@@ -44,32 +44,50 @@ public class ModulMove : MonoBehaviour
     {
         for (int i = 0; i < _gridManager.Grid.GetLength(0); i++)
         {
-            int numberObstacle = 0;
             for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
             {
-
-                if (numberObstacle == 2)
-                {
-                    break;
-                }
                 float chance = Random.Range(0f, 1f);
 
                 if (chance > 0.75) 
                 {
-                    Vector3 offset = new Vector3(0, 0.5f, 0);
-                    Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
-                    _gridManager.SetCellEmpty(i,j,false);
                     int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
                     ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
-                    GameObject obstacle = Instantiate(currentObstacle.Prefab,offset + pos,Quaternion.identity,transform);
-                    obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
-                    numberObstacle++;
+                    
+                    if (_gridManager.IsNeightbornEmpty(i,j,currentObstacle,true))
+                    {
+                        Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
+                        Quaternion rotate = Quaternion.identity;
+                        
+                        if (currentObstacle.LanesTaken == 3)
+                        {
+                            pos.x = 0;
+                        }
+
+                        if (currentObstacle.LanesTaken == 1)
+                        {
+                             rotate = Quaternion.Euler(0,Random.Range(0,360),0);
+                        }
+                        GameObject obstacle = Instantiate(currentObstacle.Prefab,pos,rotate,transform);
+                        obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
+
+                        if (currentObstacle.LanesTaken == 1)
+                        {
+                            _gridManager.SetCellEmpty(i,j,false);
+                        }
+                        else if (currentObstacle.LanesTaken == 3)
+                        {
+                            for (int laneX = 0; laneX < _gridManager.Grid.GetLength(0); laneX++)
+                            {
+                                _gridManager.SetCellEmpty(laneX, j, false);
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
-    //PROBLEME IL NE SPAWN PAS AU BON ENDROIT !!!!!
+    
     private void SpawnEnemy()
     {
         for (int i = 0; i < _gridManager.Grid.GetLength(0); i++)
@@ -100,8 +118,8 @@ public class ModulMove : MonoBehaviour
         transform.position = vector3;
         if (transform.position.z < -_width)
         {
-            Debug.Log("Instancie nouveau block ="+_modulPrefabs);
-            Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);
+            var random =  Random.Range(0, _modulPrefabs.Count);
+            Instantiate(_modulPrefabs[random], new Vector3(0,0,58), Quaternion.identity);
             Destroy(gameObject);
         }
     }

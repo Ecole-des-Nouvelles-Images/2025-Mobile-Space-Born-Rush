@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1dd373388ed0764daab96fd84853fb1, type: 3}
   m_Name: Obs_Box
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleData
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1631780608831274185, guid: 9a51b8a9b86ebe04686729232ff3816c, type: 3}
   LanesTaken: 1
   Damage: 0
   IsStunning: 0

@@ -1,15 +1,18 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _floor;
     [SerializeField] private int _cellX;
     [SerializeField] private int _cellZ;
     [SerializeField] private float _cellSize = 1.5f;
 
     [SerializeField] private MeshRenderer[] _lanesBounds;
     
+    private List<int> _neightbornUpDown =  new List<int>(){2,1,-1,-2};
+    private List<int> _neightbornEnemy = new List<int>() {-1,-2};
+    private List<int> _neightbornRows =  new List<int>(){-2,-1,1,2};
     
     private Bounds _planeBounds;
 
@@ -33,7 +36,6 @@ public class GridManager : MonoBehaviour
         _cellZ = Mathf.RoundToInt(size.z / _cellSize);
 
         Grid = new Cell[_cellX, _cellZ];
-
         
         Vector3 origin = new Vector3(_planeBounds.min.x, _planeBounds.center.y, _planeBounds.min.z);
 
@@ -69,6 +71,59 @@ public class GridManager : MonoBehaviour
         Cell cell = Grid[x, z];
         cell.IsEmpty = empty;
         Grid[x, z] = cell;
+    }
+
+    public bool IsNeightbornEmpty(int x, int z, ObstacleData obs, bool IsObstacle = false)
+    {
+        if (IsObstacle)
+        {
+            if (!Grid[x, z].IsEmpty)
+                return false;
+            
+            if (obs.LanesTaken == 1)
+            {
+                foreach (var pos in _neightbornUpDown)
+                {
+                    int neightborn = z + pos;
+                    if ( neightborn < 0 || neightborn >= _cellZ)
+                        continue;
+
+                    if (!Grid[x, neightborn].IsEmpty)
+                        return false;
+                    // SetCellEmpty(x,neightborn, false);
+                }
+                return true;
+            }
+            else if (obs.LanesTaken == 3)
+            {
+                for (int laneX = 0; laneX < _cellX; laneX++)
+                {
+                    if (!Grid[laneX, z].IsEmpty)
+                        return false;
+                }
+                
+                foreach (var pos in _neightbornUpDown)
+                {
+                    int neightbornZ = z + pos;
+                    if (neightbornZ < 0 || neightbornZ >= _cellZ)
+                        continue;
+
+                    for (int laneX = 0; laneX < _cellX; laneX++)
+                    {
+                        if (!Grid[laneX, neightbornZ].IsEmpty)
+                            return false;
+                        // SetCellEmpty(laneX, neightbornZ, false);
+                    }
+                }
+            }
+            return true;
+        }
+        else
+        {
+            
+        }
+        
+        return false;
     }
     
     private void OnDrawGizmos()
