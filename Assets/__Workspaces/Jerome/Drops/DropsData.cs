@@ -10,14 +10,16 @@ public class DropsData : ScriptableObject
     public string Description;
 
     public float Value;
+    [Header("In seconds")]
     public float Duration;
-    public float DropChance;
+    [Header("0 to 100")]
+    [Range(0, 100)] public int DropChance;
 }
 
 public enum DropType
 {
-    Health,
     XP,
+    Health,
     InstaFill,
     Magnet,
     SpeedBoost

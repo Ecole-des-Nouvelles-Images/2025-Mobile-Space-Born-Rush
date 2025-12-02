@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933b7e22032d2a647b2f231ff138f749, type: 3}
+  m_Name: Health
+  m_EditorClassIdentifier: Assembly-CSharp::DropsData
+  Type: 1
+  Prefab: {fileID: 8128744193459512121, guid: 4bf366ac291096b488a5b3b36eb9e53d, type: 3}
+  Name: Health
+  Description: Heals the player for a base ammount * the health drop multiplier
+  Value: 50
+  Duration: 0
+  DropChance: 50
