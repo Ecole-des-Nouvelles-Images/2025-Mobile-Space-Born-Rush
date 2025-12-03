@@ -27,6 +27,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public Vector3 KnockBackVelocity;
     public bool IsKnocked;
     public LayerMask EnemyMask;
+    public GameObject XpPrefab;
     
     [Header("<color=yellow>=====Bool State Settings=====</color>")]
     public bool IsWait;
@@ -83,6 +84,10 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     public void Death()
     {
+        if (XpPrefab != null)
+        {
+            Instantiate(XpPrefab, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
     

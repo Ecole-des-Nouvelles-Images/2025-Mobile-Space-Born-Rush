@@ -42,7 +42,7 @@ public class ModulMove : MonoBehaviour
 
     private void SpawnObstacles()
     {
-        for (int i = 0; i < _gridManager.Grid.GetLength(0); i++)
+        for (int i = 2; i < _gridManager.Grid.GetLength(0); i++)
         {
             for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
             {
@@ -95,12 +95,13 @@ public class ModulMove : MonoBehaviour
             for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
             {
                 float chance = Random.Range(0f, 1f);
-                if (chance > 0.8f && EnemyNumber > 0 && _gridManager.Grid[i,j].IsEmpty)
+                if (chance > 0.8f && EnemyNumber > 0 && _gridManager.IsNeightbornEmpty(i,j,null, false))
                 {
                     int random =  Random.Range(0, _enemies.Count);
-                    Vector3 offset = new Vector3(0, 0.5f, 0);
+                    Vector3 offset = new Vector3(0, 1f, 0);
                     Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
                     GameObject enemy = Instantiate(_enemies[random],offset + pos ,Quaternion.Euler(0f, 180f, 0f),_parentsTransform);
+                    _gridManager.SetCellEmpty(i,j,false);
                     EnemyNumber--;
                 }
                 else if (EnemyNumber == 0)

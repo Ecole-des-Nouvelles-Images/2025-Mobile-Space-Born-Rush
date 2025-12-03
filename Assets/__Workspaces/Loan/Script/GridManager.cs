@@ -11,8 +11,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private MeshRenderer[] _lanesBounds;
     
     private List<int> _neightbornUpDown =  new List<int>(){2,1,-1,-2};
-    private List<int> _neightbornEnemy = new List<int>() {-1,-2};
-    private List<int> _neightbornRows =  new List<int>(){-2,-1,1,2};
+    private List<int> _neightbornEnemy = new List<int>() {1,2};
     
     private Bounds _planeBounds;
 
@@ -90,7 +89,7 @@ public class GridManager : MonoBehaviour
 
                     if (!Grid[x, neightborn].IsEmpty)
                         return false;
-                    // SetCellEmpty(x,neightborn, false);
+                    SetCellEmpty(x,neightborn, false);
                 }
                 return true;
             }
@@ -112,7 +111,7 @@ public class GridManager : MonoBehaviour
                     {
                         if (!Grid[laneX, neightbornZ].IsEmpty)
                             return false;
-                        // SetCellEmpty(laneX, neightbornZ, false);
+                        SetCellEmpty(laneX, neightbornZ, false);
                     }
                 }
             }
@@ -120,7 +119,19 @@ public class GridManager : MonoBehaviour
         }
         else
         {
-            
+            if (!Grid[x, z].IsEmpty)
+                return false;
+
+            foreach (var pos in _neightbornEnemy)
+            {
+                int neightborn = z - pos;
+                if ( neightborn < 0 || neightborn >= _cellZ)
+                    continue;
+
+                if (!Grid[x, neightborn].IsEmpty)
+                    return false;
+            }
+            return true;
         }
         
         return false;

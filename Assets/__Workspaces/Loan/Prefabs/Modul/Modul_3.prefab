@@ -1359,13 +1359,13 @@ MonoBehaviour:
   _modulPrefabs:
   - {fileID: 4264590297778141436, guid: d4496db7d7621be479b400eb066ae838, type: 3}
   - {fileID: 3896133961801177329, guid: 32bed9ed4a2faeb46930f5437e635c1b, type: 3}
-  - {fileID: 4194574011200283712}
   _gameUpgrades: {fileID: 0}
   _gridManager: {fileID: 5529357489604769338}
-  _enemies: []
+  _enemies:
+  - {fileID: 9214185679248329394, guid: 008428c34e35f334492029ff4a091b10, type: 3}
   _parentsTransform: {fileID: 4330357265393467401}
-  EnemyNumber: 0
-  isEnemy: 0
+  EnemyNumber: 2
+  isEnemy: 1
   _obstaclesPrefabs:
   - {fileID: 11400000, guid: 6f37c8c49454f4e4582da1339e422afe, type: 2}
   - {fileID: 11400000, guid: c84821079ca86124ea8bf00a324d9655, type: 2}
