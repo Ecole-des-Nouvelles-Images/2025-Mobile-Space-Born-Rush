@@ -54,6 +54,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     private void FixedUpdate()
     {
+        
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
         SpeedDirection = new Vector3(0f, 0f, -GameUpgrades.GameSpeed);
         
