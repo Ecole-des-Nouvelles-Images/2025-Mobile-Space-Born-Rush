@@ -23,7 +23,7 @@ public class ModulMove : MonoBehaviour
     [FormerlySerializedAs("_isObstacle")] public bool isObstacle;
     
     
-    private float _width = 22f;
+    private float _width = 25f;
     private void Start()
     {
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
@@ -157,7 +157,7 @@ public class ModulMove : MonoBehaviour
         if (transform.position.z < -_width)
         {
             var random =  Random.Range(0, _modulPrefabs.Count);
-            Instantiate(_modulPrefabs[random], new Vector3(0,0,58), Quaternion.identity);
+            Instantiate(_modulPrefabs[random], new Vector3(0,0,53), Quaternion.identity);
             Destroy(gameObject);
         }
     }

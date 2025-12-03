@@ -17,10 +17,24 @@ public class WeaponHandler : MonoBehaviour
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
     [SerializeField]private LayerMask _layerMask;
+    private Animator _animator;
+    private bool _isAim;
 
     private void Awake()
     {
         EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
+    }
+    
+    private void Start()
+    {
+        _animator = GetComponentInParent<Animator>();
+        _currentWeapon = _weaponData;
+        _ammoNumber = _currentWeapon.MagSize;
+        _layerMask = _currentWeapon.EnemyMask;
+        _firePoint.GetComponent<Transform>();
+        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+        
+        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
     }
 
     private void OnPlayerTakeStun(float time)
@@ -39,19 +53,9 @@ public class WeaponHandler : MonoBehaviour
         EventBus.OnPlayerTakeStun -= OnPlayerTakeStun;
     }
 
-    private void Start()
-    {
-        _currentWeapon = _weaponData;
-        _ammoNumber = _currentWeapon.MagSize;
-        _layerMask = _currentWeapon.EnemyMask;
-        _firePoint.GetComponent<Transform>();
-        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-        
-        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
-    }
-
     private void Update()
     {
+        _isAim = false;
         if (_isStunned) return;
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
@@ -61,7 +65,12 @@ public class WeaponHandler : MonoBehaviour
             if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
             { 
                 if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
-                { 
+                {
+                    if (_animator != null)
+                    {
+                        _animator.SetBool("isAim",true);
+                        _isAim = true;
+                    }
                     Fire();
                 }
             }
@@ -69,12 +78,14 @@ public class WeaponHandler : MonoBehaviour
             {
                 if (other.collider.TryGetComponent<PlayerController>(out var enemy)) 
                 { 
+                    if (_animator != null)
+                    {
+                        _animator.SetBool("isAim",true);
+                        _isAim = true;
+                    }
                     Fire();
                 }
             }
-            
-            
-            
         }
             
         if (_currentFireRate > 0)
@@ -85,6 +96,12 @@ public class WeaponHandler : MonoBehaviour
         if (_currentCooldown > 0)
         {
             _currentCooldown -= Time.deltaTime;
+            _isAim = false;
+        }
+        
+        if (_animator != null && !_isAim)
+        {
+            _animator.SetBool("isAim",false);
         }
 
         if (_isRaycastDraw)
@@ -111,6 +128,10 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
+            if (_animator != null)
+            {
+                _animator.SetTrigger("isFire");
+            }
             GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
             currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData,_currentWeapon.EnemyMask);
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
