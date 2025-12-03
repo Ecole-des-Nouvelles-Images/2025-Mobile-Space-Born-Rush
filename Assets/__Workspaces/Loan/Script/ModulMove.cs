@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ModulMove : MonoBehaviour
@@ -15,11 +16,11 @@ public class ModulMove : MonoBehaviour
     [SerializeField] private List<GameObject> _enemies;
     [SerializeField] private Transform _parentsTransform; 
     public int EnemyNumber;
-    [SerializeField] private bool _isEnemy;
+    [FormerlySerializedAs("_isEnemy")] public bool isEnemy;
     
     [Header("<color=yellow>=====Obstacle Settings=====</color>")]
     [SerializeField] private List<ObstacleData> _obstaclesPrefabs = new List<ObstacleData>();
-    [SerializeField] private bool _isObstacle;
+    [FormerlySerializedAs("_isObstacle")] public bool isObstacle;
     
     
     private float _width = 22f;
@@ -28,12 +29,12 @@ public class ModulMove : MonoBehaviour
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         _parentsTransform = GameObject.FindGameObjectWithTag("Parents").transform;
         
-        if (_isObstacle)
+        if (isObstacle)
         {
             SpawnObstacles();
         }
 
-        if (_isEnemy)
+        if (isEnemy)
         {
             SpawnEnemy();
         }
@@ -99,6 +100,7 @@ public class ModulMove : MonoBehaviour
         transform.position = vector3;
         if (transform.position.z < -_width)
         {
+            Debug.Log("Instancie nouveau block ="+_modulPrefabs);
             Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);
             Destroy(gameObject);
         }

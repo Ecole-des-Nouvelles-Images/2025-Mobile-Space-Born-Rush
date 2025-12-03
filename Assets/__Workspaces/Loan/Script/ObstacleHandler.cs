@@ -6,7 +6,7 @@ public class ObstacleHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent<PlayerController>(out var playerController))
         {
             EventBus.OnPlayerTakeDamage?.Invoke(ObstacleData.Damage);
             EventBus.OnObstacleHit?.Invoke();

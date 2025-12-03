@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
-        throw new NotImplementedException();
+        Debug.Log("GameOver");
     }
 
     private void OnGamePause()
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameStart()
     {
-        throw new NotImplementedException();
+        Debug.Log("GameStart");
     }
 
     private void OnDestroy()
