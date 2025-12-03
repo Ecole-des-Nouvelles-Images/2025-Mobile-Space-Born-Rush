@@ -27,36 +27,29 @@ public class DropsManager : MonoBehaviour
         }
         #endregion
 
-    private void Awake()
+    private void Start()
     {
-        BuildDropTables();
+        ValidateDropData();
     }
     
-    void BuildDropTables()
+    private void ValidateDropData()
     {
-        _dropTypeMap = new Dictionary<DropType, DropsData>();
-        _dropChanceRanges = new Dictionary<DropType, Vector2>();
-        
-        float currentMax = 0f;
-        
-        // First pass: Find XP (should be first, but let's be safe)
-        DropsData xpData = _dropsData.Find(d => d.Type == DropType.XP);
-        if (xpData == null)
+        if (_dropsData.Count == 0)
         {
-            Debug.LogError("No XP drop data found in list!");
+            Debug.LogError("DropsManager: No drop data configured!");
             return;
         }
         
-        // Build chance ranges for NON-XP items (power-ups only)
-        foreach (DropsData drop in _dropsData)
+        // Check if first item is XP (recommended convention)
+        if (_dropsData[0].Type != DropType.XP)
         {
-            _dropTypeMap[drop.Type] = drop; // Map type to data
-            
-            if (drop.Type == DropType.XP) continue; // Skip XP for chance table
-            
-            float chance = drop.DropChance / 100f;
-            _dropChanceRanges[drop.Type] = new Vector2(currentMax, currentMax + chance);
-            currentMax += chance;
+            Debug.LogWarning($"DropsManager: First item is {_dropsData[0].Type}, not XP. Make sure XP is first in the list.");
+        }
+        
+        // XP should have 0% drop chance since it always drops
+        if (_dropsData[0].DropChance != 0)
+        {
+            Debug.LogWarning($"DropsManager: XP has DropChance = {_dropsData[0].DropChance}%. XP should have 0% chance.");
         }
     }
     
@@ -64,34 +57,64 @@ public class DropsManager : MonoBehaviour
     {
         Vector3 spawnPos = enemyTransform.position;
         
-        // 1. ALWAYS drop XP (find by enum)
-        if (_dropTypeMap.TryGetValue(DropType.XP, out DropsData xpData))
-        {
-            GameObject xp = Instantiate(xpData.Prefab);
-            xp.transform.position = spawnPos;
-        }
+        // 1. ALWAYS drop XP (guaranteed, first in list)
+        SpawnXP(spawnPos);
         
-        // 2. Roll for power-ups (using your range system)
-        if (_dropsData.Count > 1) // If we have more than just XP
+        // 2. Check EACH power-up independently (skip index 0 = XP)
+        SpawnRandomPowerUps(spawnPos);
+    }
+    
+    void SpawnXP(Vector3 position)
+    {
+        // XP is always first in list
+        DropsData xpData = _dropsData[0];
+        
+        // TODO replace with pooling
+        GameObject xp = Instantiate(xpData.Prefab);
+        xp.transform.position = position;
+    }
+    
+    void SpawnRandomPowerUps(Vector3 basePosition)
+    {
+        // Check each power-up
+        for (int i = 0; i < _dropsData.Count; i++)
         {
-            float roll = Random.Range(0f, 1f);
+            DropsData drop = _dropsData[i];
             
-            foreach (var kvp in _dropChanceRanges)
+            // Independent chance check for this power-up
+            // Random.Range(0, 101) gives 0-100, so < DropChance works correctly
+            if (Random.Range(0, 101) < drop.DropChance)
             {
-                DropType type = kvp.Key;
-                Vector2 range = kvp.Value;
-                
-                if (roll >= range.x && roll < range.y)
-                {
-                    // Spawn this power-up by looking up its data
-                    if (_dropTypeMap.TryGetValue(type, out DropsData powerUpData))
-                    {
-                        GameObject drop = Instantiate(powerUpData.Prefab);
-                        drop.transform.position = spawnPos;
-                    }
-                    break; // Only one power-up
-                }
+                SpawnPowerUp(drop, basePosition, i);
             }
         }
+    }
+    
+    void SpawnPowerUp(DropsData data, Vector3 basePosition, int index)
+    {
+        // Calculate position with offset to avoid overlap
+        Vector3 offset = CalculateSpawnOffset(index);
+        Vector3 spawnPosition = basePosition + offset;
+        
+        // TODO replace with pooling
+        GameObject drop = Instantiate(data.Prefab);
+        drop.transform.position = spawnPosition;
+        
+        Debug.Log($"Spawned {data.Name} at {spawnPosition}");
+    }
+    
+    Vector3 CalculateSpawnOffset(int powerUpIndex)
+    {
+        // Simple circular offset pattern
+        
+        int adjustedIndex = powerUpIndex - 1; // Convert to 0-based for power-ups
+        
+        float angle = adjustedIndex * 90f; // 90 degrees apart
+        float radius = 0.3f;
+        
+        float x = Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
+        float z = Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
+        
+        return new Vector3(x, 0.2f, z); // Slightly above ground
     }
 }
