@@ -44,6 +44,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     
     private void Start()
     {
+        EventBus.OnEnemyDead += Death;
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
@@ -51,7 +52,17 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         CurrentFireRate = EnemyData.FireRate;
         CurrentDamage = EnemyData.Damage;
         IsWait =  true;
+        if (Animator != null)
+        {
+            Animator = GetComponent<Animator>();
+        }
     }
+
+    private void OnDestroy()
+    {
+        EventBus.OnEnemyDead -= Death;
+    }
+
     private void FixedUpdate()
     {
         
@@ -80,11 +91,19 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
+        if (Animator != null)
+        {
+            Animator.SetTrigger("isHit");
+        }
         CurrentHealth -= damage;
     }
 
-    public void Death()
+    private void Death(GameObject gameObject)
     {
+        if (Animator != null)
+        {
+            Animator.SetTrigger("isDie");
+        }
         if (XpPrefab != null)
         {
             Instantiate(XpPrefab, transform.position, Quaternion.identity);

@@ -12,12 +12,20 @@ public class Attack : BaseState
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
+                    if (enemy.Animator != null)
+                    {
+                        enemy.Animator.SetBool("isAim", true);
+                    }
                     return;
                 }
             }
             else
             {
                 enemy.IsAttacking = false;
+                if (enemy.Animator != null)
+                {
+                    enemy.Animator.SetBool("isAim", false);
+                }
                 enemy.IsWait =  true;
             }
         }
@@ -31,6 +39,10 @@ public class Attack : BaseState
                     
                     if (enemy.CurrentFireRate <= 0)
                     {
+                        if (enemy.Animator != null)
+                        {
+                            enemy.Animator.SetTrigger("isAttack");
+                        }
                         player.TakeDamage(enemy.CurrentDamage);
                         enemy.CurrentFireRate = _fireRate;
                     }
