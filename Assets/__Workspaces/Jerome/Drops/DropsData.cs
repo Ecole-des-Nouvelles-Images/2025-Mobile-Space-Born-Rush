@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DropsData", menuName = "Scriptable Objects/DropData")]
-public class DropsData : ScriptableObject
+public abstract class DropsData : ScriptableObject
 {
     public DropType Type;
     public GameObject Prefab;
@@ -14,6 +14,9 @@ public class DropsData : ScriptableObject
     public float Duration;
     [Header("0 to 100")]
     [Range(0, 100)] public int DropChance;
+    
+    // The power-up behavior - each child implements this differently
+    public abstract void ApplyEffect(float value, float duration);
 }
 
 public enum DropType
