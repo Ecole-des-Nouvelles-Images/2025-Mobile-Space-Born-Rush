@@ -13,7 +13,10 @@ public static class EventBus
     public static Action<float> OnDistanceRun;
     public static Action<int> OnScoreChanged;
     public static Action<int> OnHighScore;
-    public static Action<float> OnSpeedChanged;
+    /// <summary>
+    /// Multiplicative value, duration in seconds
+    /// </summary>
+    public static Action<float, float> OnSpeedChanged;
     
     // ===== PLAYER EVENTS =====
     public static Action OnPlayerSpawn;
@@ -22,11 +25,27 @@ public static class EventBus
     public static Action<float> OnPlayerTakeDamage;
     public static Action<float> OnPlayerTakeStun;
     // public static Action<PowerUpType> OnPowerUpCollected;
+    /// <summary>
+    /// Current health + value passed
+    /// </summary>
     public static Action<float> OnPlayerCurrentHealthChange;
+    /// <summary>
+    /// Max health + value passed
+    /// </summary>
     public static Action<float> OnPlayerMaxHealthChange;
+    /// <summary>
+    /// Current XP + value passed
+    /// </summary>
     public static Action<float> OnPlayerCurrentXPChange;
+    /// <summary>
+    /// Max xp + value passed
+    /// </summary>
     public static Action<float> OnPlayerXPToLevelUpChange;
     public static Action<int> OnLaneChanged;
+    /// <summary>
+    /// Bool on/off, duration in seconds
+    /// </summary>
+    public static Action<bool, float> OnMagnetActivated;
     
     // ===== UPGRADE SYSTEM EVENTS =====
     public static Action<List<UpgradeData>> OnPlayerLevelUp;
@@ -46,6 +65,9 @@ public static class EventBus
 
     // ===== ENEMY EVENTS =====
     // public static Action<EnemyType> OnEnemySpawn;
+    /// <summary>
+    /// Returns the enemy gameobject in case it needs to be called somewhereS
+    /// </summary>
     public static Action<GameObject> OnEnemyDead;
     public static Action<float> OnEnemyTakeDamage;
     public static Action OnEnemyGotPastPlayer;
