@@ -91,7 +91,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (Animator != null)
+        if (Animator)
         {
             Animator.SetTrigger("isHit");
         }
@@ -100,14 +100,14 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     private void Death(GameObject gameObject)
     {
-        if (Animator != null)
-        {
-            Animator.SetTrigger("isDie");
-        }
-        if (XpPrefab != null)
-        {
-            Instantiate(XpPrefab, transform.position, Quaternion.identity);
-        }
+        // if (Animator != null)
+        // {
+        //     Animator.SetTrigger("isDie");
+        // }
+        // if (XpPrefab != null)
+        // {
+        //     Instantiate(XpPrefab, transform.position, Quaternion.identity);
+        // }
         Destroy(gameObject);
     }
     

@@ -23,7 +23,7 @@ public enum DropType
 {
     XP,
     Health,
-    InstaFill,
+    InstaKill,
     Magnet,
     SpeedBoost
 }

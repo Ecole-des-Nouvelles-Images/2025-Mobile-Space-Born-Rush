@@ -43,9 +43,9 @@ public static class EventBus
     public static Action<float> OnPlayerXPToLevelUpChange;
     public static Action<int> OnLaneChanged;
     /// <summary>
-    /// Bool on/off, duration in seconds
+    /// Duration in seconds
     /// </summary>
-    public static Action<bool, float> OnMagnetActivated;
+    public static Action<float> OnMagnetActivated;
     
     // ===== UPGRADE SYSTEM EVENTS =====
     public static Action<List<UpgradeData>> OnPlayerLevelUp;
@@ -66,7 +66,7 @@ public static class EventBus
     // ===== ENEMY EVENTS =====
     // public static Action<EnemyType> OnEnemySpawn;
     /// <summary>
-    /// Returns the enemy gameobject in case it needs to be called somewhereS
+    /// Returns the enemy gameobject in case it needs to be called somewhere
     /// </summary>
     public static Action<GameObject> OnEnemyDead;
     public static Action<float> OnEnemyTakeDamage;

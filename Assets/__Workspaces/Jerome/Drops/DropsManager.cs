@@ -19,6 +19,7 @@ public class DropsManager : MonoBehaviour
         private void OnEnemyDead(GameObject obj)
         {
             SpawnDrop(obj.transform);
+            Debug.Log("Died");
         }
 
         private void OnDisable()
@@ -77,7 +78,7 @@ public class DropsManager : MonoBehaviour
     void SpawnRandomPowerUps(Vector3 basePosition)
     {
         // Check each power-up
-        for (int i = 0; i < _dropsData.Count; i++)
+        for (int i = 1; i < _dropsData.Count; i++)
         {
             DropsData drop = _dropsData[i];
             
@@ -86,6 +87,7 @@ public class DropsManager : MonoBehaviour
             if (Random.Range(0, 101) < drop.DropChance)
             {
                 SpawnPowerUp(drop, basePosition, i);
+                return;
             }
         }
     }

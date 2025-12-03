@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "HealthData", menuName = "Scriptable Objects/Drops/HealthData")]
+[CreateAssetMenu(fileName = "HealthData", menuName = "Drops/HealthData")]
 public class HealthData : DropsData
 {
     private DropsData _dropsData;

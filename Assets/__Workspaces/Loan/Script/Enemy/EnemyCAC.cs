@@ -21,7 +21,7 @@ public class EnemyCAC : EnemyHandler
             CurrentState = new Dead();
         }
         
-        CurrentState.Excute(this);
+        //CurrentState.Excute(this);
         
         Debug.DrawRay(Raycast.origin, Raycast.direction * CurrentRange, Color.blue);
     }

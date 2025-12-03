@@ -174,6 +174,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
         type: 3}
+      propertyPath: isEnemy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
+        type: 3}
       propertyPath: _isEnemy
       value: 1
       objectReference: {fileID: 0}
@@ -1068,6 +1073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
         type: 3}
+      propertyPath: isObstacle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
+        type: 3}
       propertyPath: _isObstacle
       value: 0
       objectReference: {fileID: 0}
@@ -1447,6 +1457,11 @@ PrefabInstance:
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
         type: 3}
       propertyPath: _isEnemy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
+        type: 3}
+      propertyPath: isObstacle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
@@ -2058,11 +2073,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropsManager
   _dropsData:
-  - {fileID: 11400000, guid: ca1bbc2d8a2d1d64baa59fa50f9ed228, type: 2}
-  - {fileID: 11400000, guid: f89b641fefd938b47b6fad15c3b6b82b, type: 2}
-  - {fileID: 11400000, guid: 2e19916be1fde2f49b5a2a5884dbeaa4, type: 2}
-  - {fileID: 11400000, guid: 30f3f61548ec8c74baf8812584a4a76e, type: 2}
-  - {fileID: 11400000, guid: 61da96da329474541b6ec3e6fe36b976, type: 2}
+  - {fileID: 11400000, guid: 05f4109fd78f99741b4fdea43d73e715, type: 2}
+  - {fileID: 11400000, guid: 0858e7b4b0d6baa4fb0175dc6d5e7d3b, type: 2}
+  - {fileID: 11400000, guid: 366a22d02356de942b1e6204a7ce6749, type: 2}
+  - {fileID: 11400000, guid: 053887d0ead77c54f8c3c301732ce8df, type: 2}
+  - {fileID: 11400000, guid: 9ab5af23994b58f498b8b3011dd34377, type: 2}
 --- !u!1 &1269260174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,6 +3145,11 @@ PrefabInstance:
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
         type: 3}
       propertyPath: _isEnemy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
+        type: 3}
+      propertyPath: isObstacle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 116809992540710247, guid: f3102abf9c036fb4d81ba6677657cf4c,
