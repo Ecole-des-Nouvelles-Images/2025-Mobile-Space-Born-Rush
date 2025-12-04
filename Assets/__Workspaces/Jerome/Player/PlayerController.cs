@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnSpeedChanged(float val, float duration)
     {
         //Will need to speed up all the players animations with this
-        throw new NotImplementedException();
+        
     }
 
     private void OnLaneChanged(int val)
