@@ -7,6 +7,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField]private WeaponUpgradeController _weaponUpgrades;
     [SerializeField]private Transform _firePoint ;
     private WeaponData _currentWeapon ;
+    private BulletData _currentBullet ;
     private Ray _weaponRaycast;
     [SerializeField]private float _currentFireRate;
     [SerializeField]private float _currentCooldown;
@@ -35,6 +36,7 @@ public class WeaponHandler : MonoBehaviour
     private void GameStart()
     {
         _currentWeapon = _weaponData;
+        _currentBullet = _currentWeapon.BulletData;
         _ammoNumber = _currentWeapon.MagSize;
         _layerMask = _currentWeapon.EnemyMask;
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
@@ -63,33 +65,61 @@ public class WeaponHandler : MonoBehaviour
     {
         _isAim = false;
         if (_isStunned) return;
+        
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-            
-            
-            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
-            { 
-                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
-                {
-                    if (_animator != null)
+
+            if (_currentBullet.IsDestroyedObstacle)
+            {
+                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
+                { 
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        _animator.SetBool("isAim",true);
-                        _isAim = true;
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(enemy,null);
                     }
-                    Fire();
+                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    { 
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(null,player);
+                    }
                 }
             }
-            else if (Physics.Raycast(_weaponRaycast,out RaycastHit other ,_currentWeapon.FireDistance,_layerMask))
+            else
             {
-                if (other.collider.TryGetComponent<PlayerController>(out var enemy)) 
+                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
                 { 
-                    if (_animator != null)
+                    if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) 
+                        return;
+                    
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        _animator.SetBool("isAim",true);
-                        _isAim = true;
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(enemy,null);
                     }
-                    Fire();
+                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    { 
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(null,player);
+                    }
+                    
                 }
             }
         }
@@ -125,7 +155,7 @@ public class WeaponHandler : MonoBehaviour
         _stunCoroutine = null;
     }
     
-    public void Fire()
+    public void Fire(EnemyHandler enemy, PlayerController player)
     {
         if (_ammoNumber <= 0)
         {
@@ -138,8 +168,16 @@ public class WeaponHandler : MonoBehaviour
             {
                 _animator.SetTrigger("isFire");
             }
-            GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
-            currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData,_currentWeapon.EnemyMask);
+
+            if (enemy != null)
+            {
+                _currentBullet.OnHitEnemy(enemy,enemy);
+            }
+            else
+            {
+                _currentBullet.OnHitEnemy(player,null);
+            }
+            
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
             _ammoNumber--;
         }
