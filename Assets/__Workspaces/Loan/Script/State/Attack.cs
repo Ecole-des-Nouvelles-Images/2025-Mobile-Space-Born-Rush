@@ -8,31 +8,42 @@ public class Attack : BaseState
         if (enemy.IsRange)
         {
             enemy.Raycast = new Ray(enemy.Transform.position, enemy.Transform.forward);
-            if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.Range,enemy.EnemyMask))
+            if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.CurrentRange,enemy.EnemyMask))
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
+                    if (enemy.Animator != null)
+                    {
+                        enemy.Animator.SetBool("isAim", true);
+                    }
                     return;
                 }
             }
             else
             {
-                enemy.SpeedDirection = new Vector3(0, 0, -enemy.GameUpgrades.GameSpeed);
                 enemy.IsAttacking = false;
+                if (enemy.Animator != null)
+                {
+                    enemy.Animator.SetBool("isAim", false);
+                }
                 enemy.IsWait =  true;
             }
         }
         else
         {
             // enemy.Raycast = new Ray(enemy.Transform.position, enemy.Transform.forward);
-            if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.Range,enemy.EnemyMask))
+            if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.CurrentRange,enemy.EnemyMask))
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
                     
                     if (enemy.CurrentFireRate <= 0)
                     {
-                        player.TakeDamage(enemy.Damage);
+                        if (enemy.Animator != null)
+                        {
+                            enemy.Animator.SetTrigger("isAttack");
+                        }
+                        player.TakeDamage(enemy.CurrentDamage);
                         enemy.CurrentFireRate = _fireRate;
                     }
                     else
@@ -44,7 +55,6 @@ public class Attack : BaseState
             }
             else
             {
-                enemy.SpeedDirection = new Vector3(0, 0, -enemy.GameUpgrades.GameSpeed);
                 enemy.IsAttacking = false;
                 enemy.IsWait =  true;
             }

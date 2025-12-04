@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {
@@ -32,6 +30,8 @@ public class PlayerController : MonoBehaviour,IDamageable
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
     
+    [SerializeField] private Animator _animator;
+    
     #region subscriptions
     private void Awake()
     {
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         throw new NotImplementedException();
     }
 
-    private void OnSpeedChanged(float val)
+    private void OnSpeedChanged(float val, float duration)
     {
         //Will need to speed up all the players animations with this
         throw new NotImplementedException();
@@ -91,7 +91,11 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
-        throw new NotImplementedException();
+        if (_animator != null)
+        {
+            _animator.SetTrigger("isDie");
+        }
+        Debug.Log("GameOver");
     }
 
     private void OnGamePause()
@@ -101,7 +105,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameStart()
     {
-        throw new NotImplementedException();
+        Debug.Log("GameStart");
     }
 
     private void OnDestroy()
@@ -133,6 +137,10 @@ public class PlayerController : MonoBehaviour,IDamageable
         _col = GetComponent<BoxCollider>();
         EnableGameplayInput();
 
+        if (_animator != null)
+        {
+            _animator = GetComponent<Animator>();
+        }
         // Animator animator = GetComponent<Animator>();
         // animator.speed = 2;
 
@@ -146,14 +154,21 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     private void Jump()
     {
+        if (_animator != null)
+        {
+            _animator.SetTrigger("isJump");
+        }
         _rb.AddForce(JumpForce, ForceMode.Impulse);
-        
     }
     
     //Sliding will basically be just the players hitbox getting smaller
     //And when the end of the animation plays it should call for the collider to resize
     private void Slide()
     {
+        if (_animator != null)
+        {
+            _animator.SetTrigger("isSlide");
+        }
         _isSliding = MovementStateChange(_isSliding);
         _col.size /= SlideAmount;
         _col.center /= SlideAmount;
@@ -216,10 +231,18 @@ public class PlayerController : MonoBehaviour,IDamageable
             // Your lane switching code
             if (swipeDelta.x > 0)
             {
+                if (_animator != null)
+                {
+                    _animator.SetTrigger("isMoveRight");
+                }
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
             }
             else
             {
+                if (_animator != null)
+                {
+                    _animator.SetTrigger("isMoveLeft");
+                }
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
             }
             
@@ -264,6 +287,10 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     public void TakeDamage(float damage)
     {
+        if (_animator != null)
+        {
+            _animator.SetTrigger("isHit");
+        }
         EventBus.OnPlayerTakeDamage?.Invoke(damage);
     }
 }

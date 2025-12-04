@@ -1,12 +1,10 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyHandler : MonoBehaviour, IDamageable
 {
     [Header("=====General Settings=====")] 
-    public float Hp;
-    public float MaxHp;
+    public EnemyData EnemyData;
+    public float CurrentHealth;
     public Vector3 SpeedDirection;
     public Transform Transform;
     public Rigidbody Rb;
@@ -14,9 +12,9 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     [Header("<color=red>=====Attack Settings=====</color>")]
     // public WeaponData WeaponData;
-    public float Damage;
+    public float CurrentDamage;
     public bool IsRange;
-    public float Range;
+    public float CurrentRange;
     public Ray Raycast;
     public float CurrentFireRate; 
     
@@ -27,11 +25,13 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public Vector3 KnockBackVelocity;
     public bool IsKnocked;
     public LayerMask EnemyMask;
+    public GameObject XpPrefab;
     
     [Header("<color=yellow>=====Bool State Settings=====</color>")]
     public bool IsWait;
     public bool IsAttacking;
     public bool IsDead;
+    
     
     public BaseState CurrentState = new Wait();
     
@@ -42,12 +42,27 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     
     private void Start()
     {
+        EventBus.OnEnemyDead += Death;
+        EventBus.OnGameOver += GameOver;
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
-        Hp =  MaxHp;
+        CurrentHealth = EnemyData.MaxHealth;
+        CurrentFireRate = EnemyData.FireRate;
+        CurrentDamage = EnemyData.Damage;
         IsWait =  true;
+        if (Animator != null)
+        {
+            Animator = GetComponent<Animator>();
+        }
     }
+
+    private void OnDestroy()
+    {
+        EventBus.OnEnemyDead -= Death;
+        EventBus.OnGameOver -= GameOver;
+    }
+
     private void FixedUpdate()
     {
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
@@ -66,7 +81,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             IsKnocked = false;
         }
 
-        if (Hp <= 0)
+        if (CurrentHealth <= 0)
         {
             IsDead = true;
             IsWait = false;
@@ -75,11 +90,23 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        Hp -= damage;
+        if (Animator)
+        {
+            Animator.SetTrigger("isHit");
+        }
+        CurrentHealth -= damage;
     }
 
-    public void Death()
+    private void Death(GameObject gameObject)
     {
+        // if (Animator != null)
+        // {
+        //     Animator.SetTrigger("isDie");
+        // }
+        // if (XpPrefab != null)
+        // {
+        //     Instantiate(XpPrefab, transform.position, Quaternion.identity);
+        // }
         Destroy(gameObject);
     }
     
@@ -107,5 +134,10 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             }
         }
         transform.position = new Vector3(closeLane, transform.position.y, transform.position.z);
+    }
+
+    private void GameOver()
+    {
+        Destroy(this.gameObject);
     }
 }

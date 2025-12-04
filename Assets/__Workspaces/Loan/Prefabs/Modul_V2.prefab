@@ -1,72 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &33656489880549614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6502744400001053803}
-  - component: {fileID: 1684759437020569026}
-  - component: {fileID: 3932486241771720627}
-  m_Layer: 7
-  m_Name: Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6502744400001053803
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33656489880549614}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.44, z: 17.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4394254819799695844}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1684759437020569026
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33656489880549614}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 8.483944, y: 6.3735704, z: 0.5401745}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3932486241771720627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33656489880549614}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc1217f62a4ee78439a3e306a3fc69e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SectionTrigger
-  _modulPrefabs: {fileID: 0}
 --- !u!1 &971498069995428723
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +460,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37f85f8719bee741871936bb46a15c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateGrid
-  _floor: {fileID: 971498069995428723}
   _cellX: 0
   _cellZ: 0
   _cellSize: 1.5
@@ -655,7 +587,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8773283271524586789}
-  - {fileID: 6502744400001053803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &116809992540710247
@@ -670,19 +601,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342dbe3b9d3317d4c83bb6570cbe74bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModulMove
-  _modulPrefabs: {fileID: 8125433806601994066}
+  _modulPrefabs:
+  - {fileID: 8125433806601994066, guid: 4d343ce4a4678b74e9d2c6e4d45851b1, type: 3}
   _gameUpgrades: {fileID: 0}
   _gridManager: {fileID: 6526854210263805091}
   _enemies:
   - {fileID: 9214185679248329394, guid: 008428c34e35f334492029ff4a091b10, type: 3}
   _parentsTransform: {fileID: 0}
   EnemyNumber: 3
-  _isEnemy: 1
+  isEnemy: 0
   _obstaclesPrefabs:
-  - {fileID: 11400000, guid: e97e5301080f4ba4580e8874c666cde3, type: 2}
-  - {fileID: 11400000, guid: 1bfcafc0b31cd7145802c1430dbe6508, type: 2}
-  - {fileID: 11400000, guid: ef8f3edb62bd60a4299f28d0262efdfb, type: 2}
-  _isObstacle: 1
+  - {fileID: 11400000, guid: 6f37c8c49454f4e4582da1339e422afe, type: 2}
+  - {fileID: 11400000, guid: c84821079ca86124ea8bf00a324d9655, type: 2}
+  - {fileID: 11400000, guid: 55ba511966d2dc642a1ce523ce0179d5, type: 2}
+  isObstacle: 1
 --- !u!1 &8824056965941047007
 GameObject:
   m_ObjectHideFlags: 0
