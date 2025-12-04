@@ -16,14 +16,14 @@ public abstract class DropsData : ScriptableObject
     [Range(0, 100)] public int DropChance;
     
     // The power-up behavior - each child implements this differently
-    public abstract void ApplyEffect(float value, float duration);
+    public abstract void ApplyEffect();
 }
 
 public enum DropType
 {
     XP,
     Health,
-    InstaFill,
+    InstaKill,
     Magnet,
     SpeedBoost
 }

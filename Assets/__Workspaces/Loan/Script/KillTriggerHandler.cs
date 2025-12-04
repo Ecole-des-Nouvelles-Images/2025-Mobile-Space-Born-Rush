@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class KillTriggerHandler : MonoBehaviour
@@ -13,11 +12,17 @@ public class KillTriggerHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //TODO Swap to pooling
         if (other.gameObject.CompareTag("Enemy"))
         {
             float damage = _playerStat.MaxHealth * _percent;
             EventBus.OnEnemyGotPastPlayer?.Invoke();
             EventBus.OnPlayerTakeDamage?.Invoke(damage);
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Drop"))
+        {
             Destroy(other.gameObject);
         }
     }

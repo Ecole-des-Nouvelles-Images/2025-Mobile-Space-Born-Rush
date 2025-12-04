@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: XpData
   m_EditorClassIdentifier: Assembly-CSharp::XpData
   Type: 0
-  Prefab: {fileID: 0}
-  Name: 
-  Description: 
-  Value: 0
+  Prefab: {fileID: 8302907845533644872, guid: 5d4d5aa03a386f349841ea20a7375280, type: 3}
+  Name: xp
+  Description: A strange alien organ that improves your weapons.
+  Value: 10
   Duration: 0
   DropChance: 0

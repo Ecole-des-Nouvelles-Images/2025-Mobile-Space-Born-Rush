@@ -52,7 +52,6 @@ public class WeaponHandler : MonoBehaviour
         }
 
         _stunCoroutine = StartCoroutine(AsyncStun(time));
-        Debug.Log("Stun");
     }
 
     private void OnDestroy()

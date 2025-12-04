@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "InstaKillData", menuName = "Scriptable Objects/Drops/InstaKillData")]
+[CreateAssetMenu(fileName = "InstaKillData", menuName = "Drops/InstaKillData")]
 public class InstaKillData : DropsData
 {
     private DropsData _dropsData;
     
-    public override void ApplyEffect(float value, float duration)
+    public override void ApplyEffect()
     {
-        EventBus.OnEnemyTakeDamage?.Invoke(value);
+        EventBus.OnEnemyTakeDamage?.Invoke(this.Value);
     }
 }
