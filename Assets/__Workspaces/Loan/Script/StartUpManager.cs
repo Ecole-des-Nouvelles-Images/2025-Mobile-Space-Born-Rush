@@ -3,7 +3,7 @@ using UnityEngine;
 public class StartUpManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _modulPrefb;
+    [SerializeField] private GameObject[] _modulPrefb;
     [SerializeField] private GameObject _playerPrefb;
     [SerializeField] private Transform _parentTransform;
 
@@ -28,10 +28,11 @@ public class StartUpManager : MonoBehaviour
 
         while (pos <= 60)
         {
-            GameObject modul = Instantiate(_modulPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform.transform);
+            int rand = Random.Range(0, _modulPrefb.Length);
+            GameObject modul = Instantiate(_modulPrefb[rand],new Vector3(0,0,pos),Quaternion.identity,_parentTransform.transform);
             modul.GetComponent<ModulMove>().isEnemy = false;
             modul.GetComponent<ModulMove>().isObstacle = false;
-            pos += 20;
+            pos += 19;
         }
     }
 }

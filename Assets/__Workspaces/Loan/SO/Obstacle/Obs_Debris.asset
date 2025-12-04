@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1dd373388ed0764daab96fd84853fb1, type: 3}
   m_Name: Obs_Debris
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleData
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1975228015912645549, guid: 5b1a7012de5263948a19f423da395156, type: 3}
   LanesTaken: 1
   Damage: 0
   IsStunning: 0

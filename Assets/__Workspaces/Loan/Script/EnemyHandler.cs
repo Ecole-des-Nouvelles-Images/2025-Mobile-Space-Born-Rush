@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyHandler : MonoBehaviour, IDamageable
 {
@@ -27,6 +25,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public Vector3 KnockBackVelocity;
     public bool IsKnocked;
     public LayerMask EnemyMask;
+    public GameObject XpPrefab;
     
     [Header("<color=yellow>=====Bool State Settings=====</color>")]
     public bool IsWait;
@@ -43,6 +42,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     
     private void Start()
     {
+        EventBus.OnEnemyDead += Death;
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
@@ -50,9 +50,20 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         CurrentFireRate = EnemyData.FireRate;
         CurrentDamage = EnemyData.Damage;
         IsWait =  true;
+        if (Animator != null)
+        {
+            Animator = GetComponent<Animator>();
+        }
     }
+
+    private void OnDestroy()
+    {
+        EventBus.OnEnemyDead -= Death;
+    }
+
     private void FixedUpdate()
     {
+        
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
         SpeedDirection = new Vector3(0f, 0f, -GameUpgrades.GameSpeed);
         
@@ -78,11 +89,23 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
+        if (Animator)
+        {
+            Animator.SetTrigger("isHit");
+        }
         CurrentHealth -= damage;
     }
 
-    public void Death()
+    private void Death(GameObject gameObject)
     {
+        // if (Animator != null)
+        // {
+        //     Animator.SetTrigger("isDie");
+        // }
+        // if (XpPrefab != null)
+        // {
+        //     Instantiate(XpPrefab, transform.position, Quaternion.identity);
+        // }
         Destroy(gameObject);
     }
     

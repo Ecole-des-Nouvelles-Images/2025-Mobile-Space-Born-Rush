@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {
@@ -59,7 +57,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         throw new NotImplementedException();
     }
 
-    private void OnSpeedChanged(float val)
+    private void OnSpeedChanged(float val, float duration)
     {
         //Will need to speed up all the players animations with this
         throw new NotImplementedException();

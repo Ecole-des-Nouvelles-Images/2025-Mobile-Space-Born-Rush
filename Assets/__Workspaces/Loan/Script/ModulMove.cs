@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class ModulMove : MonoBehaviour
 {
     [Header("<color=cyan>=====Modul Settings=====</color>")]
-    [SerializeField] private GameObject _modulPrefabs;
+    [SerializeField] private List<GameObject> _modulPrefabs = new List<GameObject>();
     [SerializeField] private GameUpgradeController _gameUpgrades;
     
     [Header("<color=green>=====Grid Settings=====</color>")] 
@@ -42,54 +42,110 @@ public class ModulMove : MonoBehaviour
 
     private void SpawnObstacles()
     {
-        for (int i = 0; i < _gridManager.Grid.GetLength(0); i++)
+        for (int i = 2; i < _gridManager.Grid.GetLength(0); i++)
         {
-            int numberObstacle = 0;
             for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
             {
-
-                if (numberObstacle == 2)
-                {
-                    break;
-                }
                 float chance = Random.Range(0f, 1f);
 
                 if (chance > 0.75) 
                 {
-                    Vector3 offset = new Vector3(0, 0.5f, 0);
-                    Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
-                    _gridManager.SetCellEmpty(i,j,false);
                     int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
                     ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
-                    GameObject obstacle = Instantiate(currentObstacle.Prefab,offset + pos,Quaternion.identity,transform);
-                    obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
-                    numberObstacle++;
+                    
+                    if (_gridManager.IsNeightbornEmpty(i,j,currentObstacle,true))
+                    {
+                        Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
+                        Quaternion rotate = Quaternion.identity;
+                        
+                        if (currentObstacle.LanesTaken == 3)
+                        {
+                            pos.x = 0;
+                        }
+
+                        if (currentObstacle.LanesTaken == 1)
+                        {
+                             rotate = Quaternion.Euler(0,Random.Range(0,360),0);
+                        }
+                        GameObject obstacle = Instantiate(currentObstacle.Prefab,pos,rotate,transform);
+                        obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
+
+                        if (currentObstacle.LanesTaken == 1)
+                        {
+                            _gridManager.SetCellEmpty(i,j,false);
+                        }
+                        else if (currentObstacle.LanesTaken == 3)
+                        {
+                            for (int laneX = 0; laneX < _gridManager.Grid.GetLength(0); laneX++)
+                            {
+                                _gridManager.SetCellEmpty(laneX, j, false);
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
-    //PROBLEME IL NE SPAWN PAS AU BON ENDROIT !!!!!
+    
     private void SpawnEnemy()
     {
-        for (int i = 0; i < _gridManager.Grid.GetLength(0); i++)
+        //First Version !  
+        // for (int z = 0; z < _gridManager.Grid.GetLength(1); z++)
+        // {
+        //     for (int x = 0; x < _gridManager.Grid.GetLength(0); x++)
+        //     {
+        //         float chance = Random.Range(0f, 1f);
+        //         if (chance > 0.8f && EnemyNumber > 0 && _gridManager.IsNeightbornEmpty(x,z,null, false))
+        //         {
+        //             int random =  Random.Range(0, _enemies.Count);
+        //             Vector3 offset = new Vector3(0, 1f, 0);
+        //             Vector3 pos = _gridManager.GetCellWorldPosition(x,z);
+        //             GameObject enemy = Instantiate(_enemies[random],offset + pos ,Quaternion.Euler(0f, 180f, 0f),_parentsTransform.transform);
+        //             _gridManager.SetCellEmpty(x,z,false);
+        //             EnemyNumber--;
+        //         }
+        //         else if (EnemyNumber <= 0)
+        //         {
+        //             return;
+        //         }
+        //     }
+        // }
+        
+        //Second Version !
+        
+        int width = _gridManager.Grid.GetLength(0);
+        int height = _gridManager.Grid.GetLength(1);
+        
+        List<Vector2Int> emptyCells = new List<Vector2Int>();
+
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
+            for (int j = 0; j < height; j++)
             {
-                float chance = Random.Range(0f, 1f);
-                if (chance > 0.8f && EnemyNumber > 0 && _gridManager.Grid[i,j].IsEmpty)
+                if (_gridManager.IsNeightbornEmpty(i,j,null,false))
                 {
-                    int random =  Random.Range(0, _enemies.Count);
-                    Vector3 offset = new Vector3(0, 0.5f, 0);
-                    Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
-                    GameObject enemy = Instantiate(_enemies[random],offset + pos ,Quaternion.Euler(0f, 180f, 0f),_parentsTransform);
-                    EnemyNumber--;
-                }
-                else if (EnemyNumber == 0)
-                {
-                    return;
+                    emptyCells.Add(new Vector2Int(i, j));
                 }
             }
+        }
+
+        while (EnemyNumber > 0 && emptyCells.Count > 0)
+        {
+            int random = Random.Range(0, emptyCells.Count);
+            Vector2Int cell = emptyCells[random];
+            emptyCells.RemoveAt(random);
+            
+            float chance = Random.Range(0f, 1f);
+            if (chance <= 0.8f)
+                continue;
+            
+            int randomEnemy = Random.Range(0, _enemies.Count);
+            Vector3 offset = new Vector3(0, 1f, 0);
+            Vector3 pos = _gridManager.GetCellWorldPosition(cell.x, cell.y);
+            
+            Instantiate(_enemies[randomEnemy], offset + pos, Quaternion.identity, _parentsTransform.transform);
+            EnemyNumber--;
         }
     }
 
@@ -100,8 +156,8 @@ public class ModulMove : MonoBehaviour
         transform.position = vector3;
         if (transform.position.z < -_width)
         {
-            Debug.Log("Instancie nouveau block ="+_modulPrefabs);
-            Instantiate(_modulPrefabs, new Vector3(0,0,58), Quaternion.identity);
+            var random =  Random.Range(0, _modulPrefabs.Count);
+            Instantiate(_modulPrefabs[random], new Vector3(0,0,58), Quaternion.identity);
             Destroy(gameObject);
         }
     }
