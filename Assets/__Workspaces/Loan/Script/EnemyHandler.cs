@@ -45,6 +45,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     private void Start()
     {
         EventBus.OnEnemyDead += Death;
+        EventBus.OnGameOver += GameOver;
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
@@ -61,11 +62,11 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     private void OnDestroy()
     {
         EventBus.OnEnemyDead -= Death;
+        EventBus.OnGameOver -= GameOver;
     }
 
     private void FixedUpdate()
     {
-        
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
         SpeedDirection = new Vector3(0f, 0f, -GameUpgrades.GameSpeed);
         
@@ -135,5 +136,10 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             }
         }
         transform.position = new Vector3(closeLane, transform.position.y, transform.position.z);
+    }
+
+    private void GameOver()
+    {
+        Destroy(this.gameObject);
     }
 }

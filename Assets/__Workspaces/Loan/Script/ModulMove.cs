@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,6 +29,7 @@ public class ModulMove : MonoBehaviour
     {
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         _parentsTransform = GameObject.FindGameObjectWithTag("Parents").transform;
+        EventBus.OnGameOver += GameOver;
         
         if (isObstacle)
         {
@@ -38,6 +40,11 @@ public class ModulMove : MonoBehaviour
         {
             SpawnEnemy();
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.OnGameOver -= GameOver;
     }
 
     private void SpawnObstacles()
@@ -160,5 +167,10 @@ public class ModulMove : MonoBehaviour
             Instantiate(_modulPrefabs[random], new Vector3(0,0,53), Quaternion.identity);
             Destroy(gameObject);
         }
+    }
+
+    private void GameOver()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -38,7 +38,6 @@ public class UIHandler : MonoBehaviour
     {
        _loosePanel.SetActive(true);
        Debug.Log("Loose");
-       EventBus.OnGamePause?.Invoke();
     }
 
     public void GameStart()

@@ -23,15 +23,20 @@ public class WeaponHandler : MonoBehaviour
     private void Awake()
     {
         EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
+        EventBus.OnGameStart += GameStart;
     }
-    
+
     private void Start()
     {
         _animator = GetComponentInParent<Animator>();
+        _firePoint.GetComponent<Transform>();
+    }
+    
+    private void GameStart()
+    {
         _currentWeapon = _weaponData;
         _ammoNumber = _currentWeapon.MagSize;
         _layerMask = _currentWeapon.EnemyMask;
-        _firePoint.GetComponent<Transform>();
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
         
         _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
@@ -51,6 +56,7 @@ public class WeaponHandler : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.OnPlayerTakeStun -= OnPlayerTakeStun;
+        EventBus.OnGameStart -= GameStart;
     }
 
     private void Update()
