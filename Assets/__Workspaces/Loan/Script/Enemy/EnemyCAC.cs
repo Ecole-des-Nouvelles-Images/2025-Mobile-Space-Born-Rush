@@ -17,11 +17,10 @@ public class EnemyCAC : EnemyHandler
 
         if (IsDead)
         {
-            EventBus.OnEnemyDead?.Invoke(gameObject);
             CurrentState = new Dead();
         }
         
-        //CurrentState.Excute(this);
+        CurrentState.Excute(this);
         
         Debug.DrawRay(Raycast.origin, Raycast.direction * CurrentRange, Color.blue);
     }

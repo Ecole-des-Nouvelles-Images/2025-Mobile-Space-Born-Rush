@@ -5,8 +5,8 @@ public class HealthData : DropsData
 {
     private DropsData _dropsData;
     
-    public override void ApplyEffect(float value, float duration)
+    public override void ApplyEffect()
     {
-        EventBus.OnPlayerCurrentHealthChange?.Invoke(value);
+        EventBus.OnPlayerCurrentHealthChange?.Invoke(this.Value);
     }
 }

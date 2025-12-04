@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: InstaKillData
   m_EditorClassIdentifier: Assembly-CSharp::InstaKillData
   Type: 2
-  Prefab: {fileID: 8128744193459512121, guid: 4bf366ac291096b488a5b3b36eb9e53d, type: 3}
+  Prefab: {fileID: 6735616631284067959, guid: 0ae165a16a750d8459f46d3f41cd0f8f, type: 3}
   Name: Instant Kill
-  Description: Destroy all whom opose you1
+  Description: Destroy all whom opose you
   Value: 10000
   Duration: 0
   DropChance: 5

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MagnetData
   m_EditorClassIdentifier: Assembly-CSharp::MagnetData
   Type: 3
-  Prefab: {fileID: 8128744193459512121, guid: 4bf366ac291096b488a5b3b36eb9e53d, type: 3}
+  Prefab: {fileID: 2362020633229765574, guid: 300054762be55cc42a4fafc061372c38, type: 3}
   Name: Magnet
   Description: All alien parts come rushing towards you.
   Value: 0

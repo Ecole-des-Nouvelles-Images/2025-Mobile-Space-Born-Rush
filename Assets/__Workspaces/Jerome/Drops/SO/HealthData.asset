@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthData
   m_EditorClassIdentifier: Assembly-CSharp::HealthData
   Type: 1
-  Prefab: {fileID: 8128744193459512121, guid: 4bf366ac291096b488a5b3b36eb9e53d, type: 3}
+  Prefab: {fileID: 8761609004418163955, guid: 57a41cd8fbc9b6740825d4fe85161b51, type: 3}
   Name: Health
   Description: You feel better, for now.
   Value: 50

@@ -27,7 +27,7 @@ public class DropsManager : MonoBehaviour
             EventBus.OnEnemyDead -= OnEnemyDead;
         }
         #endregion
-
+        
     private void Start()
     {
         ValidateDropData();
@@ -67,12 +67,16 @@ public class DropsManager : MonoBehaviour
     
     void SpawnXP(Vector3 position)
     {
-        // XP is always first in list
         DropsData xpData = _dropsData[0];
-        
-        // TODO replace with pooling
         GameObject xp = Instantiate(xpData.Prefab);
         xp.transform.position = position;
+        
+        // CRITICAL: Pass the data to the drop
+        DropsMovement movement = xp.GetComponent<DropsMovement>();
+        if (movement)
+        {
+            movement.Initialize(xpData);
+        }
     }
     
     void SpawnRandomPowerUps(Vector3 basePosition)
@@ -94,15 +98,19 @@ public class DropsManager : MonoBehaviour
     
     void SpawnPowerUp(DropsData data, Vector3 basePosition, int index)
     {
-        // Calculate position with offset to avoid overlap
         Vector3 offset = CalculateSpawnOffset(index);
         Vector3 spawnPosition = basePosition + offset;
         
-        // TODO replace with pooling
         GameObject drop = Instantiate(data.Prefab);
         drop.transform.position = spawnPosition;
         
-        Debug.Log($"Spawned {data.Name} at {spawnPosition}");
+        // CRITICAL: Pass the data to the drop
+        DropsMovement movement = drop.GetComponent<DropsMovement>();
+        if (movement)
+        {
+            movement.Initialize(data);
+        }
+        
     }
     
     Vector3 CalculateSpawnOffset(int powerUpIndex)

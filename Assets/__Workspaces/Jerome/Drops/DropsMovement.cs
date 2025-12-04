@@ -3,38 +3,48 @@ using UnityEngine;
 
 public class DropsMovement : MonoBehaviour
 {
-    private GameUpgradeController _gameUpgradeController;
-    private XpData _xpData;
+    public DropsData DropData { get; private set; }
     
+    private GameUpgradeController _gameUpgradeController;
     private PlayerController _playerController;
     private Coroutine _magnetCoroutine = null;
     private bool _magnetized = false;
+    
+    public void Initialize(DropsData data)
+    {
+        DropData = data;
+    }
     private void OnEnable()
     {
-        EventBus.OnMagnetActivated += OnMagnetActivated;
+        // Only listen to magnet if this is XP
+        if (DropData != null && DropData.Type == DropType.XP)
+        {
+            EventBus.OnMagnetActivated += OnMagnetActivated;
+        }
     }
-
+    
     private void OnMagnetActivated(float time)
     {
-        if (!_xpData) return;
+        if (DropData == null || DropData.Type != DropType.XP) return;
+        
         if (_magnetCoroutine != null)
         {
             StopCoroutine(_magnetCoroutine);
         }
-
         _magnetCoroutine = StartCoroutine(MagnetCoroutine(time));
-
     }
-
+    
     private void OnDisable()
     {
-        EventBus.OnMagnetActivated -= OnMagnetActivated;
+        if (DropData != null && DropData.Type == DropType.XP)
+        {
+            EventBus.OnMagnetActivated -= OnMagnetActivated;
+        }
     }
 
     private void Start()
     {
         _gameUpgradeController = FindAnyObjectByType<GameUpgradeController>();
-        _xpData = FindObjectOfType<XpData>();
         _playerController = FindObjectOfType<PlayerController>();
     }
 
@@ -43,7 +53,8 @@ public class DropsMovement : MonoBehaviour
 
         if (_magnetized)
         {
-            transform.position = Vector3.Lerp(transform.position, _playerController.transform.position,
+            //The Vector up is so that the xp doesn't go into the floor. 
+            transform.position = Vector3.Lerp(transform.position, _playerController.transform.position + Vector3.up,
                 _gameUpgradeController.GameSpeed * Time.deltaTime);
             return;
         }
@@ -55,6 +66,11 @@ public class DropsMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (DropData)
+            {
+                DropData.ApplyEffect();
+            }
+            
             Destroy(gameObject);
         }
     }

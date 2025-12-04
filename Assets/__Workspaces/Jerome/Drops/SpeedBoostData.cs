@@ -3,8 +3,8 @@
 [CreateAssetMenu(fileName = "SpeedBoostData", menuName = "Drops/SpeedBoostData")]
 public class SpeedBoostData : DropsData
 {
-    public override void ApplyEffect(float value, float duration)
+    public override void ApplyEffect()
     {
-        EventBus.OnSpeedChanged?.Invoke(value, duration);
+        EventBus.OnSpeedChanged?.Invoke(this.Value, this.Duration);
     }
 }

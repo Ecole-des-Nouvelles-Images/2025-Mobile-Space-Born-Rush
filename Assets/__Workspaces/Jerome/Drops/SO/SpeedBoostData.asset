@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpeedBoostData
   m_EditorClassIdentifier: Assembly-CSharp::SpeedBoostData
   Type: 4
-  Prefab: {fileID: 8128744193459512121, guid: 4bf366ac291096b488a5b3b36eb9e53d, type: 3}
+  Prefab: {fileID: 5530763364690824985, guid: b50a18e3e215e2e44bb299222da15455, type: 3}
   Name: Speed Boost
   Description: A strange feeling makes you run faster.
   Value: 1.5

@@ -5,8 +5,8 @@ public class MagnetData : DropsData
 {
     private DropsData _dropsData;
     
-    public override void ApplyEffect(float value, float duration)
+    public override void ApplyEffect()
     {
-        EventBus.OnMagnetActivated?.Invoke(duration);
+        EventBus.OnMagnetActivated?.Invoke(this.Duration);
     }
 }
