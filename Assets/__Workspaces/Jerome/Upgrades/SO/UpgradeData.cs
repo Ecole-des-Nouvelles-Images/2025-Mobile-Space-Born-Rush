@@ -21,9 +21,26 @@ public class UpgradeData : ScriptableObject
     public float baseWeight = 1f; // Base probability weight
 }
 
+/// <summary>
+/// PlayerStat <br/>
+/// Max HP, HPMultiplier, XPMultiplier <br/><br/>
+/// WeaponStat <br/>
+/// Damage, FireRate, MagSize, Cooldown, WeaponSwap <br/><br/>
+/// GameSystem <br/>
+/// Speed, CardChoice
+/// </summary>
 public enum UpgradeCategory
 {
-    PlayerStat, // Max HP, HPMultiplier, XPMultiplier
-    WeaponStat, // Damage, FireRate, MagSize, Cooldown, WeaponSwap
-    GameSystem // Speed, CardChoice
+    /// <summary>
+    /// Max HP, HPMultiplier, XPMultiplier
+    /// </summary>
+    PlayerStat,
+    /// <summary>
+    /// Damage, FireRate, MagSize, Cooldown, WeaponSwap
+    /// </summary>
+    WeaponStat,
+    /// <summary>
+    /// Speed, CardChoice
+    /// </summary>
+    GameSystem
 }
