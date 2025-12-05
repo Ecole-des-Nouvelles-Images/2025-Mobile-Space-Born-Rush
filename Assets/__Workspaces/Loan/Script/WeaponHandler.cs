@@ -7,6 +7,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField]private WeaponUpgradeController _weaponUpgrades;
     [SerializeField]private Transform _firePoint ;
     private WeaponData _currentWeapon ;
+    private BulletData _currentBullet ;
     private Ray _weaponRaycast;
     [SerializeField]private float _currentFireRate;
     [SerializeField]private float _currentCooldown;
@@ -17,10 +18,30 @@ public class WeaponHandler : MonoBehaviour
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
     [SerializeField]private LayerMask _layerMask;
+    private Animator _animator;
+    private bool _isAim;
 
     private void Awake()
     {
         EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
+        EventBus.OnGameStart += GameStart;
+    }
+
+    private void Start()
+    {
+        _animator = GetComponentInParent<Animator>();
+        _firePoint.GetComponent<Transform>();
+    }
+    
+    private void GameStart()
+    {
+        _currentWeapon = _weaponData;
+        _currentBullet = _currentWeapon.BulletData;
+        _ammoNumber = _currentWeapon.MagSize;
+        _layerMask = _currentWeapon.EnemyMask;
+        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+        
+        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
     }
 
     private void OnPlayerTakeStun(float time)
@@ -36,44 +57,70 @@ public class WeaponHandler : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.OnPlayerTakeStun -= OnPlayerTakeStun;
-    }
-
-    private void Start()
-    {
-        _currentWeapon = _weaponData;
-        _ammoNumber = _currentWeapon.MagSize;
-        _layerMask = _currentWeapon.EnemyMask;
-        _firePoint.GetComponent<Transform>();
-        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-        
-        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
+        EventBus.OnGameStart -= GameStart;
     }
 
     private void Update()
     {
+        _isAim = false;
         if (_isStunned) return;
+        
         if (_currentFireRate <= 0 && _currentCooldown <= 0 )
         {
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-            
-            
-            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
-            { 
-                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
-                { 
-                    Fire();
-                }
-            }
-            else if (Physics.Raycast(_weaponRaycast,out RaycastHit other ,_currentWeapon.FireDistance,_layerMask))
+
+            if (_currentBullet.IsDestroyedObstacle)
             {
-                if (other.collider.TryGetComponent<PlayerController>(out var enemy)) 
+                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
                 { 
-                    Fire();
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                    {
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(enemy,null);
+                    }
+                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    { 
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(null,player);
+                    }
                 }
             }
-            
-            
-            
+            else
+            {
+                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
+                { 
+                    if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) 
+                        return;
+                    
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                    {
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(enemy,null);
+                    }
+                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    { 
+                        if (_animator != null)
+                        {
+                            _animator.SetBool("isAim",true);
+                            _isAim = true;
+                        }
+                        Fire(null,player);
+                    }
+                    
+                }
+            }
         }
             
         if (_currentFireRate > 0)
@@ -84,6 +131,12 @@ public class WeaponHandler : MonoBehaviour
         if (_currentCooldown > 0)
         {
             _currentCooldown -= Time.deltaTime;
+            _isAim = false;
+        }
+        
+        if (_animator != null && !_isAim)
+        {
+            _animator.SetBool("isAim",false);
         }
 
         if (_isRaycastDraw)
@@ -101,7 +154,7 @@ public class WeaponHandler : MonoBehaviour
         _stunCoroutine = null;
     }
     
-    public void Fire()
+    public void Fire(EnemyHandler enemy, PlayerController player)
     {
         if (_ammoNumber <= 0)
         {
@@ -110,8 +163,20 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
-            GameObject currentAmmo = Instantiate(_currentWeapon.BulletData.BulletPrefab,_firePoint.position,Quaternion.identity);
-            currentAmmo.GetComponent<BulletHandler>().Setup(_currentWeapon.BulletData,_currentWeapon.EnemyMask);
+            if (_animator != null)
+            {
+                _animator.SetTrigger("isFire");
+            }
+
+            if (enemy != null)
+            {
+                _currentBullet.OnHitEnemy(enemy,enemy);
+            }
+            else
+            {
+                _currentBullet.OnHitEnemy(player,null);
+            }
+            
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
             _ammoNumber--;
         }

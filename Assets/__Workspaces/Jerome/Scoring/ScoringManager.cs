@@ -7,6 +7,8 @@ public class ScoringManager : MonoBehaviour
     
     private float _score, _highScore;
     private bool _isGamePaused = true;
+    [SerializeField]private int _killsNumber = 0;
+    [SerializeField]private float _timer = 0;
 
     #region subscriptions
     private void Awake()
@@ -44,6 +46,7 @@ public class ScoringManager : MonoBehaviour
     {
         //Maybe we could take the enemy type and decrease the score more or less.
         IncreaseScore(100f);
+        _killsNumber++;
     }
 
     private void OnGamePause()
@@ -73,6 +76,8 @@ public class ScoringManager : MonoBehaviour
 
     private void OnGameStart()
     {
+        _killsNumber = 0;
+        _timer = 0;
         _isGamePaused = false;
     }
 
@@ -105,6 +110,7 @@ public class ScoringManager : MonoBehaviour
     {
         //TODO: Uncomment when the game UI is implemented
         //if (_isGamePaused) return;
+        _timer += Time.deltaTime;
         
         _score += _gameUpgrades.GameSpeed *  Time.deltaTime;
     }

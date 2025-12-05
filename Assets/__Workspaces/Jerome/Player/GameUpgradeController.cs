@@ -13,6 +13,7 @@ public class GameUpgradeController : MonoBehaviour
         
         // Main event
         EventBus.OnGameSystemUpgrade += OnGameSystemUpgrade;
+        EventBus.OnGameStart +=  GameStart;
         
     }
 
@@ -42,6 +43,7 @@ public class GameUpgradeController : MonoBehaviour
         
         // Main event
         EventBus.OnGameSystemUpgrade -= OnGameSystemUpgrade;
+        EventBus.OnGameStart -= GameStart;
     }
 
     #endregion
@@ -49,7 +51,7 @@ public class GameUpgradeController : MonoBehaviour
     public float GameSpeed => _gameSpeed;
     public float NumberOfUpgrades => _numberOfUpgrades;
     
-    void Start()
+    private void GameStart()
     {
         _gameSpeed = 2;
         _numberOfUpgrades = 2;

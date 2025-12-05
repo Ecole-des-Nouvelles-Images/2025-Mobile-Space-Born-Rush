@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 388253e1fef711345ad489529cbaa8c9, type: 3}
   m_Name: EnemyCAC
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  MaxHealth: 20
+  MaxHealth: 60
   FireRate: 1
   Damage: 10
