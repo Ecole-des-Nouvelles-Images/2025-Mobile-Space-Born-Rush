@@ -8954,7 +8954,7 @@ MonoBehaviour:
     ImpulseDuration: 0.2
     ImpulseType: 0
     DissipationRate: 0.25
-    RawSignal: {fileID: 0}
+    RawSignal: {fileID: 11400000, guid: 13774647a09134b44a9728c3691828de, type: 2}
     AmplitudeGain: 1
     FrequencyGain: 1
     RepeatMode: 0
