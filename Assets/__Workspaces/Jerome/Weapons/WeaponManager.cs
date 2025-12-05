@@ -14,6 +14,7 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         EventBus.OnWeaponUpgrade += OnWeaponUpgrade;
+        SwapWeapon(AllWeaponPrefabs[0]);
     }
 
     private void OnWeaponUpgrade(UpgradeType upgrade, float value)
@@ -35,7 +36,7 @@ public class WeaponManager : MonoBehaviour
         _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
         
         // Equip default weapon
-        SwapWeapon(AllWeaponPrefabs[0]);
+        // SwapWeapon(AllWeaponPrefabs[0]);
     }
 
     public void SwapWeapon(GameObject newWeaponData)

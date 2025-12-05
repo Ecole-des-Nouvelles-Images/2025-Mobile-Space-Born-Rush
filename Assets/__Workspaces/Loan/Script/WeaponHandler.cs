@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -32,7 +33,18 @@ public class WeaponHandler : MonoBehaviour
         _animator = GetComponentInParent<Animator>();
         _firePoint.GetComponent<Transform>();
     }
-    
+
+    private void OnEnable()
+    {
+        _currentWeapon = _weaponData;
+        _currentBullet = _currentWeapon.BulletData;
+        _ammoNumber = _currentWeapon.MagSize;
+        _layerMask = _currentWeapon.EnemyMask;
+        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+        
+        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
+    }
+
     private void GameStart()
     {
         _currentWeapon = _weaponData;
@@ -121,6 +133,12 @@ public class WeaponHandler : MonoBehaviour
                     
                 }
             }
+        }
+        
+        if (_ammoNumber <= 0)
+        {
+            _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
+            _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
         }
             
         if (_currentFireRate > 0)

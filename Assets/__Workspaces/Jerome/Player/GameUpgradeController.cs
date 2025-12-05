@@ -53,7 +53,7 @@ public class GameUpgradeController : MonoBehaviour
     
     private void GameStart()
     {
-        _gameSpeed = 2;
+        _gameSpeed = 8;
         _numberOfUpgrades = 2;
     }
 

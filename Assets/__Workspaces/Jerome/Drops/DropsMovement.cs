@@ -9,6 +9,8 @@ public class DropsMovement : MonoBehaviour
     private PlayerController _playerController;
     private Coroutine _magnetCoroutine = null;
     private bool _magnetized = false;
+
+    private float _width = 5;
     
     public void Initialize(DropsData data)
     {
@@ -51,6 +53,11 @@ public class DropsMovement : MonoBehaviour
     void Update()
     {
 
+        if (transform.position.z < -_width)
+        {
+            Destroy(gameObject);
+        }
+        
         if (_magnetized)
         {
             //The Vector up is so that the xp doesn't go into the floor. 

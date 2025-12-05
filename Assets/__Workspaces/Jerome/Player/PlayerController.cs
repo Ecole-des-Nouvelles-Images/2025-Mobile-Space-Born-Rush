@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     [SerializeField] private int _currentLaneIndex;
     
     //Variables for methods
-    private bool _isJumping = true;
+    [SerializeField]private bool _isJumping = false;
     [SerializeField] private bool _isSliding;
     private bool _isPaused;
     
@@ -105,7 +105,19 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameStart()
     {
-        Debug.Log("GameStart");
+        _rb = GetComponent<Rigidbody>();
+        _col = GetComponent<BoxCollider>();
+        EnableGameplayInput();
+
+        if (_animator != null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+        // Animator animator = GetComponent<Animator>();
+        // animator.speed = 2;
+
+        _isJumping = true;
+        _currentLaneIndex = 1;
     }
 
     private void OnDestroy()
@@ -131,21 +143,21 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     #endregion
     
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _col = GetComponent<BoxCollider>();
-        EnableGameplayInput();
-
-        if (_animator != null)
-        {
-            _animator = GetComponent<Animator>();
-        }
-        // Animator animator = GetComponent<Animator>();
-        // animator.speed = 2;
-
-        _currentLaneIndex = 1;
-    }
+    // private void Start()
+    // {
+    //     _rb = GetComponent<Rigidbody>();
+    //     _col = GetComponent<BoxCollider>();
+    //     EnableGameplayInput();
+    //
+    //     if (_animator != null)
+    //     {
+    //         _animator = GetComponent<Animator>();
+    //     }
+    //     // Animator animator = GetComponent<Animator>();
+    //     // animator.speed = 2;
+    //
+    //     _currentLaneIndex = 1;
+    // }
     
     //This method is called at the start and end of any animation to stop the player from being able to double jump or slide
     public bool MovementStateChange(bool state)

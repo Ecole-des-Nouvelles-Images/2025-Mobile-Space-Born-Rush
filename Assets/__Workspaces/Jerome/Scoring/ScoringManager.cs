@@ -78,6 +78,7 @@ public class ScoringManager : MonoBehaviour
     {
         _killsNumber = 0;
         _timer = 0;
+        _score = 0;
         _isGamePaused = false;
     }
 
@@ -110,6 +111,8 @@ public class ScoringManager : MonoBehaviour
     {
         //TODO: Uncomment when the game UI is implemented
         //if (_isGamePaused) return;
+        if (_isGamePaused)
+            return;
         _timer += Time.deltaTime;
         
         _score += _gameUpgrades.GameSpeed *  Time.deltaTime;
