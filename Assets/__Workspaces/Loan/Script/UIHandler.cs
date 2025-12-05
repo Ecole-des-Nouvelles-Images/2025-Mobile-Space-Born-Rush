@@ -51,6 +51,7 @@ public class UIHandler : MonoBehaviour
     public void ReturnMenu()
     {
         _menuEmpty.SetActive(true);
+        _gamePanel.SetActive(true);
         _loosePanel.SetActive(false);
         _gameEmpty.SetActive(false);
     }
@@ -81,6 +82,7 @@ public class UIHandler : MonoBehaviour
     
     public void OpenCreditPanel()
     {
+        _gamePanel.SetActive(false);
         _optionPanel.SetActive(false);
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(true);
