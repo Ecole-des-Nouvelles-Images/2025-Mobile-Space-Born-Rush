@@ -7792,6 +7792,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoringManager
   _killsNumber: 0
   _timer: 0
+  _timerText: {fileID: 40422992}
+  _scoreText: {fileID: 711830359}
+  _killsText: {fileID: 245202226}
 --- !u!114 &1511302801
 MonoBehaviour:
   m_ObjectHideFlags: 0
