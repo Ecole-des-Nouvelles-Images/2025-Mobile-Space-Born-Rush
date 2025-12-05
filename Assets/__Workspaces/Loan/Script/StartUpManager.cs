@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class StartUpManager : MonoBehaviour
 {
@@ -12,6 +14,11 @@ public class StartUpManager : MonoBehaviour
         EventBus.OnGameStart += StartGame; 
     }
 
+    private void Start()
+    {
+        _parentTransform = GetComponent<Transform>();
+    }
+
     private void OnDestroy()
     {
         EventBus.OnGameStart -= StartGame;
@@ -20,19 +27,19 @@ public class StartUpManager : MonoBehaviour
 
     private void StartGame()
     {
-        int pos = 0;
+        float pos = 0;
         if (_playerPrefb != null)
         {
             GameObject player = Instantiate(_playerPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform);
         }
-
+        
         while (pos <= 60)
         {
             int rand = Random.Range(0, _modulPrefb.Length);
             GameObject modul = Instantiate(_modulPrefb[rand],new Vector3(0,0,pos),Quaternion.identity,_parentTransform.transform);
             modul.GetComponent<ModulMove>().isEnemy = false;
             modul.GetComponent<ModulMove>().isObstacle = false;
-            pos += 19;
+            pos += 19.5f;
         }
     }
 }

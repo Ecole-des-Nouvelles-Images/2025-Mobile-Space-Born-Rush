@@ -93,7 +93,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: 2, z: 2.5}
   VerticalArmLength: 0.4
   CameraSide: 0
-  CameraDistance: 6
+  CameraDistance: 5
   AvoidObstacles:
     Enabled: 0
     CollisionFilter:

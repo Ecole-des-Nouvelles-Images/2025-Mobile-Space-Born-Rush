@@ -25,7 +25,8 @@ public class PlayerStatController : MonoBehaviour
         
         // Main event
         EventBus.OnStatUpgrade += OnStatUpgrade;
-        
+        EventBus.OnGameStart += GameStart;
+
     }
 
     private void OnStatUpgrade(UpgradeType upgrade, float value)
@@ -104,7 +105,7 @@ public class PlayerStatController : MonoBehaviour
         EventBus.OnGameOver?.Invoke();
         
         //Then die
-        Destroy(this);
+        // Destroy(this);
         
     }
     private void OnDestroy()
@@ -119,6 +120,7 @@ public class PlayerStatController : MonoBehaviour
         
         // Main event
         EventBus.OnStatUpgrade -= OnStatUpgrade;
+        EventBus.OnGameStart -= GameStart;
     }
 
     #endregion
@@ -131,7 +133,7 @@ public class PlayerStatController : MonoBehaviour
     // public float CurrentXp => _currentXP;
     // public float XpToLevelUp => _xpToLevelUp;
     
-    void Start()
+    private void GameStart()
     {
         MaxHealth = _playerData.BaseMaxHealth;
         _currentHealth = _playerData.BaseMaxHealth;

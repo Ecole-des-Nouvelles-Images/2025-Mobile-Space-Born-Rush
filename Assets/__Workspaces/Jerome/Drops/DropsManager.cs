@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,6 +7,7 @@ public class DropsManager : MonoBehaviour
 {
 
     [SerializeField] private List<DropsData> _dropsData = new List<DropsData>();
+    [SerializeField] private Transform _dropsParent;
     
     private Dictionary<DropType, DropsData> _dropTypeMap;
     private Dictionary<DropType, Vector2> _dropChanceRanges;
@@ -14,6 +16,7 @@ public class DropsManager : MonoBehaviour
         private void OnEnable()
         {
             EventBus.OnEnemyDead += OnEnemyDead;
+            EventBus.OnGameOver += GameOver;
         }
 
         private void OnEnemyDead(GameObject obj)
@@ -25,6 +28,7 @@ public class DropsManager : MonoBehaviour
         private void OnDisable()
         {
             EventBus.OnEnemyDead -= OnEnemyDead;
+            EventBus.OnGameOver -= GameOver;
         }
         #endregion
         
@@ -32,7 +36,16 @@ public class DropsManager : MonoBehaviour
     {
         ValidateDropData();
     }
-    
+
+    private void GameOver()
+    {
+        foreach (Transform child in _dropsParent)
+        {
+            Destroy(child.gameObject);
+        }
+            
+    }
+
     private void ValidateDropData()
     {
         if (_dropsData.Count == 0)
@@ -68,14 +81,15 @@ public class DropsManager : MonoBehaviour
     void SpawnXP(Vector3 position)
     {
         DropsData xpData = _dropsData[0];
-        GameObject xp = Instantiate(xpData.Prefab);
-        xp.transform.position = position;
+        GameObject xp = Instantiate(xpData.Prefab, position, Quaternion.identity, _dropsParent.transform);
+        // xp.transform.position = position;
         
         // CRITICAL: Pass the data to the drop
         DropsMovement movement = xp.GetComponent<DropsMovement>();
         if (movement)
         {
             movement.Initialize(xpData);
+            xp.SetActive(true);
         }
     }
     
@@ -101,7 +115,7 @@ public class DropsManager : MonoBehaviour
         Vector3 offset = CalculateSpawnOffset(index);
         Vector3 spawnPosition = basePosition + offset;
         
-        GameObject drop = Instantiate(data.Prefab);
+        GameObject drop = Instantiate(data.Prefab, spawnPosition, Quaternion.identity, _dropsParent.transform);
         drop.transform.position = spawnPosition;
         
         // CRITICAL: Pass the data to the drop
@@ -109,6 +123,7 @@ public class DropsManager : MonoBehaviour
         if (movement)
         {
             movement.Initialize(data);
+            drop.SetActive(true);
         }
         
     }

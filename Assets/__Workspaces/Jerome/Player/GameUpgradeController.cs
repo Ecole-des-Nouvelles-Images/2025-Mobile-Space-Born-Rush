@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameUpgradeController : MonoBehaviour
@@ -13,7 +14,14 @@ public class GameUpgradeController : MonoBehaviour
         
         // Main event
         EventBus.OnGameSystemUpgrade += OnGameSystemUpgrade;
+        EventBus.OnGameStart +=  GameStart;
+        EventBus.OnSpeedChanged += OnSpeedChanged;
         
+    }
+
+    private void OnSpeedChanged(float speed, float time)
+    {
+        StartCoroutine(SpeedBoost(speed, time));
     }
 
     private void OnGameSystemUpgrade(UpgradeType upgrade, float value)
@@ -42,16 +50,23 @@ public class GameUpgradeController : MonoBehaviour
         
         // Main event
         EventBus.OnGameSystemUpgrade -= OnGameSystemUpgrade;
+        EventBus.OnGameStart -= GameStart;
     }
 
     #endregion
     
     public float GameSpeed => _gameSpeed;
     public float NumberOfUpgrades => _numberOfUpgrades;
-    
-    void Start()
+
+    IEnumerator SpeedBoost(float speedBoost, float time)
     {
-        _gameSpeed = 2;
+        _gameSpeed *= speedBoost;
+        yield return new WaitForSeconds(time);
+        _gameSpeed/= speedBoost;
+    }
+    private void GameStart()
+    {
+        _gameSpeed = 8;
         _numberOfUpgrades = 2;
     }
 
