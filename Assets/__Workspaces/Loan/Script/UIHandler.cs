@@ -37,7 +37,7 @@ public class UIHandler : MonoBehaviour
     private void GameLosse()
     {
        _loosePanel.SetActive(true);
-       Debug.Log("Loose");
+       Debug.Log("Lose");
     }
 
     public void GameStart()

@@ -22,7 +22,6 @@ public class DropsManager : MonoBehaviour
         private void OnEnemyDead(GameObject obj)
         {
             SpawnDrop(obj.transform);
-            Debug.Log("Died");
         }
 
         private void OnDisable()

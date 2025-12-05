@@ -43,6 +43,8 @@ public class WeaponManager : MonoBehaviour
 
     private void OnGameStart()
     {
+        Debug.Log("Game Started");
+        _swapWeaponIndex = 0;
         SwapWeapon(AllWeaponPrefabs[0]);
     }
 
