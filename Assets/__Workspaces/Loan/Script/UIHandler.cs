@@ -45,6 +45,7 @@ public class UIHandler : MonoBehaviour
         _gameEmpty.SetActive(true);
         _menuEmpty.SetActive(false);
         EventBus.OnGameStart?.Invoke();
+        Debug.Log("GameStart");
     }
 
     public void ReturnMenu()

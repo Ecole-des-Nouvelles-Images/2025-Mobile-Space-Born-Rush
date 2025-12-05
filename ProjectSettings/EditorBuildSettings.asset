@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/__Workspaces/Test/APKTest.unity
-    guid: f88e1a2fcec3f4c48bb036368749cbae
+    guid: 4bd71272bc69a1947baa1e5ac8e282bf
+  - enabled: 1
+    path: Assets/__Workspaces/Test/APKTest_2.unity
+    guid: fbe792554095c834490fcb14a6685463
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d914f9b66f044814b944f97b196c7e50,
       type: 2}
