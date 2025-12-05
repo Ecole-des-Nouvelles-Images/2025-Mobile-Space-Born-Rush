@@ -14,6 +14,7 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         EventBus.OnWeaponUpgrade += OnWeaponUpgrade;
+        EventBus.OnGameStart += OnGameStart;
         SwapWeapon(AllWeaponPrefabs[0]);
     }
 
@@ -29,6 +30,7 @@ public class WeaponManager : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.OnWeaponUpgrade -= OnWeaponUpgrade;
+        EventBus.OnGameStart -= OnGameStart;
     }
 
     void Start()
@@ -37,6 +39,11 @@ public class WeaponManager : MonoBehaviour
         
         // Equip default weapon
         // SwapWeapon(AllWeaponPrefabs[0]);
+    }
+
+    private void OnGameStart()
+    {
+        SwapWeapon(AllWeaponPrefabs[0]);
     }
 
     public void SwapWeapon(GameObject newWeaponData)
