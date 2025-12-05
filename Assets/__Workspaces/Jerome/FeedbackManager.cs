@@ -9,6 +9,6 @@ public class FeedbackManager : MonoBehaviour
     public void SmallShake()
     {
         // This is it! One line.
-        _impulseSource.GenerateImpulse();
+        _impulseSource.GenerateImpulseWithForce(0.2f);
     }
 }

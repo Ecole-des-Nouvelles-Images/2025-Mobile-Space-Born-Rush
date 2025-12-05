@@ -1416,7 +1416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 721820564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &186121867
 MonoBehaviour:
@@ -4322,6 +4322,91 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &652861139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652861141}
+  - component: {fileID: 652861140}
+  m_Layer: 0
+  m_Name: InpulseSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &652861140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652861139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 3
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 1, y: 0, z: 0.5}
+--- !u!4 &652861141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652861139}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 721820564}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &684892009
 GameObject:
   m_ObjectHideFlags: 0
@@ -4603,12 +4688,16 @@ Transform:
   - {fileID: 1059486695}
   - {fileID: 1864986560}
   - {fileID: 290965743}
-  - {fileID: 1473931662}
   - {fileID: 1716055721}
+  - {fileID: 652861141}
+  - {fileID: 1473931662}
   - {fileID: 887916139}
   - {fileID: 604356028}
   - {fileID: 1511302803}
   - {fileID: 1679692160}
+  - {fileID: 1419666213}
+  - {fileID: 186121866}
+  - {fileID: 1322794752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &781155495
@@ -7063,6 +7152,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218905848}
   m_CullTransparentMesh: 1
+--- !u!1 &1289267755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2835293686429415688, guid: 3d60045d2f00edf4eae94221337e5959,
+    type: 3}
+  m_PrefabInstance: {fileID: 1473931661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1292958146
 GameObject:
   m_ObjectHideFlags: 0
@@ -7290,12 +7385,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322794750}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.10578, y: 1.45785, z: 0.91129}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 721820564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346459763
 GameObject:
@@ -7616,12 +7711,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419666211}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 721820564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1419666215
 MonoBehaviour:
@@ -7717,7 +7812,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2835293686429415688, guid: 3d60045d2f00edf4eae94221337e5959,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1473931666}
   m_SourcePrefab: {fileID: 100100000, guid: 3d60045d2f00edf4eae94221337e5959, type: 3}
 --- !u!4 &1473931662 stripped
 Transform:
@@ -7725,6 +7824,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1473931661}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1473931666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289267755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1511302797
 GameObject:
   m_ObjectHideFlags: 0
@@ -7753,12 +7876,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511302797}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbfbbd4990d63444997a40e10424b09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FeedbackManager
-  _impulseSource: {fileID: 0}
+  _impulseSource: {fileID: 652861140}
 --- !u!114 &1511302799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8045,7 +8168,7 @@ GameObject:
   - component: {fileID: 1716055721}
   - component: {fileID: 1716055722}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PlayerPlatform
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9482,8 +9605,5 @@ SceneRoots:
   - {fileID: 1558882587}
   - {fileID: 554754192}
   - {fileID: 721820564}
-  - {fileID: 1419666213}
   - {fileID: 2065659497}
   - {fileID: 950739901}
-  - {fileID: 186121866}
-  - {fileID: 1322794752}
