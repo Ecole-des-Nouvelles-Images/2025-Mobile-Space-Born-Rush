@@ -17,7 +17,7 @@ public class DropsMovement : MonoBehaviour
     private void OnEnable()
     {
         // Only listen to magnet if this is XP
-        if (DropData != null && DropData.Type == DropType.XP)
+        if (DropData.Type == DropType.XP)
         {
             EventBus.OnMagnetActivated += OnMagnetActivated;
         }
@@ -36,7 +36,7 @@ public class DropsMovement : MonoBehaviour
     
     private void OnDisable()
     {
-        if (DropData != null && DropData.Type == DropType.XP)
+        if (DropData.Type == DropType.XP)
         {
             EventBus.OnMagnetActivated -= OnMagnetActivated;
         }
