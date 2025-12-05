@@ -76,6 +76,7 @@ public class DropsManager : MonoBehaviour
         if (movement)
         {
             movement.Initialize(xpData);
+            xp.SetActive(true);
         }
     }
     
@@ -109,6 +110,7 @@ public class DropsManager : MonoBehaviour
         if (movement)
         {
             movement.Initialize(data);
+            drop.SetActive(true);
         }
         
     }

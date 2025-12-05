@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: M_PowerUp_Kit
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 58b188b8df834c04097024a8e1733fcb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
