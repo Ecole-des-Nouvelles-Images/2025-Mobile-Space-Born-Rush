@@ -17,7 +17,7 @@ MonoBehaviour:
   Name: KX-90
   Cooldown: 6
   FireRate: 0.5
-  FireDistance: 35
+  FireDistance: 15
   MagSize: 5
   EnemyMask:
     serializedVersion: 2

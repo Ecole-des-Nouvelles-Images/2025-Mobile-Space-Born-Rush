@@ -2021,6 +2021,7 @@ MonoBehaviour:
   _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
   PixelDistToDetect: 200
   _currentLaneIndex: 0
+  _isJumping: 0
   _isSliding: 0
   JumpForce: {x: 0, y: 5, z: 0}
   SlideAmount: 2
@@ -2390,6 +2391,7 @@ MonoBehaviour:
   _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
   PixelDistToDetect: 200
   _currentLaneIndex: 0
+  _isJumping: 0
   _isSliding: 0
   JumpForce: {x: 0, y: 5, z: 0}
   SlideAmount: 2
@@ -5724,6 +5726,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KillTriggerHandler
   _percent: 0.1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &887916141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7997,6 +8002,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KillTriggerHandler
   _percent: 0.1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &1269260176
 BoxCollider:
   m_ObjectHideFlags: 0
