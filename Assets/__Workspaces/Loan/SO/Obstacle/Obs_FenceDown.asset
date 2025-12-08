@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1dd373388ed0764daab96fd84853fb1, type: 3}
-  m_Name: Obstacle_Moove
+  m_Name: Obs_FenceDown
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleData
-  Prefab: {fileID: 337892607293438627, guid: 03e29b12e1da42746a65312584315bbc, type: 3}
-  LanesTaken: 0
+  Prefab: {fileID: 8064277688660450271, guid: d64b423d31cddb64badfc499c91e214a, type: 3}
+  LanesTaken: 3
   Damage: 10
-  IsStunning: 0
-  StunTime: 0
+  IsStunning: 1
+  StunTime: 1
+  IsRotate: 0
