@@ -766,6 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2856684683082026407}
   - component: {fileID: 5289067777018544762}
+  - component: {fileID: 1548910671124951197}
   m_Layer: 7
   m_Name: M_ModuleCorridor_03
   m_TagString: Untagged
@@ -824,6 +825,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c84821079ca86124ea8bf00a324d9655, type: 2}
   - {fileID: 11400000, guid: 55ba511966d2dc642a1ce523ce0179d5, type: 2}
   isObstacle: 1
+--- !u!114 &1548910671124951197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595878097578157565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3752b11fd1fd1d4398433343aa1ec33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightingController
+  _playerStats: {fileID: 0}
+  _targetLight: {fileID: 7303748916518594390}
+  _fullHealthColor: {r: 0, g: 0.7294118, b: 1, a: 1}
+  _lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  _colorChangeSpeed: 2
+  _changeIntensity: 0
+  _fullHealthIntensity: 1
+  _lowHealthIntensity: 0.5
+  _lowHealthThreshold: 50
 --- !u!1 &8112755894945144993
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,38 +1,100 @@
-using System;
 using UnityEngine;
 
 public class LightingController : MonoBehaviour
 {
+    [Header("Player Reference")]
+    [SerializeField] private PlayerStatController _playerStats;
 
-    // As the players health changes we can change the lighting and play with it to give some nice life.
-    // First we get a reference to the players' health.
-    private PlayerStatController _playerStats;
-    // Then we get a reference to the light we want to play with. Set in the inspector.
-    [SerializeField] private Material _lightMaterial;
-    // We can keep a reference to the original colour to come back to.
-    private Color _originalLightColor;
+    [Header("Light Reference")]
+    [SerializeField] private Light _targetLight; // Direct reference to the Light component
 
-    private void Start()
+    [Header("Health Light Settings")]
+    [SerializeField] private Color _fullHealthColor = Color.white;
+    [SerializeField] private Color _lowHealthColor = Color.red;
+    [SerializeField, Range(0.1f, 5f)] private float _colorChangeSpeed = 2f;
+
+    [Header("Intensity Settings (Optional)")]
+    [SerializeField] private bool _changeIntensity = false;
+    [SerializeField] private float _fullHealthIntensity = 1f;
+    [SerializeField] private float _lowHealthIntensity = 0.5f;
+
+    [Header("Health Threshold")]
+    [SerializeField, Range(0, 100)] private int _lowHealthThreshold = 50;
+
+    // Cached values for optimization
+    private Color _currentTargetColor;
+    private Color _currentColor;
+    private float _lastKnownHealth = -1f;
+
+    void Start()
     {
-        _originalLightColor =  _lightMaterial.color;
+        // === VALIDATION ===
+        if (!_targetLight)
+        {
+            // Try to get it from this GameObject if not set
+            _targetLight = GetComponentInChildren<Light>();
+            
+            if (!_targetLight)
+            {
+                Debug.LogError("LightingController: No Light component assigned or found!", this);
+                enabled = false;
+                return;
+            }
+        }
+
+        if (!_playerStats)
+        {
+            _playerStats = FindObjectOfType<PlayerStatController>();
+        }
+
+        // Initialize with current light color
+        _currentColor = _targetLight.color;
+        _currentTargetColor = _currentColor;
     }
 
-    private void Update()
+    void Update()
     {
-        switch (_playerStats.CurrentHealth)
+        if (!_playerStats || !_targetLight) return;
+
+        float currentHealth = _playerStats.CurrentHealth;
+
+        // === OPTIMIZATION: Skip if health hasn't changed ===
+        if (Mathf.Approximately(currentHealth, _lastKnownHealth))
         {
-            case >= 50:
-                LerpLighting(_originalLightColor);
-                break;
-            case <= 50:
-                LerpLighting(Color.red);
-                break;
+            return;
+        }
+
+        _lastKnownHealth = currentHealth;
+
+        // === Determine target color based on health ===
+        if (currentHealth > _lowHealthThreshold)
+        {
+            _currentTargetColor = _fullHealthColor;
+        }
+        else
+        {
+            _currentTargetColor = _lowHealthColor;
+        }
+
+        // === Smooth color transition ===
+        _currentColor = Color.Lerp(_currentColor, _currentTargetColor, 
+                                   Time.deltaTime * _colorChangeSpeed);
+        
+        _targetLight.color = _currentColor;
+
+        // === Optional: Change intensity too ===
+        if (_changeIntensity)
+        {
+            float healthPercent = Mathf.Clamp01(currentHealth / 100f);
+            float targetIntensity = Mathf.Lerp(_lowHealthIntensity, _fullHealthIntensity, healthPercent);
+            _targetLight.intensity = Mathf.Lerp(_targetLight.intensity, targetIntensity, 
+                                                Time.deltaTime * _colorChangeSpeed);
         }
     }
 
-    void LerpLighting(Color color)
+    // === Helper method for instant changes (e.g., healing potion) ===
+    public void ForceUpdateLight()
     {
-        //Here we lerp between the current colour and the one passed
-        _lightMaterial.color = Color.Lerp(_lightMaterial.color, color, 0.2f);
+        _lastKnownHealth = -1f; // This will force an update on next frame
     }
 }
