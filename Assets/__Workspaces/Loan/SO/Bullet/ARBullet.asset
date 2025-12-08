@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1fb4ada1916eae4d870277e9cd55107, type: 3}
   m_Name: ARBullet
   m_EditorClassIdentifier: Assembly-CSharp::ARBulletData
-  BulletPrefab: {fileID: 0}
-  BulletSpeed: {x: 0, y: 0, z: 0}
-  BulletLifeTime: 0
-  BulletDamage: 0
+  BulletDamage: 10
   IsDestroyedObstacle: 0

@@ -1,10 +1,19 @@
 # ninja log v5
 11	578	7859419928773260	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	3759f7a52279051a
 18	584	7859419928833799	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c3fd8d05dc2df1d4
-0	591	7859419928919525	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5c2ebfc6aa5c0e92
-26	599	7859419928990071	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	efc85c723e8d45c6
-4	631	7859419929312181	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d9b7e4cb8aa42dcf
 23	670	7859419929695271	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	69d0bae86ddef3e
+0	591	7859419928919525	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5c2ebfc6aa5c0e92
+4	631	7859419929312181	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d9b7e4cb8aa42dcf
+26	599	7859419928990071	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	efc85c723e8d45c6
 15	743	7859419930430047	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d5ee0fa98ca469b1
-8	807	7859419931040800	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6cbb8099cf0af0ad
 807	862	7859419931620808	D:/LocalDir/2025-Mobile-Space-Born/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/7326b1a2/obj/arm64-v8a/libgame.so	ac7d020f3960c80d
+8	807	7859419931040800	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6cbb8099cf0af0ad
+25	675	7866431943361030	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	3759f7a52279051a
+13	677	7866431943376060	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c3fd8d05dc2df1d4
+17	686	7866431943486571	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5c2ebfc6aa5c0e92
+21	690	7866431943516616	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	efc85c723e8d45c6
+9	725	7866431943851289	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d9b7e4cb8aa42dcf
+34	766	7866431944250300	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	69d0bae86ddef3e
+30	851	7866431945118149	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d5ee0fa98ca469b1
+4	918	7866431945759028	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6cbb8099cf0af0ad
+918	990	7866431946508103	D:/LocalDir/2025-Mobile-Space-Born/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/7326b1a2/obj/arm64-v8a/libgame.so	ac7d020f3960c80d

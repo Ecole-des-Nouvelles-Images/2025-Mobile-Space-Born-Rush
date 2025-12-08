@@ -49,48 +49,110 @@ public class ModulMove : MonoBehaviour
 
     private void SpawnObstacles()
     {
-        for (int i = 2; i < _gridManager.Grid.GetLength(0); i++)
+        // for (int i = 2; i < _gridManager.Grid.GetLength(0); i++)
+        // {
+        //     for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
+        //     {
+        //         float chance = Random.Range(0f, 1f);
+        //
+        //         if (chance > 0.75) 
+        //         {
+        //             int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
+        //             ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
+        //             
+        //             if (_gridManager.IsNeightbornEmpty(i,j,currentObstacle,true))
+        //             {
+        //                 Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
+        //                 Quaternion rotate = Quaternion.identity;
+        //                 
+        //                 if (currentObstacle.LanesTaken == 3)
+        //                 {
+        //                     pos.x = 0;
+        //                 }
+        //
+        //                 if (currentObstacle.LanesTaken == 1)
+        //                 {
+        //                      rotate = Quaternion.Euler(0,Random.Range(0,360),0);
+        //                 }
+        //                 GameObject obstacle = Instantiate(currentObstacle.Prefab,pos,rotate,transform);
+        //                 obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
+        //
+        //                 if (currentObstacle.LanesTaken == 1)
+        //                 {
+        //                     _gridManager.SetCellEmpty(i,j,false);
+        //                 }
+        //                 else if (currentObstacle.LanesTaken == 3)
+        //                 {
+        //                     for (int laneX = 0; laneX < _gridManager.Grid.GetLength(0); laneX++)
+        //                     {
+        //                         _gridManager.SetCellEmpty(laneX, j, false);
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        
+        int width = _gridManager.Grid.GetLength(0);
+        int height = _gridManager.Grid.GetLength(1);
+            
+        List<Vector2Int> candidateCells = new List<Vector2Int>();
+
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
+            for (int j = 1; j < height; j++) 
+            { 
+                candidateCells.Add(new Vector2Int(i, j));
+            }
+        }
+        
+        // int obstaclesToSpawn = ObstacleNumber; 
+
+        while (candidateCells.Count > 0)
+        {
+            int randomIndex = Random.Range(0, candidateCells.Count);
+            Vector2Int cell = candidateCells[randomIndex];
+            candidateCells.RemoveAt(randomIndex);
+            
+            float chance = Random.Range(0f, 1f);
+            if (chance <= 0.75f)
+                continue;
+            
+            int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
+            ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
+            
+            if (!_gridManager.IsNeightbornEmpty(cell.x, cell.y, currentObstacle, true))
+                continue;
+            
+            Vector3 pos = _gridManager.GetCellWorldPosition(cell.x, cell.y);
+            Quaternion rotate = Quaternion.identity;
+            
+            if (currentObstacle.LanesTaken == 3)
             {
-                float chance = Random.Range(0f, 1f);
+                pos.x = 0;
+            }
 
-                if (chance > 0.75) 
+            if (currentObstacle.LanesTaken == 1)
+            {
+                rotate = Quaternion.Euler(0, Random.Range(0, 360), 0);
+            }
+            
+            GameObject obstacle = Instantiate(currentObstacle.Prefab, pos, rotate, transform);
+            obstacle.GetComponent<ObstacleHandler>().ObstacleData = currentObstacle;
+            
+            if (currentObstacle.LanesTaken == 1)
+            {
+                _gridManager.SetCellEmpty(cell.x, cell.y, false);
+            }
+            else if (currentObstacle.LanesTaken == 3)
+            {
+                for (int laneX = 0; laneX < width; laneX++)
                 {
-                    int randomObstacle = Random.Range(0, _obstaclesPrefabs.Count);
-                    ObstacleData currentObstacle = _obstaclesPrefabs[randomObstacle];
-                    
-                    if (_gridManager.IsNeightbornEmpty(i,j,currentObstacle,true))
-                    {
-                        Vector3 pos = _gridManager.GetCellWorldPosition(i,j);
-                        Quaternion rotate = Quaternion.identity;
-                        
-                        if (currentObstacle.LanesTaken == 3)
-                        {
-                            pos.x = 0;
-                        }
-
-                        if (currentObstacle.LanesTaken == 1)
-                        {
-                             rotate = Quaternion.Euler(0,Random.Range(0,360),0);
-                        }
-                        GameObject obstacle = Instantiate(currentObstacle.Prefab,pos,rotate,transform);
-                        obstacle.GetComponent<ObstacleHandler>().ObstacleData =  currentObstacle;
-
-                        if (currentObstacle.LanesTaken == 1)
-                        {
-                            _gridManager.SetCellEmpty(i,j,false);
-                        }
-                        else if (currentObstacle.LanesTaken == 3)
-                        {
-                            for (int laneX = 0; laneX < _gridManager.Grid.GetLength(0); laneX++)
-                            {
-                                _gridManager.SetCellEmpty(laneX, j, false);
-                            }
-                        }
-                    }
+                    _gridManager.SetCellEmpty(laneX, cell.y, false);
                 }
             }
+
+            // obstaclesToSpawn--;
         }
     }
 
