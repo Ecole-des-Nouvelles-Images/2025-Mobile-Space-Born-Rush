@@ -8,5 +8,6 @@ public class InstaKillData : DropsData
     public override void ApplyEffect()
     {
         EventBus.OnEnemyTakeDamage?.Invoke(this.Value);
+        Handheld.Vibrate();
     }
 }
