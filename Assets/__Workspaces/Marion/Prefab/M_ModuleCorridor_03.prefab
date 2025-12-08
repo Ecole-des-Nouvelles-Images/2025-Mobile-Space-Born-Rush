@@ -816,7 +816,7 @@ MonoBehaviour:
   - {fileID: 9214185679248329394, guid: 008428c34e35f334492029ff4a091b10, type: 3}
   - {fileID: 7814141541575929589, guid: 3769520660e676b48bf51ea4b7c24ab9, type: 3}
   _parentsTransform: {fileID: 0}
-  EnemyNumber: 2
+  EnemyNumber: 1
   isEnemy: 1
   _obstaclesPrefabs:
   - {fileID: 11400000, guid: 70343954ff5b37648aee25225b192be9, type: 2}
