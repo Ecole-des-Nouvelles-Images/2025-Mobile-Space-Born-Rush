@@ -315,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568642610493020092}
   - component: {fileID: 468638808726622242}
+  - component: {fileID: 2804493078025043842}
   m_Layer: 7
   m_Name: M_ModuleCorridor_01
   m_TagString: Untagged
@@ -373,6 +374,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c84821079ca86124ea8bf00a324d9655, type: 2}
   - {fileID: 11400000, guid: 55ba511966d2dc642a1ce523ce0179d5, type: 2}
   isObstacle: 1
+--- !u!114 &2804493078025043842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4657553178679537581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3752b11fd1fd1d4398433343aa1ec33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightingController
+  _lightMaterial: {fileID: 0}
 --- !u!1 &5555690323698111194
 GameObject:
   m_ObjectHideFlags: 0

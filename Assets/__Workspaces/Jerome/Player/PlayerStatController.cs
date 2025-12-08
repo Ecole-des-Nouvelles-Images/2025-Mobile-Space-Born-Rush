@@ -12,6 +12,9 @@ public class PlayerStatController : MonoBehaviour
     //Player Variables
     [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
 
+    [SerializeField] private Image _healthBar;
+    private bool _isStart = false;
+    
     #region subscriptions
     private void Awake()
     {
