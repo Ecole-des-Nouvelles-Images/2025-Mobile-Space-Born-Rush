@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Obs_Barrier
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleData
   Prefab: {fileID: 0}
-  LanesTaken: 0
-  Damage: 0
-  IsStunning: 0
-  StunTime: 0
+  LanesTaken: 1
+  Damage: 5
+  IsStunning: 1
+  StunTime: 0.5

@@ -87,20 +87,20 @@ public class WeaponHandler : MonoBehaviour
                 { 
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(enemy,null);
                     }
                     else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                     { 
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(null,player);
                     }
                 }
@@ -114,20 +114,20 @@ public class WeaponHandler : MonoBehaviour
                     
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(enemy,null);
                     }
                     else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                     { 
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(null,player);
                     }
                     
@@ -152,10 +152,10 @@ public class WeaponHandler : MonoBehaviour
             _isAim = false;
         }
         
-        if (_animator != null && !_isAim)
-        {
-            _animator.SetBool("isAim",false);
-        }
+        // if (_animator != null && !_isAim)
+        // {
+        //     _animator.SetBool("isAim",false);
+        // }
 
         if (_isRaycastDraw)
         {
@@ -181,10 +181,10 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
-            if (_animator != null)
-            {
-                _animator.SetTrigger("isFire");
-            }
+            // if (_animator != null)
+            // {
+            //     _animator.SetTrigger("isFire");
+            // }
 
             if (enemy != null)
             {

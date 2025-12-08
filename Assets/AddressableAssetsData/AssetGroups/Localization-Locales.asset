@@ -15,13 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-Locales
   m_GUID: 0e375e45a44490b4581d8ccd7d141642
   m_SerializeEntries:
-  - m_GUID: 0d4bf18987b658745a4c405615dff5cb
-    m_Address: French (fr) 1
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0e1a31f27c37a204184b6a4f2d9f8439
+  - m_GUID: 12155f63f8a43cb489bebf50c3240d16
     m_Address: English (en) 1
     m_ReadOnly: 1
     m_SerializedLabels:
@@ -36,6 +30,12 @@ MonoBehaviour:
     m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d452be0578927b942b0242024ecad858
+    m_Address: French (fr) 1
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: f110bef9128ec8243be18dd949f94c58, type: 2}
