@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class StartUpManager : MonoBehaviour
 {
@@ -10,6 +12,11 @@ public class StartUpManager : MonoBehaviour
     private void Awake()
     {
         EventBus.OnGameStart += StartGame; 
+    }
+
+    private void Start()
+    {
+        _parentTransform = GetComponent<Transform>();
     }
 
     private void OnDestroy()

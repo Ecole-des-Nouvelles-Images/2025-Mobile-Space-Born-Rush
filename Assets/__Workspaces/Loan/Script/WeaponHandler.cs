@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -32,7 +33,18 @@ public class WeaponHandler : MonoBehaviour
         _animator = GetComponentInParent<Animator>();
         _firePoint.GetComponent<Transform>();
     }
-    
+
+    private void OnEnable()
+    {
+        _currentWeapon = _weaponData;
+        _currentBullet = _currentWeapon.BulletData;
+        _ammoNumber = _currentWeapon.MagSize;
+        _layerMask = _currentWeapon.EnemyMask;
+        _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+        
+        _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
+    }
+
     private void GameStart()
     {
         _currentWeapon = _weaponData;
@@ -75,20 +87,20 @@ public class WeaponHandler : MonoBehaviour
                 { 
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(enemy,null);
                     }
                     else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                     { 
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(null,player);
                     }
                 }
@@ -102,25 +114,31 @@ public class WeaponHandler : MonoBehaviour
                     
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(enemy,null);
                     }
                     else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                     { 
-                        if (_animator != null)
-                        {
-                            _animator.SetBool("isAim",true);
-                            _isAim = true;
-                        }
+                        // if (_animator != null)
+                        // {
+                        //     _animator.SetBool("isAim",true);
+                        //     _isAim = true;
+                        // }
                         Fire(null,player);
                     }
                     
                 }
             }
+        }
+        
+        if (_ammoNumber <= 0)
+        {
+            _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
+            _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
         }
             
         if (_currentFireRate > 0)
@@ -134,10 +152,10 @@ public class WeaponHandler : MonoBehaviour
             _isAim = false;
         }
         
-        if (_animator != null && !_isAim)
-        {
-            _animator.SetBool("isAim",false);
-        }
+        // if (_animator != null && !_isAim)
+        // {
+        //     _animator.SetBool("isAim",false);
+        // }
 
         if (_isRaycastDraw)
         {
@@ -163,10 +181,10 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
-            if (_animator != null)
-            {
-                _animator.SetTrigger("isFire");
-            }
+            // if (_animator != null)
+            // {
+            //     _animator.SetTrigger("isFire");
+            // }
 
             if (enemy != null)
             {

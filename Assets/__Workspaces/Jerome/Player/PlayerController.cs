@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     [SerializeField] private int _currentLaneIndex;
     
     //Variables for methods
-    private bool _isJumping = true;
+    [SerializeField]private bool _isJumping = false;
     [SerializeField] private bool _isSliding;
     private bool _isPaused;
     
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnSpeedChanged(float val, float duration)
     {
         //Will need to speed up all the players animations with this
-        throw new NotImplementedException();
+        
     }
 
     private void OnLaneChanged(int val)
@@ -76,7 +76,10 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     private void OnPlayerSpawn()
     {
-        throw new NotImplementedException();
+        Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
+        var position = transform.position;
+        position.x = targetPos.x;
+        transform.position = position;
     }
 
     private void OnGameResume()
@@ -91,11 +94,12 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
-        if (_animator != null)
+        if (_animator)
         {
             _animator.SetTrigger("isDie");
         }
-        Debug.Log("GameOver");
+        
+        _isPaused = true;
     }
 
     private void OnGamePause()
@@ -105,7 +109,25 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameStart()
     {
-        Debug.Log("GameStart");
+        _rb = GetComponent<Rigidbody>();
+        _col = GetComponent<BoxCollider>();
+        EnableGameplayInput();
+
+        if (_animator)
+        {
+            _animator = GetComponent<Animator>();
+        }
+        // Animator animator = GetComponent<Animator>();
+        // animator.speed = 2;
+
+        _isJumping = true;
+        _isPaused = false;
+        _currentLaneIndex = 1;
+        
+        Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
+        var position = transform.position;
+        position.x = targetPos.x;
+        transform.position = position;
     }
 
     private void OnDestroy()
@@ -130,22 +152,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
 
     #endregion
-    
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _col = GetComponent<BoxCollider>();
-        EnableGameplayInput();
-
-        if (_animator != null)
-        {
-            _animator = GetComponent<Animator>();
-        }
-        // Animator animator = GetComponent<Animator>();
-        // animator.speed = 2;
-
-        _currentLaneIndex = 1;
-    }
     
     //This method is called at the start and end of any animation to stop the player from being able to double jump or slide
     public bool MovementStateChange(bool state)
@@ -231,7 +237,7 @@ public class PlayerController : MonoBehaviour,IDamageable
             // Your lane switching code
             if (swipeDelta.x > 0)
             {
-                if (_animator != null)
+                if (_animator)
                 {
                     _animator.SetTrigger("isMoveRight");
                 }
@@ -239,7 +245,7 @@ public class PlayerController : MonoBehaviour,IDamageable
             }
             else
             {
-                if (_animator != null)
+                if (_animator)
                 {
                     _animator.SetTrigger("isMoveLeft");
                 }
@@ -287,7 +293,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (_animator != null)
+        if (_animator)
         {
             _animator.SetTrigger("isHit");
         }

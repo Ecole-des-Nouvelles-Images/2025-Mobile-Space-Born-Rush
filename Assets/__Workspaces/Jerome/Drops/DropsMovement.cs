@@ -9,6 +9,8 @@ public class DropsMovement : MonoBehaviour
     private PlayerController _playerController;
     private Coroutine _magnetCoroutine = null;
     private bool _magnetized = false;
+
+    private float _width = 5;
     
     public void Initialize(DropsData data)
     {
@@ -17,7 +19,7 @@ public class DropsMovement : MonoBehaviour
     private void OnEnable()
     {
         // Only listen to magnet if this is XP
-        if (DropData != null && DropData.Type == DropType.XP)
+        if (DropData.Type == DropType.XP)
         {
             EventBus.OnMagnetActivated += OnMagnetActivated;
         }
@@ -36,7 +38,7 @@ public class DropsMovement : MonoBehaviour
     
     private void OnDisable()
     {
-        if (DropData != null && DropData.Type == DropType.XP)
+        if (DropData.Type == DropType.XP)
         {
             EventBus.OnMagnetActivated -= OnMagnetActivated;
         }
@@ -51,6 +53,11 @@ public class DropsMovement : MonoBehaviour
     void Update()
     {
 
+        if (transform.position.z < -_width)
+        {
+            Destroy(gameObject);
+        }
+        
         if (_magnetized)
         {
             //The Vector up is so that the xp doesn't go into the floor. 

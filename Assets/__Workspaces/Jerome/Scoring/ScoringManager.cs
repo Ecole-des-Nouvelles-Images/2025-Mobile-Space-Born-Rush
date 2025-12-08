@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScoringManager : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class ScoringManager : MonoBehaviour
     private bool _isGamePaused = true;
     [SerializeField]private int _killsNumber = 0;
     [SerializeField]private float _timer = 0;
+    [Header("=====Text Settings=====")]
+    [SerializeField]private TextMeshProUGUI _timerText;
+    [SerializeField]private TextMeshProUGUI _scoreText;
+    [SerializeField]private TextMeshProUGUI _killsText;
 
     #region subscriptions
     private void Awake()
@@ -78,6 +84,7 @@ public class ScoringManager : MonoBehaviour
     {
         _killsNumber = 0;
         _timer = 0;
+        _score = 0;
         _isGamePaused = false;
     }
 
@@ -110,6 +117,8 @@ public class ScoringManager : MonoBehaviour
     {
         //TODO: Uncomment when the game UI is implemented
         //if (_isGamePaused) return;
+        if (_isGamePaused)
+            return;
         _timer += Time.deltaTime;
         
         _score += _gameUpgrades.GameSpeed *  Time.deltaTime;
@@ -127,7 +136,12 @@ public class ScoringManager : MonoBehaviour
     }
     private void GameOver()
     {
-        Debug.Log(_score);
+        int minutes = Mathf.FloorToInt(_timer / 60);
+        int seconds = Mathf.FloorToInt(_timer % 60);
+
+        _timerText.text = $"Timer: {minutes:00}:{seconds:00}";
+        _scoreText.text = "Score: " + _score;
+        _killsText.text = "Kills: " + _killsNumber;
     }
 
     public float Score => _score;

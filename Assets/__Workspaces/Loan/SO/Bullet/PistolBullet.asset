@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545a67c029e7f114294fc25c4f1d6722, type: 3}
   m_Name: PistolBullet
   m_EditorClassIdentifier: Assembly-CSharp::PistolBulletData
-  BulletPrefab: {fileID: 7005073462024459232, guid: 4e0adca639edd4f4ca1e1ce18b77f7e4, type: 3}
-  BulletSpeed: {x: 0, y: 0, z: 10}
-  BulletLifeTime: 5
-  BulletDamage: 3
+  BulletDamage: 5
   IsDestroyedObstacle: 0

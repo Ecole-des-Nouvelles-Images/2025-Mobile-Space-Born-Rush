@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 8885834530876378810}
   - component: {fileID: 5414367188670162152}
   - component: {fileID: 400575236031155781}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: XP
-  m_TagString: Untagged
+  m_TagString: Drop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &322354187227949556
 Transform:
   m_ObjectHideFlags: 0
