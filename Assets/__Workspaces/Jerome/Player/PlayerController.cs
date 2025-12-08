@@ -242,6 +242,7 @@ public class PlayerController : MonoBehaviour,IDamageable
                     _animator.SetTrigger("isMoveRight");
                 }
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
+                if (_isSliding) StopSlide();
             }
             else
             {
@@ -250,6 +251,7 @@ public class PlayerController : MonoBehaviour,IDamageable
                     _animator.SetTrigger("isMoveLeft");
                 }
                 _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
+                if (_isSliding) StopSlide();
             }
             
             Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
