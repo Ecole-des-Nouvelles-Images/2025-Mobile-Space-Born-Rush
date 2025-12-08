@@ -7617,6 +7617,7 @@ GameObject:
   - component: {fileID: 1511302800}
   - component: {fileID: 1511302799}
   - component: {fileID: 1511302798}
+  - component: {fileID: 1511302804}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -7719,6 +7720,25 @@ Transform:
   - {fileID: 156001555}
   m_Father: {fileID: 721820564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1511302804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511302797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daedd53f219d4b04ba24066d513021f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameDirector
+  _speedIncrement: 30000
+  _difficultyPerLevel: 5
+  _difficultyIncrement: 60000
+  _difficultyHealth: 10
+  _difficultyDamage: 2
+  _gameUpgrades: {fileID: 0}
+  _enemyHandler: {fileID: 0}
 --- !u!1 &1558882584
 GameObject:
   m_ObjectHideFlags: 0
@@ -8944,7 +8964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
   ImpulseDefinition:
     ImpulseChannel: -1
-    ImpulseShape: 3
+    ImpulseShape: 4
     CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
