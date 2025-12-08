@@ -83,6 +83,7 @@ public class PlayerStatController : MonoBehaviour
     }
     private void OnPlayerTakeDamage(float val)
     {
+        FeedbackManager.SmallShake();
         _currentHealth -= val;
         
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);

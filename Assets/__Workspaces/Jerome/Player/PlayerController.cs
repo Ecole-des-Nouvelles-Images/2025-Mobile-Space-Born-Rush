@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     //And when the end of the animation plays it should call for the collider to resize
     private void Slide()
     {
-        if (_animator != null)
+        if (_animator)
         {
             _animator.SetTrigger("isSlide");
         }
@@ -259,10 +259,12 @@ public class PlayerController : MonoBehaviour,IDamageable
         }
         else
         {
-            // Your jump/slide code
+            // Jump & Slide code
             if (swipeDelta.y > 0 && !_isJumping)
             {
                 Jump();
+
+                if (_isSliding) StopSlide();
             }
             else if (swipeDelta.y < 0 && !_isSliding)
             {
