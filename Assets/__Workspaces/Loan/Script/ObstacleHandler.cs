@@ -8,9 +8,6 @@ public class ObstacleHandler : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerController>(out var playerController))
         {
-            //ScreenShake
-            FeedbackManager.SmallShake();
-            
             EventBus.OnPlayerTakeDamage?.Invoke(ObstacleData.Damage);
             EventBus.OnObstacleHit?.Invoke();
             if (ObstacleData.IsStunning)

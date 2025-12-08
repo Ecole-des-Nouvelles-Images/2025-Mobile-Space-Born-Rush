@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHandler : MonoBehaviour, IDamageable
@@ -9,6 +11,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public Transform Transform;
     public Rigidbody Rb;
     public GameUpgradeController GameUpgrades;
+    public GameDirector GameDirector;
 
     [Header("<color=red>=====Attack Settings=====</color>")]
     // public WeaponData WeaponData;
@@ -38,34 +41,32 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     private float _knockbackTimer = 3f;
     private float _knockbackForceMax = 8f;
     private float[] _lanes = new[] { -1.5f, 0f, 1.5f };
-    
-    
-    private void Start()
+
+    private void OnEnable()
     {
         EventBus.OnEnemyDead += Death;
         EventBus.OnGameOver += GameOver;
-        Rb = GetComponent<Rigidbody>();
-        Transform = GetComponent<Transform>();
-        GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
-        CurrentHealth = EnemyData.MaxHealth;
-        CurrentFireRate = EnemyData.FireRate;
-        CurrentDamage = EnemyData.Damage;
-        IsWait =  true;
-        if (Animator != null)
-        {
-            Animator = GetComponent<Animator>();
-        }
-
-        if (IsRange)
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
     }
 
     private void OnDestroy()
     {
         EventBus.OnEnemyDead -= Death;
         EventBus.OnGameOver -= GameOver;
+    }
+    private void Start()
+    {
+        Rb = GetComponent<Rigidbody>();
+        Transform = GetComponent<Transform>();
+        GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
+        GameDirector = FindObjectOfType<GameDirector>();
+        CurrentHealth = EnemyData.MaxHealth + GameDirector.DifficultyHealth;
+        CurrentFireRate = EnemyData.FireRate;
+        CurrentDamage = EnemyData.Damage + GameDirector.DifficultyDamage;
+        IsWait =  true;
+        if (Animator)
+        {
+            Animator = GetComponent<Animator>();
+        }
     }
 
     private void FixedUpdate()

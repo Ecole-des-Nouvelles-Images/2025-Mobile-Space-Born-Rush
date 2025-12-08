@@ -71,6 +71,7 @@ public static class EventBus
     public static Action<GameObject> OnEnemyDead;
     public static Action<float> OnEnemyTakeDamage;
     public static Action OnEnemyGotPastPlayer;
+    public static Action<int, int> OnDifficultyChange;
 
     // ===== ENVIRONMENT EVENTS =====
     public static Action<Terrain> GenerationTerrainFinished;

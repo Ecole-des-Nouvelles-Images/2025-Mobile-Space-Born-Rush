@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Manicas_Maelys_PLacementUI4_0
+      name: Manicas_Maelys_PLacementUI4_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 2163
-        width: 304
-        height: 256
+        x: 569
+        y: 2368
+        width: 287
+        height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 025f466bc61f078409ea48b9d460d61e
-      internalID: -1610681583
+      spriteID: 63ffdc50b142d2342bd50b2e5f25507d
+      internalID: 1341720130
       vertices: []
       indices: 
       edges: []
@@ -135,10 +135,10 @@ TextureImporter:
       name: Manicas_Maelys_PLacementUI4_2
       rect:
         serializedVersion: 2
-        x: 69
-        y: 1809
-        width: 269
-        height: 270
+        x: 1042
+        y: 2343
+        width: 337
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,8 +147,250 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e6c0c3858cd8bf448a752325a234b40
-      internalID: 431238432
+      spriteID: 369530a9b7a10d24da98f4783f01f9fb
+      internalID: 1877294494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 2163
+        width: 309
+        height: 260
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc817ded7a3e78a419a29742918be06d
+      internalID: 164434850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_4
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 2236
+        width: 287
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18d97012508ae544991c28c29f7dce9b
+      internalID: -218021308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_5
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 2145
+        width: 428
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 966b7b84bba10c4498bc106b8acefbd4
+      internalID: -1279150149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_6
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 2114
+        width: 367
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6caabda1e77d9048a3024b06d32b5ef
+      internalID: -1144021220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_7
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 1815
+        width: 292
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1ab19fc9eb006b4288ee65149e63050
+      internalID: -1345998515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_9
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 1980
+        width: 367
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 635108c33f2e6a141922e33f23fa7ce5
+      internalID: 637211818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_10
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1774
+        width: 106
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69d9e90143c159c4b95a385a3b855de4
+      internalID: 474743254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_11
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 1760
+        width: 180
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e30838ab6d58b48998848abba03716
+      internalID: -1546518376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_12
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 1762
+        width: 182
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bbe1251e5ef84e4a88529ee05b688cd
+      internalID: 14386172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_13
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 1459
+        width: 410
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e68d746a973907d489b9516c4a456367
+      internalID: 189459419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Manicas_Maelys_PLacementUI4_14
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 1459
+        width: 409
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40e6f6397f0d87146b6c0e2b81af6fa7
+      internalID: 512973317
       vertices: []
       indices: 
       edges: []
@@ -157,7 +399,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d37e786770e5a064494d2c1867bf3aeb
+    spriteID: 277df991d7bd9b34a928f18c43b2a9fc
     internalID: 0
     vertices: []
     indices: 
@@ -169,10 +411,21 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Manicas_Maelys_PLacementUI4_0: -1610681583
-      Manicas_Maelys_PLacementUI4_1: 1935163423
-      Manicas_Maelys_PLacementUI4_2: 431238432
-      Manicas_Maelys_PLacementUI4_3: -1619625959
+      Manicas_Maelys_PLacementUI4_0: 1553148819
+      Manicas_Maelys_PLacementUI4_1: 1341720130
+      Manicas_Maelys_PLacementUI4_10: 474743254
+      Manicas_Maelys_PLacementUI4_11: -1546518376
+      Manicas_Maelys_PLacementUI4_12: 14386172
+      Manicas_Maelys_PLacementUI4_13: 189459419
+      Manicas_Maelys_PLacementUI4_14: 512973317
+      Manicas_Maelys_PLacementUI4_2: 1877294494
+      Manicas_Maelys_PLacementUI4_3: 164434850
+      Manicas_Maelys_PLacementUI4_4: -218021308
+      Manicas_Maelys_PLacementUI4_5: -1279150149
+      Manicas_Maelys_PLacementUI4_6: -1144021220
+      Manicas_Maelys_PLacementUI4_7: -1345998515
+      Manicas_Maelys_PLacementUI4_8: -905155455
+      Manicas_Maelys_PLacementUI4_9: 637211818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
