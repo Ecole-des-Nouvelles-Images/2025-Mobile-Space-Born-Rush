@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerStatController : MonoBehaviour
 {
@@ -103,6 +105,7 @@ public class PlayerStatController : MonoBehaviour
         
         //Invoke GameOver
         EventBus.OnGameOver?.Invoke();
+        _isStart = false;
         
         //Then die
         // Destroy(this);
@@ -141,5 +144,14 @@ public class PlayerStatController : MonoBehaviour
         _currentXP = 0;
         _xpToLevelUp = _playerData.BaseXPToLevelUp;
         _xpMultiplier = _playerData.BaseXPMultiplier;
+        _isStart = true;
+    }
+
+    private void Update()
+    {
+        if (_isStart)
+        {
+            _healthBar.fillAmount = _currentHealth / MaxHealth;
+        }
     }
 }

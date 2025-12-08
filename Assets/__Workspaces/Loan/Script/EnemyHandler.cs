@@ -67,6 +67,11 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         {
             Animator = GetComponent<Animator>();
         }
+
+        if (IsRange)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
     }
 
     private void FixedUpdate()

@@ -19,6 +19,7 @@ MonoBehaviour:
   FireRate: 0.35
   FireDistance: 25
   MagSize: 10
+  IsPlayer: 1
   EnemyMask:
     serializedVersion: 2
     m_Bits: 72
