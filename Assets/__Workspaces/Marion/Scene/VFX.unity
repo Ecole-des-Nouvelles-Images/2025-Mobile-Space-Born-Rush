@@ -525,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &723143456
 Transform:
   m_ObjectHideFlags: 0
@@ -995,6 +995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_HumanGabarit_Ue
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ae8df951a6e6e6843961bcb4280556b5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
