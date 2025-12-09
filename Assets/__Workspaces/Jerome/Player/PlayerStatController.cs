@@ -13,6 +13,7 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
 
     [SerializeField] private Image _healthBar;
+    [SerializeField] private ParticleSystem _takeXpParticles;
     private bool _isStart = false;
     
     #region subscriptions
@@ -64,6 +65,7 @@ public class PlayerStatController : MonoBehaviour
     private void OnPlayerCurrentXPChange(float val)
     {
         _currentXP += val;
+        _takeXpParticles.Play();
 
         if (_currentXP >= _xpToLevelUp)
         {

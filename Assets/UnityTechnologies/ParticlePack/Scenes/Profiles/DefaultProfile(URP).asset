@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.3
   response:
     m_OverrideState: 1
     m_Value: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.03
 --- !u!114 &-2258499163602125952
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -103,6 +103,34 @@ MonoBehaviour:
   gain:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
+--- !u!114 &-2067433394697089261
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.Vignette
+  active: 1
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.2}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.183
+  smoothness:
+    m_OverrideState: 0
+    m_Value: 0.252
+  rounded:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +153,7 @@ MonoBehaviour:
   - {fileID: 740967236602005484}
   - {fileID: -3810629763630417521}
   - {fileID: -2479417445916080044}
+  - {fileID: -2067433394697089261}
 --- !u!114 &740967236602005484
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -444,7 +473,7 @@ MonoBehaviour:
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: -8
   saturation:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: -22
