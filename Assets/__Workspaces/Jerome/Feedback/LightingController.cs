@@ -7,7 +7,6 @@ public class LightingController : MonoBehaviour
 
     [Header("Light Reference")]
     [SerializeField] private Light _targetLight; // Direct reference to the Light component
-    [SerializeField] private Light _targetLight2; // Direct reference to the other Light component
 
     [Header("Health Light Settings")]
     [SerializeField] private Color _fullHealthColor = Color.white;
@@ -65,7 +64,7 @@ public class LightingController : MonoBehaviour
         _lastKnownHealth = currentHealth;
 
         // === Determine target color based on health ===
-        if (currentHealth > currentHealth*_lowHealthThreshold)
+        if (currentHealth > _playerStats.MaxHealth*_lowHealthThreshold)
         {
             _currentTargetColor = _fullHealthColor;
         }
@@ -79,7 +78,6 @@ public class LightingController : MonoBehaviour
                                    Time.deltaTime * _colorChangeSpeed);
         
         _targetLight.color = _currentColor;
-        _targetLight2.color = _currentColor;
 
         // === Optional: Change intensity too ===
         if (_changeIntensity)
