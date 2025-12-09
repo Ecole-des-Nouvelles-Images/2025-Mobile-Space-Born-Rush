@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Fire Rate
   Description: Increases the current waepons fire rate.
-  Icon: {fileID: 0}
+  Icon: {fileID: -1605597557, guid: 9dcf7718b613e63488568d8019319b7c, type: 3}
   category: 1
   Type: 6
   Value: 1
