@@ -55,7 +55,12 @@ public class GameUpgradeController : MonoBehaviour
 
     #endregion
     
-    public float GameSpeed => _gameSpeed;
+    public float GameSpeed
+    {
+        get => _gameSpeed;
+        set => _gameSpeed = value;
+    }
+
     public float NumberOfUpgrades => _numberOfUpgrades;
 
     IEnumerator SpeedBoost(float speedBoost, float time)

@@ -84,25 +84,34 @@ public class WeaponHandler : MonoBehaviour
             if (_currentBullet.IsDestroyedObstacle)
             {
                 if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
-                { 
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                {
+                    if (_currentWeapon.IsPlayer)
                     {
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(enemy,null);
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                        {
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(enemy,null);
+                        }
                     }
-                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(null,player);
+                    else
+                    {
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                            return; 
+                        if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                        { 
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(null,player);
+                        }
                     }
+                    
                 }
             }
             else
@@ -111,24 +120,32 @@ public class WeaponHandler : MonoBehaviour
                 { 
                     if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) 
                         return;
-                    
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+
+                    if (_currentWeapon.IsPlayer)
                     {
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(enemy,null);
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                        {
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(enemy,null);
+                        }
                     }
-                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(null,player);
+                    else
+                    {
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                            return;
+                        if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                        { 
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(null,player);
+                        }
                     }
                     
                 }
