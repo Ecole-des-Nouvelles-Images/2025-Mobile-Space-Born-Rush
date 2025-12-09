@@ -16,9 +16,7 @@ public class KillTriggerHandler : MonoBehaviour
         //TODO Swap to pooling
         if (other.gameObject.CompareTag("Enemy"))
         {
-            float damage = _playerStat.MaxHealth * _percent;
             EventBus.OnEnemyGotPastPlayer?.Invoke();
-            EventBus.OnPlayerTakeDamage?.Invoke(damage);
             Destroy(other.gameObject);
         }
     }
