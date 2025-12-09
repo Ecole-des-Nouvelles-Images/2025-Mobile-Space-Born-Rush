@@ -16,6 +16,8 @@ public class WeaponHandler : MonoBehaviour
     
     [SerializeField] private bool _isRaycastDraw;
     
+    [SerializeField] private ParticleSystem _fireParticles;
+    
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
     [SerializeField]private LayerMask _layerMask;
@@ -206,10 +208,12 @@ public class WeaponHandler : MonoBehaviour
             if (enemy != null)
             {
                 _currentBullet.OnHitEnemy(enemy,enemy);
+                _fireParticles.Play();
             }
             else
             {
                 _currentBullet.OnHitEnemy(player,null);
+                _fireParticles.Play();
             }
             
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;

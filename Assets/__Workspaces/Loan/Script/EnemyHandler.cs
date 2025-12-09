@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyHandler : MonoBehaviour, IDamageable
 {
@@ -23,6 +24,10 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     
     [Header("<color=cyan>======Animator======</color>")]
     public Animator Animator;
+    
+    [FormerlySerializedAs("HitParticles")]
+    [Header("<color=blue>======Particule System======</color>")]
+    [SerializeField] ParticleSystem _hitParticles;
     
     [Header("<color=magenta>=====Other Settings=====</color>")]
     public Vector3 KnockBackVelocity;
@@ -105,6 +110,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         {
             Animator.SetTrigger("isHit");
         }
+        _hitParticles.Play();
         CurrentHealth -= damage;
     }
 
