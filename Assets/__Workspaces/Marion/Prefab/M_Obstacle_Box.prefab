@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleHandler
   ObstacleData: {fileID: 0}
+  _particleSystem: {fileID: 7541559784716997548}
 --- !u!65 &7274873122721160049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1049,6 +1050,12 @@ PrefabInstance:
 --- !u!4 &769530258036494002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3701544315433926544, guid: 9fcc33fb392df81448fedffa8c14afbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4175801402018246946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7541559784716997548 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5862118720650715790, guid: 9fcc33fb392df81448fedffa8c14afbb,
     type: 3}
   m_PrefabInstance: {fileID: 4175801402018246946}
   m_PrefabAsset: {fileID: 0}

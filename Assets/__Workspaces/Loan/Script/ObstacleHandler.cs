@@ -3,6 +3,7 @@ using UnityEngine;
 public class ObstacleHandler : MonoBehaviour
 {
     public ObstacleData ObstacleData;
+    [SerializeField] private ParticleSystem _particleSystem;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +17,10 @@ public class ObstacleHandler : MonoBehaviour
             }
             else
             {
+                if (_particleSystem != null)
+                {
+                    _particleSystem.Play();
+                }
                 Destroy(gameObject);
             }
         }
