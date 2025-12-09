@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Game Speed
   Description: Increases how fast the game plays.
-  Icon: {fileID: 0}
+  Icon: {fileID: -884949612, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
   category: 2
   Type: 4
   Value: 1.2

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: HP Drop Boost
   Description: Incerases how much health is recovered from drops
-  Icon: {fileID: 0}
+  Icon: {fileID: 970099956, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
   category: 0
   Type: 8
   Value: 0.1

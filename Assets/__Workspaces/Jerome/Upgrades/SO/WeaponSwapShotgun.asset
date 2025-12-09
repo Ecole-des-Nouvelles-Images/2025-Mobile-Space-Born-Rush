@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Change Weapon
   Description: Swap to the Shotgun
-  Icon: {fileID: 0}
+  Icon: {fileID: -527765299, guid: 9dcf7718b613e63488568d8019319b7c, type: 3}
   category: 1
   Type: 2
   Value: 2

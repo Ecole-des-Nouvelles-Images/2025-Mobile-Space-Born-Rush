@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Damage
   Description: Increases current weapons damage.
-  Icon: {fileID: 0}
+  Icon: {fileID: -1651781478, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
   category: 1
   Type: 1
   Value: 5
