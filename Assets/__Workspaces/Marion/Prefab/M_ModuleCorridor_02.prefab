@@ -929,13 +929,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LightingController
   _playerStats: {fileID: 0}
   _targetLight: {fileID: 7755350377363700219}
+  _targetLight2: {fileID: 1529400138453073164}
   _fullHealthColor: {r: 0, g: 0.7294118, b: 1, a: 1}
   _lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  _colorChangeSpeed: 2
+  _colorChangeSpeed: 1
   _changeIntensity: 0
   _fullHealthIntensity: 1
   _lowHealthIntensity: 0.5
-  _lowHealthThreshold: 50
+  _lowHealthThreshold: 0.5
+  _currentTargetColor: {r: 0, g: 0, b: 0, a: 0}
+  _currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &83006480163827247
 PrefabInstance:
   m_ObjectHideFlags: 0

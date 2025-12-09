@@ -7,11 +7,12 @@ public class LightingController : MonoBehaviour
 
     [Header("Light Reference")]
     [SerializeField] private Light _targetLight; // Direct reference to the Light component
+    [SerializeField] private Light _targetLight2; // Direct reference to the other Light component
 
     [Header("Health Light Settings")]
     [SerializeField] private Color _fullHealthColor = Color.white;
     [SerializeField] private Color _lowHealthColor = Color.red;
-    [SerializeField, Range(0.1f, 5f)] private float _colorChangeSpeed = 2f;
+    [SerializeField, Range(0.1f, 5f)] private float _colorChangeSpeed = 1f;
 
     [Header("Intensity Settings (Optional)")]
     [SerializeField] private bool _changeIntensity = false;
@@ -19,7 +20,7 @@ public class LightingController : MonoBehaviour
     [SerializeField] private float _lowHealthIntensity = 0.5f;
 
     [Header("Health Threshold")]
-    [SerializeField, Range(0, 100)] private int _lowHealthThreshold = 50;
+    [SerializeField, Range(0f, 1f)] private float _lowHealthThreshold = 0.5f;
 
     // Cached values for optimization
     private Color _currentTargetColor;
@@ -59,15 +60,12 @@ public class LightingController : MonoBehaviour
         float currentHealth = _playerStats.CurrentHealth;
 
         // === OPTIMIZATION: Skip if health hasn't changed ===
-        if (Mathf.Approximately(currentHealth, _lastKnownHealth))
-        {
-            return;
-        }
+        if (SmallHealthDiff(currentHealth) && _currentColor == _currentTargetColor) return;
 
         _lastKnownHealth = currentHealth;
 
         // === Determine target color based on health ===
-        if (currentHealth > _lowHealthThreshold)
+        if (currentHealth > currentHealth*_lowHealthThreshold)
         {
             _currentTargetColor = _fullHealthColor;
         }
@@ -81,6 +79,7 @@ public class LightingController : MonoBehaviour
                                    Time.deltaTime * _colorChangeSpeed);
         
         _targetLight.color = _currentColor;
+        _targetLight2.color = _currentColor;
 
         // === Optional: Change intensity too ===
         if (_changeIntensity)
@@ -92,6 +91,15 @@ public class LightingController : MonoBehaviour
         }
     }
 
+    bool SmallHealthDiff(float currentHealth)
+    {
+        if (currentHealth >= _lastKnownHealth - 5 && currentHealth <= _lastKnownHealth + 5) return true;
+
+        _lastKnownHealth = currentHealth;
+        return false;
+        
+    }
+    
     // === Helper method for instant changes (e.g., healing potion) ===
     public void ForceUpdateLight()
     {
