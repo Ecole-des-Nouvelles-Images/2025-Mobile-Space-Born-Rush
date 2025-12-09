@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Choices
   Description: Increase the number of choices given on level ip
-  Icon: {fileID: 0}
+  Icon: {fileID: 2075886160, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
   category: 2
   Type: 9
   Value: 1
