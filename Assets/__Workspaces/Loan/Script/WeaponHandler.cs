@@ -23,11 +23,14 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField]private LayerMask _layerMask;
     private Animator _animator;
     private bool _isAim;
+    private Material _material;
+    private float _toRougeValue;
 
     private void Awake()
     {
         EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
         EventBus.OnGameStart += GameStart;
+        _material = GetComponent<Renderer>().material;
     }
 
     private void Start()
@@ -158,6 +161,7 @@ public class WeaponHandler : MonoBehaviour
         {
             _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
             _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
+            _toRougeValue = 1;
         }
             
         if (_currentFireRate > 0)
@@ -170,12 +174,17 @@ public class WeaponHandler : MonoBehaviour
             _currentCooldown -= Time.deltaTime;
             _isAim = false;
         }
+        else
+        {
+            _toRougeValue = 0;
+        }
         
         // if (_animator != null && !_isAim)
         // {
         //     _animator.SetBool("isAim",false);
         // }
-
+        _material.SetFloat("_ToRouge", _toRougeValue);
+        
         if (_isRaycastDraw)
         {
             Debug.DrawRay(_weaponRaycast.origin, _weaponRaycast.direction * _currentWeapon.FireDistance, Color.red);
@@ -197,6 +206,7 @@ public class WeaponHandler : MonoBehaviour
         {
             _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
             _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
+            _toRougeValue = 1;
         }
         else
         {
