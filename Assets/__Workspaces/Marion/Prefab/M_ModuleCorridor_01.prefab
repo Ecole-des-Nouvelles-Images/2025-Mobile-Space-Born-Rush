@@ -386,7 +386,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3752b11fd1fd1d4398433343aa1ec33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightingController
-  _lightMaterial: {fileID: 0}
+  _playerStats: {fileID: 0}
+  _targetLight: {fileID: 5732921998537864204}
+  _targetLight2: {fileID: 799707820304055890}
+  _fullHealthColor: {r: 0, g: 0.7294118, b: 1, a: 1}
+  _lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  _colorChangeSpeed: 1
+  _changeIntensity: 0
+  _fullHealthIntensity: 1
+  _lowHealthIntensity: 0.5
+  _lowHealthThreshold: 0.5
+  _currentTargetColor: {r: 0, g: 0, b: 0, a: 0}
+  _currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &5555690323698111194
 GameObject:
   m_ObjectHideFlags: 0

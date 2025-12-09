@@ -1448,12 +1448,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatController
   _playerData: {fileID: 11400000, guid: b7b9fe7912d4f224993af640ca7f2bcf, type: 2}
-  MaxHealth: 0
+  _maxHealth: 0
   _currentHealth: 0
   _hpDropMultiplier: 0
   _currentXP: 0
   _xpToLevelUp: 0
   _xpMultiplier: 0
+  _healthBar: {fileID: 0}
 --- !u!114 &186121869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7510,9 +7511,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartUpManager
   _modulPrefb:
-  - {fileID: 4264590297778141436, guid: d4496db7d7621be479b400eb066ae838, type: 3}
-  - {fileID: 3896133961801177329, guid: 32bed9ed4a2faeb46930f5437e635c1b, type: 3}
-  - {fileID: 4194574011200283712, guid: a2831f671d4fa5145a2f5a851ea84b79, type: 3}
+  - {fileID: 4657553178679537581, guid: 4cf24f6f87ef26c48a8636d9ef0223fd, type: 3}
+  - {fileID: 8920960571737518199, guid: fc9876a9e5ccf1d468dc38f1d049ba6a, type: 3}
+  - {fileID: 7595878097578157565, guid: a68d1f546d11f13498f685688bb7c360, type: 3}
   _playerPrefb: {fileID: 0}
   _parentTransform: {fileID: 721820564}
 --- !u!1001 &1473931661
@@ -7737,8 +7738,9 @@ MonoBehaviour:
   _difficultyIncrement: 60000
   _difficultyHealth: 10
   _difficultyDamage: 2
+  _healthIncrement: 10
+  _damageIncrement: 2
   _gameUpgrades: {fileID: 0}
-  _enemyHandler: {fileID: 0}
 --- !u!1 &1558882584
 GameObject:
   m_ObjectHideFlags: 0
