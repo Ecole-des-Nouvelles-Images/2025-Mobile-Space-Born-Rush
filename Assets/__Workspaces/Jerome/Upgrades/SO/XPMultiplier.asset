@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   category: 0
   Type: 3
-  Value: 0.1
+  Value: 0.2
   maxTimesSelectable: 0
   timesSelected: 0
   isExclusive: 0

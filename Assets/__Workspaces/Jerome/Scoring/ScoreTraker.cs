@@ -32,7 +32,7 @@ public class ScoreTracker : MonoBehaviour
             Debug.LogWarning("High Score Text not assigned to ScoreTracker!");
         
         if (!_scoringManager)
-            _scoringManager = FindObjectOfType<ScoringManager>();
+            _scoringManager = FindAnyObjectByType<ScoringManager>();
         
         if (!_highScoreData)
             Debug.LogWarning("HighScoreData not assigned to ScoreTracker!");

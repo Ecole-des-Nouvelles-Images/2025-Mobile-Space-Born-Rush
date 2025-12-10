@@ -15,11 +15,11 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   BulletData: {fileID: 11400000, guid: ce94d54a8dd69f944ace1bc36cd1a2dd, type: 2}
   Name: RX-77
-  Cooldown: 5
-  FireRate: 0.35
+  Cooldown: 3
+  FireRate: 0.6
   FireDistance: 25
-  MagSize: 10
+  MagSize: 20
   IsPlayer: 1
   EnemyMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 8

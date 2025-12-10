@@ -29,10 +29,6 @@ public class WeaponHandler : MonoBehaviour
 
     private void Awake()
     {
-        EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
-        EventBus.OnGameStart += GameStart;
-        EventBus.OnGamePause += GamePause;
-        EventBus.OnGameResume += GameResume;
         _material = GetComponent<Renderer>().material;
     }
 
@@ -44,6 +40,12 @@ public class WeaponHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        //Subs need to be OnEnable since we Enable and disable weapons throughout the game
+        EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
+        EventBus.OnGameStart += GameStart;
+        EventBus.OnGamePause += GamePause;
+        EventBus.OnGameResume += GameResume;
+        
         _currentWeapon = _weaponData;
         _currentBullet = _currentWeapon.BulletData;
         _ammoNumber = _currentWeapon.MagSize;
@@ -84,7 +86,7 @@ public class WeaponHandler : MonoBehaviour
         _stunCoroutine = StartCoroutine(AsyncStun(time));
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         EventBus.OnPlayerTakeStun -= OnPlayerTakeStun;
         EventBus.OnGameStart -= GameStart;

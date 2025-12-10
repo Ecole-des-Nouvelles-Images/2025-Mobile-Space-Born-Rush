@@ -44,7 +44,7 @@ public class LightingController : MonoBehaviour
 
         if (!_playerStats)
         {
-            _playerStats = FindObjectOfType<PlayerStatController>();
+            _playerStats = FindAnyObjectByType<PlayerStatController>();
         }
 
         // Initialize with current light color

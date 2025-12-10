@@ -9415,8 +9415,8 @@ MonoBehaviour:
   _speedIncrement: 30000
   _difficultyPerLevel: 5
   _difficultyIncrement: 60000
-  _difficultyHealth: 10
-  _difficultyDamage: 2
+  _difficultyHealth: 0
+  _difficultyDamage: 0
   _healthIncrement: 10
   _damageIncrement: 2
   _gameUpgrades: {fileID: 186121869}

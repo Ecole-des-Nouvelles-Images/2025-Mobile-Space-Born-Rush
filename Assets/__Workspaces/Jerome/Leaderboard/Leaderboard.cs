@@ -11,8 +11,6 @@ public class LeaderboardManager : MonoBehaviour
     [Header("Parent")]
     [SerializeField] private Transform _scoreParent;
     
-    private string _publicLeaderboardKey = "5c3c902af5a8e494aab05ef56ebcd46b03e3ea04c7848ea0482a6a154304c6dc";
-    
     
     private void OnEnable()
     {
