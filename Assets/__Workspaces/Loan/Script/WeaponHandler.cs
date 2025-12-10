@@ -25,11 +25,14 @@ public class WeaponHandler : MonoBehaviour
     private bool _isAim;
     private Material _material;
     private float _toRougeValue;
+    private bool _isPause;
 
     private void Awake()
     {
         EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
         EventBus.OnGameStart += GameStart;
+        EventBus.OnGamePause += GamePause;
+        EventBus.OnGameResume += GameResume;
         _material = GetComponent<Renderer>().material;
     }
 
@@ -61,6 +64,16 @@ public class WeaponHandler : MonoBehaviour
         _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
     }
 
+    private void GamePause()
+    {
+        _isPause = true;
+    }
+
+    private void GameResume()
+    {
+        _isPause = false;
+    }
+
     private void OnPlayerTakeStun(float time)
     {
         if (_stunCoroutine != null)
@@ -79,6 +92,9 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+        if (_isPause)
+            return;
+        
         _isAim = false;
         if (_isStunned) return;
         

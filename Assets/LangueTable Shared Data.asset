@@ -43,6 +43,34 @@ MonoBehaviour:
     m_Key: B_Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 3241105363652608
+    m_Key: B_Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3241180110344192
+    m_Key: B_Quitt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3241239803678720
+    m_Key: S_MasterVolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3290737418522624
+    m_Key: S_Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3290795425746944
+    m_Key: S_SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3290839788900352
+    m_Key: S_Ambiance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296491462545408
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
