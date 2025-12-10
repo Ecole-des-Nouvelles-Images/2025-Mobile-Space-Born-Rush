@@ -33,5 +33,6 @@ public class FeedbackManager : MonoBehaviour
     public static void SmallShake()
     {
         _localImpulseSource.GenerateImpulseWithForce(0.05f);
+        Handheld.Vibrate();
     }
 }

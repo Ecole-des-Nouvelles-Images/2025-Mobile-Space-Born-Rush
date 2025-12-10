@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Cooldown
   Description: Reduces the current weapons cooldown.
-  Icon: {fileID: 0}
+  Icon: {fileID: 1690835182, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
   category: 1
   Type: 5
   Value: 1

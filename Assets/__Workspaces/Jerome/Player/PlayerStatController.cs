@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerStatController : MonoBehaviour
 {
@@ -8,9 +10,12 @@ public class PlayerStatController : MonoBehaviour
     
     
     //Player Variables
-    [FormerlySerializedAs("_maxHealth")]public  float MaxHealth;
-    [SerializeField] private float _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
+    [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
 
+    [SerializeField] private Image _healthBar;
+    [SerializeField] private ParticleSystem _takeXpParticles;
+    private bool _isStart = false;
+    
     #region subscriptions
     private void Awake()
     {
@@ -47,7 +52,7 @@ public class PlayerStatController : MonoBehaviour
     private void OnPlayerMaxHealthChange(float val)
     {
         //Depends on how the value is sent but this is the basic logic
-        MaxHealth += val;
+        _maxHealth += val;
         EventBus.OnPlayerCurrentHealthChange(val);
     }
     private void OnPlayerCurrentHealthChange(float val)
@@ -60,6 +65,7 @@ public class PlayerStatController : MonoBehaviour
     private void OnPlayerCurrentXPChange(float val)
     {
         _currentXP += val;
+        _takeXpParticles.Play();
 
         if (_currentXP >= _xpToLevelUp)
         {
@@ -104,6 +110,7 @@ public class PlayerStatController : MonoBehaviour
         
         //Invoke GameOver
         EventBus.OnGameOver?.Invoke();
+        _isStart = false;
         
         //Then die
         // Destroy(this);
@@ -127,20 +134,29 @@ public class PlayerStatController : MonoBehaviour
     #endregion
     
     //If I ever decide to decouple this class into a data class and a damage handler or smth
-    // public float HPDropMultiplier => _hpDropMultiplier;
-    // public float XPMultiplier => _xpMultiplier;
-    // public float MaxHealth => _maxHealth;
-    // public float CurrentHealth => _currentHealth;
-    // public float CurrentXp => _currentXP;
-    // public float XpToLevelUp => _xpToLevelUp;
+    public float HPDropMultiplier => _hpDropMultiplier;
+    public float XPMultiplier => _xpMultiplier;
+    public float MaxHealth => _maxHealth;
+    public float CurrentHealth => _currentHealth;
+    public float CurrentXp => _currentXP;
+    public float XpToLevelUp => _xpToLevelUp;
     
     private void GameStart()
     {
-        MaxHealth = _playerData.BaseMaxHealth;
+        _maxHealth = _playerData.BaseMaxHealth;
         _currentHealth = _playerData.BaseMaxHealth;
         _hpDropMultiplier = _playerData.BaseHPDropMultiplier;
         _currentXP = 0;
         _xpToLevelUp = _playerData.BaseXPToLevelUp;
         _xpMultiplier = _playerData.BaseXPMultiplier;
+        _isStart = true;
+    }
+
+    private void Update()
+    {
+        if (_isStart)
+        {
+            _healthBar.fillAmount = _currentHealth / MaxHealth;
+        }
     }
 }

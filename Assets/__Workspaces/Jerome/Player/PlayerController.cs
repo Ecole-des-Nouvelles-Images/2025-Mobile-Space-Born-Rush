@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,13 @@ public class PlayerController : MonoBehaviour,IDamageable
     [SerializeField]private bool _isJumping = false;
     [SerializeField] private bool _isSliding;
     private bool _isPaused;
+    
+    [Header("Lane Movement")]
+    [SerializeField] private float _laneChangeSpeed = 10f; // How fast we move between lanes
+    private bool _isChangingLane = false;
+    private Coroutine _laneChangeCoroutine = null; // Reference to our running movement coroutine
+    
+    private bool IsInNeutralState => !_isJumping && !_isSliding && !_isChangingLane;    
     
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
@@ -234,28 +242,31 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         if (isHorizontalSwipe)
         {
-            // Your lane switching code
-            if (swipeDelta.x > 0)
+            // Calculate target lane
+            int targetLane = _currentLaneIndex + (swipeDelta.x > 0 ? 1 : -1);
+            targetLane = _laneProfile.GetLaneIndex(targetLane); // Clamp/validate
+    
+            // Don't move if we're already on that lane
+            if (targetLane == _currentLaneIndex) return;
+    
+            // RULE 2: Allow lane changes during slide, but no animation
+            // RULE 3: Only play animation from neutral state
+            if (IsInNeutralState && _animator)
             {
-                if (_animator)
-                {
-                    _animator.SetTrigger("isMoveRight");
-                }
-                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex + 1);
+                _animator.SetTrigger(swipeDelta.x > 0 ? "isMoveRight" : "isMoveLeft");
             }
-            else
+    
+            // Update current lane immediately
+            _currentLaneIndex = targetLane;
+    
+            // Stop any existing movement coroutine
+            if (_laneChangeCoroutine != null)
             {
-                if (_animator)
-                {
-                    _animator.SetTrigger("isMoveLeft");
-                }
-                _currentLaneIndex = _laneProfile.GetLaneIndex(_currentLaneIndex - 1);
+                StopCoroutine(_laneChangeCoroutine);
             }
-            
-            Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
-            var position = transform.position;
-            position.x = targetPos.x;
-            transform.position = position;
+    
+            // Start smooth movement (works whether sliding or not)
+            _laneChangeCoroutine = StartCoroutine(MoveToLane(_currentLaneIndex));
         }
         else
         {
@@ -273,6 +284,46 @@ public class PlayerController : MonoBehaviour,IDamageable
         }
     }
     #endregion
+    private IEnumerator MoveToLane(int targetLaneIndex)
+    {
+        _isChangingLane = true;
+    
+        // Get the starting and target X positions
+        float startX = transform.position.x;
+        float targetX = _laneProfile.GetLanePosition(targetLaneIndex).x;
+    
+        float elapsedTime = 0f;
+        // Calculate how long the movement should take based on distance and speed
+        float distance = Mathf.Abs(targetX - startX);
+        float duration = distance / _laneChangeSpeed;
+    
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+        
+            // Use a smoother interpolation curve (easing)
+            float smoothedT = Mathf.SmoothStep(0f, 1f, t);
+        
+            // Calculate new X position
+            float newX = Mathf.Lerp(startX, targetX, smoothedT);
+        
+            // Apply only to X axis
+            Vector3 newPos = transform.position;
+            newPos.x = newX;
+            transform.position = newPos;
+        
+            yield return null; // Wait until next frame
+        }
+    
+        // Ensure we snap to the exact final position
+        Vector3 finalPos = transform.position;
+        finalPos.x = targetX;
+        transform.position = finalPos;
+    
+        _isChangingLane = false;
+        _laneChangeCoroutine = null;
+    }
     
     //The logic to stop the player from double jumping or sliding while jumping
     private void OnCollisionEnter(Collision other)

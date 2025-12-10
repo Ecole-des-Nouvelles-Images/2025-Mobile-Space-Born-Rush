@@ -49,9 +49,9 @@ public class ModulMove : MonoBehaviour
 
     private void SpawnObstacles()
     {
-        // for (int i = 2; i < _gridManager.Grid.GetLength(0); i++)
+        // for (int i = 0; i < _gridManager.Grid.GetLength(0); i++)
         // {
-        //     for (int j = 0; j < _gridManager.Grid.GetLength(1); j++)
+        //     for (int j = 2; j < _gridManager.Grid.GetLength(1); j++)
         //     {
         //         float chance = Random.Range(0f, 1f);
         //
@@ -70,7 +70,7 @@ public class ModulMove : MonoBehaviour
         //                     pos.x = 0;
         //                 }
         //
-        //                 if (currentObstacle.LanesTaken == 1)
+        //                 if (currentObstacle.IsRotate)
         //                 {
         //                      rotate = Quaternion.Euler(0,Random.Range(0,360),0);
         //                 }
@@ -97,7 +97,7 @@ public class ModulMove : MonoBehaviour
         int height = _gridManager.Grid.GetLength(1);
             
         List<Vector2Int> candidateCells = new List<Vector2Int>();
-
+        
         for (int i = 0; i < width; i++)
         {
             for (int j = 1; j < height; j++) 
@@ -107,7 +107,7 @@ public class ModulMove : MonoBehaviour
         }
         
         // int obstaclesToSpawn = ObstacleNumber; 
-
+        
         while (candidateCells.Count > 0)
         {
             int randomIndex = Random.Range(0, candidateCells.Count);
@@ -126,19 +126,19 @@ public class ModulMove : MonoBehaviour
             
             Vector3 pos = _gridManager.GetCellWorldPosition(cell.x, cell.y);
             Quaternion rotate = Quaternion.identity;
-            
+
             if (currentObstacle.LanesTaken == 3)
             {
                 pos.x = 0;
             }
-
-            if (currentObstacle.LanesTaken == 1)
+            
+            if (currentObstacle.IsRotate)
             {
                 rotate = Quaternion.Euler(0, Random.Range(0, 360), 0);
             }
             
             GameObject obstacle = Instantiate(currentObstacle.Prefab, pos, rotate, transform);
-            obstacle.GetComponent<ObstacleHandler>().ObstacleData = currentObstacle;
+            obstacle.GetComponentInChildren<ObstacleHandler>().ObstacleData = currentObstacle;
             
             if (currentObstacle.LanesTaken == 1)
             {
@@ -151,7 +151,7 @@ public class ModulMove : MonoBehaviour
                     _gridManager.SetCellEmpty(laneX, cell.y, false);
                 }
             }
-
+        
             // obstaclesToSpawn--;
         }
     }

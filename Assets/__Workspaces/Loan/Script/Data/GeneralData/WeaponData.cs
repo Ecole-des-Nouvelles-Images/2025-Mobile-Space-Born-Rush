@@ -10,5 +10,6 @@ public class WeaponData : ScriptableObject
     public float FireRate;
     public float FireDistance;
     public int MagSize;
+    public bool IsPlayer;
     public LayerMask EnemyMask;
 }

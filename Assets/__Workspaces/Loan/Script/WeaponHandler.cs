@@ -16,16 +16,21 @@ public class WeaponHandler : MonoBehaviour
     
     [SerializeField] private bool _isRaycastDraw;
     
+    [SerializeField] private ParticleSystem _fireParticles;
+    
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
     [SerializeField]private LayerMask _layerMask;
     private Animator _animator;
     private bool _isAim;
+    private Material _material;
+    private float _toRougeValue;
 
     private void Awake()
     {
         EventBus.OnPlayerTakeStun += OnPlayerTakeStun;
         EventBus.OnGameStart += GameStart;
+        _material = GetComponent<Renderer>().material;
     }
 
     private void Start()
@@ -84,25 +89,34 @@ public class WeaponHandler : MonoBehaviour
             if (_currentBullet.IsDestroyedObstacle)
             {
                 if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
-                { 
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                {
+                    if (_currentWeapon.IsPlayer)
                     {
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(enemy,null);
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                        {
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(enemy,null);
+                        }
                     }
-                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(null,player);
+                    else
+                    {
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
+                            return; 
+                        if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                        { 
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(null,player);
+                        }
                     }
+                    
                 }
             }
             else
@@ -111,24 +125,32 @@ public class WeaponHandler : MonoBehaviour
                 { 
                     if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) 
                         return;
-                    
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+
+                    if (_currentWeapon.IsPlayer)
                     {
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(enemy,null);
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                        {
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(enemy,null);
+                        }
                     }
-                    else if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
-                        // if (_animator != null)
-                        // {
-                        //     _animator.SetBool("isAim",true);
-                        //     _isAim = true;
-                        // }
-                        Fire(null,player);
+                    else
+                    {
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                            return;
+                        if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                        { 
+                            // if (_animator != null)
+                            // {
+                            //     _animator.SetBool("isAim",true);
+                            //     _isAim = true;
+                            // }
+                            Fire(null,player);
+                        }
                     }
                     
                 }
@@ -139,6 +161,7 @@ public class WeaponHandler : MonoBehaviour
         {
             _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
             _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
+            _toRougeValue = 1;
         }
             
         if (_currentFireRate > 0)
@@ -151,12 +174,17 @@ public class WeaponHandler : MonoBehaviour
             _currentCooldown -= Time.deltaTime;
             _isAim = false;
         }
+        else
+        {
+            _toRougeValue = 0;
+        }
         
         // if (_animator != null && !_isAim)
         // {
         //     _animator.SetBool("isAim",false);
         // }
-
+        _material.SetFloat("_ToRouge", _toRougeValue);
+        
         if (_isRaycastDraw)
         {
             Debug.DrawRay(_weaponRaycast.origin, _weaponRaycast.direction * _currentWeapon.FireDistance, Color.red);
@@ -178,6 +206,7 @@ public class WeaponHandler : MonoBehaviour
         {
             _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
             _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
+            _toRougeValue = 1;
         }
         else
         {
@@ -189,10 +218,12 @@ public class WeaponHandler : MonoBehaviour
             if (enemy != null)
             {
                 _currentBullet.OnHitEnemy(enemy,enemy);
+                _fireParticles.Play();
             }
             else
             {
                 _currentBullet.OnHitEnemy(player,null);
+                _fireParticles.Play();
             }
             
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;

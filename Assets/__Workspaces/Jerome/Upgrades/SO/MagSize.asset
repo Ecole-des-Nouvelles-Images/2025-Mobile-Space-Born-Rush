@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Magazine Size
   Description: Increases the current weapons mag size.
-  Icon: {fileID: 0}
+  Icon: {fileID: -1200811564, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
   category: 1
   Type: 7
   Value: 1
