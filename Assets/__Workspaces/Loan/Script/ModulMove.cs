@@ -9,6 +9,7 @@ public class ModulMove : MonoBehaviour
     [Header("<color=cyan>=====Modul Settings=====</color>")]
     [SerializeField] private List<GameObject> _modulPrefabs = new List<GameObject>();
     [SerializeField] private GameUpgradeController _gameUpgrades;
+    [SerializeField] private Transform _parentModulTransform;
     
     [Header("<color=green>=====Grid Settings=====</color>")] 
     [SerializeField] private GridManager _gridManager;
@@ -25,11 +26,15 @@ public class ModulMove : MonoBehaviour
     
     
     private float _width = 25f;
+    private bool _isPaused;
     private void Start()
     {
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         _parentsTransform = GameObject.FindGameObjectWithTag("Parents").transform;
+        _parentModulTransform = GameObject.FindGameObjectWithTag("ParentsModul").transform;
         EventBus.OnGameOver += GameOver;
+        EventBus.OnGamePause += GamePause;
+        EventBus.OnGameResume += GameResume;
         
         if (isObstacle)
         {
@@ -45,6 +50,13 @@ public class ModulMove : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.OnGameOver -= GameOver;
+        EventBus.OnGamePause -= GamePause;
+        EventBus.OnGameResume -= GameResume;
+    }
+
+    private void OnDisable()
+    {
+        Destroy(gameObject);
     }
 
     private void SpawnObstacles()
@@ -220,15 +232,27 @@ public class ModulMove : MonoBehaviour
 
     void Update()
     {
+        if (_isPaused)
+            return;
         var vector3 = transform.position;
         vector3.z = vector3.z - _gameUpgrades.GameSpeed * Time.deltaTime;
         transform.position = vector3;
         if (transform.position.z < -_width)
         {
             var random =  Random.Range(0, _modulPrefabs.Count);
-            Instantiate(_modulPrefabs[random], new Vector3(0,0,53), Quaternion.identity);
+            Instantiate(_modulPrefabs[random], new Vector3(0,0,53), Quaternion.identity,_parentModulTransform.transform);
             Destroy(gameObject);
         }
+    }
+
+    private void GamePause()
+    {
+        _isPaused = true;
+    }
+
+    private void GameResume()
+    {
+        _isPaused = false;
     }
 
     private void GameOver()

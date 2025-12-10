@@ -10,6 +10,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject _scorePanel;
     [SerializeField] private GameObject _creditPanel;
     [SerializeField] private GameObject _loosePanel;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject _hudPanel;
 
     [Header("=====Game Settings=====")] 
     [SerializeField] private GameObject _gameEmpty;
@@ -25,6 +27,8 @@ public class UIHandler : MonoBehaviour
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(false);
         _loosePanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _hudPanel.SetActive(false);
 
         EventBus.OnGameOver += GameLosse;
     }
@@ -37,12 +41,28 @@ public class UIHandler : MonoBehaviour
     private void GameLosse()
     {
        _loosePanel.SetActive(true);
-       Debug.Log("Lose");
+       _hudPanel.SetActive(false);
+       Debug.Log("Loose");
+    }
+
+    public void GamePause()
+    {
+        _pausePanel.SetActive(true);
+        _hudPanel.SetActive(false);
+        EventBus.OnGamePause?.Invoke();
+    }
+
+    public void GameResume()
+    {
+        _pausePanel.SetActive(false);
+        _hudPanel.SetActive(true);
+        EventBus.OnGameResume?.Invoke();
     }
 
     public void GameStart()
     {
         _gameEmpty.SetActive(true);
+        _hudPanel.SetActive(true);
         _menuEmpty.SetActive(false);
         EventBus.OnGameStart?.Invoke();
         Debug.Log("GameStart");
@@ -53,6 +73,7 @@ public class UIHandler : MonoBehaviour
         _menuEmpty.SetActive(true);
         _gamePanel.SetActive(true);
         _loosePanel.SetActive(false);
+        _pausePanel.SetActive(false);
         _gameEmpty.SetActive(false);
     }
 

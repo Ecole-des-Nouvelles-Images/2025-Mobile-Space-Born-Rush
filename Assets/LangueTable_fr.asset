@@ -46,6 +46,30 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 3241105363652608
+    m_Localized: Reprendre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3241180110344192
+    m_Localized: Quitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3241239803678720
+    m_Localized: "Volume G\xE9n\xE9rale "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3290737418522624
+    m_Localized: Musique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3290795425746944
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3290839788900352
+    m_Localized: Ambiance Global
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
