@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: -1605597557, guid: 9dcf7718b613e63488568d8019319b7c, type: 3}
   category: 1
   Type: 6
-  Value: 1
+  Value: 0.15
   maxTimesSelectable: 0
   timesSelected: 0
   isExclusive: 0

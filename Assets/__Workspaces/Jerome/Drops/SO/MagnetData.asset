@@ -18,4 +18,4 @@ MonoBehaviour:
   Description: All alien parts come rushing towards you.
   Value: 0
   Duration: 5
-  DropChance: 50
+  DropChance: 30

@@ -10,13 +10,14 @@ public class DropsMovement : MonoBehaviour
     private Coroutine _magnetCoroutine = null;
     private bool _magnetized = false;
 
-    private float _width = 5;
+    private readonly float _width = 5;
     
     public void Initialize(DropsData data)
     {
         DropData = data;
+        MyEnable();
     }
-    private void OnEnable()
+    private void MyEnable()
     {
         // Only listen to magnet if this is XP
         if (DropData.Type == DropType.XP)
@@ -47,7 +48,7 @@ public class DropsMovement : MonoBehaviour
     private void Start()
     {
         _gameUpgradeController = FindAnyObjectByType<GameUpgradeController>();
-        _playerController = FindObjectOfType<PlayerController>();
+        _playerController = FindAnyObjectByType<PlayerController>();
     }
 
     void Update()

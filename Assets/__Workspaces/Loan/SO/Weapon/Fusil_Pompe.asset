@@ -15,11 +15,11 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   BulletData: {fileID: 11400000, guid: ad45df66ecdb327409dc7322a939cd7e, type: 2}
   Name: KX-90
-  Cooldown: 6
+  Cooldown: 3
   FireRate: 0.5
   FireDistance: 15
-  MagSize: 5
+  MagSize: 4
   IsPlayer: 1
   EnemyMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 8

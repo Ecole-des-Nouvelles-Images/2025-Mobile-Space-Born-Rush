@@ -7,6 +7,7 @@ public class PlayerStatController : MonoBehaviour
 {
     //Data variables
     [SerializeField] private PlayerData _playerData;
+    private UpgradeGenerator _upgradeGenerator;
     
     
     //Player Variables
@@ -18,7 +19,7 @@ public class PlayerStatController : MonoBehaviour
     private bool _isStart = false;
     
     #region subscriptions
-    private void Awake()
+    private void OnEnable()
     {
         // Player Specific Events
         EventBus.OnPlayerRevive += OnPlayerRevive;
@@ -33,6 +34,8 @@ public class PlayerStatController : MonoBehaviour
         EventBus.OnStatUpgrade += OnStatUpgrade;
         EventBus.OnGameStart += GameStart;
 
+        _upgradeGenerator = FindAnyObjectByType<UpgradeGenerator>();
+        
     }
 
     private void OnStatUpgrade(UpgradeType upgrade, float value)
@@ -71,13 +74,13 @@ public class PlayerStatController : MonoBehaviour
         if (_currentXP >= _xpToLevelUp)
         {
             // Get upgrades and trigger level up UI
-            var upgradeGenerator = FindObjectOfType<UpgradeGenerator>();
-            var choices = upgradeGenerator.GenerateUpgradeChoices();
+
+            var choices = _upgradeGenerator.GenerateUpgradeChoices();
             EventBus.OnPlayerLevelUp?.Invoke(choices);
             
             // Reset XP for next level
             _currentXP = 0;
-            EventBus.OnPlayerXPToLevelUpChange?.Invoke(_xpToLevelUp * 1.2f);
+            EventBus.OnPlayerXPToLevelUpChange?.Invoke(_xpToLevelUp * 1.05f);
         }
     }
     private void OnPlayerXPToLevelUpChange(float val)
@@ -117,7 +120,7 @@ public class PlayerStatController : MonoBehaviour
         // Destroy(this);
         
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         // Player Specific Events
         EventBus.OnPlayerRevive -= OnPlayerRevive;
