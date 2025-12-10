@@ -199,6 +199,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198748979371217952, guid: e27b001f2be573646a6185bba250069d,
         type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198748979371217952, guid: e27b001f2be573646a6185bba250069d,
+        type: 3}
       propertyPath: ShapeModule.m_Scale.x
       value: 6.08
       objectReference: {fileID: 0}
@@ -352,6 +357,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198748979371217952, guid: e27b001f2be573646a6185bba250069d,
         type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198748979371217952, guid: e27b001f2be573646a6185bba250069d,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 3
       objectReference: {fileID: 0}
@@ -445,6 +455,11 @@ PrefabInstance:
     - target: {fileID: 4103333903944158, guid: e27b001f2be573646a6185bba250069d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198748979371217952, guid: e27b001f2be573646a6185bba250069d,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198748979371217952, guid: e27b001f2be573646a6185bba250069d,
         type: 3}

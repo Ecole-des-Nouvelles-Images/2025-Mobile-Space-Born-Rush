@@ -1200,7 +1200,7 @@ Transform:
   m_GameObject: {fileID: 955735298}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21643962, y: 0, z: 0, w: 0.976296}
-  m_LocalPosition: {x: 0, y: 3.4, z: -11.03}
+  m_LocalPosition: {x: 0, y: 3.4, z: -11.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1346,7 +1346,7 @@ PrefabInstance:
     - target: {fileID: 6010273579156576986, guid: dc36b0bed7eaa0849a27f8bf6deef74c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.469
+      value: -1.648
       objectReference: {fileID: 0}
     - target: {fileID: 6010273579156576986, guid: dc36b0bed7eaa0849a27f8bf6deef74c,
         type: 3}
@@ -2216,7 +2216,7 @@ PrefabInstance:
     - target: {fileID: 3028125475338342653, guid: 3d60045d2f00edf4eae94221337e5959,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.03
+      value: -11.07
       objectReference: {fileID: 0}
     - target: {fileID: 3028125475338342653, guid: 3d60045d2f00edf4eae94221337e5959,
         type: 3}
@@ -2403,7 +2403,7 @@ Transform:
   m_GameObject: {fileID: 1798636360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.53}
+  m_LocalPosition: {x: 0, y: 0, z: -8.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3153,6 +3153,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: M_Armes_Alien
       objectReference: {fileID: 0}
+    - target: {fileID: 3804189423323567781, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7409e1e3e3f9c34449b2e11663b04d41, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
