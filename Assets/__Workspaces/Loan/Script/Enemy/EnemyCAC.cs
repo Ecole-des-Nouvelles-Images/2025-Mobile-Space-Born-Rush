@@ -4,6 +4,8 @@ public class EnemyCAC : EnemyHandler
 {
     void Update()
     {
+        if (IsPaused)
+            return;
         Raycast = new Ray(Transform.position, Transform.forward);
         if (IsWait)
         {

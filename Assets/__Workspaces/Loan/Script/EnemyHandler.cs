@@ -46,17 +46,27 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     private float _knockbackTimer = 3f;
     private float _knockbackForceMax = 8f;
     private float[] _lanes = new[] { -1.5f, 0f, 1.5f };
+    public bool IsPaused;
 
     private void OnEnable()
     {
         EventBus.OnEnemyDead += Death;
         EventBus.OnGameOver += GameOver;
+        EventBus.OnGamePause += GamePause;
+        EventBus.OnGameResume += GameResume;
+    }
+
+    private void OnDisable()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
         EventBus.OnEnemyDead -= Death;
         EventBus.OnGameOver -= GameOver;
+        EventBus.OnGamePause -= GamePause;
+        EventBus.OnGameResume -= GameResume;
     }
     private void Start()
     {
@@ -153,6 +163,15 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         transform.position = new Vector3(closeLane, transform.position.y, transform.position.z);
     }
 
+    private void GamePause()
+    {
+        IsPaused = true;
+    }
+
+    private void GameResume()
+    {
+        IsPaused = false;
+    }
     private void GameOver()
     {
         Destroy(this.gameObject);

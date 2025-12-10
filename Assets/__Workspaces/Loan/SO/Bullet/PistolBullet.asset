@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545a67c029e7f114294fc25c4f1d6722, type: 3}
   m_Name: PistolBullet
   m_EditorClassIdentifier: Assembly-CSharp::PistolBulletData
-  BulletDamage: 5
+  BulletDamage: 20
   IsDestroyedObstacle: 0
