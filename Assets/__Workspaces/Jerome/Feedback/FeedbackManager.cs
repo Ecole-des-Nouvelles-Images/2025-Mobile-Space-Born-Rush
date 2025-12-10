@@ -29,7 +29,6 @@ public class FeedbackManager : MonoBehaviour
     }
     
     
-    [ContextMenu("SmallShake")]
     public static void SmallShake()
     {
         _localImpulseSource.GenerateImpulseWithForce(0.05f);

@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - Parents
   - Drop
+  - ParentsModul
   layers:
   - Default
   - TransparentFX

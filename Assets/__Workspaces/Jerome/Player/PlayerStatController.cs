@@ -13,6 +13,7 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] private float _maxHealth, _currentHealth, _hpDropMultiplier, _currentXP, _xpToLevelUp, _xpMultiplier;
 
     [SerializeField] private Image _healthBar;
+    [SerializeField] private Image _xpBar;
     [SerializeField] private ParticleSystem _takeXpParticles;
     private bool _isStart = false;
     
@@ -157,6 +158,7 @@ public class PlayerStatController : MonoBehaviour
         if (_isStart)
         {
             _healthBar.fillAmount = _currentHealth / MaxHealth;
+            _xpBar.fillAmount = _currentXP / _xpToLevelUp;
         }
     }
 }

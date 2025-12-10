@@ -4,6 +4,8 @@ public class EnemyRange : EnemyHandler
 {
     void Update()
     {
+        if (IsPaused)
+            return;
         if (IsWait)
         {
             CurrentState = new Wait();

@@ -8,6 +8,7 @@ public class StartUpManager : MonoBehaviour
     [SerializeField] private GameObject[] _modulPrefb;
     [SerializeField] private GameObject _playerPrefb;
     [SerializeField] private Transform _parentTransform;
+    [SerializeField] private Transform _parentModulTransform;
 
     private void Awake()
     {
@@ -32,11 +33,12 @@ public class StartUpManager : MonoBehaviour
         {
             GameObject player = Instantiate(_playerPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform);
         }
+        _parentModulTransform =  GameObject.FindGameObjectWithTag("ParentsModul").transform;
         
         while (pos <= 60)
         {
             int rand = Random.Range(0, _modulPrefb.Length);
-            GameObject modul = Instantiate(_modulPrefb[rand],new Vector3(0,0,pos),Quaternion.identity,_parentTransform.transform);
+            GameObject modul = Instantiate(_modulPrefb[rand],new Vector3(0,0,pos),Quaternion.identity,_parentModulTransform.transform);
             modul.GetComponent<ModulMove>().isEnemy = false;
             modul.GetComponent<ModulMove>().isObstacle = false;
             pos += 19.5f;
