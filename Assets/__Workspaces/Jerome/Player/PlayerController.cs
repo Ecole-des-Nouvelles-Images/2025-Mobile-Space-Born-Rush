@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour,IDamageable
     private bool _isChangingLane = false;
     private Coroutine _laneChangeCoroutine = null; // Reference to our running movement coroutine
     
+    private bool IsInNeutralState => !_isJumping && !_isSliding && !_isChangingLane;    
+    
     public Vector3 JumpForce = Vector3.up;
     public int SlideAmount;
     
@@ -240,9 +242,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         if (isHorizontalSwipe)
         {
-            // Prevent new lane change if we're already moving or sliding
-            if (_isChangingLane || _isSliding) return;
-    
             // Calculate target lane
             int targetLane = _currentLaneIndex + (swipeDelta.x > 0 ? 1 : -1);
             targetLane = _laneProfile.GetLaneIndex(targetLane); // Clamp/validate
@@ -250,14 +249,15 @@ public class PlayerController : MonoBehaviour,IDamageable
             // Don't move if we're already on that lane
             if (targetLane == _currentLaneIndex) return;
     
-            // Update current lane immediately
-            _currentLaneIndex = targetLane;
-    
-            // Trigger animation
-            if (_animator)
+            // RULE 2: Allow lane changes during slide, but no animation
+            // RULE 3: Only play animation from neutral state
+            if (IsInNeutralState && _animator)
             {
                 _animator.SetTrigger(swipeDelta.x > 0 ? "isMoveRight" : "isMoveLeft");
             }
+    
+            // Update current lane immediately
+            _currentLaneIndex = targetLane;
     
             // Stop any existing movement coroutine
             if (_laneChangeCoroutine != null)
@@ -265,11 +265,8 @@ public class PlayerController : MonoBehaviour,IDamageable
                 StopCoroutine(_laneChangeCoroutine);
             }
     
-            // Start smooth movement
+            // Start smooth movement (works whether sliding or not)
             _laneChangeCoroutine = StartCoroutine(MoveToLane(_currentLaneIndex));
-    
-            // Cancel slide if active
-            if (_isSliding) StopSlide();
         }
         else
         {
@@ -327,6 +324,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         _isChangingLane = false;
         _laneChangeCoroutine = null;
     }
+    
     //The logic to stop the player from double jumping or sliding while jumping
     private void OnCollisionEnter(Collision other)
     {
