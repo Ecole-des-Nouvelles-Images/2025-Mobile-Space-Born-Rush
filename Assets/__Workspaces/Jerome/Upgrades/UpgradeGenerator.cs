@@ -20,6 +20,14 @@ public class UpgradeGenerator : MonoBehaviour
         availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);
         
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
+        
+        EventBus.OnWeaponUpgrade += OnWeaponUpgrade; 
+    }
+
+    private void OnWeaponUpgrade(UpgradeType weapon, float weaponIndex)
+    {
+        RegenerateUpgradePool();
+        //RemoveUpgradeFromPool(weapon.);
     }
 
     // Called when player levels up

@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     [SerializeField] private Animator _animator;
     
     #region subscriptions
-    private void Awake()
+    private void OnEnable()
     {
         _inputActions = new TouchControls();
         
@@ -106,6 +106,11 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             _animator.SetTrigger("isDie");
         }
+
+        if (_isSliding)
+        {
+            StopSlide();
+        }
         
         _isPaused = true;
     }
@@ -138,7 +143,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         transform.position = position;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         DisableGameplayInput();
         _inputActions?.Dispose();
@@ -168,7 +173,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     private void Jump()
     {
-        if (_animator != null)
+        if (_animator)
         {
             _animator.SetTrigger("isJump");
         }
