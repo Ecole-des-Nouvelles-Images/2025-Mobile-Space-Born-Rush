@@ -14,7 +14,7 @@ public class UpgradeGenerator : MonoBehaviour
 
     private List<UpgradeData> availableUpgrades;
 
-    private void Start()
+    private void OnEnable()
     {
         // Start with all upgrades available
         availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);

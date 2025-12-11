@@ -38,7 +38,7 @@ public class WeaponManager : MonoBehaviour
         _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
         
         // Equip default weapon
-        // SwapWeapon(AllWeaponPrefabs[0]);
+        SwapWeapon(AllWeaponPrefabs[0]);
     }
 
     private void OnGameStart()

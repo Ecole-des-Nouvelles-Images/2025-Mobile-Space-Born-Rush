@@ -21,8 +21,8 @@ public class GameDirector : MonoBehaviour
     [Header("In ms 1000ms = 1s")]
     [SerializeField] private int _difficultyIncrement = 60000;
     [Header("Current boost they have")]
-    [SerializeField] private int _difficultyHealth = 10;
-    [SerializeField] private int _difficultyDamage = 2;
+    [SerializeField] private int _difficultyHealth;
+    [SerializeField] private int _difficultyDamage;
     [Header("Increment per level up and timer")]
     [SerializeField] private int _healthIncrement = 10;
     [SerializeField] private int _damageIncrement = 2;
@@ -33,6 +33,20 @@ public class GameDirector : MonoBehaviour
     {
         EventBus.OnGameStart += OnGameStart;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
+        EventBus.OnGameOver += OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        //Turn timers off
+        _speedIncrementTimer.Enabled = false;
+        _speedIncrementTimer.Elapsed -= SpeedBoost;
+        _difficultyIncrementTimer.Enabled = false;
+        _difficultyIncrementTimer.Elapsed -= DifficultyBoost;
+        
+        //Reset the health and difficulty
+        _difficultyHealth = 0;
+        _difficultyDamage = 0;
     }
 
     private void OnPlayerLevelUp(List<UpgradeData> obj)
@@ -51,12 +65,12 @@ public class GameDirector : MonoBehaviour
     private void OnGameStart()
     {
         // Timer in ms 1000ms = 1s
-        _speedIncrementTimer = new Timer(30000);
+        _speedIncrementTimer = new Timer(_speedIncrement);
         _speedIncrementTimer.Elapsed += SpeedBoost;
         _speedIncrementTimer.AutoReset = true;
         _speedIncrementTimer.Enabled = true;
         
-        _difficultyIncrementTimer = new Timer(60000);
+        _difficultyIncrementTimer = new Timer(_difficultyIncrement);
         _difficultyIncrementTimer.Elapsed += DifficultyBoost;
         _difficultyIncrementTimer.AutoReset = true;
         _difficultyIncrementTimer.Enabled = true;
@@ -67,6 +81,10 @@ public class GameDirector : MonoBehaviour
     private void OnDisable()
     {
         EventBus.OnGameStart -= OnGameStart;
+        EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
+        EventBus.OnGameOver -= OnGameOver;
+        
+        //Turn off timers
         _speedIncrementTimer.Enabled = false;
         _speedIncrementTimer.Elapsed -= SpeedBoost;
         _difficultyIncrementTimer.Enabled = false;
@@ -75,7 +93,7 @@ public class GameDirector : MonoBehaviour
     
     private void SpeedBoost(object sender, ElapsedEventArgs e)
     {
-        _gameUpgrades.GameSpeed += 0.1f;
+        _gameUpgrades.GameSpeed += 0.2f;
     }
     private void DifficultyBoost(object sender, ElapsedEventArgs e)
     {

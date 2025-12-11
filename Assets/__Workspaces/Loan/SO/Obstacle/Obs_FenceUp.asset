@@ -16,5 +16,5 @@ MonoBehaviour:
   LanesTaken: 3
   Damage: 10
   IsStunning: 1
-  StunTime: 1
+  StunTime: 0.5
   IsRotate: 0

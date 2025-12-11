@@ -1,13 +1,13 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponUpgradeController : MonoBehaviour
 {
+    [Header("Data")]
     [SerializeField] private float _damage, _fireRate, _cooldown, _magSize, _weapon;
 
-          #region subscriptions
-    private void Awake()
+    #region subscriptions
+    private void OnEnable()
     {
         // Player Specific Events
         EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
@@ -39,6 +39,8 @@ public class WeaponUpgradeController : MonoBehaviour
             
             case UpgradeType.WeaponSwap :
                 _weapon = value;
+                //If Loan agrees then I think that the player should have his xp to level up reset when changing weapons
+                //EventBus.OnPlayerXPToLevelUpChange?.Invoke(100);
                 break;
                 
         }
@@ -48,7 +50,7 @@ public class WeaponUpgradeController : MonoBehaviour
     {
         throw new NotImplementedException();
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         // Player Specific Events
         EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;

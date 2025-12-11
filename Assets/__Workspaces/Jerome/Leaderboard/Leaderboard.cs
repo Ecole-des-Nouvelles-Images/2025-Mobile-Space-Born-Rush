@@ -1,10 +1,15 @@
 using UnityEngine;
 using Dan.Main;
 using Dan.Models;
+using TMPro;
 
-public class Leaderboard : MonoBehaviour
+public class LeaderboardManager : MonoBehaviour
 {
-    private string _publicLeaderboardKey = "5c3c902af5a8e494aab05ef56ebcd46b03e3ea04c7848ea0482a6a154304c6dc";
+    [Header("Prefab")]
+    [SerializeField] private GameObject _scorePrefab; //Children are in order Rank, Name, Score
+    
+    [Header("Parent")]
+    [SerializeField] private Transform _scoreParent;
     
     
     private void OnEnable()
@@ -31,20 +36,33 @@ public class Leaderboard : MonoBehaviour
 
     #region Private Methods
     /// <summary>
-    /// This function will get all the scores from your leaderboard <br/>
+    /// This function will get all the scores from the leaderboard and put them into the score section.
     /// TODO have it set it into the UI using a prefab
     /// </summary>
     [ContextMenu("Get Scores")]
     void GetScores()
     {
+        // Clear any existing scores
+        foreach (Transform child in _scoreParent)
+        {
+            Destroy(child.gameObject);
+        }
+    
         Leaderboards.SpaceBornRush.GetEntries(callback =>
         {
             for (int i = 0; i < callback.Length; i++)
             {
-                //For now just debug logs it, but it should instantiate the prefab for the scores.
-                Debug.Log(callback[i].Rank);
-                Debug.Log(callback[i].Username);
-                Debug.Log(callback[i].Score);
+                GameObject ScoreObj = Instantiate(_scorePrefab, _scoreParent);
+                
+                TMP_Text[] textComponents = ScoreObj.GetComponentsInChildren<TMP_Text>();
+                
+                textComponents[0].text = callback[i].Rank.ToString();
+                textComponents[1].text = callback[i].Username;
+                textComponents[2].text = callback[i].Score.ToString("N0"); // Formatted with commas
+            
+                // 4. Optional: Highlight player's own score
+                // Note: callback[i].IsMine() would need access to Entry struct
+                // We'll implement this differently below
             }
         });
     }
