@@ -54,6 +54,12 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         EventBus.OnGameOver += GameOver;
         EventBus.OnGamePause += GamePause;
         EventBus.OnGameResume += GameResume;
+        EventBus.OnEnemyTakeDamage += OnEnemyTakeDamage; 
+    }
+
+    private void OnEnemyTakeDamage(float dmg)
+    {
+        TakeDamage(dmg);
     }
 
     private void OnDisable()
@@ -67,13 +73,14 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         EventBus.OnGameOver -= GameOver;
         EventBus.OnGamePause -= GamePause;
         EventBus.OnGameResume -= GameResume;
+        EventBus.OnEnemyTakeDamage -= OnEnemyTakeDamage;
     }
     private void Start()
     {
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
-        GameDirector = FindObjectOfType<GameDirector>();
+        GameDirector = FindAnyObjectByType<GameDirector>();
         CurrentHealth = EnemyData.MaxHealth + GameDirector.DifficultyHealth;
         CurrentFireRate = EnemyData.FireRate;
         CurrentDamage = EnemyData.Damage + GameDirector.DifficultyDamage;

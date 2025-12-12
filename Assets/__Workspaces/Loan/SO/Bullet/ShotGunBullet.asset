@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718b3e7e84614e55a26996864d5a8508, type: 3}
   m_Name: ShotGunBullet
   m_EditorClassIdentifier: Assembly-CSharp::ShotGunBulletData
-  BulletPrefab: {fileID: 7005073462024459232, guid: 4e0adca639edd4f4ca1e1ce18b77f7e4, type: 3}
-  BulletSpeed: {x: 0, y: 0, z: 10}
-  BulletLifeTime: 6
   BulletDamage: 20
   IsDestroyedObstacle: 0
   _knockbackMidDirections:
@@ -27,4 +24,4 @@ MonoBehaviour:
   _knockbackLeftDirections:
   - {x: 1.5, y: 0, z: 3}
   - {x: 0, y: 0, z: 3}
-  _knockbackForce: 5
+  _knockbackForce: 10

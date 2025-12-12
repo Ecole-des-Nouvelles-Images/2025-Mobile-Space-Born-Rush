@@ -15,7 +15,7 @@ public class UpgradeUIManager : MonoBehaviour
 
     private void Start()
     {
-        upgradeManager = FindObjectOfType<UpgradeManager>();
+        upgradeManager = FindAnyObjectByType<UpgradeManager>();
         if (upgradeManager == null)
         {
             Debug.LogError("UpgradeManager not found in scene!");

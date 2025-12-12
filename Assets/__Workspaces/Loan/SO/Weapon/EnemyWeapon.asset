@@ -16,9 +16,9 @@ MonoBehaviour:
   BulletData: {fileID: 11400000, guid: 4ed65fa9f46a48a42909e9d3ab0dfc3e, type: 2}
   Name: EnemyWeapon
   Cooldown: 4
-  FireRate: 0.25
+  FireRate: 1
   FireDistance: 10
-  MagSize: 6
+  MagSize: 3
   IsPlayer: 0
   EnemyMask:
     serializedVersion: 2

@@ -168,11 +168,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 58b188b8df834c04097024a8e1733fcb,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5478226945739531074}
+      addedObject: {fileID: -7930184525645768948}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 58b188b8df834c04097024a8e1733fcb,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7930184525645768948}
+      addedObject: {fileID: -5478226945739531074}
   m_SourcePrefab: {fileID: 100100000, guid: 58b188b8df834c04097024a8e1733fcb, type: 3}
 --- !u!4 &8276679723846024777 stripped
 Transform:
@@ -186,18 +186,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8454968603743639970}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5478226945739531074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8761609004418163955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5812b17743790834e99a7094f8cfbcce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DropsMovement
 --- !u!136 &-7930184525645768948
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -221,3 +209,15 @@ CapsuleCollider:
   m_Height: 0.9
   m_Direction: 1
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &-5478226945739531074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8761609004418163955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5812b17743790834e99a7094f8cfbcce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropsMovement

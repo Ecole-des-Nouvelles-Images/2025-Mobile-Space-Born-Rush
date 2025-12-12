@@ -109,7 +109,7 @@ public class ScoringManager : MonoBehaviour
     #endregion
     void Start()
     {
-        _gameUpgrades =  FindObjectOfType<GameUpgradeController>();
+        _gameUpgrades =  FindAnyObjectByType<GameUpgradeController>();
     }
 
     // Update is called once per frame
