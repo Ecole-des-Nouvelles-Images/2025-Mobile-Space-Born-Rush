@@ -2272,9 +2272,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1233612529, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
+  m_Sprite: {fileID: 1992587460, guid: 9dcf7718b613e63488568d8019319b7c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2305,8 +2305,8 @@ RectTransform:
   - {fileID: 1207835974}
   m_Father: {fileID: 172926263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.05, y: 0.2}
-  m_AnchorMax: {x: 0.95, y: 0.95}
+  m_AnchorMin: {x: 0.05, y: 0.25}
+  m_AnchorMax: {x: 0.95, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8087,7 +8087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -241.7}
   m_SizeDelta: {x: 855, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207835975
@@ -8961,6 +8961,7 @@ MonoBehaviour:
   _loosePanel: {fileID: 606675808}
   _pausePanel: {fileID: 530583318}
   _hudPanel: {fileID: 156001554}
+  _scoreboardPanel: {fileID: 0}
   _usernamePanel: {fileID: 0}
   _creditPanel: {fileID: 573805210}
   _homeButton: {fileID: 0}
