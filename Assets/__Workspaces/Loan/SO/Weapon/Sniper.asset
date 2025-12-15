@@ -15,9 +15,9 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   BulletData: {fileID: 11400000, guid: 8e0f573ccff3b284098e82125dbf607e, type: 2}
   Name: LX-99
-  Cooldown: 4
+  Cooldown: 3
   FireRate: 0.5
-  FireDistance: 30
+  FireDistance: 40
   MagSize: 1
   IsPlayer: 1
   EnemyMask:
