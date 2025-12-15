@@ -102,7 +102,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         
         Rb.linearVelocity = SpeedDirection +  KnockBackVelocity;
         
-        if (!IsKnocked && KnockBackVelocity.magnitude < 0.05f)
+        if (!IsKnocked && KnockBackVelocity.magnitude < 0.1f)
         {
             SnapToLanes();
             IsKnocked = true;
