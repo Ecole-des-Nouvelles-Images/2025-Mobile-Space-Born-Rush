@@ -15,13 +15,14 @@ public class PlayerController : MonoBehaviour,IDamageable
     private TouchControls _inputActions;
     private Vector2 _touchStartPosition;
     private bool _fingerDown;
-    //Legacy    
-    private Vector2 _pos1;
     
     public int PixelDistToDetect = 200;
     
     //Player Variables
     [SerializeField] private int _currentLaneIndex;
+    // Collider variables
+    private Vector3 _originalColliderSize;
+    private Vector3 _originalColliderCenter;
     
     //Variables for methods
     [SerializeField]private bool _isJumping = false;
@@ -50,37 +51,19 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnGamePause += OnGamePause;
         EventBus.OnGameResume += OnGameResume;
         EventBus.OnGameOver += OnGameOver;
-        EventBus.OnGameRestart += OnGameRestart;
         
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
-        EventBus.OnPlayerRevive += OnPlayerRevive;
         
         // Movement & Environment
-        EventBus.OnLaneChanged += OnLaneChanged;
         EventBus.OnSpeedChanged += OnSpeedChanged;
         
-    }
-
-    private void OnPlayerRevive()
-    {
-        throw new NotImplementedException();
     }
 
     private void OnSpeedChanged(float val, float duration)
     {
         //Will need to speed up all the players animations with this
         
-    }
-
-    private void OnLaneChanged(int val)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void OnObstacleDodged()
-    {
-        throw new NotImplementedException();
     }
     private void OnPlayerSpawn()
     {
@@ -93,11 +76,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnGameResume()
     {
         _isPaused  = false;
-    }
-
-    private void OnGameRestart()
-    {
-        throw new NotImplementedException();
     }
 
     private void OnGameOver()
@@ -125,6 +103,9 @@ public class PlayerController : MonoBehaviour,IDamageable
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<BoxCollider>();
         EnableGameplayInput();
+        
+        _originalColliderSize = _col.size;
+        _originalColliderCenter = _col.center;
 
         if (_animator)
         {
@@ -153,14 +134,11 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnGamePause -= OnGamePause;
         EventBus.OnGameResume -= OnGameResume;
         EventBus.OnGameOver -= OnGameOver;
-        EventBus.OnGameRestart -= OnGameRestart;
         
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
-        EventBus.OnPlayerRevive -= OnPlayerRevive;
         
         // Movement & Environment
-        EventBus.OnLaneChanged -= OnLaneChanged;
         EventBus.OnSpeedChanged -= OnSpeedChanged;
     }
 
@@ -184,22 +162,24 @@ public class PlayerController : MonoBehaviour,IDamageable
     //And when the end of the animation plays it should call for the collider to resize
     private void Slide()
     {
-        if (_animator)
-        {
-            _animator.SetTrigger("isSlide");
-        }
-        _isSliding = MovementStateChange(_isSliding);
-        _col.size /= SlideAmount;
-        _col.center /= SlideAmount;
+        if (_animator) _animator.SetTrigger("isSlide");
+        
+        _isSliding = true;  // Direct assignment
+        
+        // Scale down from original
+        _col.size = _originalColliderSize / SlideAmount;
+        _col.center = _originalColliderCenter / SlideAmount;
         
         _rb.AddForce(-JumpForce, ForceMode.Impulse);
     }
-
+    
     public void StopSlide()
     {
-        _isSliding = MovementStateChange(_isSliding);
-        _col.size *= SlideAmount;
-        _col.center *= SlideAmount;
+        _isSliding = false;  // Direct assignment
+        
+        // Reset to original (IDEMPOTENT - safe to call multiple times)
+        _col.size = _originalColliderSize;
+        _col.center = _originalColliderCenter;
     }
     
     #region Input System
