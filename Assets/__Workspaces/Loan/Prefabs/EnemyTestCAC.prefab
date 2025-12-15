@@ -164,7 +164,7 @@ MonoBehaviour:
   GameDirector: {fileID: 0}
   CurrentDamage: 0
   IsRange: 0
-  CurrentRange: 0
+  CurrentRange: 2
   CurrentFireRate: 1
   Animator: {fileID: 0}
   _hitParticles: {fileID: 4466892048955758660}
@@ -177,6 +177,7 @@ MonoBehaviour:
   IsWait: 0
   IsAttacking: 0
   IsDead: 0
+  IsPaused: 0
 --- !u!1001 &1542512829508894002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ PrefabInstance:
     - target: {fileID: 3021239223948441232, guid: 290d26f6c41c3ab4185760dc1b16141e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3021239223948441232, guid: 290d26f6c41c3ab4185760dc1b16141e,
         type: 3}

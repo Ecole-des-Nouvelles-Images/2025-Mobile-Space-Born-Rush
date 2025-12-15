@@ -89,6 +89,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &896501597756738251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8655593822440936781}
+  m_Layer: 7
+  m_Name: EnemyParents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8655593822440936781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896501597756738251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 568642610493020092}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1055131872925046130
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +374,7 @@ Transform:
   - {fileID: 8067938070393785214}
   - {fileID: 4756906519044976592}
   - {fileID: 7815067861012141833}
+  - {fileID: 8655593822440936781}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &468638808726622242
@@ -360,12 +392,13 @@ MonoBehaviour:
   _modulPrefabs:
   - {fileID: 8920960571737518199, guid: fc9876a9e5ccf1d468dc38f1d049ba6a, type: 3}
   - {fileID: 7595878097578157565, guid: a68d1f546d11f13498f685688bb7c360, type: 3}
+  - {fileID: 5773438384947053712, guid: 4252a85c78e88df468b8c024696433dd, type: 3}
   _gameUpgrades: {fileID: 0}
+  _parentModulTransform: {fileID: 0}
   _gridManager: {fileID: 3638946851418515774}
   _enemies:
   - {fileID: 9214185679248329394, guid: 008428c34e35f334492029ff4a091b10, type: 3}
-  - {fileID: 7814141541575929589, guid: 3769520660e676b48bf51ea4b7c24ab9, type: 3}
-  _parentsTransform: {fileID: 0}
+  _parentsTransform: {fileID: 8655593822440936781}
   EnemyNumber: 1
   isEnemy: 1
   _obstaclesPrefabs:
@@ -388,7 +421,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LightingController
   _playerStats: {fileID: 0}
   _targetLight: {fileID: 5732921998537864204}
-  _targetLight2: {fileID: 799707820304055890}
   _fullHealthColor: {r: 0, g: 0.7294118, b: 1, a: 1}
   _lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
   _colorChangeSpeed: 1
@@ -396,8 +428,6 @@ MonoBehaviour:
   _fullHealthIntensity: 1
   _lowHealthIntensity: 0.5
   _lowHealthThreshold: 0.5
-  _currentTargetColor: {r: 0, g: 0, b: 0, a: 0}
-  _currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &5555690323698111194
 GameObject:
   m_ObjectHideFlags: 0

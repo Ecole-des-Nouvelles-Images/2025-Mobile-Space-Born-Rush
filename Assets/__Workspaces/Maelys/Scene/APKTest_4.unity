@@ -446,9 +446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreTraker
   _scoringManager: {fileID: 0}
-  _highScoreData: {fileID: 11400000, guid: 13c8acf5a5378294fb73e2118593bbaa, type: 2}
   _currentScoreText: {fileID: 442957128}
-  _highScoreText: {fileID: 0}
   _currentScoreFormat: '{0}'
   _highScoreFormat: '{0}'
   _animationDuration: 0.3
@@ -1125,6 +1123,7 @@ RectTransform:
   - {fileID: 294910705}
   - {fileID: 509626207}
   - {fileID: 565864787}
+  - {fileID: 1292958147}
   m_Father: {fileID: 1793796274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2304,7 +2303,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1207835974}
-  - {fileID: 1292958147}
   m_Father: {fileID: 172926263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.2}
@@ -5816,8 +5814,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 172926263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3, y: 0}
-  m_AnchorMax: {x: 0.7, y: 0.2}
+  m_AnchorMin: {x: 0.25, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0.2}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6020,16 +6018,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815708307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.000014305117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 172926263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7, y: 0}
-  m_AnchorMax: {x: 0.99, y: 0.2}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0.000061035156}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.75, y: 0.2}
+  m_AnchoredPosition: {x: 0.00030517578, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &815708309
 MonoBehaviour:
@@ -7745,8 +7743,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 172926263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.01, y: 0}
-  m_AnchorMax: {x: 0.3, y: 0.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.25, y: 0.2}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8414,18 +8412,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292958146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 294910705}
+  m_Father: {fileID: 172926263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -170, y: -185}
-  m_SizeDelta: {x: 165, y: 210}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.75, y: 0}
+  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1292958148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8960,12 +8958,28 @@ MonoBehaviour:
   _gamePanel: {fileID: 294910702}
   _optionPanel: {fileID: 565864786}
   _scorePanel: {fileID: 509626204}
-  _creditPanel: {fileID: 573805210}
   _loosePanel: {fileID: 606675808}
   _pausePanel: {fileID: 530583318}
   _hudPanel: {fileID: 156001554}
+  _usernamePanel: {fileID: 0}
+  _creditPanel: {fileID: 573805210}
+  _homeButton: {fileID: 0}
+  _settingsButton: {fileID: 0}
+  _scoreButton: {fileID: 0}
+  _usernameInputField: {fileID: 0}
+  _usernameSubmitButton: {fileID: 0}
+  _offlineButton: {fileID: 0}
+  _usernameStatusText: {fileID: 0}
   _gameEmpty: {fileID: 721820563}
   _menuEmpty: {fileID: 2065659496}
+  _leaderboardManager: {fileID: 0}
+  _requireInternetForUsername: 1
+  _internetCheckTimeout: 3
+  _allowOfflinePlay: 1
+  _isActive: 0
+  _isCheckingUsername: 0
+  _hasInternetConnection: 0
+  _isCheckingInternet: 0
 --- !u!4 &1419666213
 Transform:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject _loosePanel;
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _hudPanel;
+    [SerializeField] private GameObject _scoreboardPanel;
     [SerializeField] private GameObject _usernamePanel;
     [SerializeField] private GameObject _creditPanel;
     
@@ -83,8 +84,7 @@ public class UIHandler : MonoBehaviour
     private IEnumerator CheckInternetConnection()
     {
         _isCheckingInternet = true;
-    
-        // Method 1: Quick Unity check (works everywhere)
+        
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             _hasInternetConnection = false;
@@ -96,7 +96,7 @@ public class UIHandler : MonoBehaviour
         _hasInternetConnection = true;
     }
 
-    // ==================== UI INITIALIZATION ====================
+    #region ==================== UI INITIALIZATION ====================
     private void InitializeUI()
     {
         // Set defaults
@@ -105,7 +105,6 @@ public class UIHandler : MonoBehaviour
         
         // Check if player already has a username (online or offline)
         bool hasUsername = _leaderboardManager && _leaderboardManager.IsUser();
-        //PlayerPrefs.DeleteAll(); //TODO DELETE THIS WHEN PUTTING IT IN AN APK. ITS SO THAT I CAN TEST THE USERNAME STUFF
         
         // Determine if we should show username panel
         bool shouldShowUsernamePanel = ShouldShowUsernamePanel(hasUsername);
@@ -113,27 +112,14 @@ public class UIHandler : MonoBehaviour
         // Setup username panel if needed
         if (shouldShowUsernamePanel)
         {
+            OpenUsernamePanel();
             SetupUsernamePanel();
         }
         else
         {
-            // Player already has username or is playing offline
-            _usernamePanel.SetActive(false);
-            _gamePanel.SetActive(true);
-            
+            OpenGamePanel();
         }
         
-        // Hide all other panels
-        _optionPanel.SetActive(false);
-        _scorePanel.SetActive(false);
-        _loosePanel.SetActive(false);
-        _pausePanel.SetActive(false);
-        _hudPanel.SetActive(false);
-        _creditPanel.SetActive(false);
-        
-        _homeButton.SetActive(true);
-        _scoreButton.SetActive(true);
-        _settingsButton.SetActive(true);
     }
     
     private bool ShouldShowUsernamePanel(bool hasUsername)
@@ -153,8 +139,6 @@ public class UIHandler : MonoBehaviour
     
     private void SetupUsernamePanel()
     {
-        _usernamePanel.SetActive(true);
-        _gamePanel.SetActive(false);
         
         // Set up button listeners
         _usernameSubmitButton.onClick.RemoveAllListeners();
@@ -210,8 +194,9 @@ public class UIHandler : MonoBehaviour
             _usernameInputField.ActivateInputField();
         }
     }
+    #endregion
 
-    // ==================== USERNAME SUBMISSION ====================
+    #region ==================== USERNAME SUBMISSION ====================
     private void OnUsernameSubmitClicked()
     {
         if (_isCheckingUsername) return;
@@ -315,8 +300,9 @@ public class UIHandler : MonoBehaviour
             _usernameInputField.ActivateInputField();
         }
     }
-    
-    // ==================== OFFLINE PLAY HANDLING ====================
+    #endregion
+
+    #region ==================== OFFLINE PLAY HANDLING ====================
     private void OnOfflineButtonClicked()
     {
         if (!_allowOfflinePlay) return;
@@ -338,8 +324,7 @@ public class UIHandler : MonoBehaviour
     
     private void CompleteUsernameSetup(bool success)
     {
-        _usernamePanel.SetActive(false);
-        _gamePanel.SetActive(true);
+        OpenGamePanel();
         
         // Reset panel for next time
         ResetUsernamePanel();
@@ -349,11 +334,12 @@ public class UIHandler : MonoBehaviour
             ShowTemporaryMainMenuMessage("Playing offline - scores saved locally", 3f);
         }
     }
+    #endregion
 
-    // ==================== HELPER METHODS ====================
+    #region ==================== HELPER METHODS ====================
     private void SetUsernameStatus(string message, Color color)
     {
-        if (_usernameStatusText != null)
+        if (_usernameStatusText)
         {
             _usernameStatusText.text = message;
             _usernameStatusText.color = color;
@@ -362,19 +348,19 @@ public class UIHandler : MonoBehaviour
     
     private void SetUsernameUIState(bool interactive)
     {
-        if (_usernameSubmitButton != null)
+        if (_usernameSubmitButton)
             _usernameSubmitButton.interactable = interactive;
         
-        if (_usernameInputField != null)
+        if (_usernameInputField)
             _usernameInputField.interactable = interactive;
             
-        if (_offlineButton != null)
+        if (_offlineButton)
             _offlineButton.interactable = interactive;
     }
     
     private void ResetUsernamePanel()
     {
-        if (_usernameInputField != null)
+        if (_usernameInputField)
             _usernameInputField.text = "";
             
         SetUsernameStatus("", Color.white);
@@ -400,74 +386,106 @@ public class UIHandler : MonoBehaviour
         // For now, just log it
         Debug.Log($"Main menu message: {message}");
         
-        // Optional: Create a floating text or modify an existing UI element
-        // StartCoroutine(DisplayTemporaryMessage(message, duration));
     }
+    #endregion
 
-    // ==================== EXISTING GAME METHODS (UNCHANGED) ====================
+    #region ==================== EXISTING GAME METHODS ====================
+
+    private void OpenUsernamePanel()
+    {
+        // Hide all other panels
+        _optionPanel.SetActive(false);
+        _loosePanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _hudPanel.SetActive(false);
+        _creditPanel.SetActive(false);
+        _homeButton.SetActive(false);
+        _scoreButton.SetActive(false);
+        _settingsButton.SetActive(false);
+        _gamePanel.SetActive(false);
+        
+        _scorePanel.SetActive(true);
+        _usernamePanel.SetActive(true);
+    }
     private void GameLose()
     {
-        _loosePanel.SetActive(true);
         _hudPanel.SetActive(false);
+        
+        _loosePanel.SetActive(true);
     }
 
     public void GamePause()
     {
-        _pausePanel.SetActive(true);
         _hudPanel.SetActive(false);
+        
+        _pausePanel.SetActive(true);
         EventBus.OnGamePause?.Invoke();
     }
 
     public void GameResume()
     {
         _pausePanel.SetActive(false);
+        
         _hudPanel.SetActive(true);
         EventBus.OnGameResume?.Invoke();
     }
 
     public void GameStart()
     {
+        _menuEmpty.SetActive(false);
+        _pausePanel.SetActive(false);
+        
         _gameEmpty.SetActive(true);
         _hudPanel.SetActive(true);
-        _menuEmpty.SetActive(false);
         EventBus.OnGameStart?.Invoke();
     }
 
     public void ReturnMenu()
     {
-        _menuEmpty.SetActive(true);
-        _gamePanel.SetActive(true);
         _loosePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _gameEmpty.SetActive(false);
         _usernamePanel.SetActive(false);
+        
+        _menuEmpty.SetActive(true);
+        _gamePanel.SetActive(true);
     }
 
     public void OpenGamePanel()
     {
-        _gamePanel.SetActive(true);
         _optionPanel.SetActive(false);
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        
+        _gamePanel.SetActive(true);
+        _homeButton.SetActive(true);
+        _scoreButton.SetActive(true);
+        _settingsButton.SetActive(true);
+        _creditPanel.SetActive(true);
     }
     
     public void OpenOptionPanel()
     {
         _gamePanel.SetActive(false);
-        _optionPanel.SetActive(true);
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        
+        _optionPanel.SetActive(true);
     }
     
     public void OpenScorePanel()
     {
         _gamePanel.SetActive(false);
         _optionPanel.SetActive(false);
-        _scorePanel.SetActive(true);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        
+        _scorePanel.SetActive(true);
+        _scoreboardPanel.SetActive(true);
+        
+        _leaderboardManager.GetScores();
     }
     
     public void OpenCreditPanel()
@@ -475,8 +493,9 @@ public class UIHandler : MonoBehaviour
         _gamePanel.SetActive(false);
         _optionPanel.SetActive(false);
         _scorePanel.SetActive(false);
-        _creditPanel.SetActive(true);
         _usernamePanel.SetActive(false);
+        
+        _creditPanel.SetActive(true);
     }
     
     public void ChangeLangue(int langueID)
@@ -485,7 +504,6 @@ public class UIHandler : MonoBehaviour
             return;
         StartCoroutine(SetLangue(langueID));
     }
-    
     IEnumerator SetLangue(int langueID)
     {
         _isActive = true;
@@ -493,6 +511,9 @@ public class UIHandler : MonoBehaviour
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langueID];
         _isActive = false;
     }
+    
+    #endregion 
+    
 
     // ==================== DEBUG & TESTING ====================
     [ContextMenu("Test: Force Show Username Panel")]
@@ -535,9 +556,7 @@ public class UIHandler : MonoBehaviour
     [ContextMenu("Test: Clear All Usernames")]
     public void DebugClearAllUsernames()
     {
-        PlayerPrefs.DeleteKey("Username");
-        PlayerPrefs.DeleteKey("UsernameLocked");
-        PlayerPrefs.DeleteKey("OfflineUsername");
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         
         Debug.Log("Debug: Cleared all username data");

@@ -308,9 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreTraker
   _scoringManager: {fileID: 0}
-  _highScoreData: {fileID: 11400000, guid: 13c8acf5a5378294fb73e2118593bbaa, type: 2}
   _currentScoreText: {fileID: 442957128}
-  _highScoreText: {fileID: 0}
   _currentScoreFormat: '{0}'
   _highScoreFormat: '{0}'
   _animationDuration: 0.3
@@ -5757,7 +5755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -705710106, guid: f6d0940faa8df364597e5e6922694dd7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1320a525e555ad349a8cafe9ed4513cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6042,7 +6040,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1877294494, guid: 30e544a0e36e07d4b9255c353ab65b00, type: 3}
+  m_Sprite: {fileID: -1532248569, guid: 924da788b510a98429b3081fb48c6c6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6652,7 +6650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1677645188, guid: f6d0940faa8df364597e5e6922694dd7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be9febda8abffdf40a2a0aa397f68960, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8820,12 +8818,28 @@ MonoBehaviour:
   _gamePanel: {fileID: 294910702}
   _optionPanel: {fileID: 565864786}
   _scorePanel: {fileID: 509626204}
-  _creditPanel: {fileID: 573805210}
   _loosePanel: {fileID: 606675808}
   _pausePanel: {fileID: 530583318}
   _hudPanel: {fileID: 156001554}
+  _usernamePanel: {fileID: 0}
+  _creditPanel: {fileID: 573805210}
+  _homeButton: {fileID: 0}
+  _settingsButton: {fileID: 0}
+  _scoreButton: {fileID: 0}
+  _usernameInputField: {fileID: 0}
+  _usernameSubmitButton: {fileID: 0}
+  _offlineButton: {fileID: 0}
+  _usernameStatusText: {fileID: 0}
   _gameEmpty: {fileID: 721820563}
   _menuEmpty: {fileID: 2065659496}
+  _leaderboardManager: {fileID: 0}
+  _requireInternetForUsername: 1
+  _internetCheckTimeout: 3
+  _allowOfflinePlay: 1
+  _isActive: 0
+  _isCheckingUsername: 0
+  _hasInternetConnection: 0
+  _isCheckingInternet: 0
 --- !u!4 &1419666213
 Transform:
   m_ObjectHideFlags: 0
@@ -9076,7 +9090,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1279150149, guid: 30e544a0e36e07d4b9255c353ab65b00, type: 3}
+  m_Sprite: {fileID: -1615386796, guid: 924da788b510a98429b3081fb48c6c6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

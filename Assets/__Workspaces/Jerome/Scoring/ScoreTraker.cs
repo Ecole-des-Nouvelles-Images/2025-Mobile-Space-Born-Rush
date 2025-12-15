@@ -18,11 +18,9 @@ public class ScoreTracker : MonoBehaviour
     
     private float _currentDisplayScore;
     private float _targetScore;
-    private float _currentHighScore;
     
     private void Start()
     {
-        // Find references if not assigned
         if (!_currentScoreText)
             Debug.LogWarning("Current Score Text not assigned to ScoreTracker!");
         
@@ -31,7 +29,6 @@ public class ScoreTracker : MonoBehaviour
         
         // Initialize display
         _currentDisplayScore = 0;
-        
         UpdateCurrentScoreText();
     }
     
@@ -53,24 +50,6 @@ public class ScoreTracker : MonoBehaviour
             _currentDisplayScore = _targetScore;
             UpdateCurrentScoreText();
         }
-        
-        
-        
-    }
-    
-    private void OnScoreChanged(GameObject obj = null)
-    {
-        // Force immediate update for big score changes
-        if (_scoringManager)
-        {
-            _currentDisplayScore = _scoringManager.Score;
-            UpdateCurrentScoreText();
-        }
-    }
-    
-    private void OnHighScoreChanged(float newHighScore)
-    {
-        _currentHighScore = newHighScore;
     }
     
     private void UpdateCurrentScoreText()
@@ -79,17 +58,6 @@ public class ScoreTracker : MonoBehaviour
         {
             string formattedScore = _currentDisplayScore.ToString("N0");
             _currentScoreText.text = string.Format(_currentScoreFormat, formattedScore);
-        }
-    }
-    
-    // Optional visual effects
-    public void PulseCurrentScore()
-    {
-        // Add scale animation or color change for current score
-        if (_currentScoreText)
-        {
-            // Example: _currentScoreText.transform.localScale = Vector3.one * 1.2f;
-            // Use LeanTween or DOTween for smooth animation
         }
     }
 }

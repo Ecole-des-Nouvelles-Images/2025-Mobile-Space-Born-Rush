@@ -90,20 +90,19 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             Animator = GetComponent<Animator>();
         }
 
-        if (IsRange)
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
+       
+        transform.eulerAngles = new Vector3(0, 180, 0);
+        
     }
 
     private void FixedUpdate()
     {
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
-        SpeedDirection = new Vector3(0f, 0f, -GameUpgrades.GameSpeed);
+        SpeedDirection = new Vector3(0f, 0f, 0f);
         
         Rb.linearVelocity = SpeedDirection +  KnockBackVelocity;
         
-        if (!IsKnocked && KnockBackVelocity.magnitude < 0.05f)
+        if (!IsKnocked && KnockBackVelocity.magnitude < 0.1f)
         {
             SnapToLanes();
             IsKnocked = true;
