@@ -457,12 +457,12 @@ public class UIHandler : MonoBehaviour
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        _creditPanel.SetActive(false);
         
         _gamePanel.SetActive(true);
         _homeButton.SetActive(true);
         _scoreButton.SetActive(true);
         _settingsButton.SetActive(true);
-        _creditPanel.SetActive(true);
     }
     
     public void OpenOptionPanel()
