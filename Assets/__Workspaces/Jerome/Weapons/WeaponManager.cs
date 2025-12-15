@@ -43,7 +43,6 @@ public class WeaponManager : MonoBehaviour
 
     private void OnGameStart()
     {
-        Debug.Log("Game Started");
         _swapWeaponIndex = 0;
         SwapWeapon(AllWeaponPrefabs[0]);
     }
@@ -57,7 +56,6 @@ public class WeaponManager : MonoBehaviour
 
 
         // Activate new
-        
         AllWeaponPrefabs[_swapWeaponIndex].SetActive(true);
         _currentWeaponIndex = _swapWeaponIndex;
         Debug.Log($"Swapped to {newWeaponData.name}"); // Use the asset name for logging
