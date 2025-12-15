@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Dan.Main;
 using Dan.Models;
@@ -37,7 +38,6 @@ public class LeaderboardManager : MonoBehaviour
     #region Private Methods
     /// <summary>
     /// This function will get all the scores from the leaderboard and put them into the score section.
-    /// TODO have it set it into the UI using a prefab
     /// </summary>
     [ContextMenu("Get Scores")]
     void GetScores()
@@ -66,28 +66,68 @@ public class LeaderboardManager : MonoBehaviour
             }
         });
     }
-    // Function claims a spot for the user with the given username
-    void ClaimUsername(string username)
+    // Modified ClaimUsername to accept callback
+    void ClaimUsername(string username, System.Action<bool, string> resultCallback = null)
     {
         Leaderboards.SpaceBornRush.UploadNewEntry(username, 0, success =>
         {
             if (success)
             {
-                // Save username AND lock it permanently
                 PlayerPrefs.SetString("Username", username);
-                PlayerPrefs.SetInt("UsernameLocked", 1); // Lock flag
+                PlayerPrefs.SetInt("UsernameLocked", 1);
                 PlayerPrefs.Save();
-                
-                Debug.Log($"Username '{username}' permanently claimed.");
+            
+                // Subscribe to score events now
+                EventBus.OnHighScore += OnHighScore;
+            
+                string message = $"Username '{username}' permanently claimed.";
+                Debug.Log(message);
+                resultCallback?.Invoke(true, message);
             }
             else
             {
-                Debug.LogError("Failed to claim username. Try again.");
+                string message = "Failed to claim username. Try again.";
+                Debug.LogError(message);
+                resultCallback?.Invoke(false, message);
             }
         }, error =>
         {
-            Debug.LogError($"[LeaderboardCreator] {error}");
+            string message = $"[LeaderboardCreator] {error}";
+            Debug.LogError(message);
+            resultCallback?.Invoke(false, message);
         });
+    }
+    
+    private List<OfflineScore> LoadOfflineScores()
+    {
+        string json = PlayerPrefs.GetString("OfflineScores", "[]");
+        return JsonUtility.FromJson<OfflineScoreList>(json).scores;
+    }
+
+    private void SaveOfflineScores(List<OfflineScore> scores)
+    {
+        OfflineScoreList wrapper = new OfflineScoreList { scores = scores };
+        string json = JsonUtility.ToJson(wrapper);
+        PlayerPrefs.SetString("OfflineScores", json);
+        PlayerPrefs.Save();
+    }
+
+    private void ClearOfflineScores()
+    {
+        PlayerPrefs.DeleteKey("OfflineScores");
+        PlayerPrefs.Save();
+    }
+
+    private bool HasInternetConnection()
+    {
+        return Application.internetReachability != NetworkReachability.NotReachable;
+    }
+
+    // Wrapper class for JSON serialization
+    [System.Serializable]
+    private class OfflineScoreList
+    {
+        public List<OfflineScore> scores;
     }
 
     #endregion
@@ -110,57 +150,50 @@ public class LeaderboardManager : MonoBehaviour
         });
     }
 
-    public void SubmitUsername(string username)
+    public void SubmitUsername(string username, System.Action<bool, string> resultCallback = null)
     {
         // SAFETY CHECK: Prevent multiple submissions
         if (PlayerPrefs.GetInt("UsernameLocked", 0) == 1)
         {
             string currentName = PlayerPrefs.GetString("Username", "Unknown");
-            Debug.LogWarning($"Username '{currentName}' is already locked. Cannot change.");
-            return; // Exit quietly - no error needed for player
-        }
-    
-        // Additional safety: Check if already subscribed to avoid duplicates
-        if (EventBus.OnHighScore != null)
-        {
-            var subscribers = EventBus.OnHighScore.GetInvocationList();
-            foreach (var sub in subscribers)
-            {
-                if (sub.Target == this && sub.Method.Name == "OnHighScore")
-                {
-                    Debug.LogWarning("Already listening for high scores. Username likely processing.");
-                    return;
-                }
-            }
+            string message = $"Username '{currentName}' is already locked. Cannot change.";
+            Debug.LogWarning(message);
+            resultCallback?.Invoke(false, message);
+            return;
         }
     
         // Original validation
         if (string.IsNullOrEmpty(username) || username.Length < 3)
         {
-            Debug.LogError("Username must be at least 3 characters!");
-            // Optional: Add callback/event for UI feedback
+            string message = "Username must be at least 3 characters!";
+            Debug.LogError(message);
+            resultCallback?.Invoke(false, message);
             return;
         }
     
-        // Check if username exists (your existing code)
+        // Check if username exists
         var query = LeaderboardSearchQuery.ByUsername(username);
     
         Leaderboards.SpaceBornRush.GetEntries(query, entries =>
         {
             if (entries != null && entries.Length > 0)
             {
-                Debug.LogError($"Username '{username}' is already taken!");
-                // Optional: Add callback for UI
+                string message = $"Username '{username}' is already taken!";
+                Debug.LogError(message);
+                resultCallback?.Invoke(false, message);
             }
             else
             {
-                ClaimUsername(username);
+                ClaimUsername(username, resultCallback);
             }
         }, error =>
         {
-            Debug.LogError($"Failed to check username: {error}");
+            string message = $"Failed to check username: {error}";
+            Debug.LogError(message);
+            resultCallback?.Invoke(false, message);
         });
     }
+
     
     /// <summary>
     /// Gets the player's personal best score from server
@@ -186,7 +219,49 @@ public class LeaderboardManager : MonoBehaviour
         return PlayerPrefs.GetInt("UsernameLocked", 0) == 1 && 
                !string.IsNullOrEmpty(PlayerPrefs.GetString("Username"));
     }
+    [System.Serializable]
+    public class OfflineScore
+    {
+        public string username;
+        public int score;
+        public long timestamp;
+    }
+
+// Save score locally when offline
+    public void SaveScoreForLaterUpload(string username, int score)
+    {
+        List<OfflineScore> offlineScores = LoadOfflineScores();
     
+        offlineScores.Add(new OfflineScore
+        {
+            username = username,
+            score = score,
+            timestamp = System.DateTime.Now.Ticks
+        });
+    
+        SaveOfflineScores(offlineScores);
+        Debug.Log($"Score saved offline: {username} - {score}");
+    }
+
+// Upload pending scores when internet returns
+    public void UploadPendingScores()
+    {
+        if (!HasInternetConnection()) return;
+    
+        List<OfflineScore> offlineScores = LoadOfflineScores();
+    
+        if (offlineScores.Count == 0) return;
+    
+        Debug.Log($"Uploading {offlineScores.Count} pending scores...");
+    
+        foreach (OfflineScore score in offlineScores)
+        {
+            UploadScore(score.username, score.score);
+        }
+    
+        // Clear after uploading
+        ClearOfflineScores();
+    }
     #endregion
 }
 

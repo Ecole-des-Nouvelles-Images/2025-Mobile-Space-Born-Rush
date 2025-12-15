@@ -98,7 +98,7 @@ public class UpgradeUIManager : MonoBehaviour
     }
 
     // Called by UI buttons when player selects an upgrade
-    public void OnUpgradeSelected(int choiceIndex)
+    private void OnUpgradeSelected(int choiceIndex)
     {
         if (!upgradeManager)
         {
