@@ -462,7 +462,7 @@ public class UIHandler : MonoBehaviour
         _homeButton.SetActive(true);
         _scoreButton.SetActive(true);
         _settingsButton.SetActive(true);
-        _creditPanel.SetActive(true);
+        _creditPanel.SetActive(false);
     }
     
     public void OpenOptionPanel()

@@ -8821,6 +8821,7 @@ MonoBehaviour:
   _loosePanel: {fileID: 606675808}
   _pausePanel: {fileID: 530583318}
   _hudPanel: {fileID: 156001554}
+  _scoreboardPanel: {fileID: 0}
   _usernamePanel: {fileID: 0}
   _creditPanel: {fileID: 573805210}
   _homeButton: {fileID: 0}
