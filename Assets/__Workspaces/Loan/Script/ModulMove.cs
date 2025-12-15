@@ -30,7 +30,7 @@ public class ModulMove : MonoBehaviour
     private void Start()
     {
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
-        _parentsTransform = GameObject.FindGameObjectWithTag("Parents").transform;
+        _parentsTransform = _parentsTransform.GetComponent<Transform>();
         _parentModulTransform = GameObject.FindGameObjectWithTag("ParentsModul").transform;
         EventBus.OnGameOver += GameOver;
         EventBus.OnGamePause += GamePause;

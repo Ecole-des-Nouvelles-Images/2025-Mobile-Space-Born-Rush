@@ -191,6 +191,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         _isSliding = MovementStateChange(_isSliding);
         _col.size /= SlideAmount;
         _col.center /= SlideAmount;
+        
+        _rb.AddForce(-JumpForce, ForceMode.Impulse);
     }
 
     public void StopSlide()

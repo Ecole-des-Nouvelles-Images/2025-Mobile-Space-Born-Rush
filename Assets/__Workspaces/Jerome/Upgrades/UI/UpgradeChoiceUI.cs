@@ -16,7 +16,10 @@ public class UpgradeChoiceUI : MonoBehaviour
 
     private void Start()
     {
-        _isiconImageNotNull = iconImage != null;
+        if (iconImage != null)
+        {
+            _isiconImageNotNull = true;
+        }
     }
 
     public void DisplayUpgrade(UpgradeData upgrade, int index)

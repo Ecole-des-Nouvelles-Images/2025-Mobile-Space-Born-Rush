@@ -6,7 +6,7 @@ public class ScoringManager : MonoBehaviour
 {
     private GameUpgradeController _gameUpgrades;
     
-    private float _score, _highScore;
+    private float _score;
     private bool _isGamePaused = true;
     [SerializeField]private int _killsNumber = 0;
     [SerializeField]private float _timer = 0;
@@ -66,6 +66,7 @@ public class ScoringManager : MonoBehaviour
     private void OnGameOver()
     {
         _isGamePaused = true;
+        EventBus.OnHighScore?.Invoke((int)_score);
         GameOver();
     }
     
@@ -114,10 +115,7 @@ public class ScoringManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO: Uncomment when the game UI is implemented
-        //if (_isGamePaused) return;
-        if (_isGamePaused)
-            return;
+        if (_isGamePaused) return;
         _timer += Time.deltaTime;
         
         _score += _gameUpgrades.GameSpeed *  Time.deltaTime;
@@ -126,6 +124,7 @@ public class ScoringManager : MonoBehaviour
     private void DecreaseScore(float value)
     {
         _score -= value;
+        _score = Mathf.Clamp(_score, 0, int.MaxValue);
         //Do something to make it look pretty when the player looses points
     }    
     private void IncreaseScore(float value)
@@ -141,11 +140,9 @@ public class ScoringManager : MonoBehaviour
         _timerText.text = $"Timer: {minutes:00}:{seconds:00}";
         _scoreText.text = "Score: " + (int)_score;
         _killsText.text = "Kills: " + _killsNumber;
+        
+        EventBus.OnHighScore?.Invoke((int)_score);
     }
 
     public float Score => _score;
-    public float GetHighScore()
-    {
-        return _highScore;
-    }
 }
