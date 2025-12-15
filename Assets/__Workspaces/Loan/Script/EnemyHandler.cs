@@ -82,7 +82,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         GameDirector = FindAnyObjectByType<GameDirector>();
         CurrentHealth = EnemyData.MaxHealth + GameDirector.DifficultyHealth;
-        CurrentFireRate = EnemyData.FireRate;
+        CurrentFireRate = 0;
         CurrentDamage = EnemyData.Damage + GameDirector.DifficultyDamage;
         IsWait =  true;
         if (Animator)
