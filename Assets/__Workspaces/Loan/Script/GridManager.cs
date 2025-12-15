@@ -1,25 +1,31 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GridManager : MonoBehaviour
 {
+    [Header("===== Cells Settings =====")]
     [SerializeField] private int _cellX;
     [SerializeField] private int _cellZ;
     [SerializeField] private float _cellSize = 1.5f;
 
+    [Header("===== Lanes List =====")]
     [SerializeField] private MeshRenderer[] _lanesBounds;
     
     private List<int> _neightbornUpDown =  new List<int>(){2,1,-1,-2};
     private List<int> _neightbornEnemy = new List<int>() {1,2};
+    private List<int> _neightbornAll = new List<int>() { 1,-1 };
     
     private Bounds _planeBounds;
+    private Color _gizmoColor;
 
     public Cell[,] Grid;
 
     private void Awake()
     {
         Generate();
+        _gizmoColor = Random.ColorHSV();
     }
 
     private void Generate()
@@ -81,41 +87,20 @@ public class GridManager : MonoBehaviour
             
             if (obs.LanesTaken == 1)
             {
-                foreach (var pos in _neightbornUpDown)
+                if (obs.IsRotate)
                 {
-                    int neightborn = z + pos;
-                    if ( neightborn < 0 || neightborn >= _cellZ)
-                        continue;
-
-                    if (!Grid[x, neightborn].IsEmpty)
-                        return false;
-                    SetCellEmpty(x,neightborn, false);
+                   return CheckAndReserveUpDownSafe(x, z);
                 }
-                return true;
+                else
+                {
+                    return CheckAndReserveAllNeighborsSafe(x, z);
+                }
+                
             }
             else if (obs.LanesTaken == 3)
             {
-                for (int laneX = 0; laneX < _cellX; laneX++)
-                {
-                    if (!Grid[laneX, z].IsEmpty)
-                        return false;
-                }
-                
-                foreach (var pos in _neightbornUpDown)
-                {
-                    int neightbornZ = z + pos;
-                    if (neightbornZ < 0 || neightbornZ >= _cellZ)
-                        continue;
-
-                    for (int laneX = 0; laneX < _cellX; laneX++)
-                    {
-                        if (!Grid[laneX, neightbornZ].IsEmpty)
-                            return false;
-                        SetCellEmpty(laneX, neightbornZ, false);
-                    }
-                }
+                return CheckAndReserveLanesSafe(z);
             }
-            return true;
         }
         else
         {
@@ -136,13 +121,102 @@ public class GridManager : MonoBehaviour
         
         return false;
     }
+
+    #region CheckRegion
+    
+    bool CheckAndReserveAllNeighborsSafe(int x, int z)
+    {
+        List<(int x, int z)> toReserve = new List<(int x, int z)>();
+
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            for (int dz = -1; dz <= 1; dz++)
+            {
+                if (dx == 0 && dz == 0) 
+                    continue; 
+
+                int nx = x + dx;
+                int nz = z + dz;
+                
+                if (nx < 0 || nx >= _cellX || nz < 0 || nz >= _cellZ)
+                    continue;
+                        
+                if (!Grid[nx, nz].IsEmpty)
+                    return false;
+
+                toReserve.Add((nx, nz));
+            }
+        }
+        
+        foreach (var cell in toReserve)
+            SetCellEmpty(cell.x, cell.z, false);
+
+        return true;
+    }
+    
+    bool CheckAndReserveUpDownSafe(int x, int z)
+    {
+        List<int> toReserveZ = new List<int>();
+
+        foreach (var pos in _neightbornUpDown)
+        {
+            int nz = z + pos;
+
+            if (nz < 0 || nz >= _cellZ)
+                continue;
+
+            if (!Grid[x, nz].IsEmpty)
+                return false;
+
+            toReserveZ.Add(nz);
+        }
+        
+        foreach (int nz in toReserveZ)
+            SetCellEmpty(x, nz, false);
+
+        return true;
+    }
+    
+    bool CheckAndReserveLanesSafe(int z)
+    {
+        for (int laneX = 0; laneX < _cellX; laneX++)
+        {
+            if (!Grid[laneX, z].IsEmpty)
+                return false;
+        }
+        
+        List<(int x, int z)> toReserve = new List<(int x, int z)>();
+
+        foreach (var pos in _neightbornUpDown)
+        {
+            int neightbornZ = z + pos;
+            if (neightbornZ < 0 || neightbornZ >= _cellZ)
+                continue;
+
+            for (int laneX = 0; laneX < _cellX; laneX++)
+            {
+                if (!Grid[laneX, neightbornZ].IsEmpty)
+                    return false;
+
+                toReserve.Add((laneX, neightbornZ));
+            }
+        }
+        
+        foreach (var p in toReserve)
+            SetCellEmpty(p.x, p.z, false);
+
+        return true;
+    }
+
+    #endregion
+    
     
     private void OnDrawGizmos()
     {
         if (Grid == null || Grid.Length == 0)
             return;
 
-        Gizmos.color = Color.green;
+        Gizmos.color = _gizmoColor;;
 
         for (int x = 0; x < _cellX; x++)
         {
