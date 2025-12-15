@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -44,6 +45,12 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private bool _isCheckingUsername = false;
     [SerializeField] private bool _hasInternetConnection = false;
     [SerializeField] private bool _isCheckingInternet = false;
+    
+    [Header("Countdown Settings")]
+    [SerializeField] private GameObject _countdownPanel;
+    [SerializeField] private TextMeshProUGUI _countdownText;
+    private float _countdownTime;
+    private bool _isCountdownActive;
 
 
     private IEnumerator Start()
@@ -51,18 +58,17 @@ public class UIHandler : MonoBehaviour
         // Wait one frame for everything to initialize
         yield return null;
         
-        Debug.Log("UIHandler: Initializing...");
-        
         // Check internet connection first (async, won't block)
         yield return StartCoroutine(CheckInternetConnection());
         
         // Initialize all UI based on internet and username status
         InitializeUI();
-        
+    }
+
+    private void OnEnable()
+    {
         // Set up event listeners
         EventBus.OnGameOver += GameLose;
-        
-        Debug.Log($"UIHandler: Initialization complete. Internet: {_hasInternetConnection}");
     }
 
     private void OnDestroy()
@@ -79,6 +85,39 @@ public class UIHandler : MonoBehaviour
         if (_usernameInputField != null)
             _usernameInputField.onSubmit.RemoveAllListeners();
     }
+    private void Update()
+    {
+        if (!_isCountdownActive) return;
+        
+        _countdownTime -= Time.deltaTime;
+        
+        if (_countdownTime > 0)
+        {
+            _countdownText.text = Mathf.CeilToInt(_countdownTime).ToString();
+        }
+        else
+        {
+            CompleteCountdown();
+        }
+    }
+
+    #region ==================== Countdown ====================
+    private void StartCountdown()
+    {
+        // Start countdown
+        _countdownTime = 3f;
+        _isCountdownActive = true;
+        _countdownPanel.SetActive(true);
+    }
+    private void CompleteCountdown()
+    {
+        _isCountdownActive = false;
+        _countdownPanel.SetActive(false);
+        
+        // Actually resume the game
+        EventBus.OnGameResume?.Invoke();
+    }
+    #endregion
 
     // ==================== INTERNET HANDLING ====================
     private IEnumerator CheckInternetConnection()
@@ -89,7 +128,6 @@ public class UIHandler : MonoBehaviour
         {
             _hasInternetConnection = false;
             _isCheckingInternet = false;
-            Debug.Log("Internet check: Unity reports no connection");
             yield break;
         }
         _isCheckingInternet = false;
@@ -427,13 +465,14 @@ public class UIHandler : MonoBehaviour
         _pausePanel.SetActive(false);
         
         _hudPanel.SetActive(true);
-        EventBus.OnGameResume?.Invoke();
+        StartCountdown();
     }
 
     public void GameStart()
     {
         _menuEmpty.SetActive(false);
         _pausePanel.SetActive(false);
+        _countdownPanel.SetActive(false);
         
         _gameEmpty.SetActive(true);
         _hudPanel.SetActive(true);
@@ -457,12 +496,12 @@ public class UIHandler : MonoBehaviour
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        _creditPanel.SetActive(false);
         
         _gamePanel.SetActive(true);
         _homeButton.SetActive(true);
         _scoreButton.SetActive(true);
         _settingsButton.SetActive(true);
-        _creditPanel.SetActive(false);
     }
     
     public void OpenOptionPanel()
