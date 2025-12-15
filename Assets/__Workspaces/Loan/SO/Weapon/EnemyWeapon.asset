@@ -22,4 +22,4 @@ MonoBehaviour:
   IsPlayer: 0
   EnemyMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 256
