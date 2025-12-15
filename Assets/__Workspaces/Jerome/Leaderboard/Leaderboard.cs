@@ -35,37 +35,7 @@ public class LeaderboardManager : MonoBehaviour
         }
     }
 
-    #region Private Methods
-    /// <summary>
-    /// This function will get all the scores from the leaderboard and put them into the score section.
-    /// </summary>
-    [ContextMenu("Get Scores")]
-    void GetScores()
-    {
-        // Clear any existing scores
-        foreach (Transform child in _scoreParent)
-        {
-            Destroy(child.gameObject);
-        }
-    
-        Leaderboards.SpaceBornRush.GetEntries(callback =>
-        {
-            for (int i = 0; i < callback.Length; i++)
-            {
-                GameObject ScoreObj = Instantiate(_scorePrefab, _scoreParent);
-                
-                TMP_Text[] textComponents = ScoreObj.GetComponentsInChildren<TMP_Text>();
-                
-                textComponents[0].text = callback[i].Rank.ToString();
-                textComponents[1].text = callback[i].Username;
-                textComponents[2].text = callback[i].Score.ToString("N0"); // Formatted with commas
-            
-                // 4. Optional: Highlight player's own score
-                // Note: callback[i].IsMine() would need access to Entry struct
-                // We'll implement this differently below
-            }
-        });
-    }
+    #region ========== Private Methods ==========
     // Modified ClaimUsername to accept callback
     void ClaimUsername(string username, System.Action<bool, string> resultCallback = null)
     {
@@ -132,7 +102,36 @@ public class LeaderboardManager : MonoBehaviour
 
     #endregion
     
-    #region Public Methods
+    #region ========== Public Methods ==========
+    /// <summary>
+    /// This function will get all the scores from the leaderboard and put them into the score section.
+    /// </summary>
+    public void GetScores()
+    {
+        // Clear any existing scores
+        foreach (Transform child in _scoreParent)
+        {
+            Destroy(child.gameObject);
+        }
+    
+        Leaderboards.SpaceBornRush.GetEntries(callback =>
+        {
+            for (int i = 0; i < callback.Length; i++)
+            {
+                GameObject ScoreObj = Instantiate(_scorePrefab, _scoreParent);
+                
+                TMP_Text[] textComponents = ScoreObj.GetComponentsInChildren<TMP_Text>();
+                
+                textComponents[0].text = callback[i].Rank.ToString();
+                textComponents[1].text = callback[i].Username;
+                textComponents[2].text = callback[i].Score.ToString("N0"); // Formatted with commas
+            
+                // 4. Optional: Highlight player's own score
+                // Note: callback[i].IsMine() would need access to Entry struct
+                // We'll implement this differently below
+            }
+        });
+    }
     /// <summary>
     /// Function will upload the score passed.
     /// </summary>
