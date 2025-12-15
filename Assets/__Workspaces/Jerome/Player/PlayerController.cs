@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {
@@ -36,8 +37,9 @@ public class PlayerController : MonoBehaviour,IDamageable
     
     private bool IsInNeutralState => !_isJumping && !_isSliding && !_isChangingLane;    
     
-    public Vector3 JumpForce = Vector3.up;
-    public int SlideAmount;
+    [Header("Player Movement")]
+    [SerializeField] private int _colliderSize;
+    [SerializeField] private Vector3 JumpForce = Vector3.up;
     
     [SerializeField] private Animator _animator;
     
@@ -89,6 +91,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             StopSlide();
         }
+        ResetCollider();
         
         _isPaused = true;
     }
@@ -114,7 +117,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Animator animator = GetComponent<Animator>();
         // animator.speed = 2;
 
-        _isJumping = true;
+        _isJumping = true; // Because the player is spawned in the air and land on the platform reversing this frame 1
         _isPaused = false;
         _currentLaneIndex = 1;
         
@@ -144,10 +147,16 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     #endregion
     
-    //This method is called at the start and end of any animation to stop the player from being able to double jump or slide
-    public bool MovementStateChange(bool state)
+    private void ShrinkCollider()
     {
-        return !state;
+        _col.size = _originalColliderSize/_colliderSize;
+        _col.center = _originalColliderCenter/_colliderSize;
+    }
+
+    private void ResetCollider()
+    {
+        _col.size = _originalColliderSize;
+        _col.center = _originalColliderCenter;
     }
     private void Jump()
     {
@@ -155,6 +164,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             _animator.SetTrigger("isJump");
         }
+        
         _rb.AddForce(JumpForce, ForceMode.Impulse);
     }
     
@@ -167,8 +177,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         _isSliding = true;  // Direct assignment
         
         // Scale down from original
-        _col.size = _originalColliderSize / SlideAmount;
-        _col.center = _originalColliderCenter / SlideAmount;
+        ShrinkCollider();
         
         _rb.AddForce(-JumpForce, ForceMode.Impulse);
     }
@@ -177,9 +186,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     {
         _isSliding = false;  // Direct assignment
         
-        // Reset to original (IDEMPOTENT - safe to call multiple times)
-        _col.size = _originalColliderSize;
-        _col.center = _originalColliderCenter;
+        ResetCollider();
     }
     
     #region Input System
@@ -358,7 +365,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         switch (other.gameObject.tag)
         {
             case "Platform":
-                _isJumping = MovementStateChange(_isJumping);
+                _isJumping = false;
+                
                 break;
         }
     }
@@ -367,7 +375,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         switch (other.gameObject.tag)
         {
             case "Platform":
-                _isJumping = MovementStateChange(_isJumping);
+                _isJumping = true;
                 break;
         }
     }
