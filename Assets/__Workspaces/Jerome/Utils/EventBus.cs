@@ -17,6 +17,7 @@ public static class EventBus
     /// Multiplicative value, duration in seconds
     /// </summary>
     public static Action<float, float> OnSpeedChanged;
+    public static Action<bool> OnInternetConnection;
     
     // ===== PLAYER EVENTS =====
     public static Action OnPlayerSpawn;

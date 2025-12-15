@@ -5,11 +5,9 @@ public class ScoreTracker : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private ScoringManager _scoringManager;
-    [SerializeField] private HighScoreData _highScoreData;
     
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI _currentScoreText;
-    [SerializeField] private TextMeshProUGUI _highScoreText;
     
     [Header("Formatting")]
     [SerializeField] private string _currentScoreFormat;
@@ -28,23 +26,13 @@ public class ScoreTracker : MonoBehaviour
         if (!_currentScoreText)
             Debug.LogWarning("Current Score Text not assigned to ScoreTracker!");
         
-        if (!_highScoreText)
-            Debug.LogWarning("High Score Text not assigned to ScoreTracker!");
-        
         if (!_scoringManager)
             _scoringManager = FindAnyObjectByType<ScoringManager>();
         
-        if (!_highScoreData)
-            Debug.LogWarning("HighScoreData not assigned to ScoreTracker!");
-        else
-            _highScoreData.LoadHighScore(); // Load saved high score
-        
         // Initialize display
         _currentDisplayScore = 0;
-        _currentHighScore = _highScoreData?.HighScore ?? 0;
         
         UpdateCurrentScoreText();
-        UpdateHighScoreText();
     }
     
     private void Update()
@@ -66,13 +54,6 @@ public class ScoreTracker : MonoBehaviour
             UpdateCurrentScoreText();
         }
         
-        // Check and update high score if needed
-        if (_highScoreData && _targetScore > _currentHighScore)
-        {
-            _currentHighScore = _targetScore;
-            _highScoreData.HighScore = _currentHighScore; // This will trigger save and event
-            UpdateHighScoreText();
-        }
         
         
     }
@@ -90,7 +71,6 @@ public class ScoreTracker : MonoBehaviour
     private void OnHighScoreChanged(float newHighScore)
     {
         _currentHighScore = newHighScore;
-        UpdateHighScoreText();
     }
     
     private void UpdateCurrentScoreText()
@@ -102,15 +82,6 @@ public class ScoreTracker : MonoBehaviour
         }
     }
     
-    private void UpdateHighScoreText()
-    {
-        if (_highScoreText)
-        {
-            string formattedScore = _currentHighScore.ToString("N0");
-            _highScoreText.text = string.Format(_highScoreFormat, formattedScore);
-        }
-    }
-    
     // Optional visual effects
     public void PulseCurrentScore()
     {
@@ -119,15 +90,6 @@ public class ScoreTracker : MonoBehaviour
         {
             // Example: _currentScoreText.transform.localScale = Vector3.one * 1.2f;
             // Use LeanTween or DOTween for smooth animation
-        }
-    }
-    
-    public void PulseHighScore()
-    {
-        // Add visual effect when high score is broken
-        if (_highScoreText)
-        {
-            // Example: Change color to gold temporarily
         }
     }
 }

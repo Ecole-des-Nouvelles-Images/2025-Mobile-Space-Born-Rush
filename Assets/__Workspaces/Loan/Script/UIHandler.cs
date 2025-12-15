@@ -15,12 +15,12 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _hudPanel;
     [SerializeField] private GameObject _usernamePanel;
+    [SerializeField] private GameObject _creditPanel;
     
     [Header("=====Buttons=====")]
     [SerializeField] private GameObject _homeButton;
     [SerializeField] private GameObject _settingsButton;
     [SerializeField] private GameObject _scoreButton; 
-    [SerializeField] private GameObject _creditPanel;
 
     [Header("=====Username Panel Components=====")]
     [SerializeField] private TMP_InputField _usernameInputField;
@@ -39,11 +39,11 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private bool _requireInternetForUsername = true;
     [SerializeField] private float _internetCheckTimeout = 3f;
     [SerializeField] private bool _allowOfflinePlay = true;
+    [SerializeField] private bool _isActive;
+    [SerializeField] private bool _isCheckingUsername = false;
+    [SerializeField] private bool _hasInternetConnection = false;
+    [SerializeField] private bool _isCheckingInternet = false;
 
-    private bool _isActive;
-    private bool _isCheckingUsername = false;
-    private bool _hasInternetConnection = false;
-    private bool _isCheckingInternet = false;
 
     private IEnumerator Start()
     {
@@ -92,54 +92,8 @@ public class UIHandler : MonoBehaviour
             Debug.Log("Internet check: Unity reports no connection");
             yield break;
         }
-    
-        // Method 2: Try multiple endpoints (PC-friendly)
-        string[] testEndpoints = new string[]
-        {
-            "http://www.google.com",           // Global
-            "http://www.cloudflare.com",       // Reliable
-            "http://www.microsoft.com",        // Corporate-friendly
-            "http://1.1.1.1"                   // IP address (bypasses DNS issues)
-        };
-    
-        bool anySuccess = false;
-    
-        foreach (string endpoint in testEndpoints)
-        {
-            if (anySuccess) break;
-        
-            using (UnityWebRequest request = UnityWebRequest.Get(endpoint))
-            {
-                request.timeout = 2; // Shorter timeout for PC
-                request.method = UnityWebRequest.kHttpVerbHEAD;
-            
-                var operation = request.SendWebRequest();
-                float startTime = Time.time;
-            
-                // Wait with timeout
-                while (!operation.isDone && Time.time - startTime < 2)
-                {
-                    yield return null;
-                }
-            
-                if (operation.isDone && request.result == UnityWebRequest.Result.Success)
-                {
-                    anySuccess = true;
-                    Debug.Log($"Internet check: Success via {endpoint}");
-                    break;
-                }
-            }
-        
-            yield return null; // Small delay between attempts
-        }
-    
-        _hasInternetConnection = anySuccess;
         _isCheckingInternet = false;
-    
-        if (!_hasInternetConnection)
-        {
-            Debug.Log("Internet check: All endpoints failed - assuming offline");
-        }
+        _hasInternetConnection = true;
     }
 
     // ==================== UI INITIALIZATION ====================
@@ -150,11 +104,11 @@ public class UIHandler : MonoBehaviour
         _gameEmpty.SetActive(false);
         
         // Check if player already has a username (online or offline)
-        bool hasUsername = _leaderboardManager != null && _leaderboardManager.IsUser();
-        bool hasOfflineUsername = PlayerPrefs.HasKey("OfflineUsername");
+        bool hasUsername = _leaderboardManager && _leaderboardManager.IsUser();
+        //PlayerPrefs.DeleteAll(); //TODO DELETE THIS WHEN PUTTING IT IN AN APK. ITS SO THAT I CAN TEST THE USERNAME STUFF
         
         // Determine if we should show username panel
-        bool shouldShowUsernamePanel = ShouldShowUsernamePanel(hasUsername, hasOfflineUsername);
+        bool shouldShowUsernamePanel = ShouldShowUsernamePanel(hasUsername);
         
         // Setup username panel if needed
         if (shouldShowUsernamePanel)
@@ -167,11 +121,6 @@ public class UIHandler : MonoBehaviour
             _usernamePanel.SetActive(false);
             _gamePanel.SetActive(true);
             
-            // If playing offline with no username, generate one
-            if (!hasUsername && hasOfflineUsername && !_hasInternetConnection)
-            {
-                ShowTemporaryMainMenuMessage("Playing offline - scores saved locally", 3f);
-            }
         }
         
         // Hide all other panels
@@ -180,20 +129,20 @@ public class UIHandler : MonoBehaviour
         _loosePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _hudPanel.SetActive(false);
-        
-        _homeButton.SetActive(false);
-        _scoreButton.SetActive(false);
-        _settingsButton.SetActive(false);
         _creditPanel.SetActive(false);
+        
+        _homeButton.SetActive(true);
+        _scoreButton.SetActive(true);
+        _settingsButton.SetActive(true);
     }
     
-    private bool ShouldShowUsernamePanel(bool hasUsername, bool hasOfflineUsername)
+    private bool ShouldShowUsernamePanel(bool hasUsername)
     {
         // If player already has a proper username, never show panel
         if (hasUsername) return false;
         
-        // If player has offline username and we're offline, don't show panel
-        if (hasOfflineUsername && !_hasInternetConnection && _allowOfflinePlay) return false;
+        // If player is offline, don't show panel
+        if (!_hasInternetConnection && _allowOfflinePlay) return false;
         
         // If we require internet but don't have it, AND we allow offline play, don't show panel
         if (_requireInternetForUsername && !_hasInternetConnection && _allowOfflinePlay) return false;

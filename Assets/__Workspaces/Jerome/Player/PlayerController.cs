@@ -200,29 +200,59 @@ public class PlayerController : MonoBehaviour,IDamageable
         _col.center *= SlideAmount;
     }
     
-    #region Inputs
-      private void EnableGameplayInput()
+    #region Input System
+    private void EnableGameplayInput()
     {
         _inputActions.Player.Enable();
         
+        // Subscribe to touch events
         _inputActions.Player.TouchContact.started += OnTouchStarted;
         _inputActions.Player.TouchContact.canceled += OnTouchEnded;
+        
+        // CRITICAL: This gives us real-time touch position updates while finger is down
+        _inputActions.Player.TouchPosition.performed += OnTouchPositionPerformed;
     }
 
     private void DisableGameplayInput()
     {
-        _inputActions.Player.Disable();
-        
+        // Unsubscribe from all events
         _inputActions.Player.TouchContact.started -= OnTouchStarted;
         _inputActions.Player.TouchContact.canceled -= OnTouchEnded;
+        _inputActions.Player.TouchPosition.performed -= OnTouchPositionPerformed;
+        
+        _inputActions.Player.Disable();
     }
 
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
         if (_isPaused) return;
         
+        // Record where the touch began
         _touchStartPosition = _inputActions.Player.TouchPosition.ReadValue<Vector2>();
         _fingerDown = true;
+    }
+
+    private void OnTouchPositionPerformed(InputAction.CallbackContext context)
+    {
+        // Only process if we're actively touching and game isn't paused
+        if (_isPaused || !_fingerDown) return;
+        
+        Vector2 currentTouchPosition = context.ReadValue<Vector2>();
+        Vector2 currentDelta = currentTouchPosition - _touchStartPosition;
+        
+        // Have we moved far enough to qualify as a swipe?
+        if (currentDelta.magnitude >= PixelDistToDetect)
+        {
+            // YES! Process the swipe immediately (no waiting for finger lift)
+            ProcessSwipe(_touchStartPosition, currentTouchPosition);
+            
+            // IMPORTANT: Prevent same swipe from triggering multiple times
+            // Option 1: Reset start position (allows continuous swiping with same finger)
+            // _touchStartPosition = currentTouchPosition;
+            
+            // Option 2: Require finger lift between swipes (recommended for runners)
+            _fingerDown = false;
+        }
     }
 
     private void OnTouchEnded(InputAction.CallbackContext context)
@@ -230,6 +260,18 @@ public class PlayerController : MonoBehaviour,IDamageable
         if (_isPaused || !_fingerDown) return;
         
         Vector2 touchEndPosition = _inputActions.Player.TouchPosition.ReadValue<Vector2>();
+        Vector2 swipeDelta = touchEndPosition - _touchStartPosition;
+        
+        // Check if this was just a tap (short movement)
+        if (swipeDelta.magnitude < PixelDistToDetect)
+        {
+            // Could implement tap-to-jump here if desired
+            // Example: if (!_isJumping) Jump();
+            return;
+        }
+        
+        // If we haven't already processed this as a real-time swipe, process it now
+        // (This is a backup for edge cases)
         ProcessSwipe(_touchStartPosition, touchEndPosition);
         
         _fingerDown = false;
@@ -239,10 +281,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     {
         Vector2 swipeDelta = endPos - startPos;
         
-        // Your existing swipe processing logic goes here
-        if (swipeDelta.magnitude < PixelDistToDetect) return;
-        
-        // Rest of your swipe logic from before...
+        // Determine primary swipe direction
         bool isHorizontalSwipe = Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y);
         
         if (isHorizontalSwipe)
@@ -250,45 +289,46 @@ public class PlayerController : MonoBehaviour,IDamageable
             // Calculate target lane
             int targetLane = _currentLaneIndex + (swipeDelta.x > 0 ? 1 : -1);
             targetLane = _laneProfile.GetLaneIndex(targetLane); // Clamp/validate
-    
+            
             // Don't move if we're already on that lane
             if (targetLane == _currentLaneIndex) return;
-    
+            
             // RULE 2: Allow lane changes during slide, but no animation
             // RULE 3: Only play animation from neutral state
             if (IsInNeutralState && _animator)
             {
                 _animator.SetTrigger(swipeDelta.x > 0 ? "isMoveRight" : "isMoveLeft");
             }
-    
+            
             // Update current lane immediately
             _currentLaneIndex = targetLane;
-    
+            
             // Stop any existing movement coroutine
             if (_laneChangeCoroutine != null)
             {
                 StopCoroutine(_laneChangeCoroutine);
             }
-    
+            
             // Start smooth movement (works whether sliding or not)
             _laneChangeCoroutine = StartCoroutine(MoveToLane(_currentLaneIndex));
         }
-        else
+        else // Vertical swipe
         {
-            // Jump & Slide code
-            if (swipeDelta.y > 0 && !_isJumping)
+            if (swipeDelta.y > 0 && !_isJumping) // Upward swipe
             {
                 Jump();
-
+                
+                // If sliding, stop the slide when jumping
                 if (_isSliding) StopSlide();
             }
-            else if (swipeDelta.y < 0 && !_isSliding)
+            else if (swipeDelta.y < 0 && !_isSliding) // Downward swipe
             {
                 Slide();
             }
         }
     }
     #endregion
+
     private IEnumerator MoveToLane(int targetLaneIndex)
     {
         _isChangingLane = true;

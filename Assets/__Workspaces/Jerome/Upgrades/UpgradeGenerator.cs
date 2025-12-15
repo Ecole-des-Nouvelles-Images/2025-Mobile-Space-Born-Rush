@@ -26,8 +26,22 @@ public class UpgradeGenerator : MonoBehaviour
 
     private void OnWeaponUpgrade(UpgradeType weapon, float weaponIndex)
     {
+        //Basically when the weapon swap happens we should remove that weapon from the pool of choices
+        //We regenerate it so that when you swap again that older weapon can be picked again
         RegenerateUpgradePool();
-        //RemoveUpgradeFromPool(weapon.);
+        RemoveUpgradeFromPool(FindWeapon(weaponIndex));
+    }
+
+    private UpgradeData FindWeapon(float weaponIndex)
+    {
+        foreach (var upgrade in allPossibleUpgrades)
+        {
+            if (upgrade.Type == UpgradeType.WeaponSwap)
+            {
+                if(upgrade.Value == weaponIndex) return upgrade;
+            }
+        }
+        return null;
     }
 
     // Called when player levels up
@@ -92,9 +106,6 @@ public class UpgradeGenerator : MonoBehaviour
     private void RegenerateUpgradePool()
     {
         availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);
-        
-        // Optional: Increase weights for rare upgrades on regeneration
-        gameSystemWeight += 0.1f; // Make system upgrades more common in late game
     }
     
     // Call this when the upgrade should no longer be available

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ScoringManager : MonoBehaviour
 {
@@ -140,7 +139,7 @@ public class ScoringManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(_timer % 60);
 
         _timerText.text = $"Timer: {minutes:00}:{seconds:00}";
-        _scoreText.text = "Score: " + _score;
+        _scoreText.text = "Score: " + (int)_score;
         _killsText.text = "Kills: " + _killsNumber;
     }
 
