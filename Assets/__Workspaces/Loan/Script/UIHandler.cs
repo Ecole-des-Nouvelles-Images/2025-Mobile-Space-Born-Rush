@@ -433,6 +433,7 @@ public class UIHandler : MonoBehaviour
     public void GameStart()
     {
         _menuEmpty.SetActive(false);
+        _pausePanel.SetActive(false);
         
         _gameEmpty.SetActive(true);
         _hudPanel.SetActive(true);

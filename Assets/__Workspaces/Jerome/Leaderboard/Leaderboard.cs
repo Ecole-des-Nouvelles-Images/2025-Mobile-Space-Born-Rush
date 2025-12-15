@@ -8,9 +8,11 @@ public class LeaderboardManager : MonoBehaviour
 {
     [Header("Prefab")]
     [SerializeField] private GameObject _scorePrefab; //Children are in order Rank, Name, Score
-    
-    [Header("Parent")]
     [SerializeField] private Transform _scoreParent;
+    
+    // Cache the player's personal best from server
+    private int _cachedPersonalBest = 0;
+    private bool _isPersonalBestLoaded = false;
     
     
     private void OnEnable()
@@ -19,6 +21,12 @@ public class LeaderboardManager : MonoBehaviour
         if (IsUser())
         {
             EventBus.OnHighScore += OnHighScore;
+            
+            // Try to upload any pending scores when coming online
+            if (HasInternetConnection())
+            {
+                UploadPendingScores();
+            }
         }
     }
 
@@ -34,7 +42,87 @@ public class LeaderboardManager : MonoBehaviour
             EventBus.OnHighScore -= OnHighScore;
         }
     }
-
+    #region Personal Best Management
+    
+    /// <summary>
+    /// Load the player's personal best from server and cache it
+    /// </summary>
+    private void LoadPersonalBest(System.Action<int> onComplete = null)
+    {
+        Leaderboards.SpaceBornRush.GetPersonalEntry(entry =>
+        {
+            _cachedPersonalBest = entry.Score;
+            _isPersonalBestLoaded = true;
+            Debug.Log($"Loaded personal best: {_cachedPersonalBest}");
+            onComplete?.Invoke(_cachedPersonalBest);
+        }, error =>
+        {
+            Debug.LogWarning($"Could not load personal best: {error}. Using cached value.");
+            onComplete?.Invoke(_cachedPersonalBest);
+        });
+    }
+    
+    /// <summary>
+    /// Check if a score is a new high score
+    /// </summary>
+    public bool IsHighScore(int score)
+    {
+        // If not loaded yet, assume it's a high score to be safe
+        if (!_isPersonalBestLoaded) return true;
+        return score > _cachedPersonalBest;
+    }
+    
+    /// <summary>
+    /// Get the current high score (cached value)
+    /// </summary>
+    public int GetHighScore()
+    {
+        return _cachedPersonalBest;
+    }
+    
+    /// <summary>
+    /// Submit score if it's a new high score
+    /// </summary>
+    public void SubmitScoreIfHighScore(int score)
+    {
+        if (!IsUser())
+        {
+            Debug.LogWarning("Cannot submit score: No username set");
+            return;
+        }
+        
+        if (!IsHighScore(score))
+        {
+            Debug.Log($"Score {score} is not higher than personal best {_cachedPersonalBest}. Not uploading.");
+            return;
+        }
+        
+        string username = PlayerPrefs.GetString("Username");
+        UploadScore(username, score, (success) =>
+        {
+            if (success)
+            {
+                _cachedPersonalBest = score;
+                Debug.Log($"New personal best set: {score}");
+            }
+        });
+    }
+    
+    /// <summary>
+    /// Force upload a score regardless of high score check
+    /// </summary>
+    public void ForceUploadScore(int score)
+    {
+        if (!IsUser()) return;
+        
+        string username = PlayerPrefs.GetString("Username");
+        UploadScore(username, score, (success) =>
+        {
+            if (success) _cachedPersonalBest = Mathf.Max(_cachedPersonalBest, score);
+        });
+    }
+    
+    #endregion
     #region ========== Private Methods ==========
     // Modified ClaimUsername to accept callback
     void ClaimUsername(string username, System.Action<bool, string> resultCallback = null)
@@ -137,16 +225,37 @@ public class LeaderboardManager : MonoBehaviour
     /// </summary>
     /// <param name="username">String</param>
     /// <param name="score">Int</param>
-    public void UploadScore(string username, int score)
+    public void UploadScore(string username, int score, System.Action<bool> callback = null)
     {
-        Leaderboards.SpaceBornRush.UploadNewEntry(username, score, callback =>
+        if (HasInternetConnection())
         {
-            if (callback) GetScores();
-        }, failed =>
+            Leaderboards.SpaceBornRush.UploadNewEntry(username, score, success =>
+            {
+                if (success)
+                {
+                    Debug.Log($"Score {score} uploaded successfully for {username}");
+                    // Update cache if this score is higher
+                    if (score > _cachedPersonalBest)
+                    {
+                        _cachedPersonalBest = score;
+                    }
+                    GetScores(); // Refresh leaderboard display
+                }
+                callback?.Invoke(success);
+            }, error =>
+            {
+                Debug.LogError($"Upload failed: {error}");
+                // Save offline for later
+                SaveScoreForLaterUpload(username, score);
+                callback?.Invoke(false);
+            });
+        }
+        else
         {
-            //Could add a popup to say this.
-            Debug.LogError($"[LeaderboardCreator] {failed}");
-        });
+            Debug.Log("No internet connection. Saving score offline.");
+            SaveScoreForLaterUpload(username, score);
+            callback?.Invoke(false);
+        }
     }
 
     public void SubmitUsername(string username, System.Action<bool, string> resultCallback = null)
