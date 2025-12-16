@@ -36,7 +36,6 @@ public class Attack : BaseState
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
-                    
                     if (enemy.CurrentFireRate <= 0)
                     {
                         if (enemy.Animator != null)

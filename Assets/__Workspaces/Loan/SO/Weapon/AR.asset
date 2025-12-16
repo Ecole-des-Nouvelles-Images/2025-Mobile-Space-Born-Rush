@@ -16,7 +16,7 @@ MonoBehaviour:
   BulletData: {fileID: 11400000, guid: ce94d54a8dd69f944ace1bc36cd1a2dd, type: 2}
   Name: RX-77
   Cooldown: 3
-  FireRate: 0.6
+  FireRate: 0.3
   FireDistance: 25
   MagSize: 20
   IsPlayer: 1

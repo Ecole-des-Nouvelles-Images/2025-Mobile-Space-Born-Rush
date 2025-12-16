@@ -57,6 +57,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void GameStart()
     {
+        _isPause = false;
         _currentWeapon = _weaponData;
         _currentBullet = _currentWeapon.BulletData;
         _ammoNumber = _currentWeapon.MagSize;
