@@ -14801,8 +14801,8 @@ MonoBehaviour:
   _isJumping: 0
   _isSliding: 0
   _laneChangeSpeed: 10
-  JumpForce: {x: 0, y: 5, z: 0}
-  SlideAmount: 2
+  _colliderSize: 2
+  JumpForce: {x: 0, y: 4.5, z: 0}
   _animator: {fileID: 3425205591866011620}
 --- !u!65 &3425205591866011622
 BoxCollider:

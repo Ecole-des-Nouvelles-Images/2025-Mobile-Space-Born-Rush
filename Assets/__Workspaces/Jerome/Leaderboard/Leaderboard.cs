@@ -22,11 +22,11 @@ public class LeaderboardManager : MonoBehaviour
         {
             EventBus.OnHighScore += OnHighScore;
             
-            // Try to upload any pending scores when coming online
-            if (HasInternetConnection())
-            {
-                UploadPendingScores();
-            }
+            // // Try to upload any pending scores when coming online
+            // if (HasInternetConnection())
+            // {
+            //     UploadPendingScores();
+            // }
         }
     }
 
