@@ -31,7 +31,7 @@ public class Attack : BaseState
         }
         else
         {
-            enemy.Raycast = new Ray(enemy.Transform.position, enemy.Transform.forward);
+            enemy.Raycast = new Ray(enemy.OriginRaycast.position, enemy.Transform.forward);
             if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.CurrentRange,enemy.EnemyMask))
             {
                 if (hit.collider.TryGetComponent<PlayerController>(out var player))
