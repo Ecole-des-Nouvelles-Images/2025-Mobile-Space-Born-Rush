@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 3715866792822300968}
   - component: {fileID: 7418426816126222875}
   - component: {fileID: 3518213156939136772}
+  - component: {fileID: 4589481662640442488}
   m_Layer: 7
   m_Name: Voie03_low
   m_TagString: Untagged
@@ -216,6 +217,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4589481662640442488
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121708500300298155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01475, y: 0.1964095, z: 0.00050003186}
+  m_Center: {x: 0.014625, y: 0, z: -0.0002500037}
 --- !u!1 &2381131522643824484
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +496,7 @@ GameObject:
   - component: {fileID: 5995228192134871671}
   - component: {fileID: 5560408779929301995}
   - component: {fileID: 6009942498043098465}
+  - component: {fileID: 3227721314701993431}
   m_Layer: 7
   m_Name: Contour02_low
   m_TagString: Untagged
@@ -552,6 +575,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3227721314701993431
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5116621384239291890}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012999993, y: 0.19635686, z: 0.04}
+  m_Center: {x: 0.028499996, y: 0.00002631172, z: 0.02}
 --- !u!1 &5406298355759283351
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +607,7 @@ GameObject:
   - component: {fileID: 278113250650931319}
   - component: {fileID: 3008830019013109106}
   - component: {fileID: 2150384325764697574}
+  - component: {fileID: 7208337081823741568}
   m_Layer: 7
   m_Name: Contour01_low
   m_TagString: Untagged
@@ -641,6 +686,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7208337081823741568
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406298355759283351}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012999993, y: 0.1964095, z: 0.04}
+  m_Center: {x: -0.028499996, y: 0, z: 0.02}
 --- !u!1 &5636352721428117344
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +718,7 @@ GameObject:
   - component: {fileID: 1225217772188184260}
   - component: {fileID: 3430337387220425261}
   - component: {fileID: 950667255622769681}
+  - component: {fileID: 7774472786312241219}
   m_Layer: 7
   m_Name: Voie02_low
   m_TagString: Untagged
@@ -730,6 +797,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7774472786312241219
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636352721428117344}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0145000005, y: 0.1964095, z: 0.00050003186}
+  m_Center: {x: 0, y: 0, z: -0.0002500037}
 --- !u!1 &5818075363703874275
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +829,7 @@ GameObject:
   - component: {fileID: 3338417517182917051}
   - component: {fileID: 203871369129703533}
   - component: {fileID: 6695034405179591482}
+  - component: {fileID: 377346888874391730}
   m_Layer: 7
   m_Name: Voie01_low
   m_TagString: Untagged
@@ -819,6 +908,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &377346888874391730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5818075363703874275}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01475, y: 0.1964095, z: 0.00050003186}
+  m_Center: {x: -0.014625, y: 0, z: -0.0002500037}
 --- !u!1 &8725988284183929341
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +1048,7 @@ MonoBehaviour:
   _parentModulTransform: {fileID: 0}
   _gridManager: {fileID: 141888392591585675}
   _enemies:
-  - {fileID: 9214185679248329394, guid: 008428c34e35f334492029ff4a091b10, type: 3}
+  - {fileID: 1826947733105000934, guid: bd99954c3356f5d4993bf799c1a6884e, type: 3}
   _parentsTransform: {fileID: 9190180809748878855}
   EnemyNumber: 1
   isEnemy: 1

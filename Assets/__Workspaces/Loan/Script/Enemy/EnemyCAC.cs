@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class EnemyCAC : EnemyHandler
 {
+    private bool _firstDead = true;
     void Update()
     {
         if (IsPaused)
             return;
-        Raycast = new Ray(Transform.position, Transform.forward);
+        Raycast = new Ray(OriginRaycast.position, Transform.forward);
         if (IsWait)
         {
             CurrentState = new Wait();
@@ -17,9 +18,11 @@ public class EnemyCAC : EnemyHandler
             CurrentState = new Attack();
         }
 
-        if (IsDead)
+        if (IsDead && _firstDead)
         {
             CurrentState = new Dead();
+            Death(this.gameObject);
+            _firstDead = false;
         }
         
         CurrentState.Excute(this);
