@@ -83,6 +83,8 @@ public class GameDirector : MonoBehaviour
         EventBus.OnGameStart -= OnGameStart;
         EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         EventBus.OnGameOver -= OnGameOver;
+
+        if (_speedIncrementTimer == null && _difficultyIncrementTimer == null) return;
         
         //Turn off timers
         _speedIncrementTimer.Enabled = false;

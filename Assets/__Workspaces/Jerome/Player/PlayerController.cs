@@ -232,14 +232,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Have we moved far enough to qualify as a swipe?
         if (currentDelta.magnitude >= PixelDistToDetect)
         {
-            // YES! Process the swipe immediately (no waiting for finger lift)
             ProcessSwipe(_touchStartPosition, currentTouchPosition);
             
-            // IMPORTANT: Prevent same swipe from triggering multiple times
-            // Option 1: Reset start position (allows continuous swiping with same finger)
-            // _touchStartPosition = currentTouchPosition;
-            
-            // Option 2: Require finger lift between swipes (recommended for runners)
             _fingerDown = false;
         }
     }
@@ -252,12 +246,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         Vector2 swipeDelta = touchEndPosition - _touchStartPosition;
         
         // Check if this was just a tap (short movement)
-        if (swipeDelta.magnitude < PixelDistToDetect)
-        {
-            // Could implement tap-to-jump here if desired
-            // Example: if (!_isJumping) Jump();
-            return;
-        }
+        if (swipeDelta.magnitude < PixelDistToDetect) return;
         
         // If we haven't already processed this as a real-time swipe, process it now
         // (This is a backup for edge cases)
