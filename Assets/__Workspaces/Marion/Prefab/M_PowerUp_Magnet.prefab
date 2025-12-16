@@ -11,12 +11,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: db34ecf07466f154788976939073f38e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db34ecf07466f154788976939073f38e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.643
+      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db34ecf07466f154788976939073f38e,
         type: 3}
@@ -160,6 +160,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_PowerUps
       objectReference: {fileID: 0}
+    - target: {fileID: 2188860803281219262, guid: a5eab8e5b45ccea4fa10abc79bed5f0d,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2288448149521061475, guid: a5eab8e5b45ccea4fa10abc79bed5f0d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -209,6 +214,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014314157999173370, guid: a5eab8e5b45ccea4fa10abc79bed5f0d,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304238204864948580, guid: a5eab8e5b45ccea4fa10abc79bed5f0d,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394090370499904501, guid: a5eab8e5b45ccea4fa10abc79bed5f0d,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

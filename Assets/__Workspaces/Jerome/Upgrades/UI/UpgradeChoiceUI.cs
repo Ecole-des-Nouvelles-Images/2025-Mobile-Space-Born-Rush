@@ -12,15 +12,7 @@ public class UpgradeChoiceUI : MonoBehaviour
 
     private int choiceIndex;
     private System.Action<int> onSelectedCallback;
-    private bool _isiconImageNotNull;
-
-    private void Start()
-    {
-        if (iconImage != null)
-        {
-            _isiconImageNotNull = true;
-        }
-    }
+    
 
     public void DisplayUpgrade(UpgradeData upgrade, int index)
     {
@@ -39,12 +31,10 @@ public class UpgradeChoiceUI : MonoBehaviour
         
         if (descriptionText)
             descriptionText.text = upgrade.Description ?? "Missing Description";
-
-        if (_isiconImageNotNull)
-        {
+        
             iconImage.sprite = upgrade.Icon;
             iconImage.color = upgrade.Icon ? Color.white : new Color(0.8f, 0.8f, 0.8f);
-        }
+
         
         if (selectButton)
         {
