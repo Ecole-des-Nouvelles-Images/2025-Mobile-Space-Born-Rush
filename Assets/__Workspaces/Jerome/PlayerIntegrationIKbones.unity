@@ -2926,6 +2926,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306744685091494431, guid: d1c9f313e2c30ac46ac29447284bca17,
         type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 6347193283442542097}
+    - target: {fileID: 3306744685091494431, guid: d1c9f313e2c30ac46ac29447284bca17,
+        type: 3}
       propertyPath: _fireParticles
       value: 
       objectReference: {fileID: 462291410}
@@ -6376,6 +6381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6961566747059055324, guid: 4b86fd82ee665ef4bb07667397211586,
         type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 6347193283442542097}
+    - target: {fileID: 6961566747059055324, guid: 4b86fd82ee665ef4bb07667397211586,
+        type: 3}
       propertyPath: _fireParticles
       value: 
       objectReference: {fileID: 1009105731}
@@ -7004,6 +7014,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 55929330}
     m_Modifications:
+    - target: {fileID: 124215578857738889, guid: 3cc4756dab9e4b2429c4c89544b97c89,
+        type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 6347193283442542097}
     - target: {fileID: 124215578857738889, guid: 3cc4756dab9e4b2429c4c89544b97c89,
         type: 3}
       propertyPath: _fireParticles
@@ -8727,6 +8742,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5237073436495868148, guid: 263d10eaaf30ffb44b6f0679362de236,
+        type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 6347193283442542097}
     - target: {fileID: 5237073436495868148, guid: 263d10eaaf30ffb44b6f0679362de236,
         type: 3}
       propertyPath: _fireParticles

@@ -82,15 +82,10 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
-        if (_animator)
-        {
-            _animator.SetTrigger("isDie");
-        }
+        if (_animator) _animator.SetTrigger("isDie");
 
-        if (_isSliding)
-        {
-            StopSlide();
-        }
+        if (_isSliding) StopSlide();
+        
         ResetCollider();
         
         _isPaused = true;
@@ -374,6 +369,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             _animator.SetTrigger("isHit");
         }
+        
         EventBus.OnPlayerTakeDamage?.Invoke(damage);
     }
 }
