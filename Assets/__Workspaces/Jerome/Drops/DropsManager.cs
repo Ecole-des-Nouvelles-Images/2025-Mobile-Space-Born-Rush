@@ -103,7 +103,7 @@ public class DropsManager : MonoBehaviour
             // Random.Range(0, 101) gives 0-100, so < DropChance works correctly
             if (Random.Range(0, 101) < drop.DropChance)
             {
-                SpawnPowerUp(drop, basePosition, i);
+                SpawnPowerUp(drop, basePosition + Vector3.forward, i);
                 return;
             }
         }

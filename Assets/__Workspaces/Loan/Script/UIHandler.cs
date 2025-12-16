@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
 public class UIHandler : MonoBehaviour
 {
@@ -427,7 +425,7 @@ public class UIHandler : MonoBehaviour
     }
     #endregion
 
-    #region ==================== EXISTING GAME METHODS ====================
+    #region ==================== GAME METHODS ====================
 
     private void OpenUsernamePanel()
     {
