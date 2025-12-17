@@ -62,29 +62,12 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
         
-        // Movement & Environment
-        EventBus.OnSpeedChanged += OnSpeedChanged;
-        
     }
 
     private void OnPlayerTakeDamage(float obj)
     {
         if (_animator) _animator.SetTrigger("isHit");
         StopSlide();
-    }
-
-    private void OnSpeedChanged(float speed, float time)
-    {
-        StartCoroutine(SpeedBoost(speed, time));
-        
-    }
-    IEnumerator SpeedBoost(float speedBoost, float time)
-    {
-        _animator.speed *= speedBoost;
-        _animator.speed = Mathf.Clamp(_animator.speed, 0.75f, 1.5f);
-        yield return new WaitForSeconds(time);
-        _animator.speed /= speedBoost;
-        _animator.speed = Mathf.Clamp(_animator.speed, 0.75f, 1.5f);
     }
     private void OnPlayerSpawn()
     {
@@ -156,8 +139,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
         
-        // Movement & Environment
-        EventBus.OnSpeedChanged -= OnSpeedChanged;
     }
 
     #endregion
