@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -9,25 +10,29 @@ public class PlayerController : MonoBehaviour,IDamageable
     //Data variables
     private Rigidbody _rb;
     private BoxCollider _col;
-    [SerializeField] private LaneProfile _laneProfile;
-    private WeaponData _currentweaponData;
+    
+    [Header("IK Movment")]
+    [SerializeField] private GameObject _weapons;
+    [SerializeField] private Rig _RHand;
+    [SerializeField] private Rig _LHand;
     
     //Variables for swipe detection
     private TouchControls _inputActions;
     private Vector2 _touchStartPosition;
     private bool _fingerDown;
     
-    public int PixelDistToDetect = 200;
+    [Header("Tweaks")]
+    [SerializeField] private int _pixelDistToDetect = 50;
+    [SerializeField] private int _colliderSize;
+    [SerializeField] private Vector3 JumpForce = Vector3.up;
     
-    //Player Variables
-    [SerializeField] private int _currentLaneIndex;
     // Collider variables
     private Vector3 _originalColliderSize;
     private Vector3 _originalColliderCenter;
     
-    //Variables for methods
-    [SerializeField]private bool _isJumping = false;
-    [SerializeField] private bool _isSliding;
+
+    private bool _isJumping = false;
+    private bool _isSliding;
     private bool _isPaused;
     
     [Header("Lane Movement")]
@@ -38,9 +43,10 @@ public class PlayerController : MonoBehaviour,IDamageable
     private bool IsInNeutralState => !_isJumping && !_isSliding && !_isChangingLane;    
     
     [Header("Player Movement")]
-    [SerializeField] private int _colliderSize;
-    [SerializeField] private Vector3 JumpForce = Vector3.up;
+    [SerializeField] private LaneProfile _laneProfile;
+    [SerializeField] private int _currentLaneIndex;
     
+    [Header("Animator")]
     [SerializeField] private Animator _animator;
     
     #region subscriptions
@@ -56,10 +62,16 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
+        EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
         
         // Movement & Environment
         EventBus.OnSpeedChanged += OnSpeedChanged;
         
+    }
+
+    private void OnPlayerTakeDamage(float obj)
+    {
+        if (_animator) _animator.SetTrigger("isHit");
     }
 
     private void OnSpeedChanged(float val, float duration)
@@ -82,15 +94,10 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
-        if (_animator)
-        {
-            _animator.SetTrigger("isDie");
-        }
+        if (_animator) _animator.SetTrigger("isDie");
 
-        if (_isSliding)
-        {
-            StopSlide();
-        }
+        if (_isSliding) StopSlide();
+        
         ResetCollider();
         
         _isPaused = true;
@@ -140,6 +147,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
+        EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
         
         // Movement & Environment
         EventBus.OnSpeedChanged -= OnSpeedChanged;
@@ -158,6 +166,20 @@ public class PlayerController : MonoBehaviour,IDamageable
         _col.size = _originalColliderSize;
         _col.center = _originalColliderCenter;
     }
+
+    private void HideIK()
+    {
+        _weapons.SetActive(false);
+        _RHand.weight = 0f;
+        _LHand.weight = 0f;
+    }
+
+    private void ShowIK()
+    {
+        _weapons.SetActive(true);
+        _RHand.weight = 1f;
+        _LHand.weight = 1f;
+    }
     private void Jump()
     {
         if (_animator)
@@ -166,6 +188,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         }
         
         _rb.AddForce(JumpForce, ForceMode.Impulse);
+
+        HideIK();
     }
     
     //Sliding will basically be just the players hitbox getting smaller
@@ -180,6 +204,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         ShrinkCollider();
         
         _rb.AddForce(-JumpForce, ForceMode.Impulse);
+        HideIK();
     }
     
     public void StopSlide()
@@ -187,6 +212,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         _isSliding = false;  // Direct assignment
         
         ResetCollider();
+        ShowIK();
     }
     
     #region Input System
@@ -230,16 +256,10 @@ public class PlayerController : MonoBehaviour,IDamageable
         Vector2 currentDelta = currentTouchPosition - _touchStartPosition;
         
         // Have we moved far enough to qualify as a swipe?
-        if (currentDelta.magnitude >= PixelDistToDetect)
+        if (currentDelta.magnitude >= _pixelDistToDetect)
         {
-            // YES! Process the swipe immediately (no waiting for finger lift)
             ProcessSwipe(_touchStartPosition, currentTouchPosition);
             
-            // IMPORTANT: Prevent same swipe from triggering multiple times
-            // Option 1: Reset start position (allows continuous swiping with same finger)
-            // _touchStartPosition = currentTouchPosition;
-            
-            // Option 2: Require finger lift between swipes (recommended for runners)
             _fingerDown = false;
         }
     }
@@ -252,12 +272,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         Vector2 swipeDelta = touchEndPosition - _touchStartPosition;
         
         // Check if this was just a tap (short movement)
-        if (swipeDelta.magnitude < PixelDistToDetect)
-        {
-            // Could implement tap-to-jump here if desired
-            // Example: if (!_isJumping) Jump();
-            return;
-        }
+        if (swipeDelta.magnitude < _pixelDistToDetect) return;
         
         // If we haven't already processed this as a real-time swipe, process it now
         // (This is a backup for edge cases)
@@ -305,10 +320,10 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             if (swipeDelta.y > 0 && !_isJumping) // Upward swipe
             {
-                Jump();
-                
                 // If sliding, stop the slide when jumping
                 if (_isSliding) StopSlide();
+                
+                Jump();
             }
             else if (swipeDelta.y < 0 && !_isSliding) // Downward swipe
             {
@@ -366,7 +381,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             case "Platform":
                 _isJumping = false;
-                
+                if(!_isSliding) ShowIK();
                 break;
         }
     }
@@ -381,10 +396,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (_animator)
-        {
-            _animator.SetTrigger("isHit");
-        }
-        EventBus.OnPlayerTakeDamage?.Invoke(damage);
+       EventBus.OnPlayerTakeDamage?.Invoke(damage);
     }
 }

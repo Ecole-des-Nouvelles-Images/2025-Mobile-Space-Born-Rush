@@ -1234,8 +1234,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
+      propertyPath: InitialModule.size3D
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: NoiseModule.separateAxes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: NoiseModule.strengthZ.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 4.83
       objectReference: {fileID: 0}
     - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
@@ -1245,7 +1285,7 @@ PrefabInstance:
     - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
@@ -1267,6 +1307,31 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.6226415
       objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.scalar
+      value: 1.134464
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.minScalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 60331
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798753871835865436, guid: 14b2183c22d61cf42989b0185a488c72,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3923050770429439444, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
       propertyPath: m_Layer
@@ -1275,7 +1340,7 @@ PrefabInstance:
     - target: {fileID: 3925846210618031266, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8577036670819439022, guid: 14b2183c22d61cf42989b0185a488c72,
         type: 3}
