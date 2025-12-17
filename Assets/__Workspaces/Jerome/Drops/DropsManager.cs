@@ -80,7 +80,8 @@ public class DropsManager : MonoBehaviour
     void SpawnXP(Vector3 position)
     {
         DropsData xpData = _dropsData[0];
-        GameObject xp = Instantiate(xpData.Prefab, position, Quaternion.identity, _dropsParent.transform);
+        Vector3 offset = new Vector3(0, 1f, 0);
+        GameObject xp = Instantiate(xpData.Prefab, position + offset, Quaternion.identity, _dropsParent.transform);
         // xp.transform.position = position;
         
         // CRITICAL: Pass the data to the drop

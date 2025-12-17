@@ -112,7 +112,7 @@ public class ModulMove : MonoBehaviour
         
         for (int i = 0; i < width; i++)
         {
-            for (int j = 1; j < height; j++) 
+            for (int j = 3; j < height; j++) 
             { 
                 candidateCells.Add(new Vector2Int(i, j));
             }

@@ -49,10 +49,14 @@ public class PlayerController : MonoBehaviour,IDamageable
     [Header("Animator")]
     [SerializeField] private Animator _animator;
     
+    private GameUpgradeController _gameUpgradeController;
+    private float _currentBlendSpeed;
+    
     #region subscriptions
     private void OnEnable()
     {
         _inputActions = new TouchControls();
+        _gameUpgradeController = FindAnyObjectByType<GameUpgradeController>();
         
         // Game State Events
         EventBus.OnGameStart += OnGameStart;
@@ -213,6 +217,15 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         ResetCollider();
         ShowIK();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
+        {
+            _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+            _animator.SetFloat("Blend", _currentBlendSpeed);
+        }
     }
     
     #region Input System
