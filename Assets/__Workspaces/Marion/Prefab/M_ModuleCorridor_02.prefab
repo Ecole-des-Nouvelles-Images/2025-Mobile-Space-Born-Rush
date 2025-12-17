@@ -1049,6 +1049,7 @@ MonoBehaviour:
   _gridManager: {fileID: 141888392591585675}
   _enemies:
   - {fileID: 1826947733105000934, guid: bd99954c3356f5d4993bf799c1a6884e, type: 3}
+  - {fileID: 7074843970951273723, guid: ba625c465ffe89b42870a389ce837c94, type: 3}
   _parentsTransform: {fileID: 9190180809748878855}
   EnemyNumber: 1
   isEnemy: 1
