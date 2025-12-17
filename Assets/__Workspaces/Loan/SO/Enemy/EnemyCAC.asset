@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   MaxHealth: 10
   FireRate: 1
-  Damage: 20
+  Damage: 5

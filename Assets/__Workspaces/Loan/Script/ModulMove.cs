@@ -222,7 +222,7 @@ public class ModulMove : MonoBehaviour
                 continue;
             
             int randomEnemy = Random.Range(0, _enemies.Count);
-            Vector3 offset = new Vector3(0, 1f, 0);
+            Vector3 offset = new Vector3(0, 0.1f, 0);
             Vector3 pos = _gridManager.GetCellWorldPosition(cell.x, cell.y);
             
             Instantiate(_enemies[randomEnemy], offset + pos, Quaternion.identity, _parentsTransform.transform);

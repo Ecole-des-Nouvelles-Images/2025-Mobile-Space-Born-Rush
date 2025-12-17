@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -20,8 +19,8 @@ public class WeaponHandler : MonoBehaviour
     
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
-    [SerializeField]private LayerMask _layerMask;
-    private Animator _animator;
+    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private Animator _animator;
     private bool _isAim;
     private Material _material;
     private float _toRougeValue;
@@ -113,18 +112,18 @@ public class WeaponHandler : MonoBehaviour
                     {
                         if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                         {
-                            // if (_animator != null)
-                            // {
-                            //     _animator.SetBool("isAim",true);
-                            //     _isAim = true;
-                            // }
+                            if (_animator)
+                            {
+                                _animator.SetBool("isFire",true);
+                                _isAim = true;
+                            }
                             Fire(enemy,null);
                         }
                     }
                     else
                     {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy))
-                            return; 
+                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
+                        
                         if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                         { 
                             // if (_animator != null)
@@ -142,8 +141,7 @@ public class WeaponHandler : MonoBehaviour
             {
                 if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
                 { 
-                    if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) 
-                        return;
+                    if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) return;
 
                     if (_currentWeapon.IsPlayer)
                     {

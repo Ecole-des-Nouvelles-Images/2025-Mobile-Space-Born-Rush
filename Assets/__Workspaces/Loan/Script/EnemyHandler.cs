@@ -20,7 +20,8 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public bool IsRange;
     public float CurrentRange;
     public Ray Raycast;
-    public float CurrentFireRate; 
+    public float CurrentFireRate;
+    public Transform OriginRaycast;
     
     [Header("<color=cyan>======Animator======</color>")]
     public Animator Animator;
@@ -28,6 +29,11 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     [FormerlySerializedAs("HitParticles")]
     [Header("<color=blue>======Particule System======</color>")]
     [SerializeField] ParticleSystem _hitParticles;
+    
+    [Header("<color=white>=====Ragdoll Settings=====</color>")]
+    [SerializeField] private BoxCollider _collider;
+    [SerializeField] private Rigidbody _rbHips;
+    [SerializeField] private float _impulseForce;
     
     [Header("<color=magenta>=====Other Settings=====</color>")]
     public Vector3 KnockBackVelocity;
@@ -50,7 +56,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        EventBus.OnEnemyDead += Death;
+        // EventBus.OnEnemyDead += Death;
         EventBus.OnGameOver += GameOver;
         EventBus.OnGamePause += GamePause;
         EventBus.OnGameResume += GameResume;
@@ -69,7 +75,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     private void OnDestroy()
     {
-        EventBus.OnEnemyDead -= Death;
+        // EventBus.OnEnemyDead -= Death;
         EventBus.OnGameOver -= GameOver;
         EventBus.OnGamePause -= GamePause;
         EventBus.OnGameResume -= GameResume;
@@ -79,6 +85,8 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     {
         Rb = GetComponent<Rigidbody>();
         Transform = GetComponent<Transform>();
+        OriginRaycast = OriginRaycast.GetComponent<Transform>();
+        _rbHips = _rbHips.GetComponent<Rigidbody>();
         GameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         GameDirector = FindAnyObjectByType<GameDirector>();
         CurrentHealth = EnemyData.MaxHealth + GameDirector.DifficultyHealth;
@@ -97,6 +105,9 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
+        if (IsDead)
+            return;
+        
         KnockBackVelocity = Vector3.Lerp(KnockBackVelocity, Vector3.zero, _knockbackTimer * Time.fixedDeltaTime);
         SpeedDirection = new Vector3(0f, 0f, 0f);
         
@@ -112,7 +123,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         {
             IsKnocked = false;
         }
-
+        
         if (CurrentHealth <= 0)
         {
             IsDead = true;
@@ -130,17 +141,22 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         CurrentHealth -= damage;
     }
 
-    private void Death(GameObject gameObject)
+    public void Death(GameObject gameObject)
     {
-        // if (Animator != null)
-        // {
-        //     Animator.SetTrigger("isDie");
-        // }
+        if (Animator != null)
+        {
+            Animator.enabled = false;
+            _collider.enabled = false;
+        }
+
+        Vector3 impulse = new Vector3(0f, 0f, 10f);
+        _rbHips.AddForce(impulse * _impulseForce, ForceMode.Impulse);
+        
         // if (XpPrefab != null)
         // {
         //     Instantiate(XpPrefab, transform.position, Quaternion.identity);
         // }
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
     
     public void ApplyKnockback(Vector3 force)
