@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnPlayerTakeDamage(float obj)
     {
         if (_animator) _animator.SetTrigger("isHit");
+        StopSlide();
     }
 
     private void OnSpeedChanged(float speed, float time)
