@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-    [SerializeField]private WeaponData _weaponData;
-    [SerializeField]private WeaponUpgradeController _weaponUpgrades;
-    [SerializeField]private Transform _firePoint ;
+    [SerializeField] private WeaponData _weaponData;
+    [SerializeField] private WeaponUpgradeController _weaponUpgrades;
+    [SerializeField] private Transform _firePoint ;
     private WeaponData _currentWeapon ;
     private BulletData _currentBullet ;
     private Ray _weaponRaycast;
-    [SerializeField]private float _currentFireRate;
-    [SerializeField]private float _currentCooldown;
+    [SerializeField] private float _currentFireRate;
+    [SerializeField] private float _currentCooldown;
+    [SerializeField] private float _overheatCooldown;
+    [SerializeField] private bool _isOverheating;
     [SerializeField] private int _ammoNumber;
     
     [SerializeField] private bool _isRaycastDraw;
@@ -47,8 +49,11 @@ public class WeaponHandler : MonoBehaviour
         
         _currentWeapon = _weaponData;
         _currentBullet = _currentWeapon.BulletData;
+        _currentCooldown = _currentWeapon.Cooldown;
         _ammoNumber = _currentWeapon.MagSize;
         _layerMask = _currentWeapon.EnemyMask;
+        _overheatCooldown = 0;
+        _isOverheating = false;
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
         
         _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();
@@ -59,6 +64,7 @@ public class WeaponHandler : MonoBehaviour
         _isPause = false;
         _currentWeapon = _weaponData;
         _currentBullet = _currentWeapon.BulletData;
+        _currentCooldown = _currentWeapon.Cooldown;
         _ammoNumber = _currentWeapon.MagSize;
         _layerMask = _currentWeapon.EnemyMask;
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
@@ -90,121 +96,68 @@ public class WeaponHandler : MonoBehaviour
     {
         EventBus.OnPlayerTakeStun -= OnPlayerTakeStun;
         EventBus.OnGameStart -= GameStart;
+        EventBus.OnGamePause -= GamePause;
+        EventBus.OnGameResume -= GameResume;
     }
 
     private void Update()
     {
+        if (_isRaycastDraw) Debug.DrawRay(_weaponRaycast.origin,
+            _weaponRaycast.direction * _currentWeapon.FireDistance, Color.red);
+        
         if (_isPause)
             return;
         
         _isAim = false;
         if (_isStunned) return;
         
-        if (_currentFireRate <= 0 && _currentCooldown <= 0 )
+        if (_currentFireRate <= 0 && !_isOverheating) // We can fire
         {
             _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-
-            if (_currentBullet.IsDestroyedObstacle)
+            
+            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask)) // If hit
             {
-                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
+                if (_currentWeapon.IsPlayer)
                 {
-                    if (_currentWeapon.IsPlayer)
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                        if (_animator)
                         {
-                            if (_animator)
-                            {
-                                _animator.SetBool("isFire",true);
-                                _isAim = true;
-                            }
-                            Fire(enemy,null);
+                            _animator.SetBool("isFire",true);
+                            _isAim = true;
                         }
+                        Fire(enemy,null);
                     }
-                    else
-                    {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
-                        
-                        if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                        { 
-                            // if (_animator != null)
-                            // {
-                            //     _animator.SetBool("isAim",true);
-                            //     _isAim = true;
-                            // }
-                            Fire(null,player);
-                        }
-                    }
-                    
                 }
+                else
+                {
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
+                    
+                    if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    { 
+                        Fire(null,player);
+                    }
+                }
+                
             }
             else
             {
-                if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask))
-                { 
-                    if (hit.collider.TryGetComponent<ObstacleHandler>(out var obstacle)) return;
-
-                    if (_currentWeapon.IsPlayer)
-                    {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
-                        {
-                            // if (_animator != null)
-                            // {
-                            //     _animator.SetBool("isAim",true);
-                            //     _isAim = true;
-                            // }
-                            Fire(enemy,null);
-                        }
-                    }
-                    else
-                    {
-                        if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
-                            return;
-                        if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                        { 
-                            // if (_animator != null)
-                            // {
-                            //     _animator.SetBool("isAim",true);
-                            //     _isAim = true;
-                            // }
-                            Fire(null,player);
-                        }
-                    }
-                    
-                }
+                if (_ammoNumber <= 0 && !_isOverheating) Overheat();
+                if (_currentCooldown > 0 && !_isOverheating && 
+                    _ammoNumber > 0 && 
+                    _ammoNumber < (_currentWeapon.MagSize + _weaponUpgrades.MagSize)) _currentCooldown -= Time.deltaTime;
+                if (_currentCooldown <= 0 && !_isOverheating) Reload();
             }
-        }
-        
-        if (_ammoNumber <= 0)
-        {
-            _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
-            _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
-            _toRougeValue = 1;
-        }
-            
-        if (_currentFireRate > 0)
-        {
-            _currentFireRate -= Time.deltaTime;
-        }
-
-        if (_currentCooldown > 0)
-        {
-            _currentCooldown -= Time.deltaTime;
-            _isAim = false;
         }
         else
         {
-            _toRougeValue = 0;
-        }
-        
-        // if (_animator != null && !_isAim)
-        // {
-        //     _animator.SetBool("isAim",false);
-        // }
-        _material.SetFloat("_ToRouge", _toRougeValue);
-        
-        if (_isRaycastDraw)
-        {
-            Debug.DrawRay(_weaponRaycast.origin, _weaponRaycast.direction * _currentWeapon.FireDistance, Color.red);
+            _currentFireRate -= Time.deltaTime;
+            if (_ammoNumber <= 0) _overheatCooldown -= Time.deltaTime;
+            if (_ammoNumber <= 0 && _isOverheating && _overheatCooldown <= 0)
+            {
+                Reload((int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize));
+                _isOverheating = false;
+            }
         }
     }
     private IEnumerator AsyncStun(float time)
@@ -216,38 +169,43 @@ public class WeaponHandler : MonoBehaviour
         
         _stunCoroutine = null;
     }
-    
-    public void Fire(EnemyHandler enemy, PlayerController player)
+
+    private void Fire(EnemyHandler enemy, PlayerController player)
     {
-        if (_ammoNumber <= 0)
+        if (enemy)
         {
-            _ammoNumber = (int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize);
-            _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
-            _toRougeValue = 1;
+            _currentBullet.OnHitEnemy(enemy,enemy);
+            _fireParticles.Play();
         }
         else
         {
-            // if (_animator != null)
-            // {
-            //     _animator.SetTrigger("isFire");
-            // }
-
-            if (enemy != null)
-            {
-                _currentBullet.OnHitEnemy(enemy,enemy);
-                _fireParticles.Play();
-            }
-            else
-            {
-                _currentBullet.OnHitEnemy(player,null);
-                _fireParticles.Play();
-            }
-            
-            _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
-            _ammoNumber--;
+            _currentBullet.OnHitEnemy(player,null);
+            _fireParticles.Play();
         }
+        
+        _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
+        _ammoNumber--;
+        
     }
 
+    private void Reload(int amm = 1)
+    {
+        _currentCooldown = _currentWeapon.Cooldown - _weaponUpgrades.Cooldown;
+        _ammoNumber += amm;
+        
+        _toRougeValue = 0;
+        _material.SetFloat("_ToRouge", _toRougeValue);
+    }
+
+    private void Overheat()
+    {
+        // If its positive then the weapon is Overheating
+        _overheatCooldown = (_currentWeapon.Cooldown - _weaponUpgrades.Cooldown) *
+                            (_currentWeapon.MagSize + _weaponUpgrades.MagSize)/2;
+        _isOverheating = true;
+        _toRougeValue = 1;
+        _material.SetFloat("_ToRouge", _toRougeValue);
+    }
     
     
 }

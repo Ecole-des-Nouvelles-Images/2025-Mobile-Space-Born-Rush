@@ -175,14 +175,24 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void HideIK()
     {
-        _weapons.SetActive(false);
+        Renderer[] allRenderers = _weapons.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = false;
+        }
+
         _RHand.weight = 0f;
         _LHand.weight = 0f;
     }
 
     private void ShowIK()
     {
-        _weapons.SetActive(true);
+        Renderer[] allRenderers = _weapons.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = true;
+        }
+        
         _RHand.weight = 1f;
         _LHand.weight = 1f;
     }
