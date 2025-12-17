@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class WeaponUpgradeController : MonoBehaviour
 {
-    [Header("Data")]
     [SerializeField] private float _damage, _fireRate, _cooldown, _magSize, _weapon;
 
     #region subscriptions

@@ -9,9 +9,6 @@ public class GameUpgradeController : MonoBehaviour
     #region subscriptions
     private void Awake()
     {
-        // Player Specific Events
-        EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
-        
         // Main event
         EventBus.OnGameSystemUpgrade += OnGameSystemUpgrade;
         EventBus.OnGameStart +=  GameStart;
@@ -38,17 +35,10 @@ public class GameUpgradeController : MonoBehaviour
                 
         }
     }
-
-    private void OnPlayerChooseAnItem(UpgradeType obj)
-    {
-        throw new NotImplementedException();
-    }
+    
     private void OnDestroy()
     {
-        // Player Specific Events
-        EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
-        
-        // Main event
+      // Main event
         EventBus.OnGameSystemUpgrade -= OnGameSystemUpgrade;
         EventBus.OnGameStart -= GameStart;
     }

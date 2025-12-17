@@ -16,7 +16,13 @@ public class KillTriggerHandler : MonoBehaviour
         //TODO Swap to pooling
         if (other.gameObject.CompareTag("Enemy"))
         {
-            EventBus.OnEnemyGotPastPlayer?.Invoke();
+            EnemyHandler current = other.gameObject.GetComponent<EnemyHandler>();
+            
+            if (current != null && !current.IsDead)
+            {
+                EventBus.OnEnemyGotPastPlayer?.Invoke();
+            }
+            
             Destroy(other.gameObject);
         }
     }
