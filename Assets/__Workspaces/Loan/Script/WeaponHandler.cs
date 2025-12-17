@@ -16,16 +16,17 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private bool _isRaycastDraw;
     
     [SerializeField] private ParticleSystem _fireParticles;
-    
     private Coroutine _stunCoroutine = null;
     private bool _isStunned;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
     private bool _isAim;
     private Material _material;
     private float _toRougeValue;
     private bool _isPause;
-
+    
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
@@ -236,11 +237,13 @@ public class WeaponHandler : MonoBehaviour
             {
                 _currentBullet.OnHitEnemy(enemy,enemy);
                 _fireParticles.Play();
+                _audioSource.PlayOneShot(_audioClip);
             }
             else
             {
                 _currentBullet.OnHitEnemy(player,null);
                 _fireParticles.Play();
+                _audioSource.PlayOneShot(_audioClip);
             }
             
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;

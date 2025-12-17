@@ -35,6 +35,12 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     [SerializeField] private Rigidbody _rbHips;
     [SerializeField] private float _impulseForce;
     
+    [Header("<color=orange>======Audio Settings=====</color>")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private AudioClip _audioClipHit;
+    [SerializeField]  private AudioClip _audioClipDeath;
+    
     [Header("<color=magenta>=====Other Settings=====</color>")]
     public Vector3 KnockBackVelocity;
     public bool IsKnocked;
@@ -138,6 +144,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             Animator.SetTrigger("isHit");
         }
         _hitParticles.Play();
+        _audioSource.PlayOneShot(_audioClipHit);
         CurrentHealth -= damage;
     }
 
@@ -148,7 +155,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             Animator.enabled = false;
             _collider.enabled = false;
         }
-
+        _audioSource.PlayOneShot(_audioClipDeath);
         Vector3 impulse = new Vector3(0f, 0f, 10f);
         _rbHips.AddForce(impulse * _impulseForce, ForceMode.Impulse);
         

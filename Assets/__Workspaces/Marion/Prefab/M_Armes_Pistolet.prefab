@@ -117,6 +117,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   _animator: {fileID: 0}
+  _audioSource: {fileID: 7051530725292091258}
+  _audioClip: {fileID: 8300000, guid: e27f6232e69f3e04698f8cb48411bfde, type: 3}
 --- !u!82 &7051530725292091258
 AudioSource:
   m_ObjectHideFlags: 0

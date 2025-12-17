@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: XP drop boost
   Description: Increases how much xp is earned by drops
-  Icon: {fileID: 0}
+  Icon: {fileID: 922563174, guid: 067b2307ae037244ab22628810ae91f0, type: 3}
   category: 0
   Type: 3
   Value: 0.2
