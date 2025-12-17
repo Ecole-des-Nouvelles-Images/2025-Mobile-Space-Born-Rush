@@ -62,10 +62,16 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
+        EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
         
         // Movement & Environment
         EventBus.OnSpeedChanged += OnSpeedChanged;
         
+    }
+
+    private void OnPlayerTakeDamage(float obj)
+    {
+        if (_animator) _animator.SetTrigger("isHit");
     }
 
     private void OnSpeedChanged(float val, float duration)
@@ -141,6 +147,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
+        EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
         
         // Movement & Environment
         EventBus.OnSpeedChanged -= OnSpeedChanged;
@@ -389,11 +396,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (_animator)
-        {
-            _animator.SetTrigger("isHit");
-        }
-        
-        EventBus.OnPlayerTakeDamage?.Invoke(damage);
+       EventBus.OnPlayerTakeDamage?.Invoke(damage);
     }
 }
