@@ -111,8 +111,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             _animator = GetComponent<Animator>();
         }
-        // Animator animator = GetComponent<Animator>();
-        // animator.speed = 2;
 
         _isJumping = true; // Because the player is spawned in the air and land on the platform reversing this frame 1
         _isPaused = false;
