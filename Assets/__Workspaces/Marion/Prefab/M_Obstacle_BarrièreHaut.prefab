@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 7251289597257613669}
   - component: {fileID: 1770587005026545361}
   - component: {fileID: 7244980622507886994}
+  - component: {fileID: 4790791473181299197}
   m_Layer: 6
   m_Name: "M_Obstacle_Barri\xE8reHaut"
   m_TagString: Untagged
@@ -377,6 +378,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleHandler
   ObstacleData: {fileID: 0}
   _particleSystem: {fileID: 0}
+--- !u!82 &4790791473181299197
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064277688660450271}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: e37a1bdce2f6510469c12ed22fe6dd86, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &918734149260673171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -774,16 +872,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7251289597257613669}
     m_Modifications:
-    - target: {fileID: -5978739914149724260, guid: ae87d34aff532cb4fb387760e2bd03f2,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: e0bd596a9095e344aa825698b27f1139, type: 2}
-    - target: {fileID: -606563610004662500, guid: ae87d34aff532cb4fb387760e2bd03f2,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: e0bd596a9095e344aa825698b27f1139, type: 2}
     - target: {fileID: -8679921383154817045, guid: 50f5baca5e305fd4d87544ae529c4bcd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -850,6 +938,16 @@ PrefabInstance:
       value: "Barri\xE8re_low"
       objectReference: {fileID: 0}
     - target: {fileID: 5052188294940613337, guid: 50f5baca5e305fd4d87544ae529c4bcd,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e0bd596a9095e344aa825698b27f1139, type: 2}
+    - target: {fileID: -5978739914149724260, guid: ae87d34aff532cb4fb387760e2bd03f2,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e0bd596a9095e344aa825698b27f1139, type: 2}
+    - target: {fileID: -606563610004662500, guid: ae87d34aff532cb4fb387760e2bd03f2,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

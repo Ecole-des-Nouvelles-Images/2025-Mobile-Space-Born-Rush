@@ -420,6 +420,7 @@ MonoBehaviour:
   _gridManager: {fileID: 3638946851418515774}
   _enemies:
   - {fileID: 1826947733105000934, guid: bd99954c3356f5d4993bf799c1a6884e, type: 3}
+  - {fileID: 7074843970951273723, guid: ba625c465ffe89b42870a389ce837c94, type: 3}
   _parentsTransform: {fileID: 8655593822440936781}
   EnemyNumber: 1
   isEnemy: 1

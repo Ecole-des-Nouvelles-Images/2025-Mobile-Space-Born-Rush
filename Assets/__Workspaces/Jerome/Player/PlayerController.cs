@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {
@@ -78,10 +76,18 @@ public class PlayerController : MonoBehaviour,IDamageable
         if (_animator) _animator.SetTrigger("isHit");
     }
 
-    private void OnSpeedChanged(float val, float duration)
+    private void OnSpeedChanged(float speed, float time)
     {
-        //Will need to speed up all the players animations with this
+        StartCoroutine(SpeedBoost(speed, time));
         
+    }
+    IEnumerator SpeedBoost(float speedBoost, float time)
+    {
+        _animator.speed *= speedBoost;
+        _animator.speed = Mathf.Clamp(_animator.speed, 0.75f, 1.5f);
+        yield return new WaitForSeconds(time);
+        _animator.speed /= speedBoost;
+        _animator.speed = Mathf.Clamp(_animator.speed, 0.75f, 1.5f);
     }
     private void OnPlayerSpawn()
     {
