@@ -14848,14 +14848,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fdd825606ecd54096976fc0db7bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
-  PixelDistToDetect: 200
-  _currentLaneIndex: 0
-  _isJumping: 0
-  _isSliding: 0
-  _laneChangeSpeed: 10
+  _weapons: {fileID: 55929329}
+  _RHand: {fileID: 881607256}
+  _LHand: {fileID: 1267523373}
+  _pixelDistToDetect: 50
   _colliderSize: 2
   JumpForce: {x: 0, y: 4.5, z: 0}
+  _laneChangeSpeed: 10
+  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
+  _currentLaneIndex: 0
   _animator: {fileID: 6347193283442542097}
 --- !u!95 &6347193283442542097
 Animator:
