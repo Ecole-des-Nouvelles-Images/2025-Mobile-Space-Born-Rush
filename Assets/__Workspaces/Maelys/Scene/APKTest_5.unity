@@ -414,6 +414,103 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 299954248}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &46611330
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46611328}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: e27f6232e69f3e04698f8cb48411bfde, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &62596399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,7 +2269,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2610502696764540687, guid: 4b86fd82ee665ef4bb07667397211586,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 46611330}
   m_SourcePrefab: {fileID: 100100000, guid: 4b86fd82ee665ef4bb07667397211586, type: 3}
 --- !u!1 &312184480
 GameObject:
@@ -3808,8 +3909,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1992587460, guid: 9dcf7718b613e63488568d8019319b7c, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 1233612529, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4873,7 +4974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &721820564
 Transform:
   m_ObjectHideFlags: 0
@@ -14795,14 +14896,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fdd825606ecd54096976fc0db7bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
-  PixelDistToDetect: 200
-  _currentLaneIndex: 0
-  _isJumping: 0
-  _isSliding: 0
-  _laneChangeSpeed: 10
+  _weapons: {fileID: 0}
+  _RHand: {fileID: 0}
+  _LHand: {fileID: 0}
+  _pixelDistToDetect: 50
   _colliderSize: 0
   JumpForce: {x: 0, y: 5, z: 0}
+  _laneChangeSpeed: 10
+  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
+  _currentLaneIndex: 0
   _animator: {fileID: 3425205591866011620}
 --- !u!65 &3425205591866011622
 BoxCollider:
