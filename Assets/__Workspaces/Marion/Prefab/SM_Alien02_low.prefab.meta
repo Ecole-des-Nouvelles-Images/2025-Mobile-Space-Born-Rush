@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/__Workspaces/Loan/TestAnim/Enemies/CAC.meta
+guid: 784ea3204e062ce419613828f0c7509e
+folderAsset: yes
+DefaultImporter:
+========
 guid: 695ba9334e94bf04087045dadb26e63d
 PrefabImporter:
+>>>>>>>> int:Assets/__Workspaces/Marion/Prefab/SM_Alien02_low.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

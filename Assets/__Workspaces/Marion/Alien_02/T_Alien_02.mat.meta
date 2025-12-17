@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/__Workspaces/Loan/TestAnim/Enemies/Range.meta
+guid: 15a5989e198e40b46a53c15c97fa574d
+folderAsset: yes
+DefaultImporter:
+========
 guid: fa2d4a372a76fe149ac044ac9e6f0fa5
 NativeFormatImporter:
+>>>>>>>> int:Assets/__Workspaces/Marion/Alien_02/T_Alien_02.mat.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
