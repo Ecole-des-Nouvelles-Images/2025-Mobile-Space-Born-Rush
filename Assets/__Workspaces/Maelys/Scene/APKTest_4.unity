@@ -2177,14 +2177,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fdd825606ecd54096976fc0db7bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
-  PixelDistToDetect: 50
-  _currentLaneIndex: 0
-  _isJumping: 0
-  _isSliding: 0
-  _laneChangeSpeed: 10
+  _weapons: {fileID: 0}
+  _RHand: {fileID: 0}
+  _LHand: {fileID: 0}
+  _pixelDistToDetect: 50
+  _colliderSize: 0
   JumpForce: {x: 0, y: 5, z: 0}
-  SlideAmount: 2
+  _laneChangeSpeed: 10
+  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
+  _currentLaneIndex: 0
   _animator: {fileID: 0}
 --- !u!65 &290965746
 BoxCollider:
@@ -4720,7 +4721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &573805211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8981,6 +8982,8 @@ MonoBehaviour:
   _isCheckingUsername: 0
   _hasInternetConnection: 0
   _isCheckingInternet: 0
+  _countdownPanel: {fileID: 0}
+  _countdownText: {fileID: 0}
 --- !u!4 &1419666213
 Transform:
   m_ObjectHideFlags: 0
@@ -14690,14 +14693,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fdd825606ecd54096976fc0db7bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
-  PixelDistToDetect: 200
-  _currentLaneIndex: 0
-  _isJumping: 0
-  _isSliding: 0
-  _laneChangeSpeed: 10
+  _weapons: {fileID: 0}
+  _RHand: {fileID: 0}
+  _LHand: {fileID: 0}
+  _pixelDistToDetect: 50
+  _colliderSize: 0
   JumpForce: {x: 0, y: 5, z: 0}
-  SlideAmount: 2
+  _laneChangeSpeed: 10
+  _laneProfile: {fileID: 11400000, guid: 75a53c563689b4846a90697c88fc14b3, type: 2}
+  _currentLaneIndex: 0
   _animator: {fileID: 3425205591866011620}
 --- !u!65 &3425205591866011622
 BoxCollider:
