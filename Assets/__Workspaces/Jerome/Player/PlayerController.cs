@@ -74,28 +74,12 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
         
-        // Movement & Environment
-        EventBus.OnSpeedChanged += OnSpeedChanged;
-        
     }
 
     private void OnPlayerTakeDamage(float obj)
     {
         if (_animator) _animator.SetTrigger("isHit");
-    }
-
-    private void OnSpeedChanged(float speed, float time)
-    {
-        StartCoroutine(SpeedBoost(speed, time));
-        
-    }
-    IEnumerator SpeedBoost(float speedBoost, float time)
-    {
-        _animator.speed *= speedBoost;
-        _animator.speed = Mathf.Clamp(_animator.speed, 0.75f, 1.5f);
-        yield return new WaitForSeconds(time);
-        _animator.speed /= speedBoost;
-        _animator.speed = Mathf.Clamp(_animator.speed, 0.75f, 1.5f);
+        StopSlide();
     }
     private void OnPlayerSpawn()
     {
@@ -139,8 +123,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             _animator = GetComponent<Animator>();
         }
-        // Animator animator = GetComponent<Animator>();
-        // animator.speed = 2;
 
         _isJumping = true; // Because the player is spawned in the air and land on the platform reversing this frame 1
         _isPaused = false;
@@ -167,8 +149,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
         
-        // Movement & Environment
-        EventBus.OnSpeedChanged -= OnSpeedChanged;
     }
 
     #endregion
@@ -187,14 +167,24 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void HideIK()
     {
-        _weapons.SetActive(false);
+        Renderer[] allRenderers = _weapons.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = false;
+        }
+
         _RHand.weight = 0f;
         _LHand.weight = 0f;
     }
 
     private void ShowIK()
     {
-        _weapons.SetActive(true);
+        Renderer[] allRenderers = _weapons.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = true;
+        }
+        
         _RHand.weight = 1f;
         _LHand.weight = 1f;
     }
