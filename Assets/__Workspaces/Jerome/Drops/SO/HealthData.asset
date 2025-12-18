@@ -18,4 +18,4 @@ MonoBehaviour:
   Description: You feel better, for now.
   Value: 50
   Duration: 0
-  DropChance: 30
+  DropChance: 15

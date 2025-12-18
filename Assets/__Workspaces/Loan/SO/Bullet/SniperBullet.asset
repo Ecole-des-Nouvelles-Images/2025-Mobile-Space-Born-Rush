@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c797bf84517d40f5a5c5050ee171d2ea, type: 3}
   m_Name: SniperBullet
   m_EditorClassIdentifier: Assembly-CSharp::SniperBulletData
-  BulletDamage: 30
-  IsDestroyedObstacle: 1
+  BulletDamage: 60

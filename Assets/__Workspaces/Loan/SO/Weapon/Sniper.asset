@@ -18,7 +18,7 @@ MonoBehaviour:
   Cooldown: 3
   FireRate: 0.5
   FireDistance: 40
-  MagSize: 1
+  MagSize: 2
   IsPlayer: 1
   EnemyMask:
     serializedVersion: 2

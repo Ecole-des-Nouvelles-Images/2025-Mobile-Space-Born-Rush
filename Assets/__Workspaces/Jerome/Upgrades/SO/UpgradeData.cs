@@ -20,9 +20,6 @@ public class UpgradeData : ScriptableObject
     public int maxTimesSelectable; // 0 = infinite
     public int timesSelected = 0;
     public bool isExclusive = false; // If true, cannot appear with other exclusive upgrades
-    
-    [Header("Progression")]
-    public float baseWeight = 1f; // Base probability weight
 }
 
 /// <summary>

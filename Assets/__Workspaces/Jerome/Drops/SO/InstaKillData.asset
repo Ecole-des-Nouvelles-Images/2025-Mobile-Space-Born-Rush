@@ -18,4 +18,4 @@ MonoBehaviour:
   Description: Destroy all whom opose you
   Value: 10000
   Duration: 0
-  DropChance: 5
+  DropChance: 2

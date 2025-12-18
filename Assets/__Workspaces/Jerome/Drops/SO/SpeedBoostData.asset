@@ -18,4 +18,4 @@ MonoBehaviour:
   Description: A strange feeling makes you run faster.
   Value: 1.5
   Duration: 5
-  DropChance: 10
+  DropChance: 5

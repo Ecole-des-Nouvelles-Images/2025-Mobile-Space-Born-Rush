@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718b3e7e84614e55a26996864d5a8508, type: 3}
   m_Name: ShotGunBullet
   m_EditorClassIdentifier: Assembly-CSharp::ShotGunBulletData
-  BulletDamage: 20
-  IsDestroyedObstacle: 0
+  BulletDamage: 40
   _knockbackMidDirections:
   - {x: 0, y: 0, z: 3}
   - {x: -1.5, y: 0, z: 3}
