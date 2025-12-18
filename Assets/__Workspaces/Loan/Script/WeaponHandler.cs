@@ -129,9 +129,9 @@ public class WeaponHandler : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (_animator)
+                        if (_animator != null)
                         {
-                            _animator.SetBool("isFire",true);
+                            _animator.SetTrigger("isFire");
                             _isAim = true;
                         }
                         Fire(enemy,null);
@@ -146,6 +146,11 @@ public class WeaponHandler : MonoBehaviour
                         if (_isCharging && _currentCharge >= _chargeTime) Fire(null,player);
                         if (_isCharging && _currentCharge < _chargeTime) _currentCharge += Time.deltaTime;
                         if (!_isCharging && _currentCharge < _chargeTime) _isCharging = true;
+                        if (_animator != null)
+                        {
+                            _animator.SetTrigger("isFire");
+                        }
+                        Fire(null,player);
                     }
                 }
                 

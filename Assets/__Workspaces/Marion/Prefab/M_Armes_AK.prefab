@@ -141,6 +141,8 @@ MonoBehaviour:
   _firePoint: {fileID: 3017253935262675559}
   _currentFireRate: 0
   _currentCooldown: 0
+  _overheatCooldown: 0
+  _isOverheating: 0
   _ammoNumber: 0
   _isRaycastDraw: 1
   _fireParticles: {fileID: 0}
@@ -159,10 +161,11 @@ AudioSource:
   m_GameObject: {fileID: 7556223008052172796}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7511151288354068682, guid: 5adc12b13f4b31240a7315bc3622f04b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f0be8af7bfb0a1848965a9d0c8eb88ea, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

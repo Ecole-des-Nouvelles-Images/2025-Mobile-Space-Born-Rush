@@ -77,6 +77,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerXPToLevelUpChange += OnPlayerXpToLevelUpChange;
         EventBus.OnUpgradeApplied += OnUpgradeApplied;
         
+        _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+        _animator.SetFloat("Blend", _currentBlendSpeed);
     }
 
     private void OnUpgradeApplied(UpgradeData obj)
@@ -246,7 +248,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         ShowIK();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
         {
