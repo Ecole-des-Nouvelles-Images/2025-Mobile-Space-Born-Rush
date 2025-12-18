@@ -9,7 +9,7 @@ public class StartUpManager : MonoBehaviour
     [SerializeField] private Transform _parentTransform;
     [SerializeField] private Transform _parentModulTransform;
 
-    private void Awake()
+    private void OnEnable()
     {
         EventBus.OnGameStart += StartGame; 
     }
@@ -23,7 +23,7 @@ public class StartUpManager : MonoBehaviour
     private void StartGame()
     {
         float pos = 0;
-        if (_playerPrefb != null)
+        if (_playerPrefb)
         {
             GameObject player = Instantiate(_playerPrefb,new Vector3(0,0.1f,pos),Quaternion.identity,_parentTransform);
             EventBus.OnPlayerSpawn?.Invoke();

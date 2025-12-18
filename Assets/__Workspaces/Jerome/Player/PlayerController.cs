@@ -111,6 +111,22 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     private void OnPlayerSpawn()
     {
+        _rb = GetComponent<Rigidbody>();
+        _col = GetComponent<BoxCollider>();
+        EnableGameplayInput();
+        
+        _originalColliderSize = _col.size;
+        _originalColliderCenter = _col.center;
+
+        if (_animator)
+        {
+            _animator = GetComponent<Animator>();
+        }
+
+        _isJumping = true; // Because the player is spawned in the air and land on the platform reversing this frame 1
+        _isPaused = false;
+        _currentLaneIndex = 1;
+        
         Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
         var position = transform.position;
         position.x = targetPos.x;
@@ -140,26 +156,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameStart()
     {
-        _rb = GetComponent<Rigidbody>();
-        _col = GetComponent<BoxCollider>();
-        EnableGameplayInput();
-        
-        _originalColliderSize = _col.size;
-        _originalColliderCenter = _col.center;
 
-        if (_animator)
-        {
-            _animator = GetComponent<Animator>();
-        }
-
-        _isJumping = true; // Because the player is spawned in the air and land on the platform reversing this frame 1
-        _isPaused = false;
-        _currentLaneIndex = 1;
-        
-        Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
-        var position = transform.position;
-        position.x = targetPos.x;
-        transform.position = position;
     }
 
     private void OnDisable()

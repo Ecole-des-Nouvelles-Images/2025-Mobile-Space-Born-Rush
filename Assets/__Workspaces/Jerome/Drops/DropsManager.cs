@@ -16,7 +16,7 @@ public class DropsManager : MonoBehaviour
         private void OnEnable()
         {
             EventBus.OnEnemyDead += OnEnemyDead;
-            EventBus.OnGameOver += GameOver;
+            EventBus.OnPlayerDead += GameOver;
         }
 
         private void OnEnemyDead(GameObject obj)
@@ -27,7 +27,7 @@ public class DropsManager : MonoBehaviour
         private void OnDisable()
         {
             EventBus.OnEnemyDead -= OnEnemyDead;
-            EventBus.OnGameOver -= GameOver;
+            EventBus.OnPlayerDead -= GameOver;
         }
         #endregion
         

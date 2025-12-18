@@ -17,6 +17,8 @@ public class CameraOffset : MonoBehaviour
 
   private void Update()
   {
+    if (!_player) return;
+    
     Vector3 pos = new Vector3(_player.position.x, transform.position.y, _player.position.z);
     transform.position = pos;
   }

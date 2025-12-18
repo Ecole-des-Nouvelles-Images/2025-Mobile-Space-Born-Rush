@@ -65,7 +65,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         // EventBus.OnEnemyDead += Death;
-        EventBus.OnGameOver += GameOver;
+        EventBus.OnPlayerDead += GameOver;
         EventBus.OnGamePause += GamePause;
         EventBus.OnGameResume += GameResume;
         EventBus.OnEnemyTakeDamage += OnEnemyTakeDamage; 
@@ -84,7 +84,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     private void OnDestroy()
     {
         // EventBus.OnEnemyDead -= Death;
-        EventBus.OnGameOver -= GameOver;
+        EventBus.OnPlayerDead -= GameOver;
         EventBus.OnGamePause -= GamePause;
         EventBus.OnGameResume -= GameResume;
         EventBus.OnEnemyTakeDamage -= OnEnemyTakeDamage;

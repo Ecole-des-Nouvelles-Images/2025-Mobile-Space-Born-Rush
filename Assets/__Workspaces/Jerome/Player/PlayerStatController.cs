@@ -105,19 +105,7 @@ public class PlayerStatController : MonoBehaviour
     }
     private void OnPlayerDead()
     {
-        //Play death animations
-        //
-        
-        //Play death screen
-        //
-        
-        
-        //Invoke GameOver
-        EventBus.OnGameOver?.Invoke();
         _isStart = false;
-        
-        //Then die
-        // Destroy(this);
         
     }
     private void OnDisable()

@@ -32,7 +32,7 @@ public class ModulMove : MonoBehaviour
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         _parentsTransform = _parentsTransform.GetComponent<Transform>();
         _parentModulTransform = GameObject.FindGameObjectWithTag("ParentsModul").transform;
-        EventBus.OnGameOver += GameOver;
+        EventBus.OnPlayerDead += GameOver;
         EventBus.OnGamePause += GamePause;
         EventBus.OnGameResume += GameResume;
         
@@ -49,7 +49,7 @@ public class ModulMove : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventBus.OnGameOver -= GameOver;
+        EventBus.OnPlayerDead -= GameOver;
         EventBus.OnGamePause -= GamePause;
         EventBus.OnGameResume -= GameResume;
     }

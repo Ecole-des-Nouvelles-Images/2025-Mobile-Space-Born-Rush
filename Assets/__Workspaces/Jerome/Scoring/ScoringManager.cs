@@ -21,7 +21,7 @@ public class ScoringManager : MonoBehaviour
         //Pauses the Score
         EventBus.OnGamePause += OnGamePause;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
-        EventBus.OnGameOver += OnGameOver;
+        EventBus.OnPlayerDead += OnPlayerDead;
         
         //Starts the score
         EventBus.OnUpgradeApplied += OnUpgradeApplied;
@@ -63,7 +63,7 @@ public class ScoringManager : MonoBehaviour
         _isGamePaused = true;
     }
 
-    private void OnGameOver()
+    private void OnPlayerDead()
     {
         _isGamePaused = true;
         EventBus.OnHighScore?.Invoke((int)_score);
@@ -92,7 +92,7 @@ public class ScoringManager : MonoBehaviour
     {
         EventBus.OnGamePause -= OnGamePause;
         EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
-        EventBus.OnGameOver -= OnGameOver;
+        EventBus.OnPlayerDead -= OnPlayerDead;
         
         EventBus.OnUpgradeApplied -= OnUpgradeApplied;
         EventBus.OnGameResume -= OnGameResume;

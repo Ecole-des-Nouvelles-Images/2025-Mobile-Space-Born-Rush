@@ -72,12 +72,12 @@ public class UIHandler : MonoBehaviour
     private void OnEnable()
     {
         // Set up event listeners
-        EventBus.OnGameOver += GameLose;
+        EventBus.OnPlayerDead += GameLose;
     }
 
     private void OnDestroy()
     {
-        EventBus.OnGameOver -= GameLose;
+        EventBus.OnPlayerDead -= GameLose;
         
         // Clean up button listeners
         if (_usernameSubmitButton != null)
@@ -488,6 +488,8 @@ public class UIHandler : MonoBehaviour
 
     public void ReturnMenu()
     {
+        EventBus.OnGameOver?.Invoke();
+        
         _loosePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _gameEmpty.SetActive(false);

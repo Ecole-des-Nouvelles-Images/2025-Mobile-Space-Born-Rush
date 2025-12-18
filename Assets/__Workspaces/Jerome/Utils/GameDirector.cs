@@ -39,7 +39,7 @@ public class GameDirector : MonoBehaviour
         EventBus.OnGamePause += OnGamePause;
         EventBus.OnGameResume += OnGameResume;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
-        EventBus.OnGameOver += OnGameOver;
+        EventBus.OnPlayerDead += OnPlayerDead;
         
         float random = Random.Range(0f, 1f);
 
@@ -65,7 +65,7 @@ public class GameDirector : MonoBehaviour
         _speedIncrementTimer.Stop();
     }
 
-    private void OnGameOver()
+    private void OnPlayerDead()
     {
         //Turn timers off
         _speedIncrementTimer.Enabled = false;
@@ -111,7 +111,7 @@ public class GameDirector : MonoBehaviour
     {
         EventBus.OnGameStart -= OnGameStart;
         EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
-        EventBus.OnGameOver -= OnGameOver;
+        EventBus.OnPlayerDead -= OnPlayerDead;
         EventBus.OnGamePause -= OnGamePause;
         EventBus.OnGameResume -= OnGameResume;
 
