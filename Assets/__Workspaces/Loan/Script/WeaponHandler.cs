@@ -16,11 +16,11 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private int _ammoNumber;
     
     [Header("Enemy Charge Settings")]
-    [SerializeField] private float _chargeTime = 1.5f; // Time to fully charge
-    [SerializeField] private float _currentCharge = 0f; // Current charge progress
-    [SerializeField] private bool _isCharging = false; // Is currently charging?
-    [SerializeField] private ParticleSystem _chargeParticles; // Visual feedback
-    [SerializeField] private AudioSource _chargeSound; // Audio feedback
+    [SerializeField] private float _chargeTime = 0.75f;
+    [SerializeField] private float _currentCharge = 0f;
+    [SerializeField] private bool _isCharging = false;
+    [SerializeField] private ParticleSystem _chargeParticles; //If enemy has different effects and sounds 
+    [SerializeField] private AudioSource _chargeSound;
     
     [SerializeField] private bool _isRaycastDraw;
     
@@ -142,8 +142,10 @@ public class WeaponHandler : MonoBehaviour
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
                     
                     if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
-                        Fire(null,player);
+                    {
+                        if (!_isCharging && _currentCharge >= _chargeTime) Fire(null,player);
+                        if (_isCharging && _currentCharge < _chargeTime) _currentCharge += Time.deltaTime;
+                        if (!_isCharging && _currentCharge < _chargeTime) _isCharging = true;
                     }
                 }
                 
@@ -192,7 +194,7 @@ public class WeaponHandler : MonoBehaviour
             //     _animator.SetTrigger("isFire");
             // }
 
-            if (enemy != null)
+            if (enemy)
             {
                 _currentBullet.OnHitEnemy(enemy,enemy);
                 _fireParticles.Play();
@@ -203,6 +205,9 @@ public class WeaponHandler : MonoBehaviour
                 _currentBullet.OnHitEnemy(player,null);
                 _fireParticles.Play();
                 _audioSource.PlayOneShot(_audioClip);
+                
+                _isCharging = false;
+                _currentCharge = 0;
             }
             
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
