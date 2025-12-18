@@ -15,6 +15,24 @@ MonoBehaviour:
   Name: Fire Rate
   Description: Increases the current waepons fire rate.
   Icon: {fileID: -1605597557, guid: 9dcf7718b613e63488568d8019319b7c, type: 3}
+  NameEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6192420960161792
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  DescriptionEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6189685867106304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   category: 1
   Type: 6
   Value: 0.15
@@ -22,3 +40,6 @@ MonoBehaviour:
   timesSelected: 0
   isExclusive: 0
   baseWeight: 1
+  references:
+    version: 2
+    RefIds: []

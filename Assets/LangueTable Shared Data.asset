@@ -68,7 +68,93 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3296491462545408
-    m_Key: New Entry
+    m_Key: U_Carte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189454010175488
+    m_Key: U_Cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189571710734336
+    m_Key: 'U_Damage
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189685867106304
+    m_Key: U_Firerate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189781467877376
+    m_Key: U_Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189855606394880
+    m_Key: U_HealthDrop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190160553267200
+    m_Key: U_MagSize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190234297520128
+    m_Key: U_Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190312743587840
+    m_Key: U_Ar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190414803587072
+    m_Key: U_Pompe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190477009309696
+    m_Key: U_Snipe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190574036144128
+    m_Key: U_Xp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192225488818176
+    m_Key: N_Carte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192282959171584
+    m_Key: N_Cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192358452449280
+    m_Key: N_Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192420960161792
+    m_Key: N_FireRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192518330929152
+    m_Key: N_health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192590137413632
+    m_Key: N_healthDrop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192953947148288
+    m_Key: N_Magsize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193112621862912
+    m_Key: N_speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193171576999936
+    m_Key: N_ChangeWeapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193263780384768
+    m_Key: N_Xp
     m_Metadata:
       m_Items: []
   m_Metadata:

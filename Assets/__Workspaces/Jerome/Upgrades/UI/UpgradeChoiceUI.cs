@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class UpgradeChoiceUI : MonoBehaviour
@@ -9,6 +10,8 @@ public class UpgradeChoiceUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private Image iconImage;
     [SerializeField] private Button selectButton;
+    private LocalizeStringEvent _nameEvent;
+    private LocalizeStringEvent _descriptionEvent;
 
     private int choiceIndex;
     private System.Action<int> onSelectedCallback;
@@ -23,6 +26,18 @@ public class UpgradeChoiceUI : MonoBehaviour
             return;
         }
 
+        _nameEvent = nameText.GetComponent<LocalizeStringEvent>();
+        _descriptionEvent = descriptionText.GetComponent<LocalizeStringEvent>();
+        
+        if (_nameEvent != null && _descriptionEvent != null)
+        {
+            _nameEvent.StringReference = upgrade.NameEvent;
+            _descriptionEvent.StringReference = upgrade.DescriptionEvent;
+        }
+        
+        // _nameEvent.RefreshString();
+        // _descriptionEvent.RefreshString();
+        
         choiceIndex = index;
         
         // Update UI elements
@@ -34,7 +49,7 @@ public class UpgradeChoiceUI : MonoBehaviour
         
             iconImage.sprite = upgrade.Icon;
             iconImage.color = upgrade.Icon ? Color.white : new Color(0.8f, 0.8f, 0.8f);
-
+        
         
         if (selectButton)
         {

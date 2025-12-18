@@ -15,6 +15,24 @@ MonoBehaviour:
   Name: Max Health
   Description: Increases Max health
   Icon: {fileID: -1345998515, guid: 30e544a0e36e07d4b9255c353ab65b00, type: 3}
+  NameEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6192518330929152
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  DescriptionEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6189781467877376
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   category: 0
   Type: 0
   Value: 20
@@ -22,3 +40,6 @@ MonoBehaviour:
   timesSelected: 0
   isExclusive: 0
   baseWeight: 1
+  references:
+    version: 2
+    RefIds: []

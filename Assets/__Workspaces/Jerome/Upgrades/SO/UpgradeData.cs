@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 
 [CreateAssetMenu(fileName = "UpgradeData", menuName = "Scriptable Objects/UpgradeData")]
 public class UpgradeData : ScriptableObject
@@ -6,6 +8,8 @@ public class UpgradeData : ScriptableObject
     [Header("Basic Info")]
     public string Name, Description;
     public Sprite Icon;
+    public LocalizedString NameEvent;
+    public LocalizedString DescriptionEvent;
     
     [Header("Gameplay Effects")]
     public UpgradeCategory category;

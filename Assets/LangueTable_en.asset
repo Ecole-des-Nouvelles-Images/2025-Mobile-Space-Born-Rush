@@ -70,6 +70,94 @@ MonoBehaviour:
     m_Localized: Global Ambiance
     m_Metadata:
       m_Items: []
+  - m_Id: 3296491462545408
+    m_Localized: Increase the number of choices given on level up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189454010175488
+    m_Localized: Reduces the current weapons cooldown.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189571710734336
+    m_Localized: Increases current weapons damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189685867106304
+    m_Localized: Increases the current waepons fire rate.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189781467877376
+    m_Localized: Increases Max health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189855606394880
+    m_Localized: Incerases how much health is recovered from drops
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190160553267200
+    m_Localized: Increases the current weapons mag size.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190234297520128
+    m_Localized: Increases how fast the game plays.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190312743587840
+    m_Localized: Swap to the Assault Rifle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190414803587072
+    m_Localized: Swap to the Shotgun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190477009309696
+    m_Localized: Swap to the Sniper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190574036144128
+    m_Localized: Increases how much xp is earned by drops
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192225488818176
+    m_Localized: Choices
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192282959171584
+    m_Localized: Cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192358452449280
+    m_Localized: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192420960161792
+    m_Localized: Fire Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192518330929152
+    m_Localized: Max Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192590137413632
+    m_Localized: HP Drop Boost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192953947148288
+    m_Localized: Magazine Size
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193112621862912
+    m_Localized: Game Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193171576999936
+    m_Localized: Change Weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193263780384768
+    m_Localized: XP drop boost
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
