@@ -9,9 +9,6 @@ public static class EventBus
     public static Action OnGamePause;
     public static Action OnGameResume;
     public static Action OnGameOver;
-    public static Action OnGameRestart;
-    public static Action<float> OnDistanceRun;
-    public static Action<int> OnScoreChanged;
     public static Action<int> OnHighScore;
     /// <summary>
     /// Multiplicative value, duration in seconds
@@ -59,10 +56,6 @@ public static class EventBus
     // ===== COMBAT EVENTS =====
     // public static Action<WeaponType> OnWeaponChanged;
     public static Action OnObstacleHit;
-    /// <summary>
-    /// Damage the obstacle inflicts
-    /// </summary>
-    public static Action OnObstacleDodged;
 
     // ===== ENEMY EVENTS =====
     // public static Action<EnemyType> OnEnemySpawn;

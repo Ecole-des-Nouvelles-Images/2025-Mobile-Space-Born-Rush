@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyRange
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   MaxHealth: 15
-  FireRate: 1
+  FireRate: 1.5
   Damage: 5

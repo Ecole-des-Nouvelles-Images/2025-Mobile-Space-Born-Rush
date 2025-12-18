@@ -61,14 +61,14 @@ public class PlayerStatController : MonoBehaviour
     }
     private void OnPlayerCurrentHealthChange(float val)
     {
-        _currentHealth += val;
+        _currentHealth += val * HPDropMultiplier;
         
         _currentHealth = Mathf.Clamp(_currentHealth, 0, MaxHealth);
     }
 
     private void OnPlayerCurrentXPChange(float val)
     {
-        _currentXP += val;
+        _currentXP += val * _xpMultiplier;
         _takeXpParticles.Play();
 
         if (_currentXP >= _xpToLevelUp)
@@ -79,7 +79,7 @@ public class PlayerStatController : MonoBehaviour
             EventBus.OnPlayerLevelUp?.Invoke(choices);
             
             // Reset XP for next level
-            _currentXP = 0;
+            _currentXP = _currentXP - _xpToLevelUp;
             EventBus.OnPlayerXPToLevelUpChange?.Invoke(_xpToLevelUp * 1.05f);
         }
     }
