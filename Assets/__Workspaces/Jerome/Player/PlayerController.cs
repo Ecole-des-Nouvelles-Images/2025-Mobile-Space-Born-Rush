@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
         
+        _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+        _animator.SetFloat("Blend", _currentBlendSpeed);
     }
 
     private void OnPlayerTakeDamage(float obj)
@@ -223,7 +225,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         ShowIK();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
         {

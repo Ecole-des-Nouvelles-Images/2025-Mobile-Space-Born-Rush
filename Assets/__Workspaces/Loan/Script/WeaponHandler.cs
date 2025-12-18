@@ -122,9 +122,9 @@ public class WeaponHandler : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
-                        if (_animator)
+                        if (_animator != null)
                         {
-                            _animator.SetBool("isFire",true);
+                            _animator.SetTrigger("isFire");
                             _isAim = true;
                         }
                         Fire(enemy,null);
@@ -135,7 +135,11 @@ public class WeaponHandler : MonoBehaviour
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
                     
                     if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
+                    {
+                        if (_animator != null)
+                        {
+                            _animator.SetTrigger("isFire");
+                        }
                         Fire(null,player);
                     }
                 }

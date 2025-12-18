@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyRange : EnemyHandler
 {
     [SerializeField] private GameObject _weapon;
+    private bool _isFirstDead = true;
     void Update()
     {
         if (IsPaused)
@@ -17,9 +18,11 @@ public class EnemyRange : EnemyHandler
             CurrentState = new Attack();
         }
 
-        if (IsDead)
+        if (IsDead && _isFirstDead)
         {
             CurrentState = new Dead();
+            Death(this.gameObject);
+            _isFirstDead = false;
             Destroy(_weapon);
         }
         
