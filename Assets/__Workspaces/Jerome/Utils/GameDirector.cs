@@ -36,8 +36,11 @@ public class GameDirector : MonoBehaviour
     private void OnEnable()
     {
         EventBus.OnGameStart += OnGameStart;
+        EventBus.OnGamePause += OnGamePause;
+        EventBus.OnGameResume += OnGameResume;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         EventBus.OnGameOver += OnGameOver;
+        
         float random = Random.Range(0f, 1f);
 
         if (random < 0.5f)
@@ -48,6 +51,18 @@ public class GameDirector : MonoBehaviour
         {
             _audio2Source.Play();
         }
+    }
+
+    private void OnGameResume()
+    {
+        _difficultyIncrementTimer.Start();
+        _speedIncrementTimer.Start();
+    }
+
+    private void OnGamePause()
+    {
+        _difficultyIncrementTimer.Stop();
+        _speedIncrementTimer.Stop();
     }
 
     private void OnGameOver()
@@ -97,6 +112,8 @@ public class GameDirector : MonoBehaviour
         EventBus.OnGameStart -= OnGameStart;
         EventBus.OnPlayerLevelUp -= OnPlayerLevelUp;
         EventBus.OnGameOver -= OnGameOver;
+        EventBus.OnGamePause -= OnGamePause;
+        EventBus.OnGameResume -= OnGameResume;
 
         if (_speedIncrementTimer == null && _difficultyIncrementTimer == null) return;
         

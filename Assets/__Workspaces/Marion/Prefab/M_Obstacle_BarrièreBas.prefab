@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead02351084e4a44882aca53348507a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleHandler
-  ObstacleData: {fileID: 0}
+  ObstacleData: {fileID: 11400000, guid: 09a71bf03f2539d4a859b3af5b7b7323, type: 2}
   _particleSystem: {fileID: 0}
+  _audioSource: {fileID: 1325988428955727032}
+  _audioClip: {fileID: 8300000, guid: e37a1bdce2f6510469c12ed22fe6dd86, type: 3}
 --- !u!65 &1978529621725720363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83,10 +85,11 @@ AudioSource:
   m_GameObject: {fileID: 8064277688660450271}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7511151288354068682, guid: 5adc12b13f4b31240a7315bc3622f04b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: e37a1bdce2f6510469c12ed22fe6dd86, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

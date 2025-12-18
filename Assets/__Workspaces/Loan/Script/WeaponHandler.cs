@@ -15,6 +15,10 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private bool _isOverheating;
     [SerializeField] private int _ammoNumber;
     
+    [Header("Enemy Charge Settings")]
+    [SerializeField] private ParticleSystem _chargeParticles; //If enemy has different effects and sounds 
+    [SerializeField] private AudioSource _chargeSound;
+    
     [SerializeField] private bool _isRaycastDraw;
     
     [SerializeField] private ParticleSystem _fireParticles;
@@ -110,54 +114,67 @@ public class WeaponHandler : MonoBehaviour
             return;
         
         _isAim = false;
-        if (_isStunned) return;
-        
-        if (_currentFireRate <= 0 && !_isOverheating) // We can fire
+        // Enemy Fire
+        if (!_currentWeapon.IsPlayer)
         {
-            _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-            
-            if (Physics.Raycast(_weaponRaycast,out RaycastHit hit,_currentWeapon.FireDistance,_layerMask)) // If hit
+            if (_currentFireRate <= 0)
             {
-                if (_currentWeapon.IsPlayer)
+                _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+                
+                if (Physics.Raycast(_weaponRaycast, out RaycastHit hit, _currentWeapon.FireDistance, _layerMask)) // If hit
+                {
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
+                            
+                    if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    {
+                        EnemyFire(player);
+                    }
+                }
+            }
+            else
+            {
+                _animator.SetBool("IsAim", true);
+                _currentFireRate -= Time.deltaTime;
+            }
+        }
+        
+        // Player Fire
+        if (_currentWeapon.IsPlayer)
+        {
+            if (_isStunned) return;
+            if (_currentFireRate <= 0 && !_isOverheating)
+            {
+                _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+
+                if (Physics.Raycast(_weaponRaycast, out RaycastHit hit, _currentWeapon.FireDistance, _layerMask)) // If hit
                 {
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
                     {
                         if (_animator)
                         {
-                            _animator.SetBool("isFire",true);
-                            _isAim = true;
+                            _animator.SetTrigger("isFire");
                         }
-                        Fire(enemy,null);
+                        PlayerFire(enemy);
                     }
                 }
                 else
                 {
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
-                    
-                    if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
-                    { 
-                        Fire(null,player);
-                    }
+                    if (_ammoNumber <= 0 && !_isOverheating) Overheat();
+                    if (_currentCooldown > 0 && !_isOverheating && 
+                        _ammoNumber > 0 && 
+                        _ammoNumber < (_currentWeapon.MagSize + _weaponUpgrades.MagSize)) _currentCooldown -= Time.deltaTime;
+                    if (_currentCooldown <= 0 && !_isOverheating) Reload();
                 }
-                
             }
             else
             {
-                if (_ammoNumber <= 0 && !_isOverheating) Overheat();
-                if (_currentCooldown > 0 && !_isOverheating && 
-                    _ammoNumber > 0 && 
-                    _ammoNumber < (_currentWeapon.MagSize + _weaponUpgrades.MagSize)) _currentCooldown -= Time.deltaTime;
-                if (_currentCooldown <= 0 && !_isOverheating) Reload();
-            }
-        }
-        else
-        {
-            _currentFireRate -= Time.deltaTime;
-            if (_ammoNumber <= 0) _overheatCooldown -= Time.deltaTime;
-            if (_ammoNumber <= 0 && _isOverheating && _overheatCooldown <= 0)
-            {
-                Reload((int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize));
-                _isOverheating = false;
+                _currentFireRate -= Time.deltaTime;
+                if (_ammoNumber <= 0) _overheatCooldown -= Time.deltaTime;
+                if (_ammoNumber <= 0 && _isOverheating && _overheatCooldown <= 0)
+                {
+                    Reload((int)(_currentWeapon.MagSize + _weaponUpgrades.MagSize));
+                    _isOverheating = false;
+                }
             }
         }
     }
@@ -170,43 +187,45 @@ public class WeaponHandler : MonoBehaviour
         
         _stunCoroutine = null;
     }
-
-    private void Fire(EnemyHandler enemy, PlayerController player)
+    private void PlayerFire(EnemyHandler enemy)
     {
-        if (enemy)
+        // Player firing at nothing
+        if (!enemy) return;
+    
+        // Apply bullet damage/effect to enemy
+        _currentBullet.OnHitEnemy(enemy, enemy);
+    
+        // Visual and audio feedback
+        _fireParticles.Play();
+        if (_audioSource && _audioClip) _audioSource.PlayOneShot(_audioClip);
+    
+        // Animation
+        if (_animator)
         {
-            _currentBullet.OnHitEnemy(enemy,enemy);
-            _fireParticles.Play();
+            _animator.SetTrigger("isFire");
+            _isAim = true;
         }
-        else
-        {
-            // if (_animator != null)
-            // {
-            //     _animator.SetTrigger("isFire");
-            // }
-
-            if (enemy != null)
-            {
-                _currentBullet.OnHitEnemy(enemy,enemy);
-                _fireParticles.Play();
-                _audioSource.PlayOneShot(_audioClip);
-            }
-            else
-            {
-                _currentBullet.OnHitEnemy(player,null);
-                _fireParticles.Play();
-                _audioSource.PlayOneShot(_audioClip);
-            }
-            
-            _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
-            _ammoNumber--;
-            _currentBullet.OnHitEnemy(player,null);
-            _fireParticles.Play();
-        }
-        
+    
+        // Weapon cooldown and ammo
         _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
         _ammoNumber--;
-        
+    }
+
+    private void EnemyFire(PlayerController player)
+    {
+        // Enemy firing at nothing
+        if (!player) return;
+    
+        // Apply bullet damage/effect to player
+        _currentBullet.OnHitEnemy(player);
+    
+        // Visual and audio feedback
+        _fireParticles.Play();
+        if (_audioSource && _audioClip) _audioSource.PlayOneShot(_audioClip);
+        if (_animator)  _animator.SetTrigger("isFire");
+    
+        // Weapon cooldown and ammo
+        _currentFireRate = _currentWeapon.FireRate;
     }
 
     private void Reload(int amm = 1)

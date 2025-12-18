@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using TMPro;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
@@ -51,6 +52,7 @@ public class UIHandler : MonoBehaviour
     private bool _isCountdownActive;
     
     [Header("<color=orange>======Audio Settings=====</color>")]
+    [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
 
@@ -562,7 +564,35 @@ public class UIHandler : MonoBehaviour
         _isActive = false;
     }
     
-    #endregion 
+    #endregion
+
+    #region ==================== AudioMixer METHODS ====================
+    
+    public void SetMasterVolume(float volume)
+    {
+        _audioMixer.SetFloat("MasterVol", volume);
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        _audioMixer.SetFloat("SFXVol", volume);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        _audioMixer.SetFloat("MusicVol", volume);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+    }
+
+    public void SetAmbianceVolume(float volume)
+    {
+       _audioMixer.SetFloat("AmbianceVol", volume);
+       PlayerPrefs.SetFloat("AmbianceVolume", volume);
+    }
+
+    #endregion
     
 
     // ==================== DEBUG & TESTING ====================

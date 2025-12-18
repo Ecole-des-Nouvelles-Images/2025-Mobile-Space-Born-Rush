@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     private bool _fingerDown;
     
     [Header("Tweaks")]
-    [SerializeField] private int _pixelDistToDetect = 50;
+    [SerializeField] private int _pixelDistToDetect = 20;
     [SerializeField] private int _colliderSize;
     [SerializeField] private Vector3 JumpForce = Vector3.up;
     
@@ -73,11 +73,32 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
+        EventBus.OnPlayerCurrentXPChange += OnPlayerCurrentXpChange;
+        EventBus.OnPlayerXPToLevelUpChange += OnPlayerXpToLevelUpChange;
+        EventBus.OnUpgradeApplied += OnUpgradeApplied;
         
+        _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+        _animator.SetFloat("Blend", _currentBlendSpeed);
+    }
+
+    private void OnUpgradeApplied(UpgradeData obj)
+    {
+        _audioSource.PlayOneShot(_choiceSound);
+    }
+
+    private void OnPlayerXpToLevelUpChange(float obj)
+    {
+        _audioSource.PlayOneShot(_lvlUpSound);
+    }
+
+    private void OnPlayerCurrentXpChange(float obj)
+    {
+        _audioSource.PlayOneShot(_xpSound);
     }
 
     private void OnPlayerTakeDamage(float obj)
     {
+        _audioSource.PlayOneShot(_hitSound);
         if (_animator) _animator.SetTrigger("isHit");
         StopSlide();
     }
@@ -96,6 +117,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
+        _audioSource.PlayOneShot(_deathSound);
         if (_animator) _animator.SetTrigger("isDie");
 
         if (_isSliding) StopSlide();
@@ -148,6 +170,9 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
         EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
+        EventBus.OnPlayerCurrentXPChange -= OnPlayerCurrentXpChange;
+        EventBus.OnPlayerXPToLevelUpChange -= OnPlayerXpToLevelUpChange;
+        EventBus.OnUpgradeApplied -= OnUpgradeApplied;
         
     }
 
@@ -223,7 +248,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         ShowIK();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
         {
@@ -414,6 +439,5 @@ public class PlayerController : MonoBehaviour,IDamageable
     public void TakeDamage(float damage)
     {
        EventBus.OnPlayerTakeDamage?.Invoke(damage);
-       _audioSource.PlayOneShot(_hitSound);
     }
 }
