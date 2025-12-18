@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/__Workspaces/Loan/TestAnim/Enemies.meta
+guid: 3b554a575c420274bb724e6f201ed6d2
+========
 guid: 82aa0ea682ffa4f458b8d034604ad652
+>>>>>>>> int:Assets/__Workspaces/Marion/Alien_02.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

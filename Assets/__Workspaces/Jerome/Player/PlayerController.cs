@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour,IDamageable
 {
@@ -49,10 +47,22 @@ public class PlayerController : MonoBehaviour,IDamageable
     [Header("Animator")]
     [SerializeField] private Animator _animator;
     
+    [Header("Sound")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private AudioClip _xpSound;
+    [SerializeField] private AudioClip _lvlUpSound;
+    [SerializeField] private AudioClip _choiceSound;
+    
+    private GameUpgradeController _gameUpgradeController;
+    private float _currentBlendSpeed;
+    
     #region subscriptions
     private void OnEnable()
     {
         _inputActions = new TouchControls();
+        _gameUpgradeController = FindAnyObjectByType<GameUpgradeController>();
         
         // Game State Events
         EventBus.OnGameStart += OnGameStart;
@@ -62,16 +72,14 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         // Player Specific Events
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
-        
-        // Movement & Environment
-        EventBus.OnSpeedChanged += OnSpeedChanged;
+        EventBus.OnPlayerTakeDamage += OnPlayerTakeDamage;
         
     }
 
-    private void OnSpeedChanged(float val, float duration)
+    private void OnPlayerTakeDamage(float obj)
     {
-        //Will need to speed up all the players animations with this
-        
+        if (_animator) _animator.SetTrigger("isHit");
+        StopSlide();
     }
     private void OnPlayerSpawn()
     {
@@ -115,8 +123,6 @@ public class PlayerController : MonoBehaviour,IDamageable
         {
             _animator = GetComponent<Animator>();
         }
-        // Animator animator = GetComponent<Animator>();
-        // animator.speed = 2;
 
         _isJumping = true; // Because the player is spawned in the air and land on the platform reversing this frame 1
         _isPaused = false;
@@ -141,9 +147,8 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         // Player Specific Events
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
+        EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
         
-        // Movement & Environment
-        EventBus.OnSpeedChanged -= OnSpeedChanged;
     }
 
     #endregion
@@ -162,14 +167,24 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void HideIK()
     {
-        _weapons.SetActive(false);
+        Renderer[] allRenderers = _weapons.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = false;
+        }
+
         _RHand.weight = 0f;
         _LHand.weight = 0f;
     }
 
     private void ShowIK()
     {
-        _weapons.SetActive(true);
+        Renderer[] allRenderers = _weapons.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = true;
+        }
+        
         _RHand.weight = 1f;
         _LHand.weight = 1f;
     }
@@ -206,6 +221,15 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         ResetCollider();
         ShowIK();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
+        {
+            _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+            _animator.SetFloat("Blend", _currentBlendSpeed);
+        }
     }
     
     #region Input System
@@ -389,11 +413,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (_animator)
-        {
-            _animator.SetTrigger("isHit");
-        }
-        
-        EventBus.OnPlayerTakeDamage?.Invoke(damage);
+       EventBus.OnPlayerTakeDamage?.Invoke(damage);
+       _audioSource.PlayOneShot(_hitSound);
     }
 }

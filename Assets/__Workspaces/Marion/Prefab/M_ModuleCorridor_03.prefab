@@ -937,6 +937,7 @@ MonoBehaviour:
   _gridManager: {fileID: 7405621186364581175}
   _enemies:
   - {fileID: 1826947733105000934, guid: bd99954c3356f5d4993bf799c1a6884e, type: 3}
+  - {fileID: 7074843970951273723, guid: ba625c465ffe89b42870a389ce837c94, type: 3}
   _parentsTransform: {fileID: 8945630433748683625}
   EnemyNumber: 1
   isEnemy: 1
@@ -945,6 +946,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6f37c8c49454f4e4582da1339e422afe, type: 2}
   - {fileID: 11400000, guid: c84821079ca86124ea8bf00a324d9655, type: 2}
   - {fileID: 11400000, guid: 55ba511966d2dc642a1ce523ce0179d5, type: 2}
+  - {fileID: 11400000, guid: 09a71bf03f2539d4a859b3af5b7b7323, type: 2}
   isObstacle: 1
 --- !u!114 &1548910671124951197
 MonoBehaviour:

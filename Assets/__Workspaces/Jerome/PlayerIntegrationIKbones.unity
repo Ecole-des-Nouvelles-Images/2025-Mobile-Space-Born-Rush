@@ -436,6 +436,7 @@ Transform:
   - {fileID: 1068997699}
   - {fileID: 1325627790}
   - {fileID: 462291409}
+  - {fileID: 1285094901}
   - {fileID: 881607255}
   - {fileID: 1267523372}
   m_Father: {fileID: 6007258765892967605}
@@ -2994,37 +2995,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 462291408}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &489866935
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 489866936}
-  m_Layer: 0
-  m_Name: L_HandIK
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &489866936
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489866935}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27807, y: 1.73635, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &497764049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8635,12 +8605,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285094900}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27807, y: 1.73635, z: 0.2}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.17667, y: -0, z: 1.7783504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 55929330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292958146
 GameObject:
@@ -15676,5 +15646,3 @@ SceneRoots:
   - {fileID: 186121866}
   - {fileID: 1322794752}
   - {fileID: 1419666213}
-  - {fileID: 1285094901}
-  - {fileID: 489866936}

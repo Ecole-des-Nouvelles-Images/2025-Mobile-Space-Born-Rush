@@ -44,11 +44,15 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private bool _hasInternetConnection = false;
     [SerializeField] private bool _isCheckingInternet = false;
     
-    [Header("Countdown Settings")]
+    [Header("=====Countdown Settings=====")]
     [SerializeField] private GameObject _countdownPanel;
     [SerializeField] private TextMeshProUGUI _countdownText;
     private float _countdownTime;
     private bool _isCountdownActive;
+    
+    [Header("<color=orange>======Audio Settings=====</color>")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
 
 
     private IEnumerator Start()
@@ -455,6 +459,7 @@ public class UIHandler : MonoBehaviour
         _hudPanel.SetActive(false);
         
         _pausePanel.SetActive(true);
+        _audioSource.PlayOneShot(_audioClip);
         EventBus.OnGamePause?.Invoke();
     }
 
@@ -463,6 +468,7 @@ public class UIHandler : MonoBehaviour
         _pausePanel.SetActive(false);
         
         _hudPanel.SetActive(true);
+        _audioSource.PlayOneShot(_audioClip);
         StartCountdown();
     }
 
@@ -472,6 +478,7 @@ public class UIHandler : MonoBehaviour
         _pausePanel.SetActive(false);
         _countdownPanel.SetActive(false);
         
+        _audioSource.PlayOneShot(_audioClip);
         _gameEmpty.SetActive(true);
         _hudPanel.SetActive(true);
         EventBus.OnGameStart?.Invoke();
@@ -484,6 +491,7 @@ public class UIHandler : MonoBehaviour
         _gameEmpty.SetActive(false);
         _usernamePanel.SetActive(false);
         
+        _audioSource.PlayOneShot(_audioClip);
         _menuEmpty.SetActive(true);
         _gamePanel.SetActive(true);
     }
@@ -496,6 +504,7 @@ public class UIHandler : MonoBehaviour
         _usernamePanel.SetActive(false);
         _creditPanel.SetActive(false);
         
+        _audioSource.PlayOneShot(_audioClip);
         _gamePanel.SetActive(true);
         _homeButton.SetActive(true);
         _scoreButton.SetActive(true);
@@ -509,6 +518,7 @@ public class UIHandler : MonoBehaviour
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
         
+        _audioSource.PlayOneShot(_audioClip);
         _optionPanel.SetActive(true);
     }
     
@@ -519,6 +529,7 @@ public class UIHandler : MonoBehaviour
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
         
+        _audioSource.PlayOneShot(_audioClip);
         _scorePanel.SetActive(true);
         _scoreboardPanel.SetActive(true);
         
@@ -532,6 +543,7 @@ public class UIHandler : MonoBehaviour
         _scorePanel.SetActive(false);
         _usernamePanel.SetActive(false);
         
+        _audioSource.PlayOneShot(_audioClip);
         _creditPanel.SetActive(true);
     }
     
@@ -539,6 +551,7 @@ public class UIHandler : MonoBehaviour
     {
         if (_isActive)
             return;
+        _audioSource.PlayOneShot(_audioClip);
         StartCoroutine(SetLangue(langueID));
     }
     IEnumerator SetLangue(int langueID)

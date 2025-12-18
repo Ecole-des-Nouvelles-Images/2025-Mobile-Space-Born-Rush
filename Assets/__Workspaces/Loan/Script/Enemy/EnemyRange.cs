@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyRange : EnemyHandler
 {
+    [SerializeField] private GameObject _weapon;
     void Update()
     {
         if (IsPaused)
@@ -19,6 +20,7 @@ public class EnemyRange : EnemyHandler
         if (IsDead)
         {
             CurrentState = new Dead();
+            Destroy(_weapon);
         }
         
         CurrentState.Excute(this);
