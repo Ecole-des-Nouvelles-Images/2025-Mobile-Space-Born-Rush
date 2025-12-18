@@ -16,8 +16,6 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private int _ammoNumber;
     
     [Header("Enemy Charge Settings")]
-    [SerializeField] private float _chargeTime = 0.75f;
-    [SerializeField] private float _currentCharge = 0f;
     [SerializeField] private bool _isCharging = false;
     [SerializeField] private ParticleSystem _chargeParticles; //If enemy has different effects and sounds 
     [SerializeField] private AudioSource _chargeSound;
@@ -134,7 +132,7 @@ public class WeaponHandler : MonoBehaviour
                             _animator.SetTrigger("isFire");
                             _isAim = true;
                         }
-                        Fire(enemy,null);
+                        PlayerFire(enemy);
                     }
                 }
                 else // Enemy Fire
@@ -143,14 +141,9 @@ public class WeaponHandler : MonoBehaviour
                     
                     if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                     {
-                        if (_isCharging && _currentCharge >= _chargeTime) Fire(null,player);
-                        if (_isCharging && _currentCharge < _chargeTime) _currentCharge += Time.deltaTime;
-                        if (!_isCharging && _currentCharge < _chargeTime) _isCharging = true;
-                        if (_animator != null)
-                        {
-                            _animator.SetTrigger("isFire");
-                        }
-                        Fire(null,player);
+                        if (_isCharging && _currentFireRate >= _currentWeapon.FireRate) EnemyFire(player);
+                        if (_isCharging && _currentFireRate < _currentWeapon.FireRate) _currentFireRate -= Time.deltaTime;
+                        if (!_isCharging && _currentFireRate < _currentWeapon.FireRate) _isCharging = true;
                     }
                 }
                 
@@ -184,41 +177,48 @@ public class WeaponHandler : MonoBehaviour
         
         _stunCoroutine = null;
     }
-
-    private void Fire(EnemyHandler enemy, PlayerController player)
+    private void PlayerFire(EnemyHandler enemy)
     {
-        if (enemy)
+        // Player firing at nothing
+        if (!enemy) return;
+    
+        // Apply bullet damage/effect to enemy
+        _currentBullet.OnHitEnemy(enemy, enemy);
+    
+        // Visual and audio feedback
+        _fireParticles.Play();
+        if (_audioSource && _audioClip) _audioSource.PlayOneShot(_audioClip);
+    
+        // Animation
+        if (_animator)
         {
-            _currentBullet.OnHitEnemy(enemy,enemy);
-            _fireParticles.Play();
+            _animator.SetBool("isFire", true);
+            _isAim = true;
         }
-        else
-        {
-            if (enemy)
-            {
-                _currentBullet.OnHitEnemy(enemy,enemy);
-                _fireParticles.Play();
-                _audioSource.PlayOneShot(_audioClip);
-            }
-            else
-            {
-                _currentBullet.OnHitEnemy(player,null);
-                _fireParticles.Play();
-                _audioSource.PlayOneShot(_audioClip);
-                
-                _isCharging = false;
-                _currentCharge = 0;
-            }
-            
-            _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
-            _ammoNumber--;
-            _currentBullet.OnHitEnemy(player,null);
-            _fireParticles.Play();
-        }
-        
+    
+        // Weapon cooldown and ammo
         _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
         _ammoNumber--;
-        
+    }
+
+    private void EnemyFire(PlayerController player)
+    {
+        // Enemy firing at nothing
+        if (!player) return;
+    
+        // Apply bullet damage/effect to player
+        _currentBullet.OnHitEnemy(player);
+    
+        // Visual and audio feedback
+        _fireParticles.Play();
+        if (_audioSource && _audioClip) _audioSource.PlayOneShot(_audioClip);
+        if (_animator)  _animator.SetTrigger("isFire");
+    
+        // Reset charge state after firing
+        _isCharging = false;
+    
+        // Weapon cooldown and ammo
+        _currentFireRate = _currentWeapon.FireRate;
     }
 
     private void Reload(int amm = 1)
