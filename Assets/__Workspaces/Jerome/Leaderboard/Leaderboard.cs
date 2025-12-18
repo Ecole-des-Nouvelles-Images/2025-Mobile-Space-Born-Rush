@@ -42,7 +42,7 @@ public class LeaderboardManager : MonoBehaviour
             EventBus.OnHighScore -= OnHighScore;
         }
     }
-    #region Personal Best Management
+    #region ========== Personal Best Management ==========
     
     /// <summary>
     /// Load the player's personal best from server and cache it
@@ -189,7 +189,6 @@ public class LeaderboardManager : MonoBehaviour
     }
 
     #endregion
-    
     #region ========== Public Methods ==========
     /// <summary>
     /// This function will get all the scores from the leaderboard and put them into the score section.

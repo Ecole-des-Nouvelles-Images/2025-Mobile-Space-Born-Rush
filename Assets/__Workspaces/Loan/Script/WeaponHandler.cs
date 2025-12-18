@@ -72,6 +72,10 @@ public class WeaponHandler : MonoBehaviour
         _currentCooldown = _currentWeapon.Cooldown;
         _ammoNumber = _currentWeapon.MagSize;
         _layerMask = _currentWeapon.EnemyMask;
+        _overheatCooldown = 0;
+        _isOverheating = false;
+        _toRougeValue = 0;
+        _material.SetFloat("_ToRouge", _toRougeValue);
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
         
         _weaponUpgrades = FindAnyObjectByType<WeaponUpgradeController>();

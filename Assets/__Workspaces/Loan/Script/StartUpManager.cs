@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,11 +14,6 @@ public class StartUpManager : MonoBehaviour
         EventBus.OnGameStart += StartGame; 
     }
 
-    private void Start()
-    {
-        _parentTransform = GetComponent<Transform>();
-    }
-
     private void OnDestroy()
     {
         EventBus.OnGameStart -= StartGame;
@@ -31,7 +25,8 @@ public class StartUpManager : MonoBehaviour
         float pos = 0;
         if (_playerPrefb != null)
         {
-            GameObject player = Instantiate(_playerPrefb,new Vector3(0,0,pos),Quaternion.identity,_parentTransform);
+            GameObject player = Instantiate(_playerPrefb,new Vector3(0,0.1f,pos),Quaternion.identity,_parentTransform);
+            EventBus.OnPlayerSpawn?.Invoke();
         }
         _parentModulTransform =  GameObject.FindGameObjectWithTag("ParentsModul").transform;
         

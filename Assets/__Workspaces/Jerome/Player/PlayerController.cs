@@ -76,9 +76,16 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerCurrentXPChange += OnPlayerCurrentXpChange;
         EventBus.OnPlayerXPToLevelUpChange += OnPlayerXpToLevelUpChange;
         EventBus.OnUpgradeApplied += OnUpgradeApplied;
+        EventBus.OnPlayerDead += OnPlayerDead;
         
         _currentBlendSpeed = _gameUpgradeController.GameSpeed;
         _animator.SetFloat("Blend", _currentBlendSpeed);
+    }
+
+    private void OnPlayerDead()
+    {
+        _audioSource.PlayOneShot(_deathSound);
+        if (_animator) _animator.SetTrigger("isDie");
     }
 
     private void OnUpgradeApplied(UpgradeData obj)
@@ -117,14 +124,13 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnGameOver()
     {
-        _audioSource.PlayOneShot(_deathSound);
-        if (_animator) _animator.SetTrigger("isDie");
-
         if (_isSliding) StopSlide();
         
         ResetCollider();
         
         _isPaused = true;
+        
+        Destroy(this.gameObject);
     }
 
     private void OnGamePause()
@@ -173,6 +179,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         EventBus.OnPlayerCurrentXPChange -= OnPlayerCurrentXpChange;
         EventBus.OnPlayerXPToLevelUpChange -= OnPlayerXpToLevelUpChange;
         EventBus.OnUpgradeApplied -= OnUpgradeApplied;
+        EventBus.OnPlayerDead -= OnPlayerDead;
         
     }
 

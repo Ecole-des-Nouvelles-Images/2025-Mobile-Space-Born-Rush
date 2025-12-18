@@ -5,9 +5,14 @@ public class CameraOffset : MonoBehaviour
 {
   [SerializeField] private Transform _player;
 
-  private void Start()
+  private void OnEnable()
   {
-    _player = _player.GetComponent<Transform>();
+    EventBus.OnPlayerSpawn += OnPlayerSpawn;
+  }
+
+  private void OnPlayerSpawn()
+  {
+    _player = GameObject.FindGameObjectWithTag("Player").transform;
   }
 
   private void Update()
