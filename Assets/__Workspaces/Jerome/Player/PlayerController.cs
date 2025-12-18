@@ -47,6 +47,14 @@ public class PlayerController : MonoBehaviour,IDamageable
     [Header("Animator")]
     [SerializeField] private Animator _animator;
     
+    [Header("Sound")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private AudioClip _xpSound;
+    [SerializeField] private AudioClip _lvlUpSound;
+    [SerializeField] private AudioClip _choiceSound;
+    
     private GameUpgradeController _gameUpgradeController;
     private float _currentBlendSpeed;
     
@@ -416,5 +424,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     public void TakeDamage(float damage)
     {
        EventBus.OnPlayerTakeDamage?.Invoke(damage);
+       _audioSource.PlayOneShot(_hitSound);
     }
 }
