@@ -15,6 +15,13 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private bool _isOverheating;
     [SerializeField] private int _ammoNumber;
     
+    [Header("Enemy Charge Settings")]
+    [SerializeField] private float _chargeTime = 0.75f;
+    [SerializeField] private float _currentCharge = 0f;
+    [SerializeField] private bool _isCharging = false;
+    [SerializeField] private ParticleSystem _chargeParticles; //If enemy has different effects and sounds 
+    [SerializeField] private AudioSource _chargeSound;
+    
     [SerializeField] private bool _isRaycastDraw;
     
     [SerializeField] private ParticleSystem _fireParticles;
@@ -130,12 +137,15 @@ public class WeaponHandler : MonoBehaviour
                         Fire(enemy,null);
                     }
                 }
-                else
+                else // Enemy Fire
                 {
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
                     
                     if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
                     {
+                        if (!_isCharging && _currentCharge >= _chargeTime) Fire(null,player);
+                        if (_isCharging && _currentCharge < _chargeTime) _currentCharge += Time.deltaTime;
+                        if (!_isCharging && _currentCharge < _chargeTime) _isCharging = true;
                         if (_animator != null)
                         {
                             _animator.SetTrigger("isFire");
@@ -189,7 +199,7 @@ public class WeaponHandler : MonoBehaviour
             //     _animator.SetTrigger("isFire");
             // }
 
-            if (enemy != null)
+            if (enemy)
             {
                 _currentBullet.OnHitEnemy(enemy,enemy);
                 _fireParticles.Play();
@@ -200,6 +210,9 @@ public class WeaponHandler : MonoBehaviour
                 _currentBullet.OnHitEnemy(player,null);
                 _fireParticles.Play();
                 _audioSource.PlayOneShot(_audioClip);
+                
+                _isCharging = false;
+                _currentCharge = 0;
             }
             
             _currentFireRate = _currentWeapon.FireRate - _weaponUpgrades.FireRate;
