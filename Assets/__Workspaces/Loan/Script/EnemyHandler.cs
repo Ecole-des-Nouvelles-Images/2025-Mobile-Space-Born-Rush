@@ -22,6 +22,8 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public Ray Raycast;
     public float CurrentFireRate;
     public Transform OriginRaycast;
+    public Transform DownRaycast;
+    public Transform UpRaycast;
     
     [Header("<color=cyan>======Animator======</color>")]
     public Animator Animator;
