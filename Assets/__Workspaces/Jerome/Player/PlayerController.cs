@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour,IDamageable
 
     private void OnPlayerTakeDamage(float obj)
     {
+        _audioSource.PlayOneShot(_hitSound);
         if (_animator) _animator.SetTrigger("isHit");
         StopSlide();
     }
@@ -436,6 +437,5 @@ public class PlayerController : MonoBehaviour,IDamageable
     public void TakeDamage(float damage)
     {
        EventBus.OnPlayerTakeDamage?.Invoke(damage);
-       _audioSource.PlayOneShot(_hitSound);
     }
 }
