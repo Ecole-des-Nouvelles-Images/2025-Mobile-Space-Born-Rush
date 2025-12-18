@@ -12150,7 +12150,7 @@ MonoBehaviour:
   _isCheckingInternet: 0
   _countdownPanel: {fileID: 1657634352}
   _countdownText: {fileID: 1671164515}
-  _audioMixer: {fileID: 0}
+  _audioMixer: {fileID: 24100000, guid: 5adc12b13f4b31240a7315bc3622f04b, type: 2}
   _audioSource: {fileID: 1419666216}
   _audioClip: {fileID: 8300000, guid: bb14260d0ce69d34eb1a58f8f8081c8a, type: 3}
 --- !u!4 &1419666213
@@ -12398,7 +12398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Leaderboard
   _scorePrefab: {fileID: 4498731284999072131, guid: 4dcb900c59937674dbeb1a2895dbd263,
     type: 3}
-  _scoreParent: {fileID: 1038663564}
+  _scoreParent: {fileID: 0}
 --- !u!1 &1424210916
 GameObject:
   m_ObjectHideFlags: 0
@@ -13250,6 +13250,7 @@ GameObject:
   - component: {fileID: 1511302804}
   - component: {fileID: 1511302809}
   - component: {fileID: 1511302810}
+  - component: {fileID: 1511302805}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
