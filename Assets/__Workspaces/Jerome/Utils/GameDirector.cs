@@ -28,12 +28,26 @@ public class GameDirector : MonoBehaviour
     [SerializeField] private int _damageIncrement = 2;
     //It needs a reference to all the upgrade controllers and then the enemy handler
     [SerializeField] private GameUpgradeController _gameUpgrades;
+    
+    [Header("Sound")]
+    [SerializeField] private AudioSource _audio1Source;
+    [SerializeField] private AudioSource _audio2Source;
 
     private void OnEnable()
     {
         EventBus.OnGameStart += OnGameStart;
         EventBus.OnPlayerLevelUp += OnPlayerLevelUp;
         EventBus.OnGameOver += OnGameOver;
+        float random = Random.Range(0f, 1f);
+
+        if (random < 0.5f)
+        {
+            _audio1Source.Play();
+        }
+        else
+        {
+            _audio2Source.Play();
+        }
     }
 
     private void OnGameOver()

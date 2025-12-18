@@ -47,10 +47,22 @@ public class PlayerController : MonoBehaviour,IDamageable
     [Header("Animator")]
     [SerializeField] private Animator _animator;
     
+    [Header("Sound")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private AudioClip _xpSound;
+    [SerializeField] private AudioClip _lvlUpSound;
+    [SerializeField] private AudioClip _choiceSound;
+    
+    private GameUpgradeController _gameUpgradeController;
+    private float _currentBlendSpeed;
+    
     #region subscriptions
     private void OnEnable()
     {
         _inputActions = new TouchControls();
+        _gameUpgradeController = FindAnyObjectByType<GameUpgradeController>();
         
         // Game State Events
         EventBus.OnGameStart += OnGameStart;
@@ -209,6 +221,15 @@ public class PlayerController : MonoBehaviour,IDamageable
         
         ResetCollider();
         ShowIK();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
+        {
+            _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+            _animator.SetFloat("Blend", _currentBlendSpeed);
+        }
     }
     
     #region Input System
@@ -393,5 +414,6 @@ public class PlayerController : MonoBehaviour,IDamageable
     public void TakeDamage(float damage)
     {
        EventBus.OnPlayerTakeDamage?.Invoke(damage);
+       _audioSource.PlayOneShot(_hitSound);
     }
 }
