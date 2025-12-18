@@ -15,6 +15,13 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private bool _isOverheating;
     [SerializeField] private int _ammoNumber;
     
+    [Header("Enemy Charge Settings")]
+    [SerializeField] private float _chargeTime = 1.5f; // Time to fully charge
+    [SerializeField] private float _currentCharge = 0f; // Current charge progress
+    [SerializeField] private bool _isCharging = false; // Is currently charging?
+    [SerializeField] private ParticleSystem _chargeParticles; // Visual feedback
+    [SerializeField] private AudioSource _chargeSound; // Audio feedback
+    
     [SerializeField] private bool _isRaycastDraw;
     
     [SerializeField] private ParticleSystem _fireParticles;
@@ -129,7 +136,7 @@ public class WeaponHandler : MonoBehaviour
                         Fire(enemy,null);
                     }
                 }
-                else
+                else // Enemy Fire
                 {
                     if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
                     

@@ -2845,7 +2845,7 @@ MonoBehaviour:
   _weapons: {fileID: 1468841552}
   _RHand: {fileID: 1578558320}
   _LHand: {fileID: 1944702165}
-  _pixelDistToDetect: 50
+  _pixelDistToDetect: 20
   _colliderSize: 2
   JumpForce: {x: 0, y: 4.5, z: 0}
   _laneChangeSpeed: 10
