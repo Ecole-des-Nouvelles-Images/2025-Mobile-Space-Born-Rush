@@ -438,6 +438,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Player_low
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3893547e28493c43840434cbc0c2107,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1032,6 +1037,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 949953103}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1012778693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.998
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630136253007277514, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444073183950436208, guid: 9bfcef75df39800489ca5f018fed579b,
+        type: 3}
+      propertyPath: m_Name
+      value: M_Armes_Alien
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9bfcef75df39800489ca5f018fed579b, type: 3}
 --- !u!1001 &1123101797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1127,6 +1200,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VFX_Stunt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855482456155408099, guid: 4f6665029e891f7409349fedf0f231f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6468595978327600152, guid: 4f6665029e891f7409349fedf0f231f8,
         type: 3}
@@ -1707,6 +1785,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1691799258}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1756645474
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788243388321668985, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877786068600983497, guid: 84ff819ffb242b046add137157606719,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_AlienArme_Implosion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84ff819ffb242b046add137157606719, type: 3}
 --- !u!1001 &1965634800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1876,6 +2022,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_Chargement
       objectReference: {fileID: 0}
+    - target: {fileID: 6518193333335010824, guid: e4541c4bcb8d4fb4a8fd28dd6a8aacb2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7655322963637235118, guid: e4541c4bcb8d4fb4a8fd28dd6a8aacb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2025,3 +2176,5 @@ SceneRoots:
   - {fileID: 1140800650492956724}
   - {fileID: 607496094}
   - {fileID: 1140022050}
+  - {fileID: 1012778693}
+  - {fileID: 1756645474}
