@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         Generate();
-        _gizmoColor = Random.ColorHSV();
+        _gizmoColor = Color.green;
     }
 
     private void Generate()

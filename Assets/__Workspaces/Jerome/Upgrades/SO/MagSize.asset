@@ -15,6 +15,24 @@ MonoBehaviour:
   Name: Magazine Size
   Description: Increases the current weapons mag size.
   Icon: {fileID: -1200811564, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
+  NameEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6192953947148288
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  DescriptionEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6190160553267200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   category: 1
   Type: 7
   Value: 1
@@ -22,3 +40,6 @@ MonoBehaviour:
   timesSelected: 0
   isExclusive: 0
   baseWeight: 1
+  references:
+    version: 2
+    RefIds: []

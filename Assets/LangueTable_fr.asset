@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3241239803678720
-    m_Localized: "Volume G\xE9n\xE9rale "
+    m_Localized: 'Volume Generale '
     m_Metadata:
       m_Items: []
   - m_Id: 3290737418522624
@@ -68,6 +68,96 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3290839788900352
     m_Localized: Ambiance Global
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296491462545408
+    m_Localized: "Augmenter le nombre de choix propos\xE9s lors du passage au niveau
+      sup\xE9rieur"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189454010175488
+    m_Localized: "R\xE9duit le temps de recharge actuel des armes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189571710734336
+    m_Localized: "Augmente les d\xE9g\xE2ts inflig\xE9s par les armes actuelles."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189685867106304
+    m_Localized: Augmente la cadence de tir des armes actuelles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189781467877376
+    m_Localized: "Augmente la sant\xE9 maximale"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6189855606394880
+    m_Localized: "Augmente la quantit\xE9 de sant\xE9 r\xE9cup\xE9r\xE9e dans le
+      Medikit"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190160553267200
+    m_Localized: "Augmente la capacit\xE9 actuelle du chargeur des armes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190234297520128
+    m_Localized: Augmente la vitesse de jeu.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190312743587840
+    m_Localized: Passez au fusil d'assaut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190414803587072
+    m_Localized: "Passer au fusil \xE0 pompe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190477009309696
+    m_Localized: Passer au fusil de sniper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6190574036144128
+    m_Localized: "Augmente la quantit\xE9 d'XP gagn\xE9e gr\xE2ce aux butins."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192225488818176
+    m_Localized: Choix
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192282959171584
+    m_Localized: Temps de recharge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192358452449280
+    m_Localized: Degats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192420960161792
+    m_Localized: Cadence de tir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192518330929152
+    m_Localized: Vie Max
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192590137413632
+    m_Localized: 'Augmente la vie recuperer '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6192953947148288
+    m_Localized: Taille du Chargeur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193112621862912
+    m_Localized: Vitesse de jeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193171576999936
+    m_Localized: Changement d'arme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6193263780384768
+    m_Localized: 'Augmente l''Xp recuperer '
     m_Metadata:
       m_Items: []
   references:

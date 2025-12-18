@@ -13,8 +13,26 @@ MonoBehaviour:
   m_Name: CardNumber
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   Name: Choices
-  Description: Increase the number of choices given on level ip
+  Description: Increase the number of choices given on level up
   Icon: {fileID: 2075886160, guid: b3ff99f8a43884c44b2d830e852605ed, type: 3}
+  NameEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 6192225488818176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  DescriptionEvent:
+    m_TableReference:
+      m_TableCollectionName: GUID:edbf53024ff336f4eb0d036add812111
+    m_TableEntryReference:
+      m_KeyId: 3296491462545408
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   category: 2
   Type: 9
   Value: 1
@@ -22,3 +40,6 @@ MonoBehaviour:
   timesSelected: 0
   isExclusive: 0
   baseWeight: 0.1
+  references:
+    version: 2
+    RefIds: []
