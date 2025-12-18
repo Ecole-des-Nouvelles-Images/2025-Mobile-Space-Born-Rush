@@ -17,7 +17,7 @@ MonoBehaviour:
   Name: EnemyWeapon
   Cooldown: 4
   FireRate: 1
-  FireDistance: 10
+  FireDistance: 20
   MagSize: 3
   IsPlayer: 0
   EnemyMask:

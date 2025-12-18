@@ -12097,6 +12097,7 @@ GameObject:
   - component: {fileID: 1419666213}
   - component: {fileID: 1419666212}
   - component: {fileID: 1419666215}
+  - component: {fileID: 1419666218}
   - component: {fileID: 1419666216}
   - component: {fileID: 1419666217}
   m_Layer: 0
@@ -12136,7 +12137,7 @@ MonoBehaviour:
   _usernameStatusText: {fileID: 1066280045}
   _gameEmpty: {fileID: 721820563}
   _menuEmpty: {fileID: 2065659496}
-  _leaderboardManager: {fileID: 1511302805}
+  _leaderboardManager: {fileID: 1419666218}
   _requireInternetForUsername: 1
   _internetCheckTimeout: 3
   _allowOfflinePlay: 1
@@ -12146,7 +12147,7 @@ MonoBehaviour:
   _isCheckingInternet: 0
   _countdownPanel: {fileID: 1657634352}
   _countdownText: {fileID: 1671164515}
-  _audioMixer: {fileID: 24100000, guid: 5adc12b13f4b31240a7315bc3622f04b, type: 2}
+  _audioMixer: {fileID: 0}
   _audioSource: {fileID: 1419666216}
   _audioClip: {fileID: 8300000, guid: bb14260d0ce69d34eb1a58f8f8081c8a, type: 3}
 --- !u!4 &1419666213
@@ -12380,6 +12381,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1419666218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419666211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c979e12a26d9f7349b276220ba125201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Leaderboard
+  _scorePrefab: {fileID: 4498731284999072131, guid: 4dcb900c59937674dbeb1a2895dbd263,
+    type: 3}
+  _scoreParent: {fileID: 1038663564}
 --- !u!1 &1424210916
 GameObject:
   m_ObjectHideFlags: 0
@@ -13229,7 +13245,6 @@ GameObject:
   - component: {fileID: 1511302799}
   - component: {fileID: 1511302798}
   - component: {fileID: 1511302804}
-  - component: {fileID: 1511302805}
   - component: {fileID: 1511302809}
   - component: {fileID: 1511302810}
   m_Layer: 0

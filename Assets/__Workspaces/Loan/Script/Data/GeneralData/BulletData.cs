@@ -5,5 +5,5 @@ public abstract class BulletData : ScriptableObject
 {
     public float BulletDamage;
 
-    public abstract void OnHitEnemy(IDamageable damageable, EnemyHandler enemy);
+    public abstract void OnHitEnemy(IDamageable damageable, EnemyHandler enemy = null);
 }
