@@ -3811,7 +3811,7 @@ MonoBehaviour:
   GameDirector: {fileID: 0}
   CurrentDamage: 0
   IsRange: 1
-  CurrentRange: 8
+  CurrentRange: 2
   CurrentFireRate: 1
   OriginRaycast: {fileID: 7635838676433260581}
   Animator: {fileID: 8958901626329225317}
