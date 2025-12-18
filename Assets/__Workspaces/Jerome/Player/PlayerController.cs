@@ -28,15 +28,15 @@ public class PlayerController : MonoBehaviour,IDamageable
     private Vector3 _originalColliderSize;
     private Vector3 _originalColliderCenter;
     
-
-    private bool _isJumping = false;
-    private bool _isSliding;
-    private bool _isPaused;
+    [Header("state")]
+    [SerializeField] private bool _isJumping;
+    [SerializeField] private bool _isSliding;
+    [SerializeField] private bool _isPaused;
     
     [Header("Lane Movement")]
     [SerializeField] private float _laneChangeSpeed = 10f; // How fast we move between lanes
-    private bool _isChangingLane = false;
-    private Coroutine _laneChangeCoroutine = null; // Reference to our running movement coroutine
+    private bool _isChangingLane;
+    private Coroutine _laneChangeCoroutine; // Reference to our running movement coroutine
     
     private bool IsInNeutralState => !_isJumping && !_isSliding && !_isChangingLane;    
     
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     private GameUpgradeController _gameUpgradeController;
     private float _currentBlendSpeed;
     
-    #region subscriptions
+    #region ========== Subscriptions ==========
     private void OnEnable()
     {
         _inputActions = new TouchControls();
@@ -242,19 +242,31 @@ public class PlayerController : MonoBehaviour,IDamageable
     
     public void StopSlide()
     {
-        _isSliding = false;  // Direct assignment
+        _isSliding = false;
         
         ResetCollider();
         ShowIK();
     }
+    public void OnSlideAnimationComplete()
+    {
+        // This gets called whether slide finished normally OR was interrupted
+        if (!_isSliding) return;
+        
+        _isSliding = false;
+        ResetCollider();
+        
+        // Only show weapons if we're grounded and alive
+        if (!_isJumping && !_isPaused) ShowIK();
+    }
 
     private void Update()
     {
-        if (_currentBlendSpeed != _gameUpgradeController.GameSpeed)
-        {
-            _currentBlendSpeed = _gameUpgradeController.GameSpeed;
-            _animator.SetFloat("Blend", _currentBlendSpeed);
-        }
+        _animator.SetBool("isNeutral", IsInNeutralState);
+
+        if (_currentBlendSpeed == _gameUpgradeController.GameSpeed) return;
+        
+        _currentBlendSpeed = _gameUpgradeController.GameSpeed;
+        _animator.SetFloat("Blend", _currentBlendSpeed);
     }
     
     #region Input System
