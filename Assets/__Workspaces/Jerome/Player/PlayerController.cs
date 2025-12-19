@@ -85,7 +85,8 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnPlayerDead()
     {
         _audioSource.PlayOneShot(_deathSound);
-        if (_animator) _animator.SetTrigger("isDie");
+        Destroy(gameObject);
+        // if (_animator) _animator.SetTrigger("isDie");
     }
 
     private void OnUpgradeApplied(UpgradeData obj)
