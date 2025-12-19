@@ -113,6 +113,7 @@ public class PlayerStatController : MonoBehaviour
         // Player Specific Events
         EventBus.OnPlayerRevive -= OnPlayerRevive;
         EventBus.OnPlayerTakeDamage -= OnPlayerTakeDamage;
+        EventBus.OnPlayerDead -= OnPlayerDead;
         EventBus.OnPlayerCurrentHealthChange -= OnPlayerCurrentHealthChange;
         EventBus.OnPlayerMaxHealthChange -= OnPlayerMaxHealthChange;
         EventBus.OnPlayerCurrentXPChange -= OnPlayerCurrentXPChange;

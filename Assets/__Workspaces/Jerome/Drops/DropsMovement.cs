@@ -27,7 +27,7 @@ public class DropsMovement : MonoBehaviour
 
     private void OnPlayerDead()
     {
-        Destroy(this.gameObject);
+        if (this) Destroy(this.gameObject);
     }
 
     private void OnMagnetActivated(float time)
