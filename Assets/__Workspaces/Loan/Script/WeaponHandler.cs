@@ -32,7 +32,9 @@ public class WeaponHandler : MonoBehaviour
     private Material _material;
     private float _toRougeValue;
     private bool _isPause;
-    
+    private bool _sawPlayer;
+    private bool _isCharging;
+
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
@@ -57,6 +59,7 @@ public class WeaponHandler : MonoBehaviour
         _currentCooldown = _currentWeapon.Cooldown;
         _ammoNumber = _currentWeapon.MagSize;
         _layerMask = _currentWeapon.EnemyMask;
+        _currentFireRate = _currentWeapon.FireRate;
         _overheatCooldown = 0;
         _isOverheating = false;
         _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
@@ -121,23 +124,33 @@ public class WeaponHandler : MonoBehaviour
         // Enemy Fire
         if (!_currentWeapon.IsPlayer)
         {
-            if (_currentFireRate <= 0)
+            _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
+            
+            if (Physics.Raycast(_weaponRaycast, out RaycastHit hit, _currentWeapon.FireDistance, _layerMask)) // If hit
             {
-                _weaponRaycast = new Ray(_firePoint.position, _firePoint.forward);
-                
-                if (Physics.Raycast(_weaponRaycast, out RaycastHit hit, _currentWeapon.FireDistance, _layerMask)) // If hit
+                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
+                        
+                if (hit.collider.TryGetComponent<PlayerController>(out var player))
                 {
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
-                            
-                    if (hit.collider.TryGetComponent<PlayerController>(out var player)) 
+                    _sawPlayer = true;
+                    if (_currentFireRate <= 0)
                     {
                         EnemyFire(player);
                     }
+                    else
+                    {
+                        _animator.SetBool("IsAim", true);
+                    }
                 }
             }
-            else
+
+            if (_sawPlayer)
             {
-                _animator.SetBool("IsAim", true);
+                if (_currentFireRate > 0 && !_isCharging)
+                {
+                    _isCharging  = true;
+                    _chargeParticles.Play();
+                }
                 _currentFireRate -= Time.deltaTime;
             }
         }
@@ -217,8 +230,15 @@ public class WeaponHandler : MonoBehaviour
 
     private void EnemyFire(PlayerController player)
     {
-        // Enemy firing at nothing
-        if (!player) return;
+        _isCharging = false;
+        //_chargeParticles.Stop();
+        // Enemy firing at nothing pretends to fire
+        if (!player)
+        {
+            _fireParticles.Play();
+            if (_audioSource && _audioClip) _audioSource.PlayOneShot(_audioClip);
+            return;
+        }
     
         // Apply bullet damage/effect to player
         _currentBullet.OnHitEnemy(player);

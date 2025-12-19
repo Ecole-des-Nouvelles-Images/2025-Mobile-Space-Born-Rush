@@ -20,15 +20,19 @@ public class DropsMovement : MonoBehaviour
     private void MyEnable()
     {
         // Only listen to magnet if this is XP
-        if (DropData.Type == DropType.XP)
-        {
-            EventBus.OnMagnetActivated += OnMagnetActivated;
-        }
+        if (DropData.Type == DropType.XP) EventBus.OnMagnetActivated += OnMagnetActivated;
+        
+        EventBus.OnPlayerDead += OnPlayerDead;
     }
-    
+
+    private void OnPlayerDead()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnMagnetActivated(float time)
     {
-        if (DropData == null || DropData.Type != DropType.XP) return;
+        if (!DropData || DropData.Type != DropType.XP) return;
         
         if (_magnetCoroutine != null)
         {
@@ -39,10 +43,9 @@ public class DropsMovement : MonoBehaviour
     
     private void OnDisable()
     {
-        if (DropData.Type == DropType.XP)
-        {
-            EventBus.OnMagnetActivated -= OnMagnetActivated;
-        }
+        if (DropData.Type == DropType.XP) EventBus.OnMagnetActivated -= OnMagnetActivated;
+        
+        EventBus.OnPlayerDead += OnPlayerDead;
     }
 
     private void Start()

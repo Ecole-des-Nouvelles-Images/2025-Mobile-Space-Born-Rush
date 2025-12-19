@@ -16,6 +16,6 @@ MonoBehaviour:
   Prefab: {fileID: 8761609004418163955, guid: 57a41cd8fbc9b6740825d4fe85161b51, type: 3}
   Name: Health
   Description: You feel better, for now.
-  Value: 50
+  Value: 25
   Duration: 0
   DropChance: 15
