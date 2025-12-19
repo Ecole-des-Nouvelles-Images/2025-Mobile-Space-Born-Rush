@@ -1,2 +1,0 @@
-D:\L.Jourdan\LocalRepos\2025-Mobile-Space-Born\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
-D:\L.Jourdan\LocalRepos\2025-Mobile-Space-Born\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

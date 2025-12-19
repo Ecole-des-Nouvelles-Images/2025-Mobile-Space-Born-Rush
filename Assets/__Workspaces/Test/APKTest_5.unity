@@ -10445,8 +10445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daedd53f219d4b04ba24066d513021f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDirector
-  _speedIncrement: 30000
-  _difficultyPerLevel: 5
+  _speedIncrement: 3000
+  _difficultyPerLevel: 2
   _difficultyIncrement: 60000
   _difficultyHealth: 10
   _difficultyDamage: 2
