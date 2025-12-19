@@ -10,7 +10,8 @@ public class GameDirector : MonoBehaviour
     private Timer _speedIncrementTimer;
     
     [Header("In ms 1000ms = 1s")]
-    [SerializeField] private int _speedIncrement = 30000;
+    [SerializeField] private int _speedIncrementTime = 30000;
+    [SerializeField] private float _speedIncrement = 0.5f;
     //It should also increase the enemies health, maybe on player level up
     private int _playerLevel = 1; // Could tweak how often it happens ex: every 2,5 or 10 levels
     [SerializeField] private int _difficultyPerLevel = 5;
@@ -126,7 +127,7 @@ public class GameDirector : MonoBehaviour
     
     private void SpeedBoost(object sender, ElapsedEventArgs e)
     {
-        _gameUpgrades.GameSpeed += 0.2f;
+        _gameUpgrades.GameSpeed += _speedIncrement;
     }
     private void DifficultyBoost(object sender, ElapsedEventArgs e)
     {
