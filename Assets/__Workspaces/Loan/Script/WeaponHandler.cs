@@ -137,10 +137,10 @@ public class WeaponHandler : MonoBehaviour
                     {
                         EnemyFire(player);
                     }
-                    else
-                    {
-                        _animator.SetBool("IsAim", true);
-                    }
+                    // else
+                    // {
+                    //     _animator.SetBool("IsAim", true);
+                    // }
                 }
             }
 
