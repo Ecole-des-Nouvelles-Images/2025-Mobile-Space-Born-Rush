@@ -1,10 +1,10 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class GameUpgradeController : MonoBehaviour
 {
     [SerializeField] private float _gameSpeed, _numberOfUpgrades;
+    private float _savedSpeed;
 
     #region subscriptions
     private void Awake()
@@ -13,7 +13,20 @@ public class GameUpgradeController : MonoBehaviour
         EventBus.OnGameSystemUpgrade += OnGameSystemUpgrade;
         EventBus.OnGameStart +=  GameStart;
         EventBus.OnSpeedChanged += OnSpeedChanged;
+        EventBus.OnGamePause += OnGamePause;
+        EventBus.OnGameResume += OnGameResume;
         
+    }
+
+    private void OnGameResume()
+    {
+        _gameSpeed = _savedSpeed;
+    }
+
+    private void OnGamePause()
+    {
+        _savedSpeed =  _gameSpeed;
+        _gameSpeed = 0;
     }
 
     private void OnSpeedChanged(float speed, float time)
@@ -41,6 +54,8 @@ public class GameUpgradeController : MonoBehaviour
       // Main event
         EventBus.OnGameSystemUpgrade -= OnGameSystemUpgrade;
         EventBus.OnGameStart -= GameStart;
+        EventBus.OnGamePause -= OnGamePause;
+        EventBus.OnGameResume -= OnGameResume;
     }
 
     #endregion
