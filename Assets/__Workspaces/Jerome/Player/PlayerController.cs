@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour,IDamageable
     [SerializeField] private AudioClip _lvlUpSound;
     [SerializeField] private AudioClip _choiceSound;
     
+    [SerializeField] private ParticleSystem _xpParticles;
+    
     private GameUpgradeController _gameUpgradeController;
     private float _currentBlendSpeed;
     
@@ -102,6 +104,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     private void OnPlayerCurrentXpChange(float obj)
     {
         _audioSource.PlayOneShot(_xpSound);
+        _xpParticles.Play();
     }
 
     private void OnPlayerTakeDamage(float obj)

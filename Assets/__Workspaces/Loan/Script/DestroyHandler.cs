@@ -7,15 +7,23 @@ public class DestroyHandler : MonoBehaviour
     private void OnEnable()
     {
         EventBus.OnPlayerDead += PlayerDead;
+        EventBus.OnGameStart += GameStart;
+        
     }
 
     private void OnDisable()
     {
         EventBus.OnPlayerDead -= PlayerDead;
+        EventBus.OnGameStart -= GameStart;
+    }
+
+    private void GameStart()
+    {
+        this.gameObject.SetActive(true);
     }
 
     private void PlayerDead()
     {
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 }
