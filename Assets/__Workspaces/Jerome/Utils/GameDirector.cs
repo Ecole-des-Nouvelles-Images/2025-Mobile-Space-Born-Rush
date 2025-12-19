@@ -95,7 +95,7 @@ public class GameDirector : MonoBehaviour
     private void OnGameStart()
     {
         // Timer in ms 1000ms = 1s
-        _speedIncrementTimer = new Timer(_speedIncrement);
+        _speedIncrementTimer = new Timer(_speedIncrementTime);
         _speedIncrementTimer.Elapsed += SpeedBoost;
         _speedIncrementTimer.AutoReset = true;
         _speedIncrementTimer.Enabled = true;
