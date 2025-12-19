@@ -22,6 +22,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject _homeButton;
     [SerializeField] private GameObject _settingsButton;
     [SerializeField] private GameObject _scoreButton; 
+    [SerializeField] private GameObject _creditButton;
 
     [Header("=====Username Panel Components=====")]
     [SerializeField] private TMP_InputField _usernameInputField;
@@ -444,9 +445,10 @@ public class UIHandler : MonoBehaviour
         _homeButton.SetActive(false);
         _scoreButton.SetActive(false);
         _settingsButton.SetActive(false);
+        _scorePanel.SetActive(false);
         _gamePanel.SetActive(false);
+        _creditButton.gameObject.SetActive(false);
         
-        _scorePanel.SetActive(true);
         _usernamePanel.SetActive(true);
     }
     private void GameLose()
@@ -509,6 +511,7 @@ public class UIHandler : MonoBehaviour
         _creditPanel.SetActive(false);
         
         _audioSource.PlayOneShot(_audioClip);
+        _creditButton.gameObject.SetActive(true);
         _gamePanel.SetActive(true);
         _homeButton.SetActive(true);
         _scoreButton.SetActive(true);

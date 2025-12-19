@@ -141,11 +141,15 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (Animator)
+        // if (Animator)
+        // {
+        //     Animator.SetTrigger("isHit");
+        // }
+        if (_hitParticles != null && !_hitParticles.isPlaying)
         {
-            Animator.SetTrigger("isHit");
+            _hitParticles.Play();
         }
-        _hitParticles.Play();
+        
         _audioSource.PlayOneShot(_audioClipHit);
         CurrentHealth -= damage;
     }
