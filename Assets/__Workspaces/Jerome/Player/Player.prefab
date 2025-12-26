@@ -1453,6 +1453,7 @@ MonoBehaviour:
   _xpSound: {fileID: 8300000, guid: ffeba46910fe4af45a17c1cf0b8aadb0, type: 3}
   _lvlUpSound: {fileID: 8300000, guid: 9855cc3fc9b35ca4e96908d4a0aa422c, type: 3}
   _choiceSound: {fileID: 8300000, guid: 2cda7d8a2c6526b42bd896ee00405da4, type: 3}
+  _xpParticles: {fileID: 4178782702901320209}
 --- !u!114 &1754991802409784007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3266,6 +3267,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e313f062d632228409aba944f96571d6, type: 3}
+--- !u!198 &4178782702901320209 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2413333106277601229, guid: e313f062d632228409aba944f96571d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1766507361975342556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8276426818699856024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7662913529153330500, guid: e313f062d632228409aba944f96571d6,
