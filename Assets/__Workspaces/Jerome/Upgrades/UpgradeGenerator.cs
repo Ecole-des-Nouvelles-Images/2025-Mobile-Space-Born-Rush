@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,12 +6,12 @@ public class UpgradeGenerator : MonoBehaviour
 {
     private GameUpgradeController _gameUpgrades;
     [SerializeField] private List<UpgradeData> allPossibleUpgrades;
-    [Header("Dynamic Choices")]
+    private Dictionary<UpgradeData, int> timesSelected = new();
     
     // Weighted probabilities for different upgrade categories
-    [SerializeField] private float weaponWeight = 0.4f;
-    [SerializeField] private float playerStatWeight = 0.4f;
-    [SerializeField] private float gameSystemWeight = 0.2f;
+    [SerializeField] private float weaponWeight;
+    [SerializeField] private float playerStatWeight;
+    [SerializeField] private float gameSystemWeight;
 
     [SerializeField] private List<UpgradeData> availableUpgrades;
 
@@ -114,9 +113,20 @@ public class UpgradeGenerator : MonoBehaviour
     
     // Call this when the upgrade should no longer be available
     // like when there are the max amount of choices or the speed is too high
-    public void RemoveUpgradeFromPool(UpgradeData selectedUpgrade)
+    private void RemoveUpgradeFromPool(UpgradeData selectedUpgrade)
     {
         availableUpgrades.Remove(selectedUpgrade);
+        
+    }
+
+    /// <summary>
+    //The point of this function is to increment the amount fo times we have selected an upgrade
+    //If it has a limit then it''s call a local function to remove it from the choice pool.
+    /// </summary>
+    /// <param name="selectedUpgrade"></param>
+    public void UpgradeSelected(UpgradeData selectedUpgrade)
+    {
+        if (selectedUpgrade.maxTimesSelectable == 0) return;
         
     }
 }

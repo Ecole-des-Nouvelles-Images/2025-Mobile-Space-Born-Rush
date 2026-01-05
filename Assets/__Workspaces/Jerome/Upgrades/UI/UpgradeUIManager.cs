@@ -31,12 +31,13 @@ public class UpgradeUIManager : MonoBehaviour
         EventBus.OnUpgradeApplied += OnUpgradeApplied;
     }
 
-    private void OnDisable()
+    private void OnUpgradeApplied(UpgradeData upgradedData)
     {
-        EventBus.OnPlayerLevelUp -= ShowUpgradeChoices;
-        EventBus.OnUpgradeApplied -= OnUpgradeApplied;
+        if (currentChoices != null && currentChoices.Contains(upgradedData))
+        {
+            CloseUpgradePanel();
+        }
     }
-
     private void ShowUpgradeChoices(List<UpgradeData> upgradeChoices)
     {
         if (upgradeChoices == null || upgradeChoices.Count == 0)
@@ -71,6 +72,12 @@ public class UpgradeUIManager : MonoBehaviour
         
         PauseGame();
     }
+    private void OnDisable()
+    {
+        EventBus.OnPlayerLevelUp -= ShowUpgradeChoices;
+        EventBus.OnUpgradeApplied -= OnUpgradeApplied;
+    }
+
 
     private UpgradeChoiceUI CreateChoiceInstance(UpgradeData upgrade, int index)
     {
@@ -120,13 +127,6 @@ public class UpgradeUIManager : MonoBehaviour
         upgradeManager.ApplyUpgrade(selectedUpgrade);
     }
 
-    private void OnUpgradeApplied(UpgradeData upgradedData)
-    {
-        if (currentChoices != null && currentChoices.Contains(upgradedData))
-        {
-            CloseUpgradePanel();
-        }
-    }
 
     private void CloseUpgradePanel()
     {

@@ -2418,7 +2418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.1}
   m_AnchorMax: {x: 0.5, y: 0.3}
-  m_AnchoredPosition: {x: 0, y: -39.999634}
+  m_AnchoredPosition: {x: 0, y: -39.99951}
   m_SizeDelta: {x: -100, y: -80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &385459348
@@ -4012,7 +4012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.1}
   m_AnchorMax: {x: 0.9, y: 0.3}
-  m_AnchoredPosition: {x: 0, y: -39.999634}
+  m_AnchoredPosition: {x: 0, y: -39.99951}
   m_SizeDelta: {x: -100, y: -80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &530668401
@@ -8417,9 +8417,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae6bee17d81fc2e47add5bcd8b236726, type: 2}
   - {fileID: 11400000, guid: 72eb5cf5c11dfdb47bda0d9281edcb6d, type: 2}
   - {fileID: 11400000, guid: c22a59374ba841046afa261ab85dae28, type: 2}
-  weaponWeight: 0.4
-  playerStatWeight: 0.4
-  gameSystemWeight: 0.2
+  weaponWeight: 0.3
+  playerStatWeight: 0.6
+  gameSystemWeight: 0.1
+  availableUpgrades: []
 --- !u!4 &1322794752
 Transform:
   m_ObjectHideFlags: 0
