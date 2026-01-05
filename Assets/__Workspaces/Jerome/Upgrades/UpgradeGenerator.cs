@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class UpgradeGenerator : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class UpgradeGenerator : MonoBehaviour
     [SerializeField] private float playerStatWeight = 0.4f;
     [SerializeField] private float gameSystemWeight = 0.2f;
 
-    private List<UpgradeData> availableUpgrades;
+    [SerializeField] private List<UpgradeData> availableUpgrades;
 
     private void OnEnable()
     {
@@ -21,15 +23,23 @@ public class UpgradeGenerator : MonoBehaviour
         
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         
-        EventBus.OnWeaponUpgrade += OnWeaponUpgrade; 
+        EventBus.OnWeaponUpgrade += OnWeaponUpgrade;
+        EventBus.OnGameStart += () => RegenerateUpgradePool();
     }
 
     private void OnWeaponUpgrade(UpgradeType weapon, float weaponIndex)
     {
+        if (weapon != UpgradeType.WeaponSwap) return;
         //Basically when the weapon swap happens we should remove that weapon from the pool of choices
         //We regenerate it so that when you swap again that older weapon can be picked again
         RegenerateUpgradePool();
         RemoveUpgradeFromPool(FindWeapon(weaponIndex));
+    }
+
+    private void OnDisable()
+    {
+        EventBus.OnWeaponUpgrade -= OnWeaponUpgrade;
+        EventBus.OnGameStart -= () => RegenerateUpgradePool();
     }
 
     private UpgradeData FindWeapon(float weaponIndex)
@@ -47,12 +57,6 @@ public class UpgradeGenerator : MonoBehaviour
     // Called when player levels up
     public List<UpgradeData> GenerateUpgradeChoices()
     {
-        if (availableUpgrades.Count == 0)
-        {
-            Debug.LogWarning("No upgrades available! Regenerating pool.");
-            RegenerateUpgradePool();
-        }
-
         List<UpgradeData> choices = new List<UpgradeData>();
         List<UpgradeData> tempPool = new List<UpgradeData>(availableUpgrades);
 
