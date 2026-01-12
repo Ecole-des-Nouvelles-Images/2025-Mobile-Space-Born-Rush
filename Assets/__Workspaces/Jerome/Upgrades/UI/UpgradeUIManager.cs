@@ -4,25 +4,25 @@ using UnityEngine;
 public class UpgradeUIManager : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] private GameObject upgradePanel;
-    [SerializeField] private UpgradeChoiceUI upgradeChoicePrefab; // The prefab reference
-    [SerializeField] private Transform choicesParent; // Parent to instantiate under
-    [SerializeField] private Animator panelAnimator;
+    [SerializeField] private GameObject _upgradeCanvas;
+    [SerializeField] private UpgradeChoiceUI _upgradeChoicePrefab; // The prefab reference
+    [SerializeField] private Transform _choicesParent; // Parent to instantiate under
 
-    private List<UpgradeData> currentChoices;
-    private List<UpgradeChoiceUI> activeChoiceInstances; // Track spawned instances
-    private UpgradeManager upgradeManager;
+    private List<UpgradeData> _currentChoices;
+    private List<UpgradeChoiceUI> _activeChoiceInstances; // Track spawned instances
+    private UpgradeManager _upgradeManager;
+    private UpgradeGenerator _upgradeGenerator;
 
     private void Start()
     {
-        upgradeManager = FindAnyObjectByType<UpgradeManager>();
-        if (upgradeManager == null)
-        {
-            Debug.LogError("UpgradeManager not found in scene!");
-        }
+        _upgradeManager = FindAnyObjectByType<UpgradeManager>();
+        if (!_upgradeManager) Debug.LogError("UpgradeManager not found in scene!");
         
-        upgradePanel.SetActive(false);
-        activeChoiceInstances = new List<UpgradeChoiceUI>();
+        _upgradeGenerator = FindAnyObjectByType<UpgradeGenerator>();
+        if (!_upgradeGenerator) Debug.LogError("UpgradeGenerator not found in scene!");
+        
+        _upgradeCanvas.SetActive(false);
+        _activeChoiceInstances = new List<UpgradeChoiceUI>();
     }
 
     private void OnEnable()
@@ -33,7 +33,7 @@ public class UpgradeUIManager : MonoBehaviour
 
     private void OnUpgradeApplied(UpgradeData upgradedData)
     {
-        if (currentChoices != null && currentChoices.Contains(upgradedData))
+        if (_currentChoices != null && _currentChoices.Contains(upgradedData))
         {
             CloseUpgradePanel();
         }
@@ -46,13 +46,13 @@ public class UpgradeUIManager : MonoBehaviour
             return;
         }
 
-        if (!upgradeChoicePrefab)
+        if (!_upgradeChoicePrefab)
         {
             Debug.LogError("UpgradeChoicePrefab is not assigned!");
             return;
         }
 
-        currentChoices = upgradeChoices;
+        _currentChoices = upgradeChoices;
 
         // Clear previous choices
         ClearExistingChoices();
@@ -61,14 +61,11 @@ public class UpgradeUIManager : MonoBehaviour
         for (int i = 0; i < upgradeChoices.Count; i++)
         {
             UpgradeChoiceUI choiceInstance = CreateChoiceInstance(upgradeChoices[i], i);
-            activeChoiceInstances.Add(choiceInstance);
+            _activeChoiceInstances.Add(choiceInstance);
         }
 
         // Show the upgrade panel
-        upgradePanel.SetActive(true);
-        
-        if (panelAnimator)
-            panelAnimator.SetTrigger("Show");
+        _upgradeCanvas.SetActive(true);
         
         PauseGame();
     }
@@ -82,7 +79,7 @@ public class UpgradeUIManager : MonoBehaviour
     private UpgradeChoiceUI CreateChoiceInstance(UpgradeData upgrade, int index)
     {
         // Instantiate the prefab
-        UpgradeChoiceUI choiceInstance = Instantiate(upgradeChoicePrefab, choicesParent);
+        UpgradeChoiceUI choiceInstance = Instantiate(_upgradeChoicePrefab, _choicesParent);
         
         // Set up the choice
         choiceInstance.DisplayUpgrade(upgrade, index);
@@ -94,59 +91,53 @@ public class UpgradeUIManager : MonoBehaviour
     private void ClearExistingChoices()
     {
         // Destroy all active choice instances
-        foreach (UpgradeChoiceUI choice in activeChoiceInstances)
+        foreach (UpgradeChoiceUI choice in _activeChoiceInstances)
         {
             if (choice)
             {
                 Destroy(choice.gameObject);
             }
         }
-        activeChoiceInstances.Clear();
+        _activeChoiceInstances.Clear();
     }
 
     // Called by UI buttons when player selects an upgrade
     private void OnUpgradeSelected(int choiceIndex)
     {
-        if (!upgradeManager)
+        if (!_upgradeManager)
         {
             Debug.LogError("UpgradeManager not found!");
             CloseUpgradePanel();
             return;
         }
 
-        if (currentChoices == null || choiceIndex < 0 || choiceIndex >= currentChoices.Count)
+        if (_currentChoices == null || choiceIndex < 0 || choiceIndex >= _currentChoices.Count)
         {
             Debug.LogError($"Invalid upgrade selection: {choiceIndex}");
             CloseUpgradePanel();
             return;
         }
 
-        UpgradeData selectedUpgrade = currentChoices[choiceIndex];
+        UpgradeData selectedUpgrade = _currentChoices[choiceIndex];
 
         // Apply the upgrade through the UpgradeManager
-        upgradeManager.ApplyUpgrade(selectedUpgrade);
+        _upgradeManager.ApplyUpgrade(selectedUpgrade);
+        _upgradeGenerator.SelectedIncrement(selectedUpgrade);
+        
     }
 
 
     private void CloseUpgradePanel()
     {
-        if (panelAnimator)
-        {
-            panelAnimator.SetTrigger("Hide");
-            Invoke(nameof(DisablePanel), 0.3f);
-        }
-        else
-        {
             DisablePanel();
-        }
     }
 
     private void DisablePanel()
     {
-        upgradePanel.SetActive(false);
+        _upgradeCanvas.SetActive(false);
         ClearExistingChoices(); // Clean up instances
         ResumeGame();
-        currentChoices = null;
+        _currentChoices = null;
     }
 
     private void PauseGame()

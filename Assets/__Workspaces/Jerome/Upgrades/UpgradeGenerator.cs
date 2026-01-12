@@ -5,20 +5,20 @@ using Random = UnityEngine.Random;
 public class UpgradeGenerator : MonoBehaviour
 {
     private GameUpgradeController _gameUpgrades;
-    [SerializeField] private List<UpgradeData> allPossibleUpgrades;
-    private Dictionary<UpgradeData, int> timesSelected = new();
+    [SerializeField] private List<UpgradeData> _allPossibleUpgrades;
+    private Dictionary<UpgradeData, int> _timesSelected = new();
     
     // Weighted probabilities for different upgrade categories
-    [SerializeField] private float weaponWeight;
-    [SerializeField] private float playerStatWeight;
-    [SerializeField] private float gameSystemWeight;
+    [SerializeField] private float _weaponWeight;
+    [SerializeField] private float _playerStatWeight;
+    [SerializeField] private float _gameSystemWeight;
 
-    [SerializeField] private List<UpgradeData> availableUpgrades;
+    [SerializeField] private List<UpgradeData> _availableUpgrades;
 
     private void OnEnable()
     {
         // Start with all upgrades available
-        availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);
+        _availableUpgrades = new List<UpgradeData>(_allPossibleUpgrades);
         
         _gameUpgrades = FindAnyObjectByType<GameUpgradeController>();
         
@@ -43,7 +43,7 @@ public class UpgradeGenerator : MonoBehaviour
 
     private UpgradeData FindWeapon(float weaponIndex)
     {
-        foreach (var upgrade in allPossibleUpgrades)
+        foreach (var upgrade in _allPossibleUpgrades)
         {
             if (upgrade.Type == UpgradeType.WeaponSwap)
             {
@@ -56,8 +56,8 @@ public class UpgradeGenerator : MonoBehaviour
     // Called when player levels up
     public List<UpgradeData> GenerateUpgradeChoices()
     {
-        List<UpgradeData> choices = new List<UpgradeData>();
-        List<UpgradeData> tempPool = new List<UpgradeData>(availableUpgrades);
+        List<UpgradeData> choices = new();
+        List<UpgradeData> tempPool = new(_availableUpgrades);
 
         // Use dynamic choice count instead of fixed
         for (int i = 0; i < _gameUpgrades.NumberOfUpgrades; i++)
@@ -76,9 +76,9 @@ public class UpgradeGenerator : MonoBehaviour
     private UpgradeData GetWeightedRandomUpgrade(List<UpgradeData> pool)
     {
         // Create weighted list based on category weights
-        List<UpgradeData> weightedPool = new List<UpgradeData>();
+        List<UpgradeData> weightedPool = new();
         
-        foreach (var upgrade in pool)
+        foreach (UpgradeData upgrade in pool)
         {
             int copies = GetWeightCopies(upgrade.category);
             for (int i = 0; i < copies; i++)
@@ -98,9 +98,9 @@ public class UpgradeGenerator : MonoBehaviour
     {
         return category switch
         {
-            UpgradeCategory.WeaponStat => Mathf.RoundToInt(weaponWeight * 10),
-            UpgradeCategory.PlayerStat => Mathf.RoundToInt(playerStatWeight * 10),
-            UpgradeCategory.GameSystem => Mathf.RoundToInt(gameSystemWeight * 10),
+            UpgradeCategory.WeaponStat => Mathf.RoundToInt(_weaponWeight * 10),
+            UpgradeCategory.PlayerStat => Mathf.RoundToInt(_playerStatWeight * 10),
+            UpgradeCategory.GameSystem => Mathf.RoundToInt(_gameSystemWeight * 10),
             _ => 1
         };
     }
@@ -108,25 +108,34 @@ public class UpgradeGenerator : MonoBehaviour
 
     private void RegenerateUpgradePool()
     {
-        availableUpgrades = new List<UpgradeData>(allPossibleUpgrades);
+        _availableUpgrades = new List<UpgradeData>(_allPossibleUpgrades);
     }
     
     // Call this when the upgrade should no longer be available
     // like when there are the max amount of choices or the speed is too high
     private void RemoveUpgradeFromPool(UpgradeData selectedUpgrade)
     {
-        availableUpgrades.Remove(selectedUpgrade);
+        _availableUpgrades.Remove(selectedUpgrade);
         
     }
 
     /// <summary>
-    //The point of this function is to increment the amount fo times we have selected an upgrade
+    //The point of this function is to increment the amount of times we have selected an upgrade
     //If it has a limit then it''s call a local function to remove it from the choice pool.
     /// </summary>
     /// <param name="selectedUpgrade"></param>
-    public void UpgradeSelected(UpgradeData selectedUpgrade)
+    public void SelectedIncrement(UpgradeData selectedUpgrade)
     {
         if (selectedUpgrade.maxTimesSelectable == 0) return;
-        
+
+        _timesSelected.TryAdd(selectedUpgrade, 0);
+
+        _timesSelected[selectedUpgrade]++;
+
+        if (_timesSelected[selectedUpgrade] >= selectedUpgrade.maxTimesSelectable)
+        {
+            RemoveUpgradeFromPool(selectedUpgrade);
+        }
+ 
     }
 }

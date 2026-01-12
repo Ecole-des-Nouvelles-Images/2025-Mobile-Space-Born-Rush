@@ -8404,23 +8404,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec5c7b429e2aa94795c6f6a105b8720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeGenerator
-  allPossibleUpgrades:
+  _allPossibleUpgrades:
   - {fileID: 11400000, guid: 461fda3a49d0cd44b801451188ff39e0, type: 2}
-  - {fileID: 11400000, guid: 4a2c06ddfe58c48479bfebbd0f2656ef, type: 2}
   - {fileID: 11400000, guid: 49660af3f7457194285c98f6e03cb889, type: 2}
-  - {fileID: 11400000, guid: 2fff17cf7faa83e4995d8dce34e77721, type: 2}
   - {fileID: 11400000, guid: fe0593c84f9bedb4c919188b819d8644, type: 2}
-  - {fileID: 11400000, guid: 3ff65f925ce154d4b919589ee340b06d, type: 2}
   - {fileID: 11400000, guid: a7bb82f3c54a6234fbda4f241e133b49, type: 2}
   - {fileID: 11400000, guid: c35729e8fd617a54ebc182268eed881c, type: 2}
   - {fileID: 11400000, guid: 7a3cdfe0a6e916b47bf5a9be2304a44a, type: 2}
   - {fileID: 11400000, guid: ae6bee17d81fc2e47add5bcd8b236726, type: 2}
   - {fileID: 11400000, guid: 72eb5cf5c11dfdb47bda0d9281edcb6d, type: 2}
   - {fileID: 11400000, guid: c22a59374ba841046afa261ab85dae28, type: 2}
-  weaponWeight: 0.3
-  playerStatWeight: 0.6
-  gameSystemWeight: 0.1
-  availableUpgrades: []
+  - {fileID: 11400000, guid: 4a2c06ddfe58c48479bfebbd0f2656ef, type: 2}
+  - {fileID: 11400000, guid: 2fff17cf7faa83e4995d8dce34e77721, type: 2}
+  - {fileID: 11400000, guid: 3ff65f925ce154d4b919589ee340b06d, type: 2}
+  _weaponWeight: 0.5
+  _playerStatWeight: 0.4
+  _gameSystemWeight: 1
+  _availableUpgrades: []
 --- !u!4 &1322794752
 Transform:
   m_ObjectHideFlags: 0
@@ -9804,11 +9804,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e18028a23df194aa6607f76792a5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeUIManager
-  upgradePanel: {fileID: 945293423}
-  upgradeChoicePrefab: {fileID: 28077344417193445, guid: 809230d35a171bc4b875298e401b3bb4,
+  _upgradeCanvas: {fileID: 945293423}
+  _upgradeChoicePrefab: {fileID: 6291767856977268178, guid: 69b88a534da17e640bb86d39b752fda6,
     type: 3}
-  choicesParent: {fileID: 1346459764}
-  panelAnimator: {fileID: 0}
+  _choicesParent: {fileID: 1346459764}
 --- !u!114 &1511302802
 MonoBehaviour:
   m_ObjectHideFlags: 0
