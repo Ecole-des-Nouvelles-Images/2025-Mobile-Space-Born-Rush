@@ -43,7 +43,7 @@ public class UpgradeGenerator : MonoBehaviour
 
     private UpgradeData FindWeapon(float weaponIndex)
     {
-        foreach (var upgrade in _allPossibleUpgrades)
+        foreach (UpgradeData upgrade in _allPossibleUpgrades)
         {
             if (upgrade.Type == UpgradeType.WeaponSwap)
             {

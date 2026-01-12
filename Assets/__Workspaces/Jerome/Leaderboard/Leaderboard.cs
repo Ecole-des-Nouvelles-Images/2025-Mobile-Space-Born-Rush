@@ -279,7 +279,7 @@ public class LeaderboardManager : MonoBehaviour
         }
     
         // Check if username exists
-        var query = LeaderboardSearchQuery.ByUsername(username);
+        LeaderboardSearchQuery query = LeaderboardSearchQuery.ByUsername(username);
     
         Leaderboards.SpaceBornRush.GetEntries(query, entries =>
         {

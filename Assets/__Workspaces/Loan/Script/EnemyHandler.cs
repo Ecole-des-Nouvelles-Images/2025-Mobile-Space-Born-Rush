@@ -30,7 +30,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     
     [FormerlySerializedAs("HitParticles")]
     [Header("<color=blue>======Particule System======</color>")]
-    [SerializeField] ParticleSystem _hitParticles;
+    [SerializeField] private ParticleSystem _hitParticles;
     
     [Header("<color=white>=====Ragdoll Settings=====</color>")]
     [SerializeField] private BoxCollider _collider;
@@ -53,13 +53,13 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     public bool IsWait;
     public bool IsAttacking;
     public bool IsDead;
-    
-    
-    public BaseState CurrentState = new Wait();
-    
-    private float _knockbackTimer = 3f;
-    private float _knockbackForceMax = 8f;
-    private float[] _lanes = new[] { -1.5f, 0f, 1.5f };
+
+
+    protected BaseState CurrentState = new Wait();
+
+    private const float _knockbackTimer = 3f;
+    private const float _knockbackForceMax = 8f;
+    private readonly float[] _lanes = { -1.5f, 0f, 1.5f };
     public bool IsPaused;
 
     private void OnEnable()
@@ -131,13 +131,12 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         {
             IsKnocked = false;
         }
+
+        if (!(CurrentHealth <= 0)) return;
         
-        if (CurrentHealth <= 0)
-        {
-            IsDead = true;
-            IsWait = false;
-            IsAttacking = false;
-        }
+        IsDead = true;
+        IsWait = false;
+        IsAttacking = false;
     }
     public void TakeDamage(float damage)
     {
@@ -145,7 +144,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         // {
         //     Animator.SetTrigger("isHit");
         // }
-        if (_hitParticles != null && !_hitParticles.isPlaying)
+        if (_hitParticles && !_hitParticles.isPlaying)
         {
             _hitParticles.Play();
         }
@@ -154,9 +153,9 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         CurrentHealth -= damage;
     }
 
-    public void Death(GameObject gameObject)
+    protected void Death(GameObject gameObject)
     {
-        if (Animator != null)
+        if (Animator)
         {
             Animator.enabled = false;
             _collider.enabled = false;
@@ -164,12 +163,6 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         _audioSource.PlayOneShot(_audioClipDeath);
         Vector3 impulse = new Vector3(0f, 0f, 10f);
         _rbHips.AddForce(impulse * _impulseForce, ForceMode.Impulse);
-        
-        // if (XpPrefab != null)
-        // {
-        //     Instantiate(XpPrefab, transform.position, Quaternion.identity);
-        // }
-        // Destroy(gameObject);
     }
     
     public void ApplyKnockback(Vector3 force)

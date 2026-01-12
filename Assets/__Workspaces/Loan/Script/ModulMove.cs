@@ -234,12 +234,12 @@ public class ModulMove : MonoBehaviour
     {
         if (_isPaused)
             return;
-        var vector3 = transform.position;
+        Vector3 vector3 = transform.position;
         vector3.z = vector3.z - _gameUpgrades.GameSpeed * Time.deltaTime;
         transform.position = vector3;
         if (transform.position.z < -_width)
         {
-            var random =  Random.Range(0, _modulPrefabs.Count);
+            int random =  Random.Range(0, _modulPrefabs.Count);
             Instantiate(_modulPrefabs[random], new Vector3(0,0,53), Quaternion.identity,_parentModulTransform.transform);
             Destroy(gameObject);
         }

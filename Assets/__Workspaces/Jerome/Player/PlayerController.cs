@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         _currentLaneIndex = 1;
         
         Vector3 targetPos = _laneProfile.GetLanePosition(_currentLaneIndex);
-        var position = transform.position;
+        Vector3 position = transform.position;
         position.x = targetPos.x;
         transform.position = position;
     }

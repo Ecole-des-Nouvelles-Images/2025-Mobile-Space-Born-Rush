@@ -19,7 +19,7 @@ public class ObstacleHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerController>(out var playerController))
+        if (other.TryGetComponent<PlayerController>(out PlayerController playerController))
         {
             EventBus.OnPlayerTakeDamage?.Invoke(ObstacleData.Damage);
             EventBus.OnObstacleHit?.Invoke();

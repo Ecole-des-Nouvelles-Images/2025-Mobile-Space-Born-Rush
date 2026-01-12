@@ -112,6 +112,12 @@ public class WeaponHandler : MonoBehaviour
         EventBus.OnGameResume -= GameResume;
     }
 
+    [ContextMenu("Unpause")]
+    public void Unpause()
+    {
+        _isPause = false;
+    }
+
     private void Update()
     {
         if (_isRaycastDraw) Debug.DrawRay(_weaponRaycast.origin,
@@ -128,9 +134,9 @@ public class WeaponHandler : MonoBehaviour
             
             if (Physics.Raycast(_weaponRaycast, out RaycastHit hit, _currentWeapon.FireDistance, _layerMask)) // If hit
             {
-                if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) return; 
+                if (hit.collider.TryGetComponent<EnemyHandler>(out EnemyHandler enemy)) return; 
                         
-                if (hit.collider.TryGetComponent<PlayerController>(out var player))
+                if (hit.collider.TryGetComponent<PlayerController>(out PlayerController player))
                 {
                     _sawPlayer = true;
                     if (_currentFireRate <= 0)
@@ -165,7 +171,7 @@ public class WeaponHandler : MonoBehaviour
 
                 if (Physics.Raycast(_weaponRaycast, out RaycastHit hit, _currentWeapon.FireDistance, _layerMask)) // If hit
                 {
-                    if (hit.collider.TryGetComponent<EnemyHandler>(out var enemy)) 
+                    if (hit.collider.TryGetComponent<EnemyHandler>(out EnemyHandler enemy)) 
                     {
                         if (_animator)
                         {
@@ -240,9 +246,6 @@ public class WeaponHandler : MonoBehaviour
             return;
         }
     
-        // Apply bullet damage/effect to player
-        _currentBullet.OnHitEnemy(player);
-    
         // Visual and audio feedback
         _fireParticles.Play();
         if (_audioSource && _audioClip) _audioSource.PlayOneShot(_audioClip);
@@ -250,6 +253,9 @@ public class WeaponHandler : MonoBehaviour
     
         // Weapon cooldown and ammo
         _currentFireRate = _currentWeapon.FireRate;
+    
+        // Apply bullet damage/effect to player
+        _currentBullet.OnHitEnemy(player);
     }
 
     private void Reload(int amm = 1)

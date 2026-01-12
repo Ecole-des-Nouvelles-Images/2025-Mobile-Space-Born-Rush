@@ -10,7 +10,7 @@ public class Attack : BaseState
             enemy.Raycast = new Ray(enemy.Transform.position, enemy.Transform.forward);
             if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.CurrentRange,enemy.EnemyMask))
             {
-                if (hit.collider.TryGetComponent<PlayerController>(out var player))
+                if (hit.collider.TryGetComponent<PlayerController>(out PlayerController player))
                 {
                     if (enemy.Animator != null)
                     {
@@ -37,7 +37,7 @@ public class Attack : BaseState
             
             if (Physics.Raycast(enemy.Raycast,out RaycastHit hit,enemy.CurrentRange,enemy.EnemyMask))
             {
-                if (hit.collider.TryGetComponent<PlayerController>(out var player))
+                if (hit.collider.TryGetComponent<PlayerController>(out PlayerController player))
                 {
                     if (enemy.CurrentFireRate <= 0)
                     {
@@ -57,7 +57,7 @@ public class Attack : BaseState
             }
             else if (Physics.Raycast(downRay,out RaycastHit hite,enemy.CurrentRange,enemy.EnemyMask))
             {
-                if (hite.collider.TryGetComponent<PlayerController>(out var player))
+                if (hite.collider.TryGetComponent<PlayerController>(out PlayerController player))
                 {
                     if (enemy.CurrentFireRate <= 0)
                     {
@@ -77,7 +77,7 @@ public class Attack : BaseState
             }
             else if (Physics.Raycast(UpRay,out RaycastHit hits,enemy.CurrentRange,enemy.EnemyMask))
             {
-                if (hits.collider.TryGetComponent<PlayerController>(out var player))
+                if (hits.collider.TryGetComponent<PlayerController>(out PlayerController player))
                 {
                     if (enemy.CurrentFireRate <= 0)
                     {

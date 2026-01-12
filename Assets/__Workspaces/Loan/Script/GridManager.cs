@@ -107,7 +107,7 @@ public class GridManager : MonoBehaviour
             if (!Grid[x, z].IsEmpty)
                 return false;
 
-            foreach (var pos in _neightbornEnemy)
+            foreach (int pos in _neightbornEnemy)
             {
                 int neightborn = z - pos;
                 if ( neightborn < 0 || neightborn >= _cellZ)
@@ -148,7 +148,7 @@ public class GridManager : MonoBehaviour
             }
         }
         
-        foreach (var cell in toReserve)
+        foreach ((int x, int z) cell in toReserve)
             SetCellEmpty(cell.x, cell.z, false);
 
         return true;
@@ -158,7 +158,7 @@ public class GridManager : MonoBehaviour
     {
         List<int> toReserveZ = new List<int>();
 
-        foreach (var pos in _neightbornUpDown)
+        foreach (int pos in _neightbornUpDown)
         {
             int nz = z + pos;
 
@@ -187,7 +187,7 @@ public class GridManager : MonoBehaviour
         
         List<(int x, int z)> toReserve = new List<(int x, int z)>();
 
-        foreach (var pos in _neightbornUpDown)
+        foreach (int pos in _neightbornUpDown)
         {
             int neightbornZ = z + pos;
             if (neightbornZ < 0 || neightbornZ >= _cellZ)
@@ -202,7 +202,7 @@ public class GridManager : MonoBehaviour
             }
         }
         
-        foreach (var p in toReserve)
+        foreach ((int x, int z) p in toReserve)
             SetCellEmpty(p.x, p.z, false);
 
         return true;

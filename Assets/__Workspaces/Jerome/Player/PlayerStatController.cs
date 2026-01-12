@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -75,7 +76,7 @@ public class PlayerStatController : MonoBehaviour
         {
             // Get upgrades and trigger level up UI
 
-            var choices = _upgradeGenerator.GenerateUpgradeChoices();
+            List<UpgradeData> choices = _upgradeGenerator.GenerateUpgradeChoices();
             EventBus.OnPlayerLevelUp?.Invoke(choices);
             
             // Reset XP for next level

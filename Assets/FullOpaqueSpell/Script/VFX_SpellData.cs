@@ -54,7 +54,7 @@ namespace FullOpaqueVFX
             ParticleSystem[] particleSystems = spellObject.GetComponentsInChildren<ParticleSystem>();
             foreach (ParticleSystem ps in particleSystems)
             {
-                var mainModule = ps.main;
+                ParticleSystem.MainModule mainModule = ps.main;
                 mainModule.startColor = spellColor;
             }
         }
