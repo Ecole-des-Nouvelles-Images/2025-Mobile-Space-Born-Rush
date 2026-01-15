@@ -33,6 +33,16 @@ public class StartUpManager : MonoBehaviour
         
         while (pos <= 60)
         {
+            //TODO Add a portion for when its the tutorial
+            //Tutorial will be luch longer It should follow this logic
+            //1. Swipe left right
+            //2. Jump and Slide
+            //3. Shoot (Force 3 enemies in front of the player and show text to explain auto shooting)
+            //4. Show amo count
+            //5. Explain Overload (Force it on first shot)
+            //6. XP explain the xp bar
+            //7. Stun and Damage (Force 3 barriers side by side)
+            //8. Explain Level up
             int rand = Random.Range(0, _modulPrefb.Length);
             GameObject modul = Instantiate(_modulPrefb[rand],new Vector3(0,0,pos),Quaternion.identity,_parentModulTransform.transform);
             modul.GetComponent<ModulMove>().isEnemy = false;
