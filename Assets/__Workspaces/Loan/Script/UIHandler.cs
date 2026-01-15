@@ -17,6 +17,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject _scoreboardPanel;
     [SerializeField] private GameObject _usernamePanel;
     [SerializeField] private GameObject _creditPanel;
+    [SerializeField] private GameObject _controlPanel;
     
     [Header("=====Buttons=====")]
     [SerializeField] private GameObject _homeButton;
@@ -509,6 +510,7 @@ public class UIHandler : MonoBehaviour
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
         _creditPanel.SetActive(false);
+        _controlPanel.SetActive(false);
         
         _audioSource.PlayOneShot(_audioClip);
         _creditButton.gameObject.SetActive(true);
@@ -524,6 +526,7 @@ public class UIHandler : MonoBehaviour
         _scorePanel.SetActive(false);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        _controlPanel.SetActive(false);
         
         _audioSource.PlayOneShot(_audioClip);
         _optionPanel.SetActive(true);
@@ -535,6 +538,7 @@ public class UIHandler : MonoBehaviour
         _optionPanel.SetActive(false);
         _creditPanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        _controlPanel.SetActive(false);
         
         _audioSource.PlayOneShot(_audioClip);
         _scorePanel.SetActive(true);
@@ -549,9 +553,22 @@ public class UIHandler : MonoBehaviour
         _optionPanel.SetActive(false);
         _scorePanel.SetActive(false);
         _usernamePanel.SetActive(false);
+        _controlPanel.SetActive(false);
         
         _audioSource.PlayOneShot(_audioClip);
         _creditPanel.SetActive(true);
+    }
+
+    public void OpenControlPanel()
+    {
+        _gamePanel.SetActive(false);
+        _optionPanel.SetActive(false);
+        _scorePanel.SetActive(false);
+        _usernamePanel.SetActive(false);
+        _creditPanel.SetActive(false);
+        
+        _audioSource.PlayOneShot(_audioClip);
+        _controlPanel.SetActive(true);
     }
     
     public void ChangeLangue(int langueID)

@@ -160,6 +160,28 @@ MonoBehaviour:
     m_Localized: 'Augmente l''Xp recuperer '
     m_Metadata:
       m_Items: []
+  - m_Id: 16267818812280832
+    m_Localized: Commande
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16270326792163328
+    m_Localized: Glissez votre doigt vers la droite ou vers la gauche pour changer
+      de voie dans la direction correspondante.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16271517118861312
+    m_Localized: Glissez vers le haut pour faire sauter le joueur.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16271590938611712
+    m_Localized: Glissez vers le bas pour faire une glissade.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16272120045867008
+    m_Localized: "Le joueur ne peut tirer sur un ennemi que s\u2019il se trouve sur
+      la meme lane que lui."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
