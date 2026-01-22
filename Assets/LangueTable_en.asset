@@ -158,6 +158,26 @@ MonoBehaviour:
     m_Localized: XP drop boost
     m_Metadata:
       m_Items: []
+  - m_Id: 16267818812280832
+    m_Localized: Control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16270326792163328
+    m_Localized: Swipe left or right to change lanes in the corresponding direction.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16271517118861312
+    m_Localized: Swipe up to make the player jump.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16271590938611712
+    m_Localized: Swipe down to perform a slide.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16272120045867008
+    m_Localized: The player can only shoot an enemy if they are on the same lane.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -157,6 +157,26 @@ MonoBehaviour:
     m_Key: N_Xp
     m_Metadata:
       m_Items: []
+  - m_Id: 16267818812280832
+    m_Key: B_Commande
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16270326792163328
+    m_Key: C_Right/Left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16271517118861312
+    m_Key: C_Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16271590938611712
+    m_Key: C_Down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16272120045867008
+    m_Key: C_Shoot
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
