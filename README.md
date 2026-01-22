@@ -1,5 +1,7 @@
 
-# [Project Name]
+# <b>Space Born Rush<b>
+
+<img width="2048" height="2048" alt="IconSpace" src="https://github.com/user-attachments/assets/86f21666-b7af-42eb-bed2-918876b915b7" />
 
 [A brief and engaging tagline or description of the game]
 
@@ -8,7 +10,8 @@
 [![License](https://img.shields.io/github/license/Ecole-des-Nouvelles-Images/Unity-Template)](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/blob/main/LICENSE)
 [![Repo Size](https://img.shields.io/github/repo-size/Ecole-des-Nouvelles-Images/Unity-Template?color=lightgrey)](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template)
 
-!(https://github.com/user-attachments/assets/8faf3f45-7566-4135-889e-2a6246501f71")
+
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -23,9 +26,9 @@
 ---
 
 ## Introduction
-**[Project Name]** is a [genre of the game] developed by **[Team/Organization Name]** during **[timeframe]**.  
-This project was created as part of **[context, e.g., a school project, game jam, or indie initiative]**.  
-The development process included **[key phases, such as preproduction, production, etc.]**.
+**SpaceBorn Rush** is a Auto-Runner/Auto-Shooter developed by **Space Mothers** during **5 weeks**.  
+This project was created as part of **a school project**.  
+The development process included **a preproduction (1 week), production (3 weeks) and a postproduction (1 weeks)**.
 
 ---
 
@@ -66,7 +69,7 @@ This game supports **[platform requirements, e.g., Android 5.1+]**.
 ---
 
 ## Development
-This project is currently **[status: finished, in development, etc.]**. Future updates might include **[examples of planned features or fixes]**.  
+This project is currently **in developmen**. Future updates might include **Bug Fix and New Features**.  
 
 If you encounter any bugs or have suggestions, please open an **[issue ticket](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/issues/new)**.
 
@@ -81,5 +84,5 @@ We would like to thank:
 ---
 
 ## Recommendations
-For the best experience, we recommend playing with **[optimal player setup, equipment, or difficulty settings]**.  
-[Additional recommendations, such as tutorials or preparation tips.]
+For the best experience, we recommend playing with **tablet**.  
+Read control before the first game.
