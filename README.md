@@ -33,7 +33,7 @@ The development process included **a preproduction (1 week), production (3 weeks
 ---
 
 ## Team
-This game was brought to life by **[Team Name or "a group of X developers/artists"]**:
+This game was brought to life by **Space Mothers**:
 - **[Name 1]**: [Role and contributions]
 - **[Name 2]**: [Role and contributions]
 - **[Name 3]**: [Role and contributions]
@@ -57,7 +57,13 @@ This game was brought to life by **[Team Name or "a group of X developers/artist
 ---
 
 ## Universe
-[Provide a brief story or lore for the game world, highlighting key characters, locations, or events. Explain how the story ties into the gameplay.]
+In the distant future, humanity stands on the brink of extinction. Its last survivors have taken refuge in **Astra-5**, a vast space station orbiting a dying star.
+
+Their only defence: the **SpaceBorn**, genetically enhanced soldiers equipped with experimental technology and trained to face the impossible.
+
+When a horde of **Xar** invades the station’s corridors, the SpaceBorn are deployed in an endless race through the infested zones.
+
+**Your objective**: survive for as long as possible, eliminate waves of enemies, and prevent the collapse of humanity’s last refuge.
 
 ---
 
