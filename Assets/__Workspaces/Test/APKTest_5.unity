@@ -9113,7 +9113,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ff65f925ce154d4b919589ee340b06d, type: 2}
   _weaponWeight: 0.5
   _playerStatWeight: 0.4
-  _gameSystemWeight: 1
+  _gameSystemWeight: 0.1
   _availableUpgrades: []
 --- !u!4 &1322794752
 Transform:
@@ -11145,10 +11145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameDirector
   _speedIncrementTime: 15000
   _speedIncrement: 0.5
-  _difficultyPerLevel: 2
   _difficultyIncrement: 60000
   _difficultyHealth: 10
   _difficultyDamage: 2
+  _difficultyPerLevel: 2
   _healthIncrement: 10
   _damageIncrement: 2
   _gameUpgrades: {fileID: 186121869}

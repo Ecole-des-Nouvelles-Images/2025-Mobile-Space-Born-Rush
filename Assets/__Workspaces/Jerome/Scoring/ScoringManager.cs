@@ -8,12 +8,12 @@ public class ScoringManager : MonoBehaviour
     
     private float _score;
     private bool _isGamePaused = true;
-    [SerializeField]private int _killsNumber = 0;
-    [SerializeField]private float _timer = 0;
+    [SerializeField] private int _killsNumber = 0;
+    [SerializeField] private float _timer = 0;
     [Header("=====Text Settings=====")]
-    [SerializeField]private TextMeshProUGUI _timerText;
-    [SerializeField]private TextMeshProUGUI _scoreText;
-    [SerializeField]private TextMeshProUGUI _killsText;
+    [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _killsText;
 
     #region subscriptions
     private void Awake()

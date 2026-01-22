@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour,IDamageable
     
     [Header("IK Movment")]
     [SerializeField] private GameObject _weapons;
-    [SerializeField] private Rig _RHand;
-    [SerializeField] private Rig _LHand;
+    [SerializeField] private Rig _rHand;
+    [SerializeField] private Rig _lHand;
     
     //Variables for swipe detection
     private TouchControls _inputActions;
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour,IDamageable
     [Header("Tweaks")]
     [SerializeField] private int _pixelDistToDetect = 20;
     [SerializeField] private int _colliderSize;
-    [SerializeField] private Vector3 JumpForce = Vector3.up;
+    [SerializeField] private Vector3 _jumpForce = Vector3.up;
     
     // Collider variables
     private Vector3 _originalColliderSize;
@@ -206,8 +206,8 @@ public class PlayerController : MonoBehaviour,IDamageable
             r.enabled = false;
         }
 
-        _RHand.weight = 0f;
-        _LHand.weight = 0f;
+        _rHand.weight = 0f;
+        _lHand.weight = 0f;
     }
 
     private void ShowIK()
@@ -218,8 +218,8 @@ public class PlayerController : MonoBehaviour,IDamageable
             r.enabled = true;
         }
         
-        _RHand.weight = 1f;
-        _LHand.weight = 1f;
+        _rHand.weight = 1f;
+        _lHand.weight = 1f;
     }
     private void Jump()
     {
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour,IDamageable
             _animator.SetTrigger("isJump");
         }
         
-        _rb.AddForce(JumpForce, ForceMode.Impulse);
+        _rb.AddForce(_jumpForce, ForceMode.Impulse);
 
         HideIK();
     }
@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour,IDamageable
         // Scale down from original
         ShrinkCollider();
         
-        _rb.AddForce(-JumpForce, ForceMode.Impulse);
+        _rb.AddForce(-_jumpForce, ForceMode.Impulse);
         HideIK();
     }
     

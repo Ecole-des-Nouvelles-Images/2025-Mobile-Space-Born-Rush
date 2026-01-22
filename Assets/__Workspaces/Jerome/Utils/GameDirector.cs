@@ -13,20 +13,23 @@ public class GameDirector : MonoBehaviour
     [SerializeField] private int _speedIncrementTime = 30000;
     [SerializeField] private float _speedIncrement = 0.5f;
     //It should also increase the enemies health, maybe on player level up
-    private int _playerLevel = 1; // Could tweak how often it happens ex: every 2,5 or 10 levels
-    [SerializeField] private int _difficultyPerLevel = 5;
     //Finally it should also increase the spawn rate of enemies and obstacles, but it should be very slow to do that.
     //Maybe mix player level with a new timer?
     private Timer _difficultyIncrementTimer;
 
     [Header("In ms 1000ms = 1s")]
     [SerializeField] private int _difficultyIncrement = 60000;
+    
     [Header("Current boost they have")]
     [SerializeField] private int _difficultyHealth;
     [SerializeField] private int _difficultyDamage;
+    
     [Header("Increment per level up and timer")]
+    [SerializeField] private int _difficultyPerLevel = 5;
     [SerializeField] private int _healthIncrement = 10;
     [SerializeField] private int _damageIncrement = 2;
+    
+    private int _playerLevel = 1; // Could tweak how often it happens ex: every 2,5 or 10 levels
     //It needs a reference to all the upgrade controllers and then the enemy handler
     [SerializeField] private GameUpgradeController _gameUpgrades;
     
