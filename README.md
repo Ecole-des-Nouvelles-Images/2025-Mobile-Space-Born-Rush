@@ -50,8 +50,13 @@ The score increases based on time survived and the number of enemies defeated. A
 
 The gameplay focuses on a balance between anticipation and quick reactions. The run ends when the player runs out of health, and the final score is compared on a global online leaderboard to determine the best **SpaceBorn** in the galaxy.
 
-### Phase 1: [Phase Name]
-[Describe the first phase of gameplay, objectives, and player actions.]
+### Introductory phase
+
+<img width="605" height="960" alt="SBR_3" src="https://github.com/user-attachments/assets/fff2025c-5389-43ca-9022-88be449baeb9" />
+
+### In-game phase
+
+<img width="599" height="797" alt="SBR_4" src="https://github.com/user-attachments/assets/ff34f33c-bd0b-4919-9469-1d2d90be0a79" />
 
 ### Phase 2: [Phase Name]
 [Describe the second phase, any escalating challenges, and goals.]
