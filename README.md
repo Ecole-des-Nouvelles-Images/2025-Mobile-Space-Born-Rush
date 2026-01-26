@@ -34,12 +34,10 @@ The development process included **a preproduction (1 week), production (3 weeks
 
 ## Team
 This game was brought to life by **Space Mothers**:
-- **[Name 1]**: [Role and contributions]
-- **[Name 2]**: [Role and contributions]
-- **[Name 3]**: [Role and contributions]
-- **[Name 4]**: [Role and contributions]
-
-![Team](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/blob/main/MetaData/team-photo.png)
+- **Jourdan Loan**: Product owner, developer.
+- **Dupret Jerome**: Lead developer.
+- **Dubreuil Marion**: Lead artist.
+- **Manicas Maelys**: Artist.
 
 ---
 
@@ -68,9 +66,9 @@ When a horde of **Xar** invades the station’s corridors, the SpaceBorn are dep
 ---
 
 ## Release
-[Provide details about the platform, availability, and installation instructions. Mention if the game is available on PC, console, or mobile, and provide links to download or install.]
+This game is available on Android.
 
-This game supports **[platform requirements, e.g., Android 5.1+]**.
+This game supports **Android**.
 
 ---
 
@@ -83,9 +81,10 @@ If you encounter any bugs or have suggestions, please open an **[issue ticket](h
 
 ## Special Thanks
 We would like to thank:
-- **[Name 1]**: [Contribution, e.g., mentorship, inspiration]
-- **[Name 2]**: [Contribution]
-- **[Name 3]**: [Contribution]
+- **[Frédéric BAST](https://github.com/FBast)** : Developer Support.
+- **[Jerome CROS](https://fr.linkedin.com/in/crospro)** : Artist Support.
+- **[Yvan BLADET](https://github.com/PopoteProf)** : Developper and integration Support.
+- **[Tommy HA PHUOC](https://fr.linkedin.com/in/tommyhaphuoc/en)** : Game Design Support.
 
 ---
 
