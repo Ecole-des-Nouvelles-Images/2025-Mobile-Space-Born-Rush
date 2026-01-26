@@ -42,7 +42,13 @@ This game was brought to life by **Space Mothers**:
 ---
 
 ## Gameplay
-[Describe the core gameplay loop, mechanics, and objectives of the game. Include details like number of players, perspective, and unique gameplay features.]
+The game is a solo mobile **auto-runner / auto-shooter**, experienced from a third-person perspective. 
+
+The player controls a character defending a space station and must survive for as long as possible.
+
+The score increases based on time survived and the number of enemies defeated. After a short introductory phase allowing the player to get used to the controls and the HUD, waves of enemies and obstacles begin to appear. 
+
+The gameplay focuses on a balance between anticipation and quick reactions. The run ends when the player runs out of health, and the final score is compared on a global online leaderboard to determine the best **SpaceBorn** in the galaxy.
 
 ### Phase 1: [Phase Name]
 [Describe the first phase of gameplay, objectives, and player actions.]
