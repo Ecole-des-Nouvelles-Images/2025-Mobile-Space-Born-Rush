@@ -1,9 +1,9 @@
 
-# <b>Space Born Rush<b>
+# <b>SpaceBorn Rush<b>
 
 <img width="2048" height="2048" alt="IconSpace" src="https://github.com/user-attachments/assets/86f21666-b7af-42eb-bed2-918876b915b7" />
 
-[A brief and engaging tagline or description of the game]
+Survive the **swarm**, evolve your **power**, and become the **ultimate SpaceBorn**.
 
 [![Unity Version](https://img.shields.io/badge/Unity-2022.3.47-blue?style=flat&logo=unity)](https://unity.com/)
 [![GitHub Release](https://img.shields.io/github/v/release/Ecole-des-Nouvelles-Images/Unity-Template)](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/releases)
@@ -42,26 +42,27 @@ This game was brought to life by **Space Mothers**:
 ---
 
 ## Gameplay
-The game is a solo mobile **auto-runner / auto-shooter**, experienced from a third-person perspective. 
 
-The player controls a character defending a space station and must survive for as long as possible.
+The game is a **solo mobile auto-runner / auto-shooter**, experienced from a third-person perspective. The player controls a character defending a space station and must **survive** for as long as possible.
 
-The score increases based on time survived and the number of enemies defeated. After a short introductory phase allowing the player to get used to the controls and the HUD, waves of enemies and obstacles begin to appear. 
+The score increases based on **time survived and the number of enemies defeated**. After a short introductory phase allowing the player to get used to the controls and the HUD, waves of enemies and obstacles begin to appear. Defeated enemies drop **experience points**, allowing the player to **level up** during the run.
 
-The gameplay focuses on a balance between anticipation and quick reactions. The run ends when the player runs out of health, and the final score is compared on a global online leaderboard to determine the best **SpaceBorn** in the galaxy.
+Each level-up offers **roguelike** choices, such as upgrades, new abilities, or weapon changes, enabling the player to adapt their playstyle on the fly. 
 
-### Introductory phase
+The gameplay focuses on a balance between **anticipation and quick reactions**. The run ends when the player runs out of health, and the final score is compared on a global online **leaderboard** to determine the **best SpaceBorn in the galaxy**.
+
+### Introductory phase :
 
 <img width="605" height="960" alt="SBR_3" src="https://github.com/user-attachments/assets/fff2025c-5389-43ca-9022-88be449baeb9" />
 
-### In-game phase
+### In-game phase :
 
 <img width="599" height="797" alt="SBR_4" src="https://github.com/user-attachments/assets/ff34f33c-bd0b-4919-9469-1d2d90be0a79" />
 
-### Phase 2: [Phase Name]
-[Describe the second phase, any escalating challenges, and goals.]
+### Level-Up phase :
 
-![Gameplay Screenshot](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/blob/main/MetaData/gameplay-screenshot.png)
+
+<img width="602" height="811" alt="SBR_5" src="https://github.com/user-attachments/assets/3415ac6e-c06d-4e97-bed7-50dc44852ba0" />
 
 ---
 
