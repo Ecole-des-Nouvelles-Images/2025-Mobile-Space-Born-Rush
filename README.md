@@ -14,30 +14,40 @@ Survive the **swarm**, evolve your **power**, and become the **ultimate SpaceBor
 
 
 ## <h1 align="center">Table of Content</h1>
-1. [Introduction](#introduction)
-2. [Team](#team)
-3. [Gameplay](#gameplay)
-4. [Universe](#universe)
-5. [Release](#release)
-6. [Development](#development)
-7. [Special Thanks](#special-thanks)
-8. [Recommendations](#recommendations)
+
+<p align="center">
+1. <a href="#introduction">Introduction</a><br>
+2. <a href="#team">Team</a><br>
+3. <a href="#gameplay">Gameplay</a><br>
+4. <a href="#universe">Universe</a><br>
+5. <a href="#release">Release</a><br>
+6. <a href="#development">Development</a><br>
+7. <a href="#special-thanks">Special Thanks</a><br>
+8. <a href="#recommendations">Recommendations</a>
+</p>
 
 ---
 
 ## <h1 align="center">Introduction</h1>
-**SpaceBorn Rush** is a Auto-Runner/Auto-Shooter developed by **Space Mothers** during **5 weeks**.  
-This project was created as part of **a school project**.  
-The development process included **a preproduction (1 week), production (3 weeks) and a postproduction (1 weeks)**.
+<p align="center">
+<b>SpaceBorn Rush</b> is an Auto-Runner/Auto-Shooter developed by <b>Space Mothers</b> during <b>5 weeks</b>.<br>
+This project was created as part of <b>a school project</b>.<br>
+The development process included <b>preproduction (1 week), production (3 weeks) and postproduction (1 week)</b>.
+</p>
 
 ---
 
 ## <h1 align="center">Team</h1>
-This game was brought to life by **Space Mothers**:
-- **Jourdan Loan**: Product owner, developer.
-- **Dupret Jerome**: Lead developer.
-- **Dubreuil Marion**: Lead artist.
-- **Manicas Maelys**: Artist.
+<p align="center">
+This game was brought to life by <b>Space Mothers</b>:
+</p>
+
+<p align="center">
+<b>Jourdan Loan</b> — Product owner, developer.<br>
+<b>Dupret Jerome</b> — Lead developer.<br>
+<b>Dubreuil Marion</b> — Lead artist.<br>
+<b>Manicas Maelys</b> — Artist.
+</p>
 
 ---
 
@@ -87,28 +97,40 @@ When a horde of **Xar** invades the station’s corridors, the SpaceBorn are dep
 ---
 
 ## <h1 align="center">Release</h1>
+<p align="center">
 This game is available on Android.
+</p>
 
-This game supports **Android**.
+<p align="center">
+This game supports <b>Android</b>.
+</p>
 
 ---
 
 ## <h1 align="center">Development</h1>
-This project is currently **in developmen**. Future updates might include **Bug Fix and New Features**.  
-
-If you encounter any bugs or have suggestions, please open an **[issue ticket](https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/issues/new)**.
+<p align="center">
+This project is currently <b>in development</b>. Future updates might include <b>Bug Fix and New Features</b>.<br><br>
+If you encounter any bugs or have suggestions, please open an <b><a href="https://github.com/Ecole-des-Nouvelles-Images/Unity-Template/issues/new">issue ticket</a></b>.
+</p>
 
 ---
 
 ## <h1 align="center">Special Thanks</h1>
-We would like to thank:
-- **[Frédéric BAST](https://github.com/FBast)** : Developer Support.
-- **[Jerome CROS](https://fr.linkedin.com/in/crospro)** : Artist Support.
-- **[Yvan BLADET](https://github.com/PopoteProf)** : Developper and integration Support.
-- **[Tommy HA PHUOC](https://fr.linkedin.com/in/tommyhaphuoc/en)** : Game Design Support.
+<div align="center">
+We would like to thank:<br><br>
+
+ <b><a href="https://github.com/FBast">Frédéric BAST</a></b> — Developer Support.<br>
+ <b><a href="https://fr.linkedin.com/in/crospro">Jerome CROS</a></b> — Artist Support.<br>
+ <b><a href="https://github.com/PopoteProf">Yvan BLADET</a></b> — Developer and Integration Support.<br>
+ <b><a href="https://fr.linkedin.com/in/tommyhaphuoc/en">Tommy HA PHUOC</a></b> — Game Design Support.
+</div>
 
 ---
 
 ## <h1 align="center">Recommendations</h1>
-For the best experience, we recommend playing with **tablet**.  
+<p align="center">
+For the best experience, we recommend playing with <b>tablet</b>.<br>
 Read control before the first game.
+</p>
+
+---
