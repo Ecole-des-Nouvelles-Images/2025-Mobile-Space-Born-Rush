@@ -24,6 +24,7 @@ public class WeaponManager : MonoBehaviour
         {
             _swapWeaponIndex = (int)value;
             SwapWeapon(AllWeaponPrefabs[_swapWeaponIndex]);
+            EventBus.OnWeaponSwap.Invoke();
         }
     }
 

@@ -51,6 +51,7 @@ public static class EventBus
     public static Action<UpgradeData> OnUpgradeApplied;
     public static Action<UpgradeType, float> OnStatUpgrade;
     public static Action<UpgradeType, float> OnWeaponUpgrade;
+    public static Action OnWeaponSwap;
     public static Action<UpgradeType, float> OnGameSystemUpgrade;
 
     // ===== COMBAT EVENTS =====

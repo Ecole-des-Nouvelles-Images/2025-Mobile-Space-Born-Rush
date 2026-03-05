@@ -7,6 +7,7 @@ public class MagazineDisplay : MonoBehaviour
     [SerializeField] private Image _magImgL;
     [SerializeField] private Image _magImgR;
     [SerializeField] private WeaponHandler _weaponManager;
+    [SerializeField] private GameObject _player;
 
     private float _fillLevel;
     
@@ -14,17 +15,26 @@ public class MagazineDisplay : MonoBehaviour
     private void OnEnable()
     {
         EventBus.OnPlayerSpawn += OnPlayerSpawn;
+        EventBus.OnWeaponSwap += SwapWeapon;
     }
 
     private void OnPlayerSpawn()
     {
         if (!_weaponManager)
             _weaponManager = FindAnyObjectByType<WeaponHandler>();
+        
+        _player = FindObjectOfType<PlayerController>().gameObject;
+    }
+
+    private void SwapWeapon()
+    {
+        _weaponManager = _player.GetComponentInChildren<WeaponHandler>();
     }
 
     private void OnDisable()
     {
         EventBus.OnPlayerSpawn -= OnPlayerSpawn;
+        EventBus.OnWeaponSwap -= SwapWeapon;
     }
     
     // Update is called once per frame
