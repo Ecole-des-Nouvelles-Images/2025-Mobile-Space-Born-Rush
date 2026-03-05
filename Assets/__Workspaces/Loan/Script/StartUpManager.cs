@@ -10,6 +10,7 @@ public class StartUpManager : MonoBehaviour
     [SerializeField] private Transform _parentTransform;
     [SerializeField] private Transform _parentModulTransform;
     [SerializeField] private GameObject _fogPrefab;
+    [SerializeField] private GameObject _blackFloor;
 
     private void OnEnable()
     {
@@ -52,5 +53,6 @@ public class StartUpManager : MonoBehaviour
         }
         
         _fogPrefab.gameObject.SetActive(true);
+        _blackFloor.gameObject.SetActive(true);
     }
 }

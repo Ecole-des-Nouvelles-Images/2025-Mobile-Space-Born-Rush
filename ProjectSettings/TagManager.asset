@@ -9,6 +9,7 @@ TagManager:
   - Parents
   - Drop
   - ParentsModul
+  - DropText
   layers:
   - Default
   - TransparentFX
