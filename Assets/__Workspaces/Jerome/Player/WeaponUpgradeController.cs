@@ -8,6 +8,9 @@ public class WeaponUpgradeController : MonoBehaviour
     #region subscriptions
     private void OnEnable()
     {
+        // Game Events
+        EventBus.OnGameStart += ResetUpgrades;
+        
         // Player Specific Events
         EventBus.OnPlayerChooseAnItem += OnPlayerChooseAnItem;
         
@@ -51,6 +54,9 @@ public class WeaponUpgradeController : MonoBehaviour
     }
     private void OnDisable()
     {
+        // Game Events
+        EventBus.OnGameStart += ResetUpgrades;
+        
         // Player Specific Events
         EventBus.OnPlayerChooseAnItem -= OnPlayerChooseAnItem;
         
