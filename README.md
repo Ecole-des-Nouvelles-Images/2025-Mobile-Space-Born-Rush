@@ -49,6 +49,8 @@ This game was brought to life by <b>Space Mothers</b>:
 <a >Dubreuil Marion</a> — Lead artist.<br>
 <a >Manicas Maelys</a> — Artist.
 </p>
+
+
 ---
 
 ## <h1 align="center">Gameplay</h1>
