@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class DropsMovement : MonoBehaviour
@@ -9,6 +10,8 @@ public class DropsMovement : MonoBehaviour
     private PlayerController _playerController;
     private Coroutine _magnetCoroutine = null;
     private bool _magnetized = false;
+    
+    private TextMeshProUGUI _textMesh;
 
     private readonly float _width = 5;
     
@@ -52,6 +55,7 @@ public class DropsMovement : MonoBehaviour
     {
         _gameUpgradeController = FindAnyObjectByType<GameUpgradeController>();
         _playerController = FindAnyObjectByType<PlayerController>();
+        _textMesh = GameObject.FindWithTag("DropText").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -80,6 +84,13 @@ public class DropsMovement : MonoBehaviour
             if (DropData)
             {
                 DropData.ApplyEffect();
+                if (DropData.Type != DropType.XP)
+                {
+                    _textMesh.text = DropData.Type.ToString();
+                    _textMesh.transform.localScale = Vector3.zero;
+                    _textMesh.gameObject.GetComponent<DropTextHandler>().IsTakeDrops =  true;
+                }
+                
             }
             
             Destroy(gameObject);

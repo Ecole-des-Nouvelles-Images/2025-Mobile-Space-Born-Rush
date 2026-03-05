@@ -9,6 +9,7 @@ public class GameDirector : MonoBehaviour
     //I would say that the director should periodically increase the speed by a little at a time.
     private Timer _speedIncrementTimer;
     [SerializeField] private GameObject _fogPrefab;
+    [SerializeField]private GameObject _blackFloor;
     
     [Header("In ms 1000ms = 1s")]
     [SerializeField] private int _speedIncrementTime = 30000;
@@ -83,6 +84,7 @@ public class GameDirector : MonoBehaviour
         _difficultyDamage = 0;
         
         _fogPrefab.gameObject.SetActive(false);
+        _blackFloor.gameObject.SetActive(false);
     }
 
     private void OnPlayerLevelUp(List<UpgradeData> obj)

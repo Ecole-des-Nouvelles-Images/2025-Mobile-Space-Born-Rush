@@ -8,12 +8,16 @@ public class ScoringManager : MonoBehaviour
     
     private float _score;
     private bool _isGamePaused = true;
+    private bool _isLooseScore = false;
+    private float _timeForBaseColor;
     [SerializeField] private int _killsNumber = 0;
     [SerializeField] private float _timer = 0;
+    [SerializeField] private Color _baseTextColor;
     [Header("=====Text Settings=====")]
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _killsText;
+    [SerializeField] private TextMeshProUGUI _scoreInGameText;
 
     #region subscriptions
     private void Awake()
@@ -119,10 +123,22 @@ public class ScoringManager : MonoBehaviour
         _timer += Time.deltaTime;
         
         _score += _gameUpgrades.GameSpeed *  Time.deltaTime;
+
+        if (_isLooseScore && _timeForBaseColor <= 0)
+        {
+            _scoreInGameText.color = _baseTextColor;
+        }
+        else if (_isLooseScore)
+        {
+            _timeForBaseColor -= Time.deltaTime;
+        }
     }
 
     private void DecreaseScore(float value)
     {
+        _scoreInGameText.color = Color.crimson;
+       _isLooseScore = true;
+       _timeForBaseColor = 1f;
         _score -= value;
         _score = Mathf.Clamp(_score, 0, int.MaxValue);
         //Do something to make it look pretty when the player looses points
