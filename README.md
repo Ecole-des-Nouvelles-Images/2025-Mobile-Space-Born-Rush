@@ -43,12 +43,11 @@ This game was brought to life by <b>Space Mothers</b>:
 </p>
 
 <p align="center">
-<b>Jourdan Loan</b> — Product owner, developer.<br>
-<b>Dupret Jerome</b> — Lead developer.<br>
-<b>Dubreuil Marion</b> — Lead artist.<br>
-<b>Manicas Maelys</b> — Artist.
+<a href="https://github.com/Ritail">Jourdan Loan</a> — Product owner, developer.<br>
+<a href="https://github.com/jdupretENSI>Dupret Jerome">Dupret Jerome</a> — Lead developer.<br>
+<a >Dubreuil Marion</a> — Lead artist.<br>
+<a >Manicas Maelys</a> — Artist.
 </p>
-
 ---
 
 ## <h1 align="center">Gameplay</h1>
