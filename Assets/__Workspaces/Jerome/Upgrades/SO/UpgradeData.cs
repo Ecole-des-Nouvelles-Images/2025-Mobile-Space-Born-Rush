@@ -18,7 +18,7 @@ public class UpgradeData : ScriptableObject
     
     [Header("Generation Settings")]
     public int maxTimesSelectable; // 0 = infinite
-    public bool isExclusive = false; // If true, cannot appear with other exclusive upgrades
+    //public bool isExclusive = false; // If true, cannot appear with other exclusive upgrades
 }
 
 /// <summary>

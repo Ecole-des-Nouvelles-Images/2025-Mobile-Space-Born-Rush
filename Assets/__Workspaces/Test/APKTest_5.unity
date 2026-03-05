@@ -9112,8 +9112,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2fff17cf7faa83e4995d8dce34e77721, type: 2}
   - {fileID: 11400000, guid: 3ff65f925ce154d4b919589ee340b06d, type: 2}
   _weaponWeight: 0.5
-  _playerStatWeight: 0.4
-  _gameSystemWeight: 0.1
+  _playerStatWeight: 0.5
+  _gameSystemWeight: 0.2
   _availableUpgrades: []
 --- !u!4 &1322794752
 Transform:
