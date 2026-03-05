@@ -1,5 +1,5 @@
 
-# <b>SpaceBorn Rush<b>
+<h1 align="center"> <b> SpaceBorn Rush </b></h1>
 
 <img width="3840" height="2160" alt="SpaceBorneIllustration" src="https://github.com/user-attachments/assets/1a3f58ad-3c78-4924-8bd8-dedf42fb7978" />
 
