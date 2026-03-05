@@ -35,6 +35,9 @@ public class WeaponHandler : MonoBehaviour
     private bool _sawPlayer;
     private bool _isCharging;
 
+    public int AmmoNumber => _ammoNumber;
+    public WeaponData CurrentWeapon => _currentWeapon;
+    
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
