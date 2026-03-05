@@ -9248,7 +9248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1279958934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11700,6 +11700,7 @@ MonoBehaviour:
   _magImgL: {fileID: 1953858160}
   _magImgR: {fileID: 836595007}
   _weaponManager: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &1521770772
 GameObject:
   m_ObjectHideFlags: 0
