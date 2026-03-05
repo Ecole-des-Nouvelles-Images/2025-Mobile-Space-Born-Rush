@@ -7,6 +7,7 @@ public class WeaponData : ScriptableObject
     public BulletData BulletData; 
     public string Name;
     public float Cooldown;
+    public float OverHeat;
     public float FireRate;
     public float FireDistance;
     public int MagSize;

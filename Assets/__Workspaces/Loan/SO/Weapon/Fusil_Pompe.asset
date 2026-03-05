@@ -16,6 +16,7 @@ MonoBehaviour:
   BulletData: {fileID: 11400000, guid: ad45df66ecdb327409dc7322a939cd7e, type: 2}
   Name: KX-90
   Cooldown: 3
+  OverHeat: 6
   FireRate: 0.5
   FireDistance: 15
   MagSize: 4

@@ -1435,11 +1435,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _weapons: {fileID: 3214190765050956200}
-  _RHand: {fileID: 6175874291718660807}
-  _LHand: {fileID: 5122565605183875508}
+  _rHand: {fileID: 6175874291718660807}
+  _lHand: {fileID: 5122565605183875508}
   _pixelDistToDetect: 20
   _colliderSize: 2
-  JumpForce: {x: 0, y: 4.5, z: 0}
+  _jumpForce: {x: 0, y: 4.5, z: 0}
   _isJumping: 0
   _isSliding: 0
   _isPaused: 0
