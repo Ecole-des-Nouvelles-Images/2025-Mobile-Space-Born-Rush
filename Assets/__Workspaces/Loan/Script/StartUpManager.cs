@@ -9,6 +9,7 @@ public class StartUpManager : MonoBehaviour
     [SerializeField] private GameObject _playerPrefb;
     [SerializeField] private Transform _parentTransform;
     [SerializeField] private Transform _parentModulTransform;
+    [SerializeField] private GameObject _fogPrefab;
 
     private void OnEnable()
     {
@@ -49,5 +50,7 @@ public class StartUpManager : MonoBehaviour
             modul.GetComponent<ModulMove>().isObstacle = false;
             pos += 19.5f;
         }
+        
+        _fogPrefab.gameObject.SetActive(true);
     }
 }

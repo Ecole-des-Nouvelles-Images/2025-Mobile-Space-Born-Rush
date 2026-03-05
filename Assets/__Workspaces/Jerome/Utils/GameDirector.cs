@@ -8,6 +8,7 @@ public class GameDirector : MonoBehaviour
     //The game director should handle the logic for the game to become harder and harder as the player is playing.
     //I would say that the director should periodically increase the speed by a little at a time.
     private Timer _speedIncrementTimer;
+    [SerializeField] private GameObject _fogPrefab;
     
     [Header("In ms 1000ms = 1s")]
     [SerializeField] private int _speedIncrementTime = 30000;
@@ -80,6 +81,8 @@ public class GameDirector : MonoBehaviour
         //Reset the health and difficulty
         _difficultyHealth = 0;
         _difficultyDamage = 0;
+        
+        _fogPrefab.gameObject.SetActive(false);
     }
 
     private void OnPlayerLevelUp(List<UpgradeData> obj)
