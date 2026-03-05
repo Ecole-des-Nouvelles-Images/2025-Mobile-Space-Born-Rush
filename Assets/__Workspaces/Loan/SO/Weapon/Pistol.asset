@@ -16,6 +16,7 @@ MonoBehaviour:
   BulletData: {fileID: 11400000, guid: cd6d815224a67ff4e940e90e8b893a76, type: 2}
   Name: VX-9
   Cooldown: 2
+  OverHeat: 4
   FireRate: 0.4
   FireDistance: 20
   MagSize: 6

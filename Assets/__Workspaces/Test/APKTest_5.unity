@@ -1083,6 +1083,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163601783}
   m_CullTransparentMesh: 1
+--- !u!1 &163852535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7517543827395626291, guid: feb8b16e304b2dc47895630c260d91ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 2024423358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &174991752
 GameObject:
   m_ObjectHideFlags: 0
@@ -10201,6 +10207,7 @@ MonoBehaviour:
     type: 3}
   _parentTransform: {fileID: 721820564}
   _parentModulTransform: {fileID: 0}
+  _fogPrefab: {fileID: 163852535}
 --- !u!82 &1419666216
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11143,6 +11150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daedd53f219d4b04ba24066d513021f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDirector
+  _fogPrefab: {fileID: 163852535}
   _speedIncrementTime: 15000
   _speedIncrement: 0.5
   _difficultyIncrement: 60000

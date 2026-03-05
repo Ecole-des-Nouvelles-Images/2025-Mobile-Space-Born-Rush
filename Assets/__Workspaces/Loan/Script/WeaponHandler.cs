@@ -270,8 +270,7 @@ public class WeaponHandler : MonoBehaviour
     private void Overheat()
     {
         // If its positive then the weapon is Overheating
-        _overheatCooldown = (_currentWeapon.FireRate - _weaponUpgrades.FireRate) *
-                            (_currentWeapon.MagSize + _weaponUpgrades.MagSize);
+        _overheatCooldown = _currentWeapon.OverHeat;
         _isOverheating = true;
         _toRougeValue = 1;
         _material.SetFloat("_ToRouge", _toRougeValue);
