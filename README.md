@@ -1,7 +1,8 @@
 
 # <b>SpaceBorn Rush<b>
 
-<img width="2048" height="2048" alt="IconSpace" src="https://github.com/user-attachments/assets/86f21666-b7af-42eb-bed2-918876b915b7" />
+<img width="3840" height="2160" alt="SpaceBorneIllustration" src="https://github.com/user-attachments/assets/1a3f58ad-3c78-4924-8bd8-dedf42fb7978" />
+
 
 Survive the **swarm**, evolve your **power**, and become the **ultimate SpaceBorn**.
 
