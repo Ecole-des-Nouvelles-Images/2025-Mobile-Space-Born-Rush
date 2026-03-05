@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
     // Drag all weapon data assets here
     public List<GameObject> AllWeaponPrefabs;
 
-    private void Awake()
+    private void OnEnable()
     {
         EventBus.OnWeaponUpgrade += OnWeaponUpgrade;
         EventBus.OnGameStart += OnGameStart;
