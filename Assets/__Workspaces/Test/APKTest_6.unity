@@ -11608,9 +11608,9 @@ GameObject:
   - component: {fileID: 1511302799}
   - component: {fileID: 1511302798}
   - component: {fileID: 1511302804}
+  - component: {fileID: 1511302811}
   - component: {fileID: 1511302809}
   - component: {fileID: 1511302810}
-  - component: {fileID: 1511302805}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -11739,22 +11739,6 @@ MonoBehaviour:
   _gameUpgrades: {fileID: 186121869}
   _audio1Source: {fileID: 1511302809}
   _audio2Source: {fileID: 1511302810}
---- !u!114 &1511302805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511302797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c979e12a26d9f7349b276220ba125201, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Leaderboard
-  _scorePrefab: {fileID: 4498731284999072131, guid: 4dcb900c59937674dbeb1a2895dbd263,
-    type: 3}
-  _scoreParent: {fileID: 0}
-  _leaderboardInternalName: space-born-rush
 --- !u!82 &1511302809
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11951,6 +11935,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1511302811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511302797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c555de66dab74b9421b790d15dc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MagazineDisplay
+  _magImgL: {fileID: 582112330}
+  _magImgR: {fileID: 1066122634}
+  _weaponManager: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &1521770772
 GameObject:
   m_ObjectHideFlags: 0
