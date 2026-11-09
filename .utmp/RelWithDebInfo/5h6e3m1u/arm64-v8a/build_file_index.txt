@@ -1,0 +1,2 @@
+C:\Users\j.dupret\GitRepos\2025-Mobile-Space-Born-Rush\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\j.dupret\GitRepos\2025-Mobile-Space-Born-Rush\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
