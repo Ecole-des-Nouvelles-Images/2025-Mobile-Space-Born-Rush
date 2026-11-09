@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Dead : BaseState
 {
     private bool _first;

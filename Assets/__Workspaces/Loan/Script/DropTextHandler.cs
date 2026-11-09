@@ -1,7 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Accessibility;
 using UnityEngine.Serialization;
 
 public class DropTextHandler : MonoBehaviour

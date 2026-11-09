@@ -458,7 +458,7 @@ MonoBehaviour:
   panel1Duration: 3
   fadeOutDuration: 0.5
   afterLoadedDelay: 5
-  gameSceneName: APKTest_5
+  gameSceneName: APKTest_6
 --- !u!4 &795420847
 Transform:
   m_ObjectHideFlags: 0

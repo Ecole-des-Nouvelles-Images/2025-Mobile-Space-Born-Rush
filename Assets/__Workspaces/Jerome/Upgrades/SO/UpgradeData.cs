@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Components;
 
 [CreateAssetMenu(fileName = "UpgradeData", menuName = "Scriptable Objects/UpgradeData")]
 public class UpgradeData : ScriptableObject
