@@ -428,7 +428,7 @@ public class UIHandler : MonoBehaviour
         _creditButton.gameObject.SetActive(true);
         _gamePanel.SetActive(true);
         _homeButton.SetActive(true);
-        _scoreButton.SetActive(true);
+        // _scoreButton.SetActive(true);
         _settingsButton.SetActive(true);
     }
 

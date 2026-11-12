@@ -71,16 +71,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3296491462545408
-    m_Localized: "Augmenter le nombre de choix propos\xE9s lors du passage au niveau
-      sup\xE9rieur"
+    m_Localized: Augmenter le nombre de choix proposes lors du passage au niveau
+      superieur.
     m_Metadata:
       m_Items: []
   - m_Id: 6189454010175488
-    m_Localized: "R\xE9duit le temps de recharge actuel des armes."
+    m_Localized: Reduire le temps de recharge actuel des armes.
     m_Metadata:
       m_Items: []
   - m_Id: 6189571710734336
-    m_Localized: "Augmente les d\xE9g\xE2ts inflig\xE9s par les armes actuelles."
+    m_Localized: Augmenter les degats infliges par les armes actuelles.
     m_Metadata:
       m_Items: []
   - m_Id: 6189685867106304
@@ -88,16 +88,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6189781467877376
-    m_Localized: "Augmente la sant\xE9 maximale"
+    m_Localized: Augmente la sante maximale
     m_Metadata:
       m_Items: []
   - m_Id: 6189855606394880
-    m_Localized: "Augmente la quantit\xE9 de sant\xE9 r\xE9cup\xE9r\xE9e dans le
-      Medikit"
+    m_Localized: Augmenter la quantite de sante recuperee dans le Medikit.
     m_Metadata:
       m_Items: []
   - m_Id: 6190160553267200
-    m_Localized: "Augmente la capacit\xE9 actuelle du chargeur des armes."
+    m_Localized: Augmente la capacite actuelle du chargeur des armes.
     m_Metadata:
       m_Items: []
   - m_Id: 6190234297520128
@@ -109,7 +108,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6190414803587072
-    m_Localized: "Passer au fusil \xE0 pompe"
+    m_Localized: Passer au fusil a pompe
     m_Metadata:
       m_Items: []
   - m_Id: 6190477009309696
@@ -117,7 +116,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6190574036144128
-    m_Localized: "Augmente la quantit\xE9 d'XP gagn\xE9e gr\xE2ce aux butins."
+    m_Localized: Augmente la quantite d'XP gagnee grace aux butins.
     m_Metadata:
       m_Items: []
   - m_Id: 6192225488818176
@@ -165,21 +164,21 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 16270326792163328
-    m_Localized: Glissez votre doigt vers la droite ou vers la gauche pour changer
+    m_Localized: Utilisez le Joystick vers la droite ou vers la gauche pour changer
       de voie dans la direction correspondante.
     m_Metadata:
       m_Items: []
   - m_Id: 16271517118861312
-    m_Localized: Glissez vers le haut pour faire sauter le joueur.
+    m_Localized: Utilisez le Joystick vers le haut pour faire sauter le joueur.
     m_Metadata:
       m_Items: []
   - m_Id: 16271590938611712
-    m_Localized: Glissez vers le bas pour faire une glissade.
+    m_Localized: Utilisez le Joystick vers le bas pour effectuer une glissade.
     m_Metadata:
       m_Items: []
   - m_Id: 16272120045867008
-    m_Localized: "Le joueur ne peut tirer sur un ennemi que s\u2019il se trouve sur
-      la meme lane que lui."
+    m_Localized: Le joueur ne peut tirer sur un ennemi que s'il se trouve sur la
+      meme voie que lui.
     m_Metadata:
       m_Items: []
   references:

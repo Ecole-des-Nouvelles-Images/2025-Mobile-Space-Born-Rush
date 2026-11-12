@@ -163,19 +163,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 16270326792163328
-    m_Localized: Swipe left or right to change lanes in the corresponding direction.
+    m_Localized: Use the Joystick to move right or left to change lanes in the corresponding
+      direction.
     m_Metadata:
       m_Items: []
   - m_Id: 16271517118861312
-    m_Localized: Swipe up to make the player jump.
+    m_Localized: Move the Joystick upwards to make the player jump.
     m_Metadata:
       m_Items: []
   - m_Id: 16271590938611712
-    m_Localized: Swipe down to perform a slide.
+    m_Localized: Move the Joystick downwards to slide.
     m_Metadata:
       m_Items: []
   - m_Id: 16272120045867008
-    m_Localized: The player can only shoot an enemy if they are on the same lane.
+    m_Localized: The player can only shoot an enemy if they are in the same lane.
     m_Metadata:
       m_Items: []
   references:
