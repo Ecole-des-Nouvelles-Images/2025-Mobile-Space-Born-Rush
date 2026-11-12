@@ -39,6 +39,7 @@ public class MagazineDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_weaponManager) return;
         _fillLevel = (float)_weaponManager.AmmoNumber / (float)_weaponManager.CurrentWeapon.MagSize;
         _magImgL.fillAmount = _fillLevel;
         _magImgR.fillAmount = _fillLevel;
