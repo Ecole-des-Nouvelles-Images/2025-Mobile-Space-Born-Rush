@@ -8934,12 +8934,12 @@ PrefabInstance:
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 424.058
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 509.056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
@@ -10588,8 +10588,8 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
@@ -10727,6 +10727,7 @@ MonoBehaviour:
   _usernamePanel: {fileID: 395153299}
   _creditPanel: {fileID: 212284478}
   _controlPanel: {fileID: 6145919}
+  _buttonParent: {fileID: 1397064878}
   _homeButton: {fileID: 1580955189}
   _settingsButton: {fileID: 1566587584}
   _scoreButton: {fileID: 550615175}
@@ -12351,12 +12352,12 @@ PrefabInstance:
     - target: {fileID: 5360869338603654240, guid: 26d8e83647344c846895ce725da8ec0b,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 424.947
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5360869338603654240, guid: 26d8e83647344c846895ce725da8ec0b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 509.056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5360869338603654240, guid: 26d8e83647344c846895ce725da8ec0b,
         type: 3}
@@ -13684,12 +13685,12 @@ PrefabInstance:
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 455.921
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 509.056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}

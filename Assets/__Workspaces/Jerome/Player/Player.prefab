@@ -1323,6 +1323,8 @@ GameObject:
   - component: {fileID: 4498173590869987264}
   - component: {fileID: 7559411096785005927}
   - component: {fileID: 1475871512479900498}
+  - component: {fileID: 3859308144933373382}
+  - component: {fileID: -5270316806214573087}
   - component: {fileID: 1754991802409784007}
   - component: {fileID: 4081656093127455202}
   - component: {fileID: 1865395771722191811}
@@ -1454,6 +1456,36 @@ MonoBehaviour:
   _lvlUpSound: {fileID: 8300000, guid: 9855cc3fc9b35ca4e96908d4a0aa422c, type: 3}
   _choiceSound: {fileID: 8300000, guid: 2cda7d8a2c6526b42bd896ee00405da4, type: 3}
   _xpParticles: {fileID: 4178782702901320209}
+--- !u!114 &3859308144933373382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3609376473359106754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a714777a9b4a443bc7e33830a400f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGamepadInput
+  _playerController: {fileID: 1475871512479900498}
+  _inputActions: {fileID: -944628639613478452, guid: 2761507a0e6068d47845f1120b791cc5,
+    type: 3}
+--- !u!114 &-5270316806214573087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3609376473359106754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581ed743cf56d354ca61540321689d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TouchSwipeInput
+  _playerController: {fileID: 1475871512479900498}
+  _inputActions: {fileID: -944628639613478452, guid: fcb2351920faaf2408dfa31a223580c0,
+    type: 3}
 --- !u!114 &1754991802409784007
 MonoBehaviour:
   m_ObjectHideFlags: 0
