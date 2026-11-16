@@ -34,6 +34,14 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     [SerializeField] private BoxCollider _collider;
     [SerializeField] private Rigidbody _rbHips;
     [SerializeField] private float _impulseForce;
+    [Tooltip("Layers the ragdoll lies on (corridor floor).")]
+    [SerializeField] private LayerMask _floorMask = 1 << 7; // Modul
+    private Rigidbody[] _ragdollBodies;
+    private Collider[] _ragdollColliders;
+
+    [Header("<color=red>=====Death FX=====</color>")]
+    [Tooltip("Blood pool spawned on the floor where the enemy dies.")]
+    [SerializeField] private BloodDecal _bloodDecalPrefab;
     
     [Header("<color=orange>======Audio Settings=====</color>")]
     [SerializeField] private AudioSource _audioSource;
@@ -104,9 +112,60 @@ public class EnemyHandler : MonoBehaviour, IDamageable
             Animator = GetComponent<Animator>();
         }
 
-       
+
         transform.eulerAngles = new Vector3(0, 180, 0);
-        
+
+        CacheRagdoll();
+        // Alive: the animation drives the bones. Dynamic bones (the old setup) fought the Animator and
+        // stored garbage velocity that was released at death, throwing limbs through the floor.
+        SetRagdollActive(false);
+    }
+
+    private void CacheRagdoll()
+    {
+        var bodies = new System.Collections.Generic.List<Rigidbody>();
+        foreach (var body in GetComponentsInChildren<Rigidbody>(true))
+            if (body.gameObject != gameObject) bodies.Add(body);
+        _ragdollBodies = bodies.ToArray();
+
+        var colliders = new System.Collections.Generic.List<Collider>();
+        foreach (var body in _ragdollBodies)
+            colliders.AddRange(body.GetComponents<Collider>());
+        _ragdollColliders = colliders.ToArray();
+
+        // The bones sit inside the root hit box: never let them push it (or be pushed by it).
+        if (_collider)
+            foreach (var col in _ragdollColliders)
+                Physics.IgnoreCollision(_collider, col, true);
+    }
+
+    private void SetRagdollActive(bool active)
+    {
+        if (_ragdollBodies == null) return;
+        foreach (var body in _ragdollBodies)
+        {
+            if (active)
+            {
+                body.isKinematic = false;
+                body.linearVelocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
+                body.interpolation = RigidbodyInterpolation.Interpolate;
+                // Full CCD against the thin floor; fast but bounded push-out if a limb still overlaps.
+                body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                body.maxDepenetrationVelocity = 6f;
+                body.solverIterations = 12;
+            }
+            else
+            {
+                body.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; // required before kinematic
+                body.isKinematic = true;
+            }
+        }
+
+        // Feet colliders were disabled: the feet sank into the floor. Every bone collides once dead.
+        if (active)
+            foreach (var col in _ragdollColliders)
+                col.enabled = true;
     }
 
     private void FixedUpdate()
@@ -153,14 +212,81 @@ public class EnemyHandler : MonoBehaviour, IDamageable
 
     protected void Death(GameObject gameObject)
     {
-        if (Animator)
+        if (Animator) Animator.enabled = false;
+        if (_collider) _collider.enabled = false;
+
+        // The root body kept its last (knockback) velocity and, without collider, dragged the whole
+        // ragdoll with it. Freeze it: the ragdoll bones do the physics from now on.
+        if (Rb)
         {
-            Animator.enabled = false;
-            _collider.enabled = false;
+            Rb.linearVelocity = Vector3.zero;
+            Rb.angularVelocity = Vector3.zero;
+            Rb.isKinematic = true;
         }
+
+        // Always have a floor: if the ray misses (module without the "Modul" layer, gap...), use the
+        // enemy's own feet height, so the safety floor and the blood pool are never skipped.
+        bool hasFloor = TryFindFloor(out RaycastHit floorHit);
+        Vector3 floorPoint = hasFloor ? floorHit.point : transform.position;
+        Vector3 floorNormal = hasFloor ? floorHit.normal : Vector3.up;
+        AddRagdollSafetyFloor(floorPoint.y);
+
+        SetRagdollActive(true);
+
         _audioSource.PlayOneShot(_audioClipDeath);
-        Vector3 impulse = new Vector3(0f, 0f, 10f);
-        _rbHips.AddForce(impulse * _impulseForce, ForceMode.Impulse);
+        // Mostly backward, slightly up: a pure horizontal push used to drive the hips into the floor.
+        Vector3 impulse = new Vector3(0f, 2f, 10f);
+        if (_rbHips) _rbHips.AddForce(impulse * _impulseForce, ForceMode.Impulse);
+
+        SpawnBloodDecal(floorPoint, floorNormal);
+    }
+
+    private bool TryFindFloor(out RaycastHit hit)
+    {
+        Vector3 origin = transform.position + Vector3.up * 1.5f;
+        if (Physics.Raycast(origin, Vector3.down, out hit, 4f, _floorMask, QueryTriggerInteraction.Ignore))
+            return true;
+
+        // Fallback: anything solid that is not a character / pickup.
+        int notCharacters = ~LayerMask.GetMask("Enemy", "Player", "Drop", "Ignore Raycast", "UI");
+        foreach (var h in Physics.RaycastAll(origin, Vector3.down, 4f, notCharacters, QueryTriggerInteraction.Ignore))
+        {
+            if (h.collider.transform.IsChildOf(transform)) continue;
+            hit = h;
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// The corridor lane colliders are only 5 cm thick and are moved every frame: falling limbs could
+    /// tunnel through. A thick box just under the floor surface (2 cm lower, so the player never touches
+    /// it) catches them. It is a child of the enemy, so it moves with the module and dies with the enemy.
+    /// </summary>
+    private void AddRagdollSafetyFloor(float floorY)
+    {
+        var floor = new GameObject("RagdollSafetyFloor");
+        floor.layer = gameObject.layer;
+        floor.transform.SetParent(transform, false);
+
+        const float thickness = 1f;
+        const float under = 0.02f;
+        // Shifted backward (+z, away from the player): the death impulse throws the body that way.
+        Vector3 worldCenter = new Vector3(transform.position.x, floorY - under - thickness * 0.5f, transform.position.z + 1.5f);
+        floor.transform.position = worldCenter;
+        floor.transform.rotation = Quaternion.identity;
+
+        var box = floor.AddComponent<BoxCollider>();
+        Vector3 scale = floor.transform.lossyScale;
+        box.size = new Vector3(4f / scale.x, thickness / scale.y, 6f / scale.z); // covers the body thrown backward
+    }
+
+    private void SpawnBloodDecal(Vector3 point, Vector3 normal)
+    {
+        if (_bloodDecalPrefab == null) return;
+        // Parented to the module (not the enemy) so the pool stays on the floor and scrolls with it.
+        var decal = Instantiate(_bloodDecalPrefab, transform.parent);
+        decal.Place(point, normal);
     }
     
     public void ApplyKnockback(Vector3 force)

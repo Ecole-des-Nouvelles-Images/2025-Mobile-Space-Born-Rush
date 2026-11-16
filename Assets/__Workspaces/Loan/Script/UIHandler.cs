@@ -31,6 +31,7 @@ public class UIHandler : MonoBehaviour
     [Header("=====Username Panel Components=====")]
     [SerializeField] private TMP_InputField _usernameInputField;
     [SerializeField] private Button _usernameSubmitButton;
+    [SerializeField] private Button _usernameOfflineButton;
     [SerializeField] private TMP_Text _usernameStatusText;
 
     [Header("=====Game Settings=====")]
@@ -57,20 +58,39 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
 
+    /// <summary>Max time the menu waits for the Talo auto-login before showing up anyway.</summary>
+    private const float AutoLoginTimeout = 5f;
+
     private IEnumerator Start()
     {
+        ApplySavedVolumes();
         yield return null;
-        yield return StartCoroutine(CheckInternetConnection());
 
-        if (_hasInternetConnection && _leaderboardManager != null)
-            yield return StartCoroutine(AwaitTask(_leaderboardManager.TryAutoLogin()));
+        // BlackNut has no online account: show the menu right away instead of waiting for Talo.
+        if (!_blackNut)
+        {
+            yield return StartCoroutine(CheckInternetConnection());
+
+            if (_hasInternetConnection && _leaderboardManager != null)
+                yield return StartCoroutine(AwaitTask(_leaderboardManager.TryAutoLogin(), AutoLoginTimeout));
+        }
 
         InitializeUI();
     }
 
-    private IEnumerator AwaitTask(Task task)
+    private IEnumerator AwaitTask(Task task, float timeout)
     {
-        while (!task.IsCompleted) yield return null;
+        float end = Time.realtimeSinceStartup + timeout;
+        while (!task.IsCompleted)
+        {
+            // A slow / stuck server must never leave the player without a menu.
+            if (Time.realtimeSinceStartup > end)
+            {
+                Debug.LogWarning("[UIHandler] Auto-login timed out, opening the menu anyway.");
+                yield break;
+            }
+            yield return null;
+        }
         if (task.IsFaulted) Debug.LogException(task.Exception);
     }
 
@@ -80,17 +100,32 @@ public class UIHandler : MonoBehaviour
         Talo.OnConnectionRestored += HandleConnectionRestored;
     }
 
-    private void OnDestroy()
+    // Unsubscribe in OnDisable (not OnDestroy): a disable/enable cycle would otherwise subscribe twice.
+    private void OnDisable()
     {
         EventBus.OnPlayerDead -= GameLose;
         Talo.OnConnectionRestored -= HandleConnectionRestored;
+    }
 
+    private void OnDestroy()
+    {
         if (_usernameSubmitButton != null)
             _usernameSubmitButton.onClick.RemoveAllListeners();
+
+        if (_usernameOfflineButton != null)
+            _usernameOfflineButton.onClick.RemoveAllListeners();
 
         if (_usernameInputField != null)
             _usernameInputField.onSubmit.RemoveAllListeners();
     }
+
+    // Volumes / language are in PlayerPrefs: make sure they reach the disk even if the app is killed.
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused) PlayerPrefs.Save();
+    }
+
+    private void OnApplicationQuit() => PlayerPrefs.Save();
 
     private void Update()
     {
@@ -183,8 +218,9 @@ public class UIHandler : MonoBehaviour
     private void SetupBlacknutUI()
     {
         _scoreButton.SetActive(false);
-        _creditButton.transform.SetParent(_buttonParent.transform, false);
-
+        _usernamePanel.SetActive(false);
+        if (_buttonParent && _creditButton.transform.parent != _buttonParent.transform)
+            _creditButton.transform.SetParent(_buttonParent.transform, false);
     }
 
     /// <summary>
@@ -193,6 +229,9 @@ public class UIHandler : MonoBehaviour
     /// </summary>
     private void CheckAndShowUsernamePanelIfNeeded()
     {
+        if (_blackNut) return; // BlackNut build: no online username at all
+        if (_playingAsGuest) return; // the player chose "offline" this session: don't nag
+
         _hasInternetConnection = Application.internetReachability != NetworkReachability.NotReachable;
         if (!_hasInternetConnection) return;
         if (_leaderboardManager != null && _leaderboardManager.IsUser()) return;
@@ -208,6 +247,13 @@ public class UIHandler : MonoBehaviour
 
         _usernameInputField.onSubmit.RemoveAllListeners();
         _usernameInputField.onSubmit.AddListener(_ => OnUsernameSubmitClicked());
+
+        // "Offline" button had no action at all: it now lets the player continue as a guest.
+        if (_usernameOfflineButton != null)
+        {
+            _usernameOfflineButton.onClick.RemoveAllListeners();
+            _usernameOfflineButton.onClick.AddListener(PlayAsGuest);
+        }
 
         if (!_hasInternetConnection)
         {
@@ -228,6 +274,16 @@ public class UIHandler : MonoBehaviour
             _usernameInputField.Select();
             _usernameInputField.ActivateInputField();
         }
+    }
+
+    private bool _playingAsGuest;
+
+    private void PlayAsGuest()
+    {
+        if (_isCheckingUsername) return;
+        _playingAsGuest = true;
+        ResetUsernamePanel();
+        OpenGamePanel();
     }
     #endregion
 
@@ -372,20 +428,29 @@ public class UIHandler : MonoBehaviour
         _scorePanel.SetActive(false);
         _gamePanel.SetActive(false);
         _creditButton.gameObject.SetActive(false);
-        _menuEmpty.SetActive(false);
+        _controlPanel.SetActive(false);
         _gameEmpty.SetActive(false);
+        _menuEmpty.SetActive(true); // P_Username is a child of the menu: it must stay visible
 
         _usernamePanel.SetActive(true);
     }
 
     private void GameLose()
     {
+        if (_loosePanel.activeSelf) return; // death reported twice
+
+        StopCountdown();
+        _pausePanel.SetActive(false);
         _hudPanel.SetActive(false);
         _loosePanel.SetActive(true);
     }
 
     public void GamePause()
     {
+        // Already paused / not in a run (double press, HUD button + Start in the same frame, ...).
+        if (_pausePanel.activeSelf || _loosePanel.activeSelf || !_gameEmpty.activeInHierarchy) return;
+
+        StopCountdown();
         _hudPanel.SetActive(false);
         _pausePanel.SetActive(true);
         _audioSource.PlayOneShot(_audioClip);
@@ -394,17 +459,43 @@ public class UIHandler : MonoBehaviour
 
     public void GameResume()
     {
+        if (!_pausePanel.activeSelf) return; // B + Resume button in the same frame → only one countdown
+
         _pausePanel.SetActive(false);
         _hudPanel.SetActive(true);
         _audioSource.PlayOneShot(_audioClip);
         StartCountdown();
     }
 
+    private void StopCountdown()
+    {
+        _isCountdownActive = false;
+        if (_countdownPanel) _countdownPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// Pause / resume from a gamepad Start button or Escape (see UINavigationManager).
+    /// Ignored outside of gameplay, during the resume countdown and on the lose screen.
+    /// </summary>
+    public void TogglePause()
+    {
+        if (_isCountdownActive || !_gameEmpty.activeInHierarchy || _loosePanel.activeSelf) return;
+        if (Time.timeScale == 0f && !_pausePanel.activeSelf) return; // upgrade choice on screen
+
+        if (_pausePanel.activeSelf) GameResume();
+        else if (_hudPanel.activeSelf) GamePause();
+    }
+
     public void GameStart()
     {
+        // A double click / A spam on "Start" would fire OnGameStart twice (two players spawned).
+        if (_gameEmpty.activeSelf && _hudPanel.activeSelf) return;
+
+        Time.timeScale = 1f;
+        StopCountdown();
         _menuEmpty.SetActive(false);
         _pausePanel.SetActive(false);
-        _countdownPanel.SetActive(false);
+        _loosePanel.SetActive(false);
 
         _audioSource.PlayOneShot(_audioClip);
         _gameEmpty.SetActive(true);
@@ -414,20 +505,26 @@ public class UIHandler : MonoBehaviour
 
     public void ReturnMenu()
     {
+        if (!_gameEmpty.activeSelf) return; // already back in the menu (double click)
+
         EventBus.OnGameOver?.Invoke();
 
+        Time.timeScale = 1f;
+        StopCountdown();
+        _hudPanel.SetActive(false);
         _loosePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _gameEmpty.SetActive(false);
         _usernamePanel.SetActive(false);
 
+        // The username panel lives under the menu: show the menu first, otherwise nothing is visible.
+        _menuEmpty.SetActive(true);
+
         // If the player went online while playing, prompt for a username now.
         CheckAndShowUsernamePanelIfNeeded();
         if (_usernamePanel.activeSelf) return;
 
-        _audioSource.PlayOneShot(_audioClip);
-        _menuEmpty.SetActive(true);
-        _gamePanel.SetActive(true);
+        OpenGamePanel();
     }
 
     public void OpenGamePanel()
@@ -435,6 +532,9 @@ public class UIHandler : MonoBehaviour
         // Cancel any background leaderboard pagination still running.
         if (_leaderboardManager != null)
             _leaderboardManager.CancelBackgroundLoading();
+
+        // Leaving the settings: persist volumes / language now.
+        if (_optionPanel.activeSelf) PlayerPrefs.Save();
 
         _optionPanel.SetActive(false);
         _scorePanel.SetActive(false);
@@ -464,6 +564,8 @@ public class UIHandler : MonoBehaviour
 
     public void OpenScorePanel()
     {
+        if (_blackNut || _leaderboardManager == null) return; // no online leaderboard in this build
+
         // If the player is online but unidentified, show the username panel first.
         CheckAndShowUsernamePanelIfNeeded();
         if (_usernamePanel.activeSelf) return;
@@ -516,13 +618,30 @@ public class UIHandler : MonoBehaviour
     {
         _isActive = true;
         yield return LocalizationSettings.InitializationOperation;
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langueID];
+
+        // A wrong index used to throw here and leave _isActive stuck at true: language locked forever.
+        var locales = LocalizationSettings.AvailableLocales.Locales;
+        if (langueID >= 0 && langueID < locales.Count)
+            LocalizationSettings.SelectedLocale = locales[langueID];
+        else
+            Debug.LogWarning($"[UIHandler] No locale at index {langueID} ({locales.Count} available).");
+
         _isActive = false;
     }
 
     #endregion
 
     #region ==================== AudioMixer METHODS ====================
+    /// <summary>Re-applies the volumes saved in PlayerPrefs (the mixer forgets them between sessions).</summary>
+    private void ApplySavedVolumes()
+    {
+        if (!_audioMixer) return;
+        if (PlayerPrefs.HasKey("MasterVolume")) _audioMixer.SetFloat("MasterVol", PlayerPrefs.GetFloat("MasterVolume"));
+        if (PlayerPrefs.HasKey("SFXVolume")) _audioMixer.SetFloat("SFXVol", PlayerPrefs.GetFloat("SFXVolume"));
+        if (PlayerPrefs.HasKey("MusicVolume")) _audioMixer.SetFloat("MusicVol", PlayerPrefs.GetFloat("MusicVolume"));
+        if (PlayerPrefs.HasKey("AmbianceVolume")) _audioMixer.SetFloat("AmbianceVol", PlayerPrefs.GetFloat("AmbianceVolume"));
+    }
+
     public void SetMasterVolume(float volume)
     {
         _audioMixer.SetFloat("MasterVol", volume);

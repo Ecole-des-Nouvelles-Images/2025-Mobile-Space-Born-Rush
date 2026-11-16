@@ -32,9 +32,15 @@ public class UIFeedBack : MonoBehaviour,IPointerEnterHandler, IPointerExitHandle
         }
 
         public void OnSelect(BaseEventData eventData) => HandleEnter();
-        public void OnPointerEnter(PointerEventData eventData) 
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData != null) EventSystem.current.SetSelectedGameObject(gameObject);
+            // Hover = select (keeps mouse and gamepad highlight in sync), only on usable buttons.
+            var es = EventSystem.current;
+            if (es != null && !es.alreadySelecting && TryGetComponent(out UnityEngine.UI.Selectable s) && s.IsInteractable())
+            {
+                es.SetSelectedGameObject(gameObject); // OnSelect plays the grow animation
+                return;
+            }
             HandleEnter();
         }
 
@@ -45,7 +51,13 @@ public class UIFeedBack : MonoBehaviour,IPointerEnterHandler, IPointerExitHandle
         }
 
         public void OnDeselect(BaseEventData eventData) => HandleExit();
-        public void OnPointerExit(PointerEventData eventData) => HandleExit();
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            // Still the selected button (gamepad focus): stay big, OnDeselect will shrink it.
+            var es = EventSystem.current;
+            if (es != null && es.currentSelectedGameObject == gameObject) return;
+            HandleExit();
+        }
 
         private void HandleExit()
         {

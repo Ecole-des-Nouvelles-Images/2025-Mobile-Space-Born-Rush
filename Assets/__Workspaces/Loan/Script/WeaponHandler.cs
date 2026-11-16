@@ -16,8 +16,11 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private int _ammoNumber;
     
     [Header("Enemy Charge Settings")]
-    [SerializeField] private ParticleSystem _chargeParticles; //If enemy has different effects and sounds 
+    [SerializeField] private ParticleSystem _chargeParticles; //If enemy has different effects and sounds
     [SerializeField] private AudioSource _chargeSound;
+    [Tooltip("Minimum time (s) the charge / muzzle flash is visible before the enemy fires, so the player can react.")]
+    [SerializeField] private float _chargeDuration = 0.9f;
+    private float _chargeTimer;
     
     [SerializeField] private bool _isRaycastDraw;
     
@@ -142,24 +145,26 @@ public class WeaponHandler : MonoBehaviour
                 if (hit.collider.TryGetComponent<PlayerController>(out PlayerController player))
                 {
                     _sawPlayer = true;
-                    if (_currentFireRate <= 0)
+                    // Fire only after the charge has been visible long enough (telegraph for the player).
+                    if (_currentFireRate <= 0 && _isCharging && _chargeTimer >= _chargeDuration)
                     {
                         EnemyFire(player);
                     }
-                    // else
-                    // {
-                    //     _animator.SetBool("IsAim", true);
-                    // }
                 }
             }
 
             if (_sawPlayer)
             {
-                if (_currentFireRate > 0 && !_isCharging)
+                // Start the charge early enough that it is on screen _chargeDuration before the shot.
+                if (!_isCharging && _currentFireRate <= _chargeDuration)
                 {
-                    _isCharging  = true;
-                    _chargeParticles.Play();
+                    _isCharging = true;
+                    _chargeTimer = 0f;
+                    if (_chargeParticles) _chargeParticles.Play(true);
+                    if (_chargeSound) _chargeSound.Play();
                 }
+
+                if (_isCharging) _chargeTimer += Time.deltaTime;
                 _currentFireRate -= Time.deltaTime;
             }
         }
@@ -240,7 +245,9 @@ public class WeaponHandler : MonoBehaviour
     private void EnemyFire(PlayerController player)
     {
         _isCharging = false;
-        //_chargeParticles.Stop();
+        _chargeTimer = 0f;
+        // The charge ends with the shot: stop emitting and let the glow fade into the muzzle flash.
+        if (_chargeParticles) _chargeParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         // Enemy firing at nothing pretends to fire
         if (!player)
         {

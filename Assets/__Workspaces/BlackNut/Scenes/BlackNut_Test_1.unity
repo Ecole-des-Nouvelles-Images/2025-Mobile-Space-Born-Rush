@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 6145920}
   - component: {fileID: 6145922}
   - component: {fileID: 6145921}
+  - component: {fileID: 6145923}
   m_Layer: 0
   m_Name: P_Crontrol
   m_TagString: Untagged
@@ -202,6 +203,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6145919}
   m_CullTransparentMesh: 1
+--- !u!114 &6145923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6145919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 1783717592}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419666212}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: OpenGamePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &40422990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 174991753}
   - component: {fileID: 174991754}
+  - component: {fileID: 174991755}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1375,10 +1406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1276398191}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1406,7 +1437,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 412858214}
   m_HandleRect: {fileID: 2055025733}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -70
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
@@ -1425,6 +1456,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &174991755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174991752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30288574e6765a74780173371714068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
+  _prefsKey: MasterVolume
 --- !u!1 &178288285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1802,6 @@ GameObject:
   - component: {fileID: 188553281}
   - component: {fileID: 188553284}
   - component: {fileID: 188553283}
-  - component: {fileID: 188553282}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -1785,43 +1828,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &188553282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188553280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.PropertyVariants.GameObjectLocalizer
-  m_TrackedObjects:
-  - rid: 178360609571078580
-  references:
-    version: 2
-    RefIds:
-    - rid: 178360609571078580
-      type: {class: TrackedRectTransform, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 188553281}
-        m_TrackedProperties:
-          items:
-          - rid: 178360609571078581
-    - rid: 178360609571078581
-      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_AnchorMax.y
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: 0
-        - localeIdentifier:
-            m_Code: fr
-          value: 1
 --- !u!114 &188553283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,7 +1980,6 @@ GameObject:
   - component: {fileID: 199037430}
   - component: {fileID: 199037433}
   - component: {fileID: 199037432}
-  - component: {fileID: 199037431}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -2001,43 +2006,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &199037431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199037429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.PropertyVariants.GameObjectLocalizer
-  m_TrackedObjects:
-  - rid: 178360609571078576
-  references:
-    version: 2
-    RefIds:
-    - rid: 178360609571078576
-      type: {class: TrackedRectTransform, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 199037430}
-        m_TrackedProperties:
-          items:
-          - rid: 178360609571078577
-    - rid: 178360609571078577
-      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_AnchorMax.y
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: 0
-        - localeIdentifier:
-            m_Code: fr
-          value: 1
 --- !u!114 &199037432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,6 +2131,35 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 278367501}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &212284480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212284478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 2130512836}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419666212}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: OpenGamePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &245202224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,7 +2383,6 @@ GameObject:
   - component: {fileID: 255863024}
   - component: {fileID: 255863027}
   - component: {fileID: 255863026}
-  - component: {fileID: 255863025}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -2413,43 +2409,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &255863025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255863023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.PropertyVariants.GameObjectLocalizer
-  m_TrackedObjects:
-  - rid: 178360609571078578
-  references:
-    version: 2
-    RefIds:
-    - rid: 178360609571078578
-      type: {class: TrackedRectTransform, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 255863024}
-        m_TrackedProperties:
-          items:
-          - rid: 178360609571078579
-    - rid: 178360609571078579
-      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_AnchorMax.y
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: 0
-        - localeIdentifier:
-            m_Code: fr
-          value: 1
 --- !u!114 &255863026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2816,7 +2775,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 495013309}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3018521264916690541, guid: 912f5a22b3eebd245942896e271ff5bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 212284480}
   m_SourcePrefab: {fileID: 100100000, guid: 912f5a22b3eebd245942896e271ff5bf, type: 3}
 --- !u!1 &278799768
 GameObject:
@@ -2964,6 +2927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 363916267}
   - component: {fileID: 363916268}
+  - component: {fileID: 363916269}
   m_Layer: 0
   m_Name: S_Music
   m_TagString: Untagged
@@ -3007,10 +2971,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1395875367}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -3057,6 +3021,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &363916269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363916266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30288574e6765a74780173371714068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
+  _prefsKey: MusicVolume
 --- !u!1 &369776026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,12 +3395,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1957984031}
+    m_SelectOnDown: {fileID: 1783717592}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 530668402}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3550,6 +3527,7 @@ GameObject:
   - component: {fileID: 395153300}
   - component: {fileID: 395153302}
   - component: {fileID: 395153301}
+  - component: {fileID: 395153303}
   m_Layer: 0
   m_Name: P_Username
   m_TagString: Untagged
@@ -3618,6 +3596,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395153299}
   m_CullTransparentMesh: 1
+--- !u!114 &395153303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395153299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 369776028}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &396156827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,7 +3724,7 @@ RectTransform:
   m_Father: {fileID: 1983041850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4864,6 +4859,7 @@ GameObject:
   m_Component:
   - component: {fileID: 518198180}
   - component: {fileID: 518198181}
+  - component: {fileID: 518198182}
   m_Layer: 0
   m_Name: S_General
   m_TagString: Untagged
@@ -4907,10 +4903,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1957984031}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4957,6 +4953,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &518198182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518198179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30288574e6765a74780173371714068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
+  _prefsKey: MasterVolume
 --- !u!1 &530583318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4968,6 +4977,7 @@ GameObject:
   - component: {fileID: 530583319}
   - component: {fileID: 530583321}
   - component: {fileID: 530583320}
+  - component: {fileID: 530583322}
   m_Layer: 5
   m_Name: P_Pause
   m_TagString: Untagged
@@ -5035,6 +5045,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530583318}
   m_CullTransparentMesh: 1
+--- !u!114 &530583322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530583318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 1276398191}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419666212}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: GameResume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &530668399
 GameObject:
   m_ObjectHideFlags: 0
@@ -5129,11 +5168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnUp: {fileID: 1395875367}
+    m_SelectOnDown: {fileID: 1783717592}
+    m_SelectOnLeft: {fileID: 385459349}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -5273,6 +5312,7 @@ GameObject:
   - component: {fileID: 572390657}
   - component: {fileID: 572390659}
   - component: {fileID: 572390658}
+  - component: {fileID: 572390660}
   m_Layer: 0
   m_Name: P_Score
   m_TagString: Untagged
@@ -5339,6 +5379,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572390656}
   m_CullTransparentMesh: 1
+--- !u!114 &572390660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572390656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 0}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419666212}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: OpenGamePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &572519854
 GameObject:
   m_ObjectHideFlags: 0
@@ -5607,6 +5676,7 @@ GameObject:
   - component: {fileID: 606675811}
   - component: {fileID: 606675810}
   - component: {fileID: 606675809}
+  - component: {fileID: 606675812}
   m_Layer: 5
   m_Name: P_Loose
   m_TagString: Untagged
@@ -5678,6 +5748,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1780}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &606675812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606675808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 1201800102}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &644610053
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,7 +6034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &721820564
 Transform:
   m_ObjectHideFlags: 0
@@ -5991,7 +6078,6 @@ GameObject:
   - component: {fileID: 728155874}
   - component: {fileID: 728155877}
   - component: {fileID: 728155876}
-  - component: {fileID: 728155875}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -6018,43 +6104,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &728155875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728155873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.PropertyVariants.GameObjectLocalizer
-  m_TrackedObjects:
-  - rid: 178360609571078572
-  references:
-    version: 2
-    RefIds:
-    - rid: 178360609571078572
-      type: {class: TrackedRectTransform, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 728155874}
-        m_TrackedProperties:
-          items:
-          - rid: 178360609571078573
-    - rid: 178360609571078573
-      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_AnchorMax.y
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: 0
-        - localeIdentifier:
-            m_Code: fr
-          value: 1
 --- !u!114 &728155876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6193,12 +6242,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 793783537}
-        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-        m_MethodName: BroadcastMessage
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7070,11 +7119,27 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 90521071}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3018521264916690541, guid: 912f5a22b3eebd245942896e271ff5bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1096412750}
     - targetCorrespondingSourceObject: {fileID: 5395502932437992856, guid: 912f5a22b3eebd245942896e271ff5bf,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 961981106}
   m_SourcePrefab: {fileID: 100100000, guid: 912f5a22b3eebd245942896e271ff5bf, type: 3}
+--- !u!114 &907450607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5744538205423206276, guid: 912f5a22b3eebd245942896e271ff5bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 907450606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961981101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &923494532
 GameObject:
   m_ObjectHideFlags: 0
@@ -7420,6 +7485,7 @@ GameObject:
   - component: {fileID: 945293427}
   - component: {fileID: 945293426}
   - component: {fileID: 945293425}
+  - component: {fileID: 945293428}
   m_Layer: 5
   m_Name: UpgradeCanvas
   m_TagString: Untagged
@@ -7510,6 +7576,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &945293428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945293423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 0}
+  _selectDelay: 0.35
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &961981101 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5395502932437992856, guid: 912f5a22b3eebd245942896e271ff5bf,
@@ -8324,9 +8407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1276398191}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -8823,6 +8906,23 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 907450606}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1096412750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096412748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 907450607}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1121367261
 GameObject:
   m_ObjectHideFlags: 0
@@ -9176,7 +9276,7 @@ PrefabInstance:
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
@@ -9186,7 +9286,7 @@ PrefabInstance:
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
@@ -9236,12 +9336,12 @@ PrefabInstance:
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 439.16663
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -404
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807482094777687731, guid: 3f620b29dafb66f4bb30467364c83a19,
         type: 3}
@@ -9641,6 +9741,7 @@ GameObject:
   - component: {fileID: 1271665736}
   - component: {fileID: 1271665735}
   - component: {fileID: 1271665734}
+  - component: {fileID: 1271665737}
   m_Layer: 0
   m_Name: P_Settings
   m_TagString: Untagged
@@ -9751,6 +9852,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271665732}
   m_CullTransparentMesh: 1
+--- !u!114 &1271665737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271665732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f1622e9d9a71c41b12b65ebf02371d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationPanel
+  _firstSelected: {fileID: 518198181}
+  _selectDelay: 0
+  _onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419666212}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: OpenGamePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1276398189
 GameObject:
   m_ObjectHideFlags: 0
@@ -9804,10 +9934,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 174991754}
+    m_SelectOnDown: {fileID: 1060394541}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -10777,6 +10907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395875366}
   - component: {fileID: 1395875367}
+  - component: {fileID: 1395875368}
   m_Layer: 0
   m_Name: S_SFX
   m_TagString: Untagged
@@ -10820,10 +10951,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 363916268}
+    m_SelectOnDown: {fileID: 530668402}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -10870,6 +11001,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1395875368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395875365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30288574e6765a74780173371714068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
+  _prefsKey: SFXVolume
 --- !u!1 &1397064878
 GameObject:
   m_ObjectHideFlags: 0
@@ -11073,16 +11217,19 @@ MonoBehaviour:
   _usernamePanel: {fileID: 395153299}
   _creditPanel: {fileID: 212284478}
   _controlPanel: {fileID: 6145919}
+  _buttonParent: {fileID: 1397064878}
   _homeButton: {fileID: 1580955189}
   _settingsButton: {fileID: 1566587584}
   _scoreButton: {fileID: 550615175}
   _creditButton: {fileID: 2130512833}
   _usernameInputField: {fileID: 369776028}
   _usernameSubmitButton: {fileID: 375800574}
+  _usernameOfflineButton: {fileID: 1018603386}
   _usernameStatusText: {fileID: 2002321448}
   _gameEmpty: {fileID: 721820563}
   _menuEmpty: {fileID: 2065659496}
   _leaderboardManager: {fileID: 1419666218}
+  _blackNut: 1
   _isActive: 0
   _isCheckingUsername: 0
   _hasInternetConnection: 0
@@ -12613,6 +12760,7 @@ GameObject:
   - component: {fileID: 1558882587}
   - component: {fileID: 1558882586}
   - component: {fileID: 1558882585}
+  - component: {fileID: 1558882588}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -12692,6 +12840,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1558882588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558882584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637df0c3913a1fa458c6129a57b1b293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UINavigationManager
+  _inputModule: {fileID: 1558882585}
+  _onPauseRequested:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419666212}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1566587584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7503463520458537561, guid: 3f620b29dafb66f4bb30467364c83a19,
@@ -14207,7 +14383,7 @@ PrefabInstance:
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
@@ -14217,7 +14393,7 @@ PrefabInstance:
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
@@ -14267,12 +14443,12 @@ PrefabInstance:
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1919.9999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -404
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2394852667677612895, guid: f0bbd6ed135026f41b95954f79123abc,
         type: 3}
@@ -14313,6 +14489,18 @@ PrefabInstance:
       insertIndex: 3
       addedObject: {fileID: 1580955194}
   m_SourcePrefab: {fileID: 100100000, guid: f0bbd6ed135026f41b95954f79123abc, type: 3}
+--- !u!114 &1783717592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8753173889057329789, guid: f0bbd6ed135026f41b95954f79123abc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1783717591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580955189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1786681662
 GameObject:
   m_ObjectHideFlags: 0
@@ -14927,7 +15115,6 @@ GameObject:
   - component: {fileID: 1861776219}
   - component: {fileID: 1861776222}
   - component: {fileID: 1861776221}
-  - component: {fileID: 1861776220}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -14954,43 +15141,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1861776220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861776218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.PropertyVariants.GameObjectLocalizer
-  m_TrackedObjects:
-  - rid: 178360609571078582
-  references:
-    version: 2
-    RefIds:
-    - rid: 178360609571078582
-      type: {class: TrackedRectTransform, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 1861776219}
-        m_TrackedProperties:
-          items:
-          - rid: 178360609571078583
-    - rid: 178360609571078583
-      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_AnchorMax.y
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: 0
-        - localeIdentifier:
-            m_Code: fr
-          value: 1
 --- !u!114 &1861776221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15338,6 +15488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1957984030}
   - component: {fileID: 1957984031}
+  - component: {fileID: 1957984032}
   m_Layer: 0
   m_Name: S_Ambiance
   m_TagString: Untagged
@@ -15381,10 +15532,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 518198181}
+    m_SelectOnDown: {fileID: 385459349}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -15431,6 +15582,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1957984032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957984029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30288574e6765a74780173371714068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
+  _prefsKey: AmbianceVolume
 --- !u!1 &1977690168
 GameObject:
   m_ObjectHideFlags: 0
@@ -15979,8 +16143,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1734717487}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16037,7 +16201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2065659497
 Transform:
   m_ObjectHideFlags: 0
@@ -16516,9 +16680,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1397064879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3173.333, y: -176.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 455, y: 455}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2130512835

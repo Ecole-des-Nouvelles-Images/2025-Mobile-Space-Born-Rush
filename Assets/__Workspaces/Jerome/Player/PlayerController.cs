@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private bool _isPaused;
 
     public bool IsPaused => _isPaused;
+    public bool IsSliding => _isSliding;
+    public bool IsGrounded => !_isJumping;
+
+    [Header("VFX")]
+    [SerializeField] private PlayerMovementVFX _movementVfx;
 
     [Header("Lane Movement")]
     [SerializeField] private float _laneChangeSpeed = 10f;
@@ -234,6 +239,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (_animator) _animator.SetTrigger("isJump");
         _rb.AddForce(_jumpForce, ForceMode.Impulse);
         HideIK();
+        if (_movementVfx) _movementVfx.PlayJump();
     }
 
     private void Slide()

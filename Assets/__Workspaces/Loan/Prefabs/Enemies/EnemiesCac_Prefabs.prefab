@@ -1324,6 +1324,11 @@ MonoBehaviour:
   _collider: {fileID: 1897523523506243506}
   _rbHips: {fileID: 8549324652405499033}
   _impulseForce: 5
+  _floorMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _bloodDecalPrefab: {fileID: 1287646417416374698, guid: cc808102f2bab5c43ae439ec39a6517e,
+    type: 3}
   _audioSource: {fileID: 8026793328789341811}
   _audioClip: {fileID: 8300000, guid: 8d62abd3ccd99c34da924acb37b8481e, type: 3}
   _audioClipHit: {fileID: 8300000, guid: be4688b865bc4de4496522b0a424a627, type: 3}

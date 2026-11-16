@@ -26,8 +26,8 @@ public class UpgradeChoiceUI : MonoBehaviour
             return;
         }
 
-        _nameEvent = nameText.GetComponent<LocalizeStringEvent>();
-        _descriptionEvent = descriptionText.GetComponent<LocalizeStringEvent>();
+        _nameEvent = nameText ? nameText.GetComponent<LocalizeStringEvent>() : null;
+        _descriptionEvent = descriptionText ? descriptionText.GetComponent<LocalizeStringEvent>() : null;
         
         if (_nameEvent != null && _descriptionEvent != null)
         {
@@ -47,8 +47,11 @@ public class UpgradeChoiceUI : MonoBehaviour
         if (descriptionText)
             descriptionText.text = upgrade.Description ?? "Missing Description";
         
+        if (iconImage)
+        {
             iconImage.sprite = upgrade.Icon;
             iconImage.color = upgrade.Icon ? Color.white : new Color(0.8f, 0.8f, 0.8f);
+        }
         
         
         if (selectButton)
