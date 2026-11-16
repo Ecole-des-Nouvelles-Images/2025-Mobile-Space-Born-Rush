@@ -22,6 +22,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject _controlPanel;
 
     [Header("=====Buttons=====")]
+    [SerializeField] private GameObject _buttonParent;
     [SerializeField] private GameObject _homeButton;
     [SerializeField] private GameObject _settingsButton;
     [SerializeField] private GameObject _scoreButton;
@@ -38,6 +39,7 @@ public class UIHandler : MonoBehaviour
 
     [Header("=====Dependencies=====")]
     [SerializeField] private LeaderboardManager _leaderboardManager;
+    [SerializeField] private bool _blackNut;
 
     [Header("=====Online Settings=====")]
     [SerializeField] private bool _isActive;
@@ -149,6 +151,12 @@ public class UIHandler : MonoBehaviour
         _menuEmpty.SetActive(true);
         _gameEmpty.SetActive(false);
 
+        if(_blackNut)
+        {
+            SetupBlacknutUI();
+            return;
+        }
+        
         bool hasUsername = _leaderboardManager && _leaderboardManager.IsUser();
 
         // Offline: play as guest, do not prompt for a username.
@@ -167,6 +175,16 @@ public class UIHandler : MonoBehaviour
             OpenUsernamePanel();
             SetupUsernamePanel();
         }
+    }
+
+    /// <summary>
+    /// Specific UI setup for the blacknut build. Will remove everything to do with 
+    /// </summary>
+    private void SetupBlacknutUI()
+    {
+        _scoreButton.SetActive(false);
+        _creditButton.transform.SetParent(_buttonParent.transform, false);
+
     }
 
     /// <summary>
