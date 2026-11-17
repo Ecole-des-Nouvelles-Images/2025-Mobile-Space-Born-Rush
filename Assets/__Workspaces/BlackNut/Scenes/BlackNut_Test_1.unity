@@ -2928,6 +2928,7 @@ GameObject:
   - component: {fileID: 363916267}
   - component: {fileID: 363916268}
   - component: {fileID: 363916269}
+  - component: {fileID: 363916270}
   m_Layer: 0
   m_Name: S_Music
   m_TagString: Untagged
@@ -3034,6 +3035,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
   _prefsKey: MusicVolume
+--- !u!114 &363916270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363916266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9629e0acceb38cd41a047f88be823e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIFeedBack
+  _playTweening: 1
+  _animationTime: 0.3
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _animationEndScale: 1.2
+  _isSlimeButton: 0
 --- !u!1 &369776026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4860,6 +4901,7 @@ GameObject:
   - component: {fileID: 518198180}
   - component: {fileID: 518198181}
   - component: {fileID: 518198182}
+  - component: {fileID: 518198183}
   m_Layer: 0
   m_Name: S_General
   m_TagString: Untagged
@@ -4966,6 +5008,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
   _prefsKey: MasterVolume
+--- !u!114 &518198183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518198179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9629e0acceb38cd41a047f88be823e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIFeedBack
+  _playTweening: 1
+  _animationTime: 0.3
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _animationEndScale: 1.2
+  _isSlimeButton: 0
 --- !u!1 &530583318
 GameObject:
   m_ObjectHideFlags: 0
@@ -10930,6 +11012,7 @@ GameObject:
   - component: {fileID: 1395875366}
   - component: {fileID: 1395875367}
   - component: {fileID: 1395875368}
+  - component: {fileID: 1395875369}
   m_Layer: 0
   m_Name: S_SFX
   m_TagString: Untagged
@@ -11036,6 +11119,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
   _prefsKey: SFXVolume
+--- !u!114 &1395875369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395875365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9629e0acceb38cd41a047f88be823e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIFeedBack
+  _playTweening: 1
+  _animationTime: 0.3
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _animationEndScale: 1.2
+  _isSlimeButton: 0
 --- !u!1 &1397064878
 GameObject:
   m_ObjectHideFlags: 0
@@ -15511,6 +15634,7 @@ GameObject:
   - component: {fileID: 1957984030}
   - component: {fileID: 1957984031}
   - component: {fileID: 1957984032}
+  - component: {fileID: 1957984033}
   m_Layer: 0
   m_Name: S_Ambiance
   m_TagString: Untagged
@@ -15617,6 +15741,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VolumeSliderSync
   _prefsKey: AmbianceVolume
+--- !u!114 &1957984033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957984029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9629e0acceb38cd41a047f88be823e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIFeedBack
+  _playTweening: 1
+  _animationTime: 0.3
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _animationEndScale: 1.2
+  _isSlimeButton: 0
 --- !u!1 &1977690168
 GameObject:
   m_ObjectHideFlags: 0
