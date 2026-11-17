@@ -35,11 +35,8 @@ MonoBehaviour:
     m_LocalVariables: []
   category: 1
   Type: 6
-  Value: 0.15
+  Value: 0.02
   maxTimesSelectable: 0
-  timesSelected: 0
-  isExclusive: 0
-  baseWeight: 1
   references:
     version: 2
     RefIds: []
