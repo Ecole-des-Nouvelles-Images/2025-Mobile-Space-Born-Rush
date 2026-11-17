@@ -3826,7 +3826,10 @@ MonoBehaviour:
   _hitParticles: {fileID: 8762880821406266431}
   _collider: {fileID: 2791570088284993106}
   _rbHips: {fileID: 7261640593363603666}
-  _impulseForce: 5
+  _deathBackSpeed: 5
+  _deathUpSpeed: 2.2
+  _deathUpperBodyBoost: 1.35
+  _deathSpin: 6
   _floorMask:
     serializedVersion: 2
     m_Bits: 128

@@ -33,7 +33,14 @@ public class EnemyHandler : MonoBehaviour, IDamageable
     [Header("<color=white>=====Ragdoll Settings=====</color>")]
     [SerializeField] private BoxCollider _collider;
     [SerializeField] private Rigidbody _rbHips;
-    [SerializeField] private float _impulseForce;
+    [Tooltip("Backward speed (m/s) given to the whole body by the killing shot.")]
+    [SerializeField] private float _deathBackSpeed = 9f;
+    [Tooltip("Upward speed (m/s) so the body leaves the floor instead of sliding on it.")]
+    [SerializeField] private float _deathUpSpeed = 2.2f;
+    [Tooltip("Extra multiplier on the upper body (spine, head, arms): the torso goes first, the body folds backward.")]
+    [SerializeField] private float _deathUpperBodyBoost = 1.35f;
+    [Tooltip("Backward spin (rad/s) on the hips: flips the body over instead of keeping it upright.")]
+    [SerializeField] private float _deathSpin = 6f;
     [Tooltip("Layers the ragdoll lies on (corridor floor).")]
     [SerializeField] private LayerMask _floorMask = 1 << 7; // Modul
     private Rigidbody[] _ragdollBodies;
@@ -149,7 +156,12 @@ public class EnemyHandler : MonoBehaviour, IDamageable
                 body.isKinematic = false;
                 body.linearVelocity = Vector3.zero;
                 body.angularVelocity = Vector3.zero;
-                body.interpolation = RigidbodyInterpolation.Interpolate;
+                // NO interpolation: the ragdoll lives under a module moved every frame by ModulMove.Update.
+                // Interpolation rewrites the bone transforms each frame from the physics pose and throws
+                // away the module offset of all frames but the last one before the physics step. In the
+                // editor (~1 frame per step) it was invisible; in the uncapped PC build (many frames per
+                // step) the body lagged behind its floor, got pushed into it and stayed stuck upright.
+                body.interpolation = RigidbodyInterpolation.None;
                 // Full CCD against the thin floor; fast but bounded push-out if a limb still overlaps.
                 body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
                 body.maxDepenetrationVelocity = 6f;
@@ -221,6 +233,7 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         {
             Rb.linearVelocity = Vector3.zero;
             Rb.angularVelocity = Vector3.zero;
+            Rb.interpolation = RigidbodyInterpolation.None; // same reason as the bones (see SetRagdollActive)
             Rb.isKinematic = true;
         }
 
@@ -234,11 +247,42 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         SetRagdollActive(true);
 
         _audioSource.PlayOneShot(_audioClipDeath);
-        // Mostly backward, slightly up: a pure horizontal push used to drive the hips into the floor.
-        Vector3 impulse = new Vector3(0f, 2f, 10f);
-        if (_rbHips) _rbHips.AddForce(impulse * _impulseForce, ForceMode.Impulse);
+        ApplyDeathBlast();
 
         SpawnBloodDecal(floorPoint, floorNormal);
+    }
+
+    /// <summary>
+    /// The old push was a single impulse on the hips (~7.8 kg) that the ~70 kg of jointed limbs damped
+    /// into a slow topple. Now every bone gets the same velocity change (mass-independent), the torso a
+    /// bit more, and the hips a backward spin: the body is thrown back as if hit by the killing shot.
+    /// +z is "backward" for the enemy (it faces the player, toward -z).
+    /// </summary>
+    private void ApplyDeathBlast()
+    {
+        if (_ragdollBodies == null || _ragdollBodies.Length == 0) return;
+
+        float side = Random.Range(-1f, 1f);
+        Vector3 baseVelocity = new Vector3(side, _deathUpSpeed, _deathBackSpeed);
+
+        foreach (var body in _ragdollBodies)
+        {
+            float boost = IsUpperBody(body.name) ? _deathUpperBodyBoost : 1f;
+            body.AddForce(baseVelocity * boost, ForceMode.VelocityChange);
+        }
+
+        // Spin around world +x tips the head toward +z: the body falls on its back.
+        if (_rbHips)
+        {
+            _rbHips.maxAngularVelocity = Mathf.Max(_rbHips.maxAngularVelocity, _deathSpin * 2f);
+            _rbHips.AddTorque(new Vector3(_deathSpin, side * 1.5f, 0f), ForceMode.VelocityChange);
+        }
+    }
+
+    private static bool IsUpperBody(string boneName)
+    {
+        return boneName.Contains("Spine") || boneName.Contains("Head") || boneName.Contains("Neck")
+               || boneName.Contains("Arm") || boneName.Contains("Hand") || boneName.Contains("Shoulder");
     }
 
     private bool TryFindFloor(out RaycastHit hit)
@@ -272,13 +316,13 @@ public class EnemyHandler : MonoBehaviour, IDamageable
         const float thickness = 1f;
         const float under = 0.02f;
         // Shifted backward (+z, away from the player): the death impulse throws the body that way.
-        Vector3 worldCenter = new Vector3(transform.position.x, floorY - under - thickness * 0.5f, transform.position.z + 1.5f);
+        Vector3 worldCenter = new Vector3(transform.position.x, floorY - under - thickness * 0.5f, transform.position.z + 4f);
         floor.transform.position = worldCenter;
         floor.transform.rotation = Quaternion.identity;
 
         var box = floor.AddComponent<BoxCollider>();
         Vector3 scale = floor.transform.lossyScale;
-        box.size = new Vector3(4f / scale.x, thickness / scale.y, 6f / scale.z); // covers the body thrown backward
+        box.size = new Vector3(5f / scale.x, thickness / scale.y, 11f / scale.z); // -1.5 m .. +9.5 m: covers the stronger throw
     }
 
     private void SpawnBloodDecal(Vector3 point, Vector3 normal)
